@@ -1,21 +1,23 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+// src/services/firebaseConfig.ts (수정된 보안 버전)
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+// Analytics는 지금 안 쓰므로 제거했습니다.
+
+// .env 파일에서 키를 안전하게 읽어옵니다.
 const firebaseConfig = {
-  apiKey: "AIzaSyBcN7umU2WqbZOg-JghWVoOYqnVaf-7iPo",
-  authDomain: "filmograph-df1d4.firebaseapp.com",
-  projectId: "filmograph-df1d4",
-  storageBucket: "filmograph-df1d4.firebasestorage.app",
-  messagingSenderId: "852597373277",
-  appId: "1:852597373277:web:df5a0aabf1f815ad58d0b4",
-  measurementId: "G-6152S1XVQE"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
-// Initialize Firebase
+// Firebase 앱 초기화
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+
+// 다른 파일에서 쓸 수 있도록 export
+export const db = getFirestore(app);
+export const auth = getAuth(app);
