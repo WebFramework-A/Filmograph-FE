@@ -7,9 +7,9 @@ import "./App.css";
 import HomePage from "./pages/HomePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import HomeLayout from "./layouts/HomeLayout";
-import GraphPage from "./pages/GraphPage";
 import ArchetypePage from "./pages/ArchetypePage";
 import MyPage from "./pages/MyPage";
+import GraphPage from "./pages/GraphPage";
 
 const router = createBrowserRouter([
   {
