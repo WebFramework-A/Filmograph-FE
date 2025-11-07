@@ -1,17 +1,16 @@
-// src/types/data.ts
-export interface Node {
+export type Node = {
   id: string;
   name: string;
-  type: 'movie' | 'person';
+  type: "movie" | "person";
   val: number; // 가중치 (출연작 수 등)
-}
+};
 
-export interface Link {
+export type Link = {
   source: string;
   target: string;
-}
+};
 
-export interface GraphData {
+export type GraphData = {
   nodes: Node[];
   links: Link[];
-}
+};
