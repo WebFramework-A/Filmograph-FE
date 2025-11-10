@@ -3,6 +3,8 @@
   height: 100dvh;
   grid-template-rows: auto 1fr auto;
 }
+
 .main-content {
-  overflow-y: auto; /* 콘텐츠가 길어질 경우를 대비 */
+  overflow-y: auto;
+  /* 콘텐츠가 길어질 경우를 대비 */
 }

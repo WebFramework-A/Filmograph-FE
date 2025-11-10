@@ -10,6 +10,7 @@ import HomeLayout from "./layouts/HomeLayout";
 import ArchetypePage from "./pages/ArchetypePage";
 import MyPage from "./pages/MyPage";
 import GraphPage from "./pages/GraphPage";
+import LoginPage from "./pages/LoginPage";
 import DetailPage from "./pages/DetailPage";
 
 const router = createBrowserRouter([
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "/my",
         element: <MyPage />,
+      },
+      {
+        path: "/login",
+        element: <LoginPage />,
       },
       {
         path: "/detail",
