@@ -1,4 +1,4 @@
-import { auth } from "../../../services/firebaseConfig"; // 경로 주의!
+import { auth } from "../../../services/firebaseConfig";
 import {
   GoogleAuthProvider,
   signInWithPopup,
@@ -8,7 +8,7 @@ import {
   type User,
 } from "firebase/auth";
 
-import type { LoginCredentials, SignUpCredentials } from "../types/authType"; // 타입 정의 필요
+import type { LoginCredentials, SignUpCredentials } from "../types/authType";
 
 const googleProvider = new GoogleAuthProvider();
 

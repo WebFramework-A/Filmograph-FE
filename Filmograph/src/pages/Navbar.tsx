@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
-  // Tailwind CSS 클래스를 사용하여 스타일 정의
   const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
     `transition-colors duration-200 ${isActive ? "text-[#34C3F1] font-bold" : "text-white hover:text-gray-300"
     }`;

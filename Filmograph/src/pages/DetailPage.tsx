@@ -41,7 +41,7 @@ const DetailPage = () => {
 
           // 19세 관람불가 영화 제외
           if (mode === "no19" && detail.watchGrade?.includes("청소년")) {
-            console.log(`🚫 제외 (19세 관람불가): ${detail.title}`);
+            console.log(`제외 (19세 관람불가): ${detail.title}`);
             continue;
           }
 
@@ -50,7 +50,7 @@ const DetailPage = () => {
 
           // TMDB 정보 없는 영화 제외
           if (mode === "skipTmdb" && result === "SKIPPED_TMDB") {
-            console.log(`⏭️ TMDB 정보 없음: ${detail.title}`);
+            console.log(`TMDB 정보 없음: ${detail.title}`);
             continue;
           }
 
@@ -58,7 +58,7 @@ const DetailPage = () => {
           //console.log(`저장 완료: ${detail.title}`);
           await new Promise((r) => setTimeout(r, 200)); // API 부하 방지
         } catch (err) {
-          console.warn(`⚠️ ${item.movieNm} 처리 실패`, err);
+          console.warn(`${item.movieNm} 처리 실패`, err);
         }
 
         // 진행률 업데이트
@@ -72,64 +72,57 @@ const DetailPage = () => {
   };
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h2>🎬 Firestore 영화 데이터 수집</h2>
-      <div
-        style={{
-          width: "100%",
-          height: "20px",
-          backgroundColor: "#eee",
-          borderRadius: "10px",
-          margin: "1rem 0",
-          overflow: "hidden",
-        }}
-      >
+    <div className="p-8 max-w-4xl mx-auto"> {/* 전체 컨테이너에 패딩과 최대 너비 적용 */}
+      <h2 className="text-2xl font-bold mb-6 text-gray-800">
+        Firestore 영화 데이터 수집
+      </h2>
+
+      {/* 진행률 바 컨테이너 */}
+      <div className="w-full h-6 bg-gray-200 rounded-full my-4 overflow-hidden shadow-inner">
+        {/* 진행률 바 (너비는 동적이므로 인라인 스타일 유지) */}
         <div
-          style={{
-            width: `${progress}%`,
-            height: "100%",
-            backgroundColor: "#34C3F1",
-            transition: "width 0.3s ease",
-          }}
+          className="h-full bg-[#34C3F1] transition-all duration-300 ease-out"
+          style={{ width: `${progress}%` }}
         />
       </div>
-      <p>{statusMsg}</p>
 
-      <div>
+      {/* 상태 메시지 */}
+      <p className="text-gray-600 mb-6 font-medium text-center">
+        {statusMsg}
+      </p>
+
+      {/* 버튼 그룹 */}
+      <div className="flex flex-wrap justify-center gap-4">
         <button
           onClick={() => handleUpload("skipTmdb")}
-          style={buttonStyle("#00B26B")}
           disabled={isRunning}
+          className="px-6 py-3 bg-[#00B26B] text-white rounded-lg font-bold shadow-md
+                     hover:bg-[#009e5f] hover:shadow-lg active:scale-95 transition-all
+                     disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          🎞 TMDB 없는 영화 제외
+          TMDB 없는 영화 제외
         </button>
         <button
           onClick={() => handleUpload("all")}
-          style={buttonStyle("#34C3F1")}
           disabled={isRunning}
+          className="px-6 py-3 bg-[#34C3F1] text-white rounded-lg font-bold shadow-md
+                     hover:bg-[#2dbae6] hover:shadow-lg active:scale-95 transition-all
+                     disabled:opacity-50 disabled:cursor-not-allowed"
         >
           모두 저장
         </button>
         <button
           onClick={() => handleUpload("no19")}
-          style={buttonStyle("#FF5252")}
           disabled={isRunning}
+          className="px-6 py-3 bg-[#FF5252] text-white rounded-lg font-bold shadow-md
+                     hover:bg-[#e64a4a] hover:shadow-lg active:scale-95 transition-all
+                     disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          🚫 19세 영화 제외
+          19세 영화 제외
         </button>
       </div>
     </div>
   );
 };
-
-const buttonStyle = (color: string) => ({
-  margin: "0.5rem",
-  padding: "0.6rem 1rem",
-  backgroundColor: color,
-  color: "white",
-  border: "none",
-  borderRadius: "8px",
-  cursor: "pointer",
-});
 
 export default DetailPage;

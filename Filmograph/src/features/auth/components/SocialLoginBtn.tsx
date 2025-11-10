@@ -5,10 +5,9 @@ export default function SocialLoginBtn() {
         try {
             await loginWithGoogle();
             alert("구글 로그인 성공!");
-            // TODO: 메인 페이지로 이동
+            //구현 예정: 메인 페이지로 이동
         }
         catch (error) {
-            // 에러 처리는 authApi에서 이미 콘솔에 출력함
             alert("구글 로그인에 실패했습니다.");
         }
     };

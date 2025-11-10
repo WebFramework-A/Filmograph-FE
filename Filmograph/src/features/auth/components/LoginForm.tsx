@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { loginWithEmail } from "../services/authApi";
 import SocialLoginBtn from "./SocialLoginBtn";
-import { FirebaseError } from "firebase/app"; // FirebaseError 타입 임포트
+import { FirebaseError } from "firebase/app";
 
 export default function LoginForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    // 🔥 Firebase 에러 코드를 한국어 메시지로 변환하는 함수
+    //로그인 오류시 출력
     const getErrorMessage = (errorCode: string) => {
         switch (errorCode) {
             case "auth/invalid-credential":
@@ -24,13 +24,15 @@ export default function LoginForm() {
         try {
             await loginWithEmail({ email, password });
             alert("로그인 성공!");
-            // TODO: 메인 페이지로 이동 (예: navigate('/'))
-        } catch (error) {
+            //구현예정: 메인 페이지로 이동
+        }
+        catch (error) {
             // 에러가 FirebaseError 타입인지 확인
             if (error instanceof FirebaseError) {
                 const msg = getErrorMessage(error.code);
                 alert(msg);
-            } else {
+            }
+            else {
                 // Firebase 외의 알 수 없는 에러
                 alert("알 수 없는 오류가 발생했습니다.");
                 console.error("Login Unknown Error:", error);

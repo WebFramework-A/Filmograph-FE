@@ -12,7 +12,7 @@ const Header = () => {
 
     return (
         <header className="p-4 bg-gray-100 flex justify-between items-center">
-            <h1 className="text-xl font-bold">Filmograph</h1>   {/*logo 자리*/}
+            <h1 className="text-xl font-bold">Filmograph</h1>           {/*logo 자리*/}
             <div className="flex gap-4 items-center">
                 {user ? (
                     // 로그인 상태일 때 보여줄 UI
@@ -28,6 +28,7 @@ const Header = () => {
                     </div>
                 ) : (
                     // 로그아웃 상태일 때 보여줄 UI
+                    // 아마 나중에 그냥 기본 user 이미지? 넣을 듯
                     <button onClick={loginWithGoogle}>구글 로그인</button>
                 )}
             </div>
