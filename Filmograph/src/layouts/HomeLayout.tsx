@@ -6,10 +6,10 @@ import "./HomeLayout.css";
 
 const HomeLayout = () => {
   return (
-    <div className="home-layout-container">
+    <div className="min-h-screen w-full">
       <Navbar />
 
-      <main className="main-content">
+      <main className="w-full flex-1">
         <Outlet />
       </main>
 
