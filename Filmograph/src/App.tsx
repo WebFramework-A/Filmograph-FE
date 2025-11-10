@@ -10,6 +10,7 @@ import HomeLayout from "./layouts/HomeLayout";
 import ArchetypePage from "./pages/ArchetypePage";
 import MyPage from "./pages/MyPage";
 import GraphPage from "./pages/GraphPage";
+import DetailPage from "./pages/DetailPage";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "/my",
         element: <MyPage />,
+      },
+      {
+        path: "/detail",
+        element: <DetailPage />,
       },
     ],
   },
