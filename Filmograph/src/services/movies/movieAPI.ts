@@ -1,10 +1,8 @@
-// src/services/movies/movieAPI.ts 
-// ------------------------------------------------------------
 // KOBIS 오픈API에서 영화 목록 및 상세정보를 불러오는 모듈
 //  - fetchMovieList() : 목록 조회
 //  - fetchMovieDetail() : 상세 조회
 // Firestore 저장 시 사용할 MovieDetail 타입으로 변환함
-// ------------------------------------------------------------
+
 import axios from "axios";
 import type { MovieDetail } from "../../types/movie";
 
@@ -28,11 +26,10 @@ const KOBIS_KEY = import.meta.env.VITE_KOBIS_API_KEY; // .env에 저장된 인�
 const BASE_URL = "https://kobis.or.kr/kobisopenapi/webservice/rest";
 
 
-/* ------------------------------------------------------------
-    영화 목록 조회
+/* 영화 목록 조회
     - 한 페이지당 최대 100개까지 영화 목록을 반환
     - 반환 데이터: [{ movieCd, movieNm, prdtYear, openDt, ... }]
-   ------------------------------------------------------------ */
+*/
 export const fetchMovieList = async (page = 1, perPage = 100) => {
   const res = await axios.get(`${BASE_URL}/movie/searchMovieList.json`, {
     params: { key: KOBIS_KEY, curPage: page, itemPerPage: perPage },
@@ -42,10 +39,9 @@ export const fetchMovieList = async (page = 1, perPage = 100) => {
   return res.data?.movieListResult?.movieList || [];
 };
 
-/* ------------------------------------------------------------
-    영화 상세 조회
+/* 영화 상세 조회
     - movieCd(영화코드)를 기반으로 상세정보 조회
-   ------------------------------------------------------------ */
+*/
 export const fetchMovieDetail = async (
   movieCd: string
 ): Promise<MovieDetail | null> => {
@@ -73,7 +69,7 @@ export const fetchMovieDetail = async (
     cast: info.actors?.map((a: KobisActor) => ({
       name: a.peopleNm,
       role: "배우",
-    })),   
+    })),
     watchGrade: info.audits?.[0]?.watchGradeNm || "정보 없음",  // 관람등급
     runtime: info.showTm ? parseInt(info.showTm) : undefined,   // 상영시간(분)
     createdAt: new Date().toISOString(),    // 저장 시각

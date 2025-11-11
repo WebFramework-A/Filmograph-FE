@@ -39,9 +39,7 @@ function isAllowedRole(repRoleNm?: string): boolean {
   return tokens.some((t) => ALLOWED_ROLES.includes(t));
 }
 
-/**
- * 영화인 목록 조회 (필터 후 perPage 개수 맞춰 반환)
- */
+//영화인 목록 조회 (필터 후 perPage 개수 맞춰 반환)
 export async function fetchPeopleList(
   page = 1,
   perPage = 100
@@ -72,9 +70,7 @@ export async function fetchPeopleList(
   return result.slice(skipCount, skipCount + perPage);
 }
 
-/**
- * 영화인 상세 조회 → Person 형태로 변환 (허용 직군만)
- */
+//영화인 상세 조회 → Person 형태로 변환 (허용 직군만)
 export async function fetchPeopleDetail(
   peopleCd: string
 ): Promise<Person | null> {
@@ -88,13 +84,13 @@ export async function fetchPeopleDetail(
   if (!info) return null;
   if (!isAllowedRole(info.repRoleNm)) return null;
 
-const filmoTitles = Array.from(
-  new Set(
-    (info.filmos || [])
-      .map((f) => f.movieNm)
-      .filter(Boolean)
-  )
-);
+  const filmoTitles = Array.from(
+    new Set(
+      (info.filmos || [])
+        .map((f) => f.movieNm)
+        .filter(Boolean)
+    )
+  );
 
 
   const person: Person = {

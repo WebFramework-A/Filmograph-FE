@@ -1,15 +1,13 @@
-// src/services/movieService.ts
 import { db } from "./firebaseConfig";
 import { doc, setDoc } from "firebase/firestore";
 import type { MovieDetail } from "../types/movie";
 import { enrichMovieData } from "./movies/posterApi";
 
-// --------------------------------------------
-// Firestore에 영화 데이터를 저장하는 함수
-//  - TMDB 데이터(포스터, 평점 등)를 enrichMovieData()로 병합
-//  - TMDB 정보가 없으면 Firestore에 저장하지 않고 "SKIPPED_TMDB" 반환
-//  - 정상 저장 시 "SAVED", 오류 시 "ERROR" 반환
-// --------------------------------------------
+/* Firestore에 영화 데이터를 저장하는 함수
+  - TMDB 데이터(포스터, 평점 등)를 enrichMovieData()로 병합
+  - TMDB 정보가 없으면 Firestore에 저장하지 않고 "SKIPPED_TMDB" 반환
+  - 정상 저장 시 "SAVED", 오류 시 "ERROR" 반환
+*/
 export const saveMovie = async (movie: MovieDetail): Promise<string> => {
   try {
     // TMDB 데이터 병합 (포스터, 평점, 줄거리 등 추가)
