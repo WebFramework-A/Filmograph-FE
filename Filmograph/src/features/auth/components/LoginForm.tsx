@@ -2,10 +2,12 @@ import { useState } from "react";
 import { loginWithEmail } from "../services/authApi";
 import SocialLoginBtn from "./SocialLoginBtn";
 import { FirebaseError } from "firebase/app";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     //로그인 오류시 출력
     const getErrorMessage = (errorCode: string) => {
@@ -24,7 +26,7 @@ export default function LoginForm() {
         try {
             await loginWithEmail({ email, password });
             alert("로그인 성공!");
-            //구현예정: 메인 페이지로 이동
+            navigate("/"); //메인 페이지로 이동
         }
         catch (error) {
             // 에러가 FirebaseError 타입인지 확인
