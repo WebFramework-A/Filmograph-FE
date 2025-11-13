@@ -1,0 +1,3575 @@
+{
+  "metadata": {
+    "total_nodes": 78,
+    "total_links": 312,
+    "communities": 8,
+    "total_collaborations": 442,
+    "avg_collaboration_per_link": 1.42,
+    "generated_at": "2025-11-12 19:01:58",
+    "version": "1.0"
+  },
+  "nodes": [
+    {
+      "id": "김태성",
+      "label": "김태성",
+      "community": 0,
+      "degree": 29,
+      "movies_count": 93,
+      "role": "음악"
+    },
+    {
+      "id": "장세진",
+      "label": "장세진",
+      "community": 0,
+      "degree": 4,
+      "movies_count": 8,
+      "role": "배우"
+    },
+    {
+      "id": "정종헌",
+      "label": "정종헌",
+      "community": 7,
+      "degree": 24,
+      "movies_count": 48,
+      "role": "촬영"
+    },
+    {
+      "id": "정경순",
+      "label": "정경순",
+      "community": 2,
+      "degree": 3,
+      "movies_count": 22,
+      "role": "배우"
+    },
+    {
+      "id": "조은지",
+      "label": "조은지",
+      "community": 2,
+      "degree": 11,
+      "movies_count": 35,
+      "role": "배우"
+    },
+    {
+      "id": "김홍익",
+      "label": "김홍익",
+      "community": 3,
+      "degree": 1,
+      "movies_count": 7,
+      "role": "감독"
+    },
+    {
+      "id": "김훈희",
+      "label": "김훈희",
+      "community": 3,
+      "degree": 5,
+      "movies_count": 18,
+      "role": "촬영"
+    },
+    {
+      "id": "손지나",
+      "label": "손지나",
+      "community": 2,
+      "degree": 10,
+      "movies_count": 23,
+      "role": "배우"
+    },
+    {
+      "id": "조한선",
+      "label": "조한선",
+      "community": 2,
+      "degree": 5,
+      "movies_count": 28,
+      "role": "배우"
+    },
+    {
+      "id": "조한철",
+      "label": "조한철",
+      "community": 7,
+      "degree": 25,
+      "movies_count": 90,
+      "role": "배우"
+    },
+    {
+      "id": "길해연",
+      "label": "길해연",
+      "community": 2,
+      "degree": 23,
+      "movies_count": 64,
+      "role": "배우"
+    },
+    {
+      "id": "임세미",
+      "label": "임세미",
+      "community": 2,
+      "degree": 11,
+      "movies_count": 37,
+      "role": "배우"
+    },
+    {
+      "id": "박미현",
+      "label": "박미현",
+      "community": 2,
+      "degree": 16,
+      "movies_count": 43,
+      "role": "배우"
+    },
+    {
+      "id": "브누와 쟉꼬",
+      "label": "브누와 쟉꼬",
+      "community": 2,
+      "degree": 1,
+      "movies_count": 14,
+      "role": "감독"
+    },
+    {
+      "id": "필립 느와레",
+      "label": "필립 느와레",
+      "community": 2,
+      "degree": 3,
+      "movies_count": 171,
+      "role": "배우"
+    },
+    {
+      "id": "엄혜정",
+      "label": "엄혜정",
+      "community": 2,
+      "degree": 3,
+      "movies_count": 12,
+      "role": "촬영"
+    },
+    {
+      "id": "기주봉",
+      "label": "기주봉",
+      "community": 7,
+      "degree": 27,
+      "movies_count": 98,
+      "role": "배우"
+    },
+    {
+      "id": "김준성",
+      "label": "김준성",
+      "community": 7,
+      "degree": 21,
+      "movies_count": 57,
+      "role": "음악"
+    },
+    {
+      "id": "천호진",
+      "label": "천호진",
+      "community": 7,
+      "degree": 15,
+      "movies_count": 33,
+      "role": "배우"
+    },
+    {
+      "id": "이용녀",
+      "label": "이용녀",
+      "community": 7,
+      "degree": 18,
+      "movies_count": 58,
+      "role": "배우"
+    },
+    {
+      "id": "최민철",
+      "label": "최민철",
+      "community": 7,
+      "degree": 14,
+      "movies_count": 16,
+      "role": "배우"
+    },
+    {
+      "id": "오수진",
+      "label": "오수진",
+      "community": 3,
+      "degree": 2,
+      "movies_count": 27,
+      "role": "음악"
+    },
+    {
+      "id": "정영삼",
+      "label": "정영삼",
+      "community": 3,
+      "degree": 8,
+      "movies_count": 29,
+      "role": "감독"
+    },
+    {
+      "id": "김민재",
+      "label": "김민재",
+      "community": 0,
+      "degree": 16,
+      "movies_count": 33,
+      "role": "배우"
+    },
+    {
+      "id": "정기섭",
+      "label": "정기섭",
+      "community": 1,
+      "degree": 10,
+      "movies_count": 20,
+      "role": "배우"
+    },
+    {
+      "id": "전수지",
+      "label": "전수지",
+      "community": 7,
+      "degree": 11,
+      "movies_count": 30,
+      "role": "배우"
+    },
+    {
+      "id": "남명렬",
+      "label": "남명렬",
+      "community": 7,
+      "degree": 20,
+      "movies_count": 39,
+      "role": "배우"
+    },
+    {
+      "id": "홍석연",
+      "label": "홍석연",
+      "community": 1,
+      "degree": 11,
+      "movies_count": 30,
+      "role": "배우"
+    },
+    {
+      "id": "고은기",
+      "label": "고은기",
+      "community": 4,
+      "degree": 5,
+      "movies_count": 35,
+      "role": "감독"
+    },
+    {
+      "id": "이재우",
+      "label": "이재우",
+      "community": 7,
+      "degree": 15,
+      "movies_count": 23,
+      "role": "촬영"
+    },
+    {
+      "id": "서범식",
+      "label": "서범식",
+      "community": 7,
+      "degree": 3,
+      "movies_count": 18,
+      "role": "배우"
+    },
+    {
+      "id": "류성현",
+      "label": "류성현",
+      "community": 1,
+      "degree": 9,
+      "movies_count": 18,
+      "role": "배우"
+    },
+    {
+      "id": "윤혜진",
+      "label": "윤혜진",
+      "community": 3,
+      "degree": 9,
+      "movies_count": 14,
+      "role": "배우"
+    },
+    {
+      "id": "박지아",
+      "label": "박지아",
+      "community": 7,
+      "degree": 16,
+      "movies_count": 25,
+      "role": "배우"
+    },
+    {
+      "id": "김태수",
+      "label": "김태수",
+      "community": 0,
+      "degree": 18,
+      "movies_count": 34,
+      "role": "촬영"
+    },
+    {
+      "id": "박경균",
+      "label": "박경균",
+      "community": 3,
+      "degree": 7,
+      "movies_count": 22,
+      "role": "촬영"
+    },
+    {
+      "id": "박선주",
+      "label": "박선주",
+      "community": 3,
+      "degree": 4,
+      "movies_count": 13,
+      "role": "배우"
+    },
+    {
+      "id": "김성오",
+      "label": "김성오",
+      "community": 0,
+      "degree": 14,
+      "movies_count": 53,
+      "role": "배우"
+    },
+    {
+      "id": "김연정",
+      "label": "김연정",
+      "community": 0,
+      "degree": 6,
+      "movies_count": 12,
+      "role": "음악"
+    },
+    {
+      "id": "김지현",
+      "label": "김지현",
+      "community": 7,
+      "degree": 3,
+      "movies_count": 28,
+      "role": "촬영"
+    },
+    {
+      "id": "김병춘",
+      "label": "김병춘",
+      "community": 1,
+      "degree": 11,
+      "movies_count": 32,
+      "role": "배우"
+    },
+    {
+      "id": "오태경",
+      "label": "오태경",
+      "community": 4,
+      "degree": 12,
+      "movies_count": 30,
+      "role": "배우"
+    },
+    {
+      "id": "이마리오",
+      "label": "이마리오",
+      "community": 2,
+      "degree": 1,
+      "movies_count": 11,
+      "role": "감독"
+    },
+    {
+      "id": "장리우",
+      "label": "장리우",
+      "community": 2,
+      "degree": 11,
+      "movies_count": 24,
+      "role": "배우"
+    },
+    {
+      "id": "하나리",
+      "label": "하나리",
+      "community": 2,
+      "degree": 1,
+      "movies_count": 1,
+      "role": "배우"
+    },
+    {
+      "id": "백경민",
+      "label": "백경민",
+      "community": 1,
+      "degree": 1,
+      "movies_count": 1,
+      "role": "촬영"
+    },
+    {
+      "id": "문제용",
+      "label": "문제용",
+      "community": 2,
+      "degree": 3,
+      "movies_count": 7,
+      "role": "감독"
+    },
+    {
+      "id": "박명신",
+      "label": "박명신",
+      "community": 7,
+      "degree": 25,
+      "movies_count": 60,
+      "role": "배우"
+    },
+    {
+      "id": "남도형",
+      "label": "남도형",
+      "community": 0,
+      "degree": 6,
+      "movies_count": 17,
+      "role": "배우"
+    },
+    {
+      "id": "홍범기",
+      "label": "홍범기",
+      "community": 0,
+      "degree": 1,
+      "movies_count": 18,
+      "role": "배우"
+    },
+    {
+      "id": "임나무",
+      "label": "임나무",
+      "community": 4,
+      "degree": 9,
+      "movies_count": 11,
+      "role": "감독"
+    },
+    {
+      "id": "변봉선",
+      "label": "변봉선",
+      "community": 0,
+      "degree": 9,
+      "movies_count": 23,
+      "role": "촬영"
+    },
+    {
+      "id": "이준오",
+      "label": "이준오",
+      "community": 0,
+      "degree": 8,
+      "movies_count": 12,
+      "role": "음악"
+    },
+    {
+      "id": "홍지석",
+      "label": "홍지석",
+      "community": 4,
+      "degree": 9,
+      "movies_count": 42,
+      "role": "배우"
+    },
+    {
+      "id": "필감성",
+      "label": "필감성",
+      "community": 0,
+      "degree": 5,
+      "movies_count": 8,
+      "role": "감독"
+    },
+    {
+      "id": "문영동",
+      "label": "문영동",
+      "community": 0,
+      "degree": 6,
+      "movies_count": 13,
+      "role": "배우"
+    },
+    {
+      "id": "마그너스 본 혼",
+      "label": "마그너스 본 혼",
+      "community": 5,
+      "degree": 1,
+      "movies_count": 2,
+      "role": "감독"
+    },
+    {
+      "id": "트린 디어홈",
+      "label": "트린 디어홈",
+      "community": 5,
+      "degree": 1,
+      "movies_count": 70,
+      "role": "배우"
+    },
+    {
+      "id": "박종범",
+      "label": "박종범",
+      "community": 1,
+      "degree": 7,
+      "movies_count": 6,
+      "role": "배우"
+    },
+    {
+      "id": "김준형",
+      "label": "김준형",
+      "community": 4,
+      "degree": 5,
+      "movies_count": 8,
+      "role": "감독"
+    },
+    {
+      "id": "조하나",
+      "label": "조하나",
+      "community": 6,
+      "degree": 1,
+      "movies_count": 1,
+      "role": "배우"
+    },
+    {
+      "id": "할리나 레인",
+      "label": "할리나 레인",
+      "community": 6,
+      "degree": 1,
+      "movies_count": 44,
+      "role": "배우"
+    },
+    {
+      "id": "이은정",
+      "label": "이은정",
+      "community": 4,
+      "degree": 5,
+      "movies_count": 4,
+      "role": "배우"
+    },
+    {
+      "id": "윤정",
+      "label": "윤정",
+      "community": 4,
+      "degree": 5,
+      "movies_count": 2,
+      "role": "배우"
+    },
+    {
+      "id": "조은성",
+      "label": "조은성",
+      "community": 2,
+      "degree": 1,
+      "movies_count": 8,
+      "role": "감독"
+    },
+    {
+      "id": "김동완",
+      "label": "김동완",
+      "community": 1,
+      "degree": 3,
+      "movies_count": 16,
+      "role": "배우"
+    },
+    {
+      "id": "김진무",
+      "label": "김진무",
+      "community": 0,
+      "degree": 1,
+      "movies_count": 6,
+      "role": "감독"
+    },
+    {
+      "id": "홍준표",
+      "label": "홍준표",
+      "community": 0,
+      "degree": 3,
+      "movies_count": 10,
+      "role": "감독"
+    },
+    {
+      "id": "박재인",
+      "label": "박재인",
+      "community": 0,
+      "degree": 1,
+      "movies_count": 5,
+      "role": "음악"
+    },
+    {
+      "id": "김하영",
+      "label": "김하영",
+      "community": 1,
+      "degree": 3,
+      "movies_count": 3,
+      "role": "배우"
+    },
+    {
+      "id": "정현철",
+      "label": "정현철",
+      "community": 7,
+      "degree": 1,
+      "movies_count": 8,
+      "role": "감독"
+    },
+    {
+      "id": "박철민",
+      "label": "박철민",
+      "community": 1,
+      "degree": 2,
+      "movies_count": 2,
+      "role": "배우"
+    },
+    {
+      "id": "이병수",
+      "label": "이병수",
+      "community": 7,
+      "degree": 2,
+      "movies_count": 4,
+      "role": "감독"
+    },
+    {
+      "id": "이원재",
+      "label": "이원재",
+      "community": 7,
+      "degree": 2,
+      "movies_count": 6,
+      "role": "배우"
+    },
+    {
+      "id": "김세연",
+      "label": "김세연",
+      "community": 0,
+      "degree": 2,
+      "movies_count": 14,
+      "role": "감독"
+    },
+    {
+      "id": "막스 폰 시도우",
+      "label": "막스 폰 시도우",
+      "community": 2,
+      "degree": 1,
+      "movies_count": 176,
+      "role": "배우"
+    },
+    {
+      "id": "변준석",
+      "label": "변준석",
+      "community": 4,
+      "degree": 1,
+      "movies_count": 5,
+      "role": "감독"
+    },
+    {
+      "id": "박현영",
+      "label": "박현영",
+      "community": 0,
+      "degree": 1,
+      "movies_count": 1,
+      "role": "배우"
+    }
+  ],
+  "links": [
+    {
+      "source": "김태성",
+      "target": "장세진",
+      "weight": 1,
+      "movies": [
+        "1724 기방난동사건"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김태성",
+      "target": "정종헌",
+      "weight": 4,
+      "movies": [
+        "1724 기방난동사건",
+        "극한직업",
+        "체포왕",
+        "코리아"
+      ],
+      "total_movies": 4
+    },
+    {
+      "source": "김태성",
+      "target": "길해연",
+      "weight": 2,
+      "movies": [
+        "가시",
+        "헬머니"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "김태성",
+      "target": "엄혜정",
+      "weight": 1,
+      "movies": [
+        "가장 보통의 연애"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김태성",
+      "target": "최민철",
+      "weight": 2,
+      "movies": [
+        "강철비2: 정상회담",
+        "퍼펙트 게임"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "김태성",
+      "target": "전수지",
+      "weight": 1,
+      "movies": [
+        "검은 수녀들"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김태성",
+      "target": "조한철",
+      "weight": 1,
+      "movies": [
+        "국가부도의 날"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김태성",
+      "target": "김연정",
+      "weight": 7,
+      "movies": [
+        "굿바이 싱글",
+        "굿바이 썸머",
+        "기적",
+        "싱크홀",
+        "연의 편지"
+      ],
+      "total_movies": 7
+    },
+    {
+      "source": "김태성",
+      "target": "김태수",
+      "weight": 5,
+      "movies": [
+        "기적",
+        "발신제한",
+        "사바하",
+        "좀비딸",
+        "특수본"
+      ],
+      "total_movies": 5
+    },
+    {
+      "source": "김태성",
+      "target": "정기섭",
+      "weight": 2,
+      "movies": [
+        "김복남 살인사건의 전말",
+        "노량: 죽음의 바다"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "김태성",
+      "target": "남명렬",
+      "weight": 2,
+      "movies": [
+        "노량: 죽음의 바다",
+        "발신제한"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "김태성",
+      "target": "김성오",
+      "weight": 2,
+      "movies": [
+        "니 부모 얼굴이 보고 싶다",
+        "타워"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "김태성",
+      "target": "홍지석",
+      "weight": 2,
+      "movies": [
+        "드림",
+        "보호자"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "김태성",
+      "target": "문영동",
+      "weight": 2,
+      "movies": [
+        "명량",
+        "최종병기 활"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "김태성",
+      "target": "이용녀",
+      "weight": 1,
+      "movies": [
+        "분홍신"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김태성",
+      "target": "박명신",
+      "weight": 2,
+      "movies": [
+        "스물",
+        "최종병기 활"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "김태성",
+      "target": "김진무",
+      "weight": 1,
+      "movies": [
+        "신이 보낸 사람"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김태성",
+      "target": "남도형",
+      "weight": 1,
+      "movies": [
+        "연의 편지"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김태성",
+      "target": "홍준표",
+      "weight": 1,
+      "movies": [
+        "연의 편지"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김태성",
+      "target": "기주봉",
+      "weight": 1,
+      "movies": [
+        "오피스"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김태성",
+      "target": "필감성",
+      "weight": 2,
+      "movies": [
+        "인질",
+        "좀비딸"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "김태성",
+      "target": "장리우",
+      "weight": 1,
+      "movies": [
+        "코리아"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김태성",
+      "target": "정영삼",
+      "weight": 1,
+      "movies": [
+        "코리아"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김태성",
+      "target": "변봉선",
+      "weight": 1,
+      "movies": [
+        "탐정 홍길동: 사라진 마을"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김태성",
+      "target": "고은기",
+      "weight": 1,
+      "movies": [
+        "파묘"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김태성",
+      "target": "박지아",
+      "weight": 1,
+      "movies": [
+        "하이재킹"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김태성",
+      "target": "임세미",
+      "weight": 1,
+      "movies": [
+        "하이재킹"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김태성",
+      "target": "김민재",
+      "weight": 2,
+      "movies": [
+        "한산 리덕스",
+        "한산: 용의 출현"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "김태성",
+      "target": "박현영",
+      "weight": 1,
+      "movies": [
+        "한여름의 판타지아"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "장세진",
+      "target": "정종헌",
+      "weight": 1,
+      "movies": [
+        "1724 기방난동사건"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "장세진",
+      "target": "문영동",
+      "weight": 1,
+      "movies": [
+        "홀리데이"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "장세진",
+      "target": "박경균",
+      "weight": 1,
+      "movies": [
+        "홀리데이"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "정종헌",
+      "target": "김지현",
+      "weight": 2,
+      "movies": [
+        "동화지만 청불입니다",
+        "우리집"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "정종헌",
+      "target": "김준성",
+      "weight": 4,
+      "movies": [
+        "리벤져",
+        "시간이탈자",
+        "용의자",
+        "파과"
+      ],
+      "total_movies": 4
+    },
+    {
+      "source": "정종헌",
+      "target": "김훈희",
+      "weight": 1,
+      "movies": [
+        "봄, 눈"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "정종헌",
+      "target": "정기섭",
+      "weight": 1,
+      "movies": [
+        "봄, 눈"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "정종헌",
+      "target": "김병춘",
+      "weight": 1,
+      "movies": [
+        "비열한 거리"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "정종헌",
+      "target": "천호진",
+      "weight": 2,
+      "movies": [
+        "비열한 거리",
+        "파과"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "정종헌",
+      "target": "박미현",
+      "weight": 1,
+      "movies": [
+        "아이들..."
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "정종헌",
+      "target": "이재우",
+      "weight": 2,
+      "movies": [
+        "아이들...",
+        "파과"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "정종헌",
+      "target": "기주봉",
+      "weight": 3,
+      "movies": [
+        "용의자",
+        "킹콩을 들다",
+        "파과"
+      ],
+      "total_movies": 3
+    },
+    {
+      "source": "정종헌",
+      "target": "김민재",
+      "weight": 1,
+      "movies": [
+        "용의자"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "정종헌",
+      "target": "남명렬",
+      "weight": 2,
+      "movies": [
+        "제보자",
+        "파과"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "정종헌",
+      "target": "전수지",
+      "weight": 1,
+      "movies": [
+        "제보자"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "정종헌",
+      "target": "이준오",
+      "weight": 1,
+      "movies": [
+        "제보자"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "정종헌",
+      "target": "장리우",
+      "weight": 1,
+      "movies": [
+        "코리아"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "정종헌",
+      "target": "정영삼",
+      "weight": 1,
+      "movies": [
+        "코리아"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "정종헌",
+      "target": "박명신",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "정종헌",
+      "target": "박지아",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "정종헌",
+      "target": "조한철",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "정종헌",
+      "target": "최민철",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "정종헌",
+      "target": "길해연",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "정종헌",
+      "target": "이용녀",
+      "weight": 2,
+      "movies": [
+        "파과",
+        "하이힐"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "정종헌",
+      "target": "김태수",
+      "weight": 1,
+      "movies": [
+        "평행이론"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "정경순",
+      "target": "조은지",
+      "weight": 1,
+      "movies": [
+        "2박 3일"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "정경순",
+      "target": "박미현",
+      "weight": 2,
+      "movies": [
+        "가족의 탄생",
+        "속초에서의 겨울"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "정경순",
+      "target": "류성현",
+      "weight": 1,
+      "movies": [
+        "정사"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "조은지",
+      "target": "윤혜진",
+      "weight": 1,
+      "movies": [
+        "달콤, 살벌한 연인"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "조은지",
+      "target": "변봉선",
+      "weight": 1,
+      "movies": [
+        "런닝맨"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "조은지",
+      "target": "남도형",
+      "weight": 1,
+      "movies": [
+        "런닝맨"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "조은지",
+      "target": "조은성",
+      "weight": 1,
+      "movies": [
+        "션샤인 러브"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "조은지",
+      "target": "서범식",
+      "weight": 1,
+      "movies": [
+        "악녀"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "조은지",
+      "target": "장리우",
+      "weight": 1,
+      "movies": [
+        "요가학원"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "조은지",
+      "target": "김태수",
+      "weight": 1,
+      "movies": [
+        "장르만 로맨스"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "조은지",
+      "target": "김병춘",
+      "weight": 1,
+      "movies": [
+        "죽어도 해피엔딩"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "조은지",
+      "target": "박미현",
+      "weight": 1,
+      "movies": [
+        "황금시대"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "조은지",
+      "target": "이용녀",
+      "weight": 1,
+      "movies": [
+        "후궁 : 제왕의 첩"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김홍익",
+      "target": "김훈희",
+      "weight": 4,
+      "movies": [
+        "CCTV",
+        "스위트홈 감독판",
+        "안동",
+        "히어로"
+      ],
+      "total_movies": 4
+    },
+    {
+      "source": "김훈희",
+      "target": "박경균",
+      "weight": 1,
+      "movies": [
+        "구르는 수레바퀴"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김훈희",
+      "target": "정기섭",
+      "weight": 1,
+      "movies": [
+        "봄, 눈"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김훈희",
+      "target": "박명신",
+      "weight": 1,
+      "movies": [
+        "시실리 2km"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "손지나",
+      "target": "조한선",
+      "weight": 1,
+      "movies": [
+        "KBS 드라마 스페셜"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "손지나",
+      "target": "조한철",
+      "weight": 2,
+      "movies": [
+        "KBS 드라마 스페셜",
+        "숨바꼭질"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "손지나",
+      "target": "길해연",
+      "weight": 2,
+      "movies": [
+        "KBS 드라마 스페셜",
+        "인 허 플레이스"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "손지나",
+      "target": "임세미",
+      "weight": 2,
+      "movies": [
+        "KBS 드라마 스페셜",
+        "방과 후 전쟁활동"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "손지나",
+      "target": "오태경",
+      "weight": 1,
+      "movies": [
+        "꿈은 이루어진다"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "손지나",
+      "target": "류성현",
+      "weight": 1,
+      "movies": [
+        "더 글로리"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "손지나",
+      "target": "박지아",
+      "weight": 1,
+      "movies": [
+        "더 글로리"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "손지나",
+      "target": "천호진",
+      "weight": 1,
+      "movies": [
+        "범죄의 재구성"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "손지나",
+      "target": "기주봉",
+      "weight": 1,
+      "movies": [
+        "숨바꼭질"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "손지나",
+      "target": "엄혜정",
+      "weight": 1,
+      "movies": [
+        "해빙"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "조한선",
+      "target": "조한철",
+      "weight": 1,
+      "movies": [
+        "KBS 드라마 스페셜"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "조한선",
+      "target": "길해연",
+      "weight": 2,
+      "movies": [
+        "KBS 드라마 스페셜",
+        "빙의"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "조한선",
+      "target": "임세미",
+      "weight": 1,
+      "movies": [
+        "KBS 드라마 스페셜"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "조한선",
+      "target": "필립 느와레",
+      "weight": 1,
+      "movies": [
+        "마이 뉴 파트너"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "조한철",
+      "target": "길해연",
+      "weight": 3,
+      "movies": [
+        "KBS 드라마 스페셜",
+        "트리거",
+        "파과"
+      ],
+      "total_movies": 3
+    },
+    {
+      "source": "조한철",
+      "target": "임세미",
+      "weight": 1,
+      "movies": [
+        "KBS 드라마 스페셜"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "조한철",
+      "target": "기주봉",
+      "weight": 4,
+      "movies": [
+        "간신",
+        "숨바꼭질",
+        "파과",
+        "프로듀사"
+      ],
+      "total_movies": 4
+    },
+    {
+      "source": "조한철",
+      "target": "김준성",
+      "weight": 4,
+      "movies": [
+        "간신",
+        "내 아내의 모든 것",
+        "세상에서 가장 아름다운 이별",
+        "파과"
+      ],
+      "total_movies": 4
+    },
+    {
+      "source": "조한철",
+      "target": "천호진",
+      "weight": 3,
+      "movies": [
+        "간신",
+        "김종욱 찾기",
+        "파과"
+      ],
+      "total_movies": 3
+    },
+    {
+      "source": "조한철",
+      "target": "박미현",
+      "weight": 3,
+      "movies": [
+        "갯마을 차차차",
+        "내가 죽던 날",
+        "은하해방전선"
+      ],
+      "total_movies": 3
+    },
+    {
+      "source": "조한철",
+      "target": "남명렬",
+      "weight": 5,
+      "movies": [
+        "경성크리처",
+        "내 아내의 모든 것",
+        "블랙머니",
+        "침묵",
+        "파과"
+      ],
+      "total_movies": 5
+    },
+    {
+      "source": "조한철",
+      "target": "이용녀",
+      "weight": 2,
+      "movies": [
+        "곡성",
+        "파과"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "조한철",
+      "target": "이재우",
+      "weight": 2,
+      "movies": [
+        "곡성",
+        "파과"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "조한철",
+      "target": "김태수",
+      "weight": 1,
+      "movies": [
+        "내 아내의 모든 것"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "조한철",
+      "target": "박명신",
+      "weight": 4,
+      "movies": [
+        "마더",
+        "붉은 가족",
+        "트리거",
+        "파과"
+      ],
+      "total_movies": 4
+    },
+    {
+      "source": "조한철",
+      "target": "윤혜진",
+      "weight": 2,
+      "movies": [
+        "마더",
+        "세상에서 가장 아름다운 이별"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "조한철",
+      "target": "김성오",
+      "weight": 1,
+      "movies": [
+        "방구석1열"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "조한철",
+      "target": "홍석연",
+      "weight": 1,
+      "movies": [
+        "빈센조"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "조한철",
+      "target": "박선주",
+      "weight": 1,
+      "movies": [
+        "세자매"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "조한철",
+      "target": "김동완",
+      "weight": 1,
+      "movies": [
+        "연가시"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "조한철",
+      "target": "정현철",
+      "weight": 1,
+      "movies": [
+        "재벌집 막내아들"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "조한철",
+      "target": "전수지",
+      "weight": 2,
+      "movies": [
+        "커플즈",
+        "트리거"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "조한철",
+      "target": "박지아",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "조한철",
+      "target": "최민철",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "조한철",
+      "target": "오태경",
+      "weight": 1,
+      "movies": [
+        "힘을 내요, 미스터 리"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "길해연",
+      "target": "임세미",
+      "weight": 4,
+      "movies": [
+        "KBS 드라마 스페셜",
+        "O'PENing",
+        "원더풀 월드",
+        "트라이: 우리는 기적이 된다"
+      ],
+      "total_movies": 4
+    },
+    {
+      "source": "길해연",
+      "target": "박미현",
+      "weight": 3,
+      "movies": [
+        "O'PENing",
+        "너와 나",
+        "카트"
+      ],
+      "total_movies": 3
+    },
+    {
+      "source": "길해연",
+      "target": "김태수",
+      "weight": 1,
+      "movies": [
+        "나의 특별한 형제"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "길해연",
+      "target": "김준성",
+      "weight": 3,
+      "movies": [
+        "날, 보러와요",
+        "살인자의 기억법",
+        "파과"
+      ],
+      "total_movies": 3
+    },
+    {
+      "source": "길해연",
+      "target": "이재우",
+      "weight": 2,
+      "movies": [
+        "메이트",
+        "파과"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "길해연",
+      "target": "임나무",
+      "weight": 1,
+      "movies": [
+        "배니싱: 미제사건"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "길해연",
+      "target": "류성현",
+      "weight": 1,
+      "movies": [
+        "스마트폰을 떨어뜨렸을 뿐인데"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "길해연",
+      "target": "홍지석",
+      "weight": 1,
+      "movies": [
+        "잉투기"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "길해연",
+      "target": "장리우",
+      "weight": 3,
+      "movies": [
+        "장산범",
+        "카트",
+        "혜화, 동"
+      ],
+      "total_movies": 3
+    },
+    {
+      "source": "길해연",
+      "target": "기주봉",
+      "weight": 2,
+      "movies": [
+        "초행",
+        "파과"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "길해연",
+      "target": "정기섭",
+      "weight": 1,
+      "movies": [
+        "트라이: 우리는 기적이 된다"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "길해연",
+      "target": "박명신",
+      "weight": 2,
+      "movies": [
+        "트리거",
+        "파과"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "길해연",
+      "target": "전수지",
+      "weight": 1,
+      "movies": [
+        "트리거"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "길해연",
+      "target": "남명렬",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "길해연",
+      "target": "박지아",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "길해연",
+      "target": "천호진",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "길해연",
+      "target": "최민철",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "길해연",
+      "target": "이용녀",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "임세미",
+      "target": "박미현",
+      "weight": 1,
+      "movies": [
+        "O'PENing"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "임세미",
+      "target": "김민재",
+      "weight": 1,
+      "movies": [
+        "돈"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "임세미",
+      "target": "김병춘",
+      "weight": 1,
+      "movies": [
+        "여신강림"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "임세미",
+      "target": "김성오",
+      "weight": 1,
+      "movies": [
+        "위기의 X"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "임세미",
+      "target": "정기섭",
+      "weight": 1,
+      "movies": [
+        "트라이: 우리는 기적이 된다"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "임세미",
+      "target": "박지아",
+      "weight": 1,
+      "movies": [
+        "하이재킹"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "박미현",
+      "target": "기주봉",
+      "weight": 2,
+      "movies": [
+        "나쁜 영화",
+        "환상속의 그대"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "박미현",
+      "target": "이준오",
+      "weight": 1,
+      "movies": [
+        "맨홀"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "박미현",
+      "target": "김민재",
+      "weight": 1,
+      "movies": [
+        "생일"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "박미현",
+      "target": "이재우",
+      "weight": 1,
+      "movies": [
+        "아이들..."
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "박미현",
+      "target": "홍석연",
+      "weight": 1,
+      "movies": [
+        "오징어 게임"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "박미현",
+      "target": "박종범",
+      "weight": 1,
+      "movies": [
+        "오징어 게임"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "박미현",
+      "target": "김하영",
+      "weight": 1,
+      "movies": [
+        "오징어 게임"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "박미현",
+      "target": "전수지",
+      "weight": 1,
+      "movies": [
+        "원더랜드"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "박미현",
+      "target": "박명신",
+      "weight": 2,
+      "movies": [
+        "제비",
+        "환상속의 그대"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "박미현",
+      "target": "장리우",
+      "weight": 2,
+      "movies": [
+        "제비",
+        "카트"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "브누와 쟉꼬",
+      "target": "필립 느와레",
+      "weight": 1,
+      "movies": [
+        "Vivement dimanche"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "필립 느와레",
+      "target": "막스 폰 시도우",
+      "weight": 1,
+      "movies": [
+        "타타르인의 사막"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "엄혜정",
+      "target": "이마리오",
+      "weight": 1,
+      "movies": [
+        "나를 닮은 얼굴"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "기주봉",
+      "target": "김준성",
+      "weight": 4,
+      "movies": [
+        "간신",
+        "보이스",
+        "용의자",
+        "파과"
+      ],
+      "total_movies": 4
+    },
+    {
+      "source": "기주봉",
+      "target": "천호진",
+      "weight": 2,
+      "movies": [
+        "간신",
+        "파과"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "기주봉",
+      "target": "홍석연",
+      "weight": 3,
+      "movies": [
+        "경축! 우리사랑",
+        "제시는 그때 스무살이었다",
+        "친구"
+      ],
+      "total_movies": 3
+    },
+    {
+      "source": "기주봉",
+      "target": "이용녀",
+      "weight": 2,
+      "movies": [
+        "경축! 우리사랑",
+        "파과"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "기주봉",
+      "target": "서범식",
+      "weight": 1,
+      "movies": [
+        "공공의 적"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "기주봉",
+      "target": "류성현",
+      "weight": 1,
+      "movies": [
+        "공작"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "기주봉",
+      "target": "정기섭",
+      "weight": 1,
+      "movies": [
+        "공작"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "기주봉",
+      "target": "박선주",
+      "weight": 1,
+      "movies": [
+        "군함도"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "기주봉",
+      "target": "김성오",
+      "weight": 2,
+      "movies": [
+        "길복순",
+        "청풍명월"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "기주봉",
+      "target": "임나무",
+      "weight": 1,
+      "movies": [
+        "밤과 낮"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "기주봉",
+      "target": "김태수",
+      "weight": 2,
+      "movies": [
+        "북촌방향",
+        "여교사"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "기주봉",
+      "target": "문영동",
+      "weight": 1,
+      "movies": [
+        "알포인트"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "기주봉",
+      "target": "오태경",
+      "weight": 1,
+      "movies": [
+        "알포인트"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "기주봉",
+      "target": "김민재",
+      "weight": 1,
+      "movies": [
+        "용의자"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "기주봉",
+      "target": "박철민",
+      "weight": 1,
+      "movies": [
+        "제시는 그때 스무살이었다"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "기주봉",
+      "target": "고은기",
+      "weight": 1,
+      "movies": [
+        "차이나타운"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "기주봉",
+      "target": "남명렬",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "기주봉",
+      "target": "박명신",
+      "weight": 2,
+      "movies": [
+        "파과",
+        "환상속의 그대"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "기주봉",
+      "target": "박지아",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "기주봉",
+      "target": "최민철",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "기주봉",
+      "target": "이재우",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김준성",
+      "target": "천호진",
+      "weight": 3,
+      "movies": [
+        "간신",
+        "간호중",
+        "파과"
+      ],
+      "total_movies": 3
+    },
+    {
+      "source": "김준성",
+      "target": "이용녀",
+      "weight": 5,
+      "movies": [
+        "간호중",
+        "베스트셀러",
+        "이층의 악당",
+        "파과",
+        "허스토리"
+      ],
+      "total_movies": 5
+    },
+    {
+      "source": "김준성",
+      "target": "고은기",
+      "weight": 1,
+      "movies": [
+        "계춘할망"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김준성",
+      "target": "박지아",
+      "weight": 2,
+      "movies": [
+        "광해, 왕이 된 남자",
+        "파과"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "김준성",
+      "target": "김태수",
+      "weight": 3,
+      "movies": [
+        "광해, 왕이 된 남자",
+        "내 아내의 모든 것",
+        "전설의 고향"
+      ],
+      "total_movies": 3
+    },
+    {
+      "source": "김준성",
+      "target": "남명렬",
+      "weight": 3,
+      "movies": [
+        "내 아내의 모든 것",
+        "파과",
+        "해피 뉴 이어"
+      ],
+      "total_movies": 3
+    },
+    {
+      "source": "김준성",
+      "target": "장리우",
+      "weight": 2,
+      "movies": [
+        "당신, 거기 있어줄래요",
+        "집으로 가는 길"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "김준성",
+      "target": "전수지",
+      "weight": 1,
+      "movies": [
+        "말아톤"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김준성",
+      "target": "윤혜진",
+      "weight": 1,
+      "movies": [
+        "세상에서 가장 아름다운 이별"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김준성",
+      "target": "김민재",
+      "weight": 1,
+      "movies": [
+        "용의자"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김준성",
+      "target": "박명신",
+      "weight": 3,
+      "movies": [
+        "전설의 고향",
+        "파과",
+        "허스토리"
+      ],
+      "total_movies": 3
+    },
+    {
+      "source": "김준성",
+      "target": "이병수",
+      "weight": 1,
+      "movies": [
+        "종이꽃"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김준성",
+      "target": "이원재",
+      "weight": 1,
+      "movies": [
+        "종이꽃"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김준성",
+      "target": "김성오",
+      "weight": 1,
+      "movies": [
+        "죽지않는 인간들의 밤"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김준성",
+      "target": "최민철",
+      "weight": 2,
+      "movies": [
+        "집으로 가는 길",
+        "파과"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "김준성",
+      "target": "변봉선",
+      "weight": 1,
+      "movies": [
+        "캐치미"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김준성",
+      "target": "이재우",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "천호진",
+      "target": "이용녀",
+      "weight": 3,
+      "movies": [
+        "간호중",
+        "불꽃처럼 나비처럼",
+        "파과"
+      ],
+      "total_movies": 3
+    },
+    {
+      "source": "천호진",
+      "target": "김병춘",
+      "weight": 2,
+      "movies": [
+        "말죽거리 잔혹사",
+        "비열한 거리"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "천호진",
+      "target": "필감성",
+      "weight": 1,
+      "movies": [
+        "말죽거리 잔혹사"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "천호진",
+      "target": "김민재",
+      "weight": 1,
+      "movies": [
+        "베테랑"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "천호진",
+      "target": "남명렬",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "천호진",
+      "target": "박명신",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "천호진",
+      "target": "박지아",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "천호진",
+      "target": "최민철",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "천호진",
+      "target": "이재우",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "이용녀",
+      "target": "홍석연",
+      "weight": 1,
+      "movies": [
+        "경축! 우리사랑"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "이용녀",
+      "target": "이재우",
+      "weight": 2,
+      "movies": [
+        "곡성",
+        "파과"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "이용녀",
+      "target": "윤혜진",
+      "weight": 1,
+      "movies": [
+        "나는 곤경에 처했다!"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "이용녀",
+      "target": "오태경",
+      "weight": 1,
+      "movies": [
+        "나쁜 놈이 더 잘 잔다"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "이용녀",
+      "target": "오수진",
+      "weight": 2,
+      "movies": [
+        "부전시장",
+        "설해"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "이용녀",
+      "target": "김태수",
+      "weight": 1,
+      "movies": [
+        "신의 한 수"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "이용녀",
+      "target": "박명신",
+      "weight": 3,
+      "movies": [
+        "친절한 금자씨",
+        "파과",
+        "허스토리"
+      ],
+      "total_movies": 3
+    },
+    {
+      "source": "이용녀",
+      "target": "남명렬",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "이용녀",
+      "target": "박지아",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "이용녀",
+      "target": "최민철",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "최민철",
+      "target": "김민재",
+      "weight": 1,
+      "movies": [
+        "대외비"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "최민철",
+      "target": "박지아",
+      "weight": 3,
+      "movies": [
+        "만분의 일초",
+        "첫잔처럼",
+        "파과"
+      ],
+      "total_movies": 3
+    },
+    {
+      "source": "최민철",
+      "target": "장리우",
+      "weight": 1,
+      "movies": [
+        "집으로 가는 길"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "최민철",
+      "target": "남명렬",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "최민철",
+      "target": "박명신",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "최민철",
+      "target": "이재우",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "오수진",
+      "target": "정영삼",
+      "weight": 1,
+      "movies": [
+        "개 같은 것들"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "정영삼",
+      "target": "윤혜진",
+      "weight": 1,
+      "movies": [
+        "광기의 역사"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "정영삼",
+      "target": "김성오",
+      "weight": 1,
+      "movies": [
+        "그녀는 예뻤다"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "정영삼",
+      "target": "김지현",
+      "weight": 1,
+      "movies": [
+        "그물"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "정영삼",
+      "target": "박경균",
+      "weight": 1,
+      "movies": [
+        "문영"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "정영삼",
+      "target": "장리우",
+      "weight": 1,
+      "movies": [
+        "코리아"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김민재",
+      "target": "정기섭",
+      "weight": 2,
+      "movies": [
+        "거미집",
+        "소방관"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "김민재",
+      "target": "이준오",
+      "weight": 1,
+      "movies": [
+        "뒤틀린 집"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김민재",
+      "target": "박종범",
+      "weight": 1,
+      "movies": [
+        "반도"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김민재",
+      "target": "김성오",
+      "weight": 2,
+      "movies": [
+        "성난황소",
+        "우는 남자"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "김민재",
+      "target": "변봉선",
+      "weight": 1,
+      "movies": [
+        "염력"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김민재",
+      "target": "박명신",
+      "weight": 1,
+      "movies": [
+        "작은 연못"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김민재",
+      "target": "이재우",
+      "weight": 1,
+      "movies": [
+        "최선의 삶"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김민재",
+      "target": "박경균",
+      "weight": 1,
+      "movies": [
+        "최소한의 선의"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "정기섭",
+      "target": "류성현",
+      "weight": 3,
+      "movies": [
+        "공작",
+        "덕구",
+        "신세계"
+      ],
+      "total_movies": 3
+    },
+    {
+      "source": "정기섭",
+      "target": "홍석연",
+      "weight": 2,
+      "movies": [
+        "국제시장",
+        "모범택시"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "정기섭",
+      "target": "남명렬",
+      "weight": 1,
+      "movies": [
+        "노량: 죽음의 바다"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "전수지",
+      "target": "김성오",
+      "weight": 2,
+      "movies": [
+        "굿뉴스",
+        "서울의 봄"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "전수지",
+      "target": "남명렬",
+      "weight": 3,
+      "movies": [
+        "미안해, 고마워",
+        "비상선언",
+        "제보자"
+      ],
+      "total_movies": 3
+    },
+    {
+      "source": "전수지",
+      "target": "박명신",
+      "weight": 2,
+      "movies": [
+        "사랑해... 말순씨",
+        "트리거"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "전수지",
+      "target": "문제용",
+      "weight": 1,
+      "movies": [
+        "슈퍼맨이었던 사나이"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "전수지",
+      "target": "이준오",
+      "weight": 1,
+      "movies": [
+        "제보자"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "남명렬",
+      "target": "김태수",
+      "weight": 2,
+      "movies": [
+        "내 아내의 모든 것",
+        "발신제한"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "남명렬",
+      "target": "김병춘",
+      "weight": 2,
+      "movies": [
+        "더 뱅커",
+        "별별 며느리"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "남명렬",
+      "target": "류성현",
+      "weight": 1,
+      "movies": [
+        "더 뱅커"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "남명렬",
+      "target": "홍석연",
+      "weight": 1,
+      "movies": [
+        "도가니"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "남명렬",
+      "target": "이준오",
+      "weight": 1,
+      "movies": [
+        "제보자"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "남명렬",
+      "target": "김지현",
+      "weight": 1,
+      "movies": [
+        "커미션"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "남명렬",
+      "target": "박명신",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "남명렬",
+      "target": "박지아",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "남명렬",
+      "target": "이재우",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "홍석연",
+      "target": "김병춘",
+      "weight": 2,
+      "movies": [
+        "극락도 살인사건",
+        "조폭 마누라 3"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "홍석연",
+      "target": "백경민",
+      "weight": 1,
+      "movies": [
+        "낭만닥터 김사부"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "홍석연",
+      "target": "박종범",
+      "weight": 1,
+      "movies": [
+        "오징어 게임"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "홍석연",
+      "target": "김하영",
+      "weight": 1,
+      "movies": [
+        "오징어 게임"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "홍석연",
+      "target": "박철민",
+      "weight": 1,
+      "movies": [
+        "제시는 그때 스무살이었다"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "고은기",
+      "target": "임나무",
+      "weight": 1,
+      "movies": [
+        "대도시의 사랑법"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "고은기",
+      "target": "김성오",
+      "weight": 1,
+      "movies": [
+        "출장 십오야"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "이재우",
+      "target": "박명신",
+      "weight": 2,
+      "movies": [
+        "동주",
+        "파과"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "이재우",
+      "target": "이준오",
+      "weight": 1,
+      "movies": [
+        "보희와 녹양"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "이재우",
+      "target": "박지아",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "이재우",
+      "target": "김태수",
+      "weight": 1,
+      "movies": [
+        "황해"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "서범식",
+      "target": "박명신",
+      "weight": 2,
+      "movies": [
+        "연예인 매니저로 살아남기",
+        "오아시스"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "류성현",
+      "target": "박명신",
+      "weight": 1,
+      "movies": [
+        "다 이루어질지니"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "류성현",
+      "target": "박지아",
+      "weight": 1,
+      "movies": [
+        "더 글로리"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "류성현",
+      "target": "김병춘",
+      "weight": 2,
+      "movies": [
+        "더 뱅커",
+        "크로스"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "윤혜진",
+      "target": "박명신",
+      "weight": 1,
+      "movies": [
+        "마더"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "윤혜진",
+      "target": "박선주",
+      "weight": 1,
+      "movies": [
+        "만남의 집"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "윤혜진",
+      "target": "박경균",
+      "weight": 1,
+      "movies": [
+        "만남의 집"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "윤혜진",
+      "target": "홍지석",
+      "weight": 1,
+      "movies": [
+        "방문자"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "박지아",
+      "target": "김태수",
+      "weight": 1,
+      "movies": [
+        "광해, 왕이 된 남자"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "박지아",
+      "target": "박명신",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김태수",
+      "target": "김연정",
+      "weight": 2,
+      "movies": [
+        "기적",
+        "좀비딸"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "김태수",
+      "target": "홍지석",
+      "weight": 1,
+      "movies": [
+        "롱 리브 더 킹: 목포 영웅"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김태수",
+      "target": "김성오",
+      "weight": 1,
+      "movies": [
+        "아저씨"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김태수",
+      "target": "박명신",
+      "weight": 1,
+      "movies": [
+        "전설의 고향"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김태수",
+      "target": "필감성",
+      "weight": 1,
+      "movies": [
+        "좀비딸"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김태수",
+      "target": "김세연",
+      "weight": 1,
+      "movies": [
+        "추격자"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김태수",
+      "target": "변봉선",
+      "weight": 1,
+      "movies": [
+        "추격자"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "박경균",
+      "target": "박선주",
+      "weight": 1,
+      "movies": [
+        "만남의 집"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "박경균",
+      "target": "문영동",
+      "weight": 1,
+      "movies": [
+        "홀리데이"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김성오",
+      "target": "오태경",
+      "weight": 1,
+      "movies": [
+        "널 기다리며"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김성오",
+      "target": "김병춘",
+      "weight": 1,
+      "movies": [
+        "사장님을 잠금해제"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김성오",
+      "target": "박재인",
+      "weight": 1,
+      "movies": [
+        "열정같은소리하고있네"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김성오",
+      "target": "이준오",
+      "weight": 1,
+      "movies": [
+        "패션왕"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김연정",
+      "target": "박종범",
+      "weight": 1,
+      "movies": [
+        "아빠는 딸"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김연정",
+      "target": "남도형",
+      "weight": 1,
+      "movies": [
+        "연의 편지"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김연정",
+      "target": "홍준표",
+      "weight": 1,
+      "movies": [
+        "연의 편지"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김연정",
+      "target": "필감성",
+      "weight": 1,
+      "movies": [
+        "좀비딸"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김병춘",
+      "target": "필감성",
+      "weight": 1,
+      "movies": [
+        "말죽거리 잔혹사"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김병춘",
+      "target": "김동완",
+      "weight": 1,
+      "movies": [
+        "소리꾼"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김병춘",
+      "target": "박종범",
+      "weight": 1,
+      "movies": [
+        "소리꾼"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "오태경",
+      "target": "이은정",
+      "weight": 1,
+      "movies": [
+        "사람과 고기"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "오태경",
+      "target": "임나무",
+      "weight": 1,
+      "movies": [
+        "사람과 고기"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "오태경",
+      "target": "홍지석",
+      "weight": 1,
+      "movies": [
+        "사람과 고기"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "오태경",
+      "target": "윤정",
+      "weight": 1,
+      "movies": [
+        "사람과 고기"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "오태경",
+      "target": "김준형",
+      "weight": 1,
+      "movies": [
+        "사람과 고기"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "오태경",
+      "target": "문영동",
+      "weight": 1,
+      "movies": [
+        "알포인트"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "오태경",
+      "target": "박명신",
+      "weight": 1,
+      "movies": [
+        "올드보이"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "장리우",
+      "target": "하나리",
+      "weight": 1,
+      "movies": [
+        "나의 해방일지"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "장리우",
+      "target": "문제용",
+      "weight": 1,
+      "movies": [
+        "내 심장을 쏴라"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "장리우",
+      "target": "박명신",
+      "weight": 1,
+      "movies": [
+        "제비"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "문제용",
+      "target": "박명신",
+      "weight": 1,
+      "movies": [
+        "타짜"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "박명신",
+      "target": "변봉선",
+      "weight": 1,
+      "movies": [
+        "얼굴"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "박명신",
+      "target": "문영동",
+      "weight": 1,
+      "movies": [
+        "최종병기 활"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "남도형",
+      "target": "홍범기",
+      "weight": 1,
+      "movies": [
+        "다이노스터: 공룡수호대"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "남도형",
+      "target": "변봉선",
+      "weight": 1,
+      "movies": [
+        "런닝맨"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "남도형",
+      "target": "홍준표",
+      "weight": 1,
+      "movies": [
+        "연의 편지"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "임나무",
+      "target": "이은정",
+      "weight": 1,
+      "movies": [
+        "사람과 고기"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "임나무",
+      "target": "홍지석",
+      "weight": 1,
+      "movies": [
+        "사람과 고기"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "임나무",
+      "target": "윤정",
+      "weight": 1,
+      "movies": [
+        "사람과 고기"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "임나무",
+      "target": "김준형",
+      "weight": 1,
+      "movies": [
+        "사람과 고기"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "임나무",
+      "target": "변준석",
+      "weight": 1,
+      "movies": [
+        "하루"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "변봉선",
+      "target": "이준오",
+      "weight": 1,
+      "movies": [
+        "더 테러 라이브"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "변봉선",
+      "target": "김세연",
+      "weight": 1,
+      "movies": [
+        "추격자"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "홍지석",
+      "target": "김준형",
+      "weight": 2,
+      "movies": [
+        "버티고",
+        "사람과 고기"
+      ],
+      "total_movies": 2
+    },
+    {
+      "source": "홍지석",
+      "target": "이은정",
+      "weight": 1,
+      "movies": [
+        "사람과 고기"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "홍지석",
+      "target": "윤정",
+      "weight": 1,
+      "movies": [
+        "사람과 고기"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "마그너스 본 혼",
+      "target": "트린 디어홈",
+      "weight": 1,
+      "movies": [
+        "바늘을 든 소녀"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "박종범",
+      "target": "김동완",
+      "weight": 1,
+      "movies": [
+        "소리꾼"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "박종범",
+      "target": "김하영",
+      "weight": 1,
+      "movies": [
+        "오징어 게임"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김준형",
+      "target": "이은정",
+      "weight": 1,
+      "movies": [
+        "사람과 고기"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "김준형",
+      "target": "윤정",
+      "weight": 1,
+      "movies": [
+        "사람과 고기"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "조하나",
+      "target": "할리나 레인",
+      "weight": 1,
+      "movies": [
+        "블라인드"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "이은정",
+      "target": "윤정",
+      "weight": 1,
+      "movies": [
+        "사람과 고기"
+      ],
+      "total_movies": 1
+    },
+    {
+      "source": "이병수",
+      "target": "이원재",
+      "weight": 1,
+      "movies": [
+        "종이꽃"
+      ],
+      "total_movies": 1
+    }
+  ]
+}
