@@ -1,4 +1,3 @@
-// src/types/people.ts
 export interface Person {
   id: string;              // KOBIS peopleCd
   name: string;            // 한글 이름

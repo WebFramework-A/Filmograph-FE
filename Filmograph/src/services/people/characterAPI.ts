@@ -25,10 +25,9 @@ interface TmdbCastItem {
   character?: string;
 }
 
-/**
- * 1) 이름으로 사람 검색
- * - TMDB person 검색해서 id + 프로필이미지(full URL)만 반환
- */
+/* 이름으로 사람 검색
+  - TMDB person 검색해서 id + 프로필이미지(full URL)만 반환
+*/
 export async function searchPersonSimple(
   name: string
 ): Promise<TmdbPersonSimple | null> {
@@ -60,10 +59,9 @@ export async function searchPersonSimple(
   }
 }
 
-/**
- * 2) TMDB person id로 캐릭터(배역) 목록 가져오기
- * - 영화/TV 구분 안 하고 character(배역명) 있는 것만 추림
- */
+/* TMDB person id로 캐릭터(배역) 목록 가져오기
+  - 영화/TV 구분 안 하고 character(배역명) 있는 것만 추림
+*/
 export async function fetchCharacterRoles(
   personId: number
 ): Promise<TmdbCharacterRole[]> {

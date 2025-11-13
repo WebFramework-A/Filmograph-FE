@@ -1,10 +1,7 @@
-// src/types/movie.ts
 // 영화 데이터 타입 정의 (KOBIS + TMDB)
 
-// -----------------------------
 // 영화 기본 정보
 //  - 영화의 식별자, 제목, 개봉일, 기본 메타데이터 등
-// -----------------------------
 export interface MovieBase {
   id: string;                 // Firestore 문서 ID (movieCd와 동일)
   movieCd: string;            // KOBIS 고유 영화 코드
@@ -21,10 +18,8 @@ export interface MovieBase {
   backdropUrl?: string;       // 배경 이미지 URL (TMDB 백드롭)
 }
 
-// -----------------------------
 // 인물 정보
 //  - 역할(role): 감독, 각본가, 배우, 프로듀서
-// -----------------------------
 export interface Person {
   id?: string;                // TMDB 또는 Firestore 내 인물 고유 ID
   name: string;               // 이름
@@ -33,10 +28,8 @@ export interface Person {
   profileUrl?: string;        // 인물 프로필 이미지 URL
 }
 
-// -----------------------------
 // 영화 제작진 정보
 //  - 인물 타입(Person)을 활용해 감독, 제작자, 배우 등을 분류
-// -----------------------------
 export interface MovieCredits {
   directors?: Person[];       // 감독 목록
   producers?: Person[];       // 제작자 목록
@@ -44,10 +37,8 @@ export interface MovieCredits {
   cast?: Person[];            // 출연 배우 목록
 }
 
-// -----------------------------
 // 영화 통계 / 흥행 데이터
 //  - 평점, 인기 지수, 관객 수, 흥행 수익 등을 저장
-// -----------------------------
 export interface MovieStats {
   rating?: number;            // 평균 평점 (0~10, TMDB 기준)
   voteCount?: number;         // 평점 투표 수 (TMDB)
@@ -57,9 +48,7 @@ export interface MovieStats {
   achievements?: string;      // 요약 성과 문장 (평점, 흥행, 수상 등 영화의 대표 성과를 한 줄 요약)
 }
 
-// -----------------------------
 // 수상 내역 및 관련 영화
-// -----------------------------
 export interface Award {
   name: string;                     // 상 이름 (예: "아카데미 시상식")
   year?: number;                    // 수상 연도
@@ -72,12 +61,10 @@ export interface MovieAwards {
   relatedMovies?: string[];   // 관련 영화 ID 배열
 }
 
-// -----------------------------
 // 최종 통합 타입
-// -----------------------------
 export interface MovieDetail
   extends MovieBase, MovieCredits, MovieStats, MovieAwards {
-    watchGrade?: string;      // 관람 연령
-    createdAt?: string;       // Firestore에 최초로 저장된 시각
-    updatedAt?: string;       // Firestore 데이터 갱신 시각
+  watchGrade?: string;      // 관람 연령
+  createdAt?: string;       // Firestore에 최초로 저장된 시각
+  updatedAt?: string;       // Firestore 데이터 갱신 시각
 }
