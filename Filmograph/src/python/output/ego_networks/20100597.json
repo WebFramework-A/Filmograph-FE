@@ -1,0 +1,37 @@
+{
+  "ego": "20100597",
+  "label": "박현영",
+  "nodes": [
+    {
+      "id": "20100597",
+      "label": "박현영",
+      "community": 0,
+      "degree": 1,
+      "movies_count": 1,
+      "role": "배우"
+    },
+    {
+      "id": "10006098",
+      "label": "김태성",
+      "community": 0,
+      "degree": 1,
+      "movies_count": 93,
+      "role": "음악"
+    }
+  ],
+  "links": [
+    {
+      "source": "20100597",
+      "target": "10006098",
+      "weight": 1,
+      "movies": [
+        "한여름의 판타지아"
+      ]
+    }
+  ],
+  "meta": {
+    "nodeCount": 2,
+    "linkCount": 1,
+    "generatedAt": "2025-11-16T02:36:47.810378"
+  }
+}

@@ -1,0 +1,1301 @@
+{
+  "ego": "10006098",
+  "label": "김태성",
+  "nodes": [
+    {
+      "id": "20141891",
+      "label": "정종헌",
+      "community": 5,
+      "degree": 16,
+      "movies_count": 48,
+      "role": "촬영"
+    },
+    {
+      "id": "20113303",
+      "label": "이용녀",
+      "community": 5,
+      "degree": 10,
+      "movies_count": 58,
+      "role": "배우"
+    },
+    {
+      "id": "10007517",
+      "label": "남명렬",
+      "community": 5,
+      "degree": 12,
+      "movies_count": 39,
+      "role": "배우"
+    },
+    {
+      "id": "20167000",
+      "label": "홍준표",
+      "community": 0,
+      "degree": 3,
+      "movies_count": 10,
+      "role": "감독"
+    },
+    {
+      "id": "10028600",
+      "label": "박명신",
+      "community": 5,
+      "degree": 15,
+      "movies_count": 60,
+      "role": "배우"
+    },
+    {
+      "id": "20147124",
+      "label": "홍지석",
+      "community": 4,
+      "degree": 3,
+      "movies_count": 42,
+      "role": "배우"
+    },
+    {
+      "id": "10060144",
+      "label": "장리우",
+      "community": 2,
+      "degree": 6,
+      "movies_count": 24,
+      "role": "배우"
+    },
+    {
+      "id": "10061971",
+      "label": "정영삼",
+      "community": 1,
+      "degree": 4,
+      "movies_count": 29,
+      "role": "감독"
+    },
+    {
+      "id": "10060277",
+      "label": "장세진",
+      "community": 1,
+      "degree": 3,
+      "movies_count": 8,
+      "role": "배우"
+    },
+    {
+      "id": "10006098",
+      "label": "김태성",
+      "community": 0,
+      "degree": 29,
+      "movies_count": 93,
+      "role": "음악"
+    },
+    {
+      "id": "10004210",
+      "label": "김민재",
+      "community": 0,
+      "degree": 9,
+      "movies_count": 33,
+      "role": "배우"
+    },
+    {
+      "id": "10029305",
+      "label": "박지아",
+      "community": 5,
+      "degree": 11,
+      "movies_count": 25,
+      "role": "배우"
+    },
+    {
+      "id": "10067417",
+      "label": "조한철",
+      "community": 5,
+      "degree": 13,
+      "movies_count": 90,
+      "role": "배우"
+    },
+    {
+      "id": "20100597",
+      "label": "박현영",
+      "community": 0,
+      "degree": 1,
+      "movies_count": 1,
+      "role": "배우"
+    },
+    {
+      "id": "20113258",
+      "label": "길해연",
+      "community": 2,
+      "degree": 15,
+      "movies_count": 64,
+      "role": "배우"
+    },
+    {
+      "id": "20111894",
+      "label": "김성오",
+      "community": 0,
+      "degree": 9,
+      "movies_count": 53,
+      "role": "배우"
+    },
+    {
+      "id": "10047370",
+      "label": "엄혜정",
+      "community": 2,
+      "degree": 1,
+      "movies_count": 12,
+      "role": "촬영"
+    },
+    {
+      "id": "20113125",
+      "label": "남도형",
+      "community": 0,
+      "degree": 4,
+      "movies_count": 17,
+      "role": "배우"
+    },
+    {
+      "id": "10061332",
+      "label": "전수지",
+      "community": 5,
+      "degree": 7,
+      "movies_count": 30,
+      "role": "배우"
+    },
+    {
+      "id": "20156418",
+      "label": "임세미",
+      "community": 2,
+      "degree": 7,
+      "movies_count": 37,
+      "role": "배우"
+    },
+    {
+      "id": "10003307",
+      "label": "기주봉",
+      "community": 5,
+      "degree": 15,
+      "movies_count": 98,
+      "role": "배우"
+    },
+    {
+      "id": "10004920",
+      "label": "김연정",
+      "community": 0,
+      "degree": 5,
+      "movies_count": 12,
+      "role": "음악"
+    },
+    {
+      "id": "20155308",
+      "label": "정기섭",
+      "community": 3,
+      "degree": 7,
+      "movies_count": 20,
+      "role": "배우"
+    },
+    {
+      "id": "10001718",
+      "label": "고은기",
+      "community": 4,
+      "degree": 3,
+      "movies_count": 35,
+      "role": "감독"
+    },
+    {
+      "id": "10086324",
+      "label": "필감성",
+      "community": 0,
+      "degree": 3,
+      "movies_count": 8,
+      "role": "감독"
+    },
+    {
+      "id": "10031352",
+      "label": "변봉선",
+      "community": 0,
+      "degree": 5,
+      "movies_count": 23,
+      "role": "촬영"
+    },
+    {
+      "id": "10026760",
+      "label": "문영동",
+      "community": 1,
+      "degree": 4,
+      "movies_count": 13,
+      "role": "배우"
+    },
+    {
+      "id": "10072255",
+      "label": "최민철",
+      "community": 5,
+      "degree": 11,
+      "movies_count": 16,
+      "role": "배우"
+    },
+    {
+      "id": "20114292",
+      "label": "김진무",
+      "community": 0,
+      "degree": 1,
+      "movies_count": 6,
+      "role": "감독"
+    },
+    {
+      "id": "20156311",
+      "label": "김태수",
+      "community": 0,
+      "degree": 14,
+      "movies_count": 34,
+      "role": "촬영"
+    }
+  ],
+  "links": [
+    {
+      "source": "20141891",
+      "target": "10006098",
+      "weight": 4,
+      "movies": [
+        "1724 기방난동사건",
+        "극한직업",
+        "체포왕",
+        "코리아"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "10060277",
+      "weight": 1,
+      "movies": [
+        "1724 기방난동사건"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "20155308",
+      "weight": 1,
+      "movies": [
+        "봄, 눈"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "10003307",
+      "weight": 3,
+      "movies": [
+        "용의자",
+        "킹콩을 들다",
+        "파과"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "10004210",
+      "weight": 1,
+      "movies": [
+        "용의자"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "10007517",
+      "weight": 2,
+      "movies": [
+        "제보자",
+        "파과"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "10061332",
+      "weight": 1,
+      "movies": [
+        "제보자"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "10060144",
+      "weight": 1,
+      "movies": [
+        "코리아"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "10061971",
+      "weight": 1,
+      "movies": [
+        "코리아"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "10028600",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "10029305",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "10067417",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "10072255",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "20113258",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "20113303",
+      "weight": 2,
+      "movies": [
+        "파과",
+        "하이힐"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "20156311",
+      "weight": 1,
+      "movies": [
+        "평행이론"
+      ]
+    },
+    {
+      "source": "20113303",
+      "target": "10003307",
+      "weight": 2,
+      "movies": [
+        "경축! 우리사랑",
+        "파과"
+      ]
+    },
+    {
+      "source": "20113303",
+      "target": "10067417",
+      "weight": 2,
+      "movies": [
+        "곡성",
+        "파과"
+      ]
+    },
+    {
+      "source": "20113303",
+      "target": "10006098",
+      "weight": 1,
+      "movies": [
+        "분홍신"
+      ]
+    },
+    {
+      "source": "20113303",
+      "target": "20156311",
+      "weight": 1,
+      "movies": [
+        "신의 한 수"
+      ]
+    },
+    {
+      "source": "20113303",
+      "target": "10028600",
+      "weight": 3,
+      "movies": [
+        "친절한 금자씨",
+        "파과",
+        "허스토리"
+      ]
+    },
+    {
+      "source": "20113303",
+      "target": "10007517",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "20113303",
+      "target": "10029305",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "20113303",
+      "target": "10072255",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "20113303",
+      "target": "20113258",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "10007517",
+      "target": "10067417",
+      "weight": 5,
+      "movies": [
+        "경성크리처",
+        "내 아내의 모든 것",
+        "블랙머니",
+        "침묵",
+        "파과"
+      ]
+    },
+    {
+      "source": "10007517",
+      "target": "20156311",
+      "weight": 2,
+      "movies": [
+        "내 아내의 모든 것",
+        "발신제한"
+      ]
+    },
+    {
+      "source": "10007517",
+      "target": "10006098",
+      "weight": 2,
+      "movies": [
+        "노량: 죽음의 바다",
+        "발신제한"
+      ]
+    },
+    {
+      "source": "10007517",
+      "target": "20155308",
+      "weight": 1,
+      "movies": [
+        "노량: 죽음의 바다"
+      ]
+    },
+    {
+      "source": "10007517",
+      "target": "10061332",
+      "weight": 3,
+      "movies": [
+        "미안해, 고마워",
+        "비상선언",
+        "제보자"
+      ]
+    },
+    {
+      "source": "10007517",
+      "target": "10003307",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "10007517",
+      "target": "10028600",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "10007517",
+      "target": "10029305",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "10007517",
+      "target": "10072255",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "10007517",
+      "target": "20113258",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "20167000",
+      "target": "10004920",
+      "weight": 1,
+      "movies": [
+        "연의 편지"
+      ]
+    },
+    {
+      "source": "20167000",
+      "target": "10006098",
+      "weight": 1,
+      "movies": [
+        "연의 편지"
+      ]
+    },
+    {
+      "source": "20167000",
+      "target": "20113125",
+      "weight": 1,
+      "movies": [
+        "연의 편지"
+      ]
+    },
+    {
+      "source": "10028600",
+      "target": "10067417",
+      "weight": 4,
+      "movies": [
+        "마더",
+        "붉은 가족",
+        "트리거",
+        "파과"
+      ]
+    },
+    {
+      "source": "10028600",
+      "target": "10061332",
+      "weight": 2,
+      "movies": [
+        "사랑해... 말순씨",
+        "트리거"
+      ]
+    },
+    {
+      "source": "10028600",
+      "target": "10006098",
+      "weight": 2,
+      "movies": [
+        "스물",
+        "최종병기 활"
+      ]
+    },
+    {
+      "source": "10028600",
+      "target": "10031352",
+      "weight": 1,
+      "movies": [
+        "얼굴"
+      ]
+    },
+    {
+      "source": "10028600",
+      "target": "10004210",
+      "weight": 1,
+      "movies": [
+        "작은 연못"
+      ]
+    },
+    {
+      "source": "10028600",
+      "target": "20156311",
+      "weight": 1,
+      "movies": [
+        "전설의 고향"
+      ]
+    },
+    {
+      "source": "10028600",
+      "target": "10060144",
+      "weight": 1,
+      "movies": [
+        "제비"
+      ]
+    },
+    {
+      "source": "10028600",
+      "target": "10026760",
+      "weight": 1,
+      "movies": [
+        "최종병기 활"
+      ]
+    },
+    {
+      "source": "10028600",
+      "target": "20113258",
+      "weight": 2,
+      "movies": [
+        "트리거",
+        "파과"
+      ]
+    },
+    {
+      "source": "10028600",
+      "target": "10003307",
+      "weight": 2,
+      "movies": [
+        "파과",
+        "환상속의 그대"
+      ]
+    },
+    {
+      "source": "10028600",
+      "target": "10029305",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "10028600",
+      "target": "10072255",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "20147124",
+      "target": "10006098",
+      "weight": 2,
+      "movies": [
+        "드림",
+        "보호자"
+      ]
+    },
+    {
+      "source": "20147124",
+      "target": "20156311",
+      "weight": 1,
+      "movies": [
+        "롱 리브 더 킹: 목포 영웅"
+      ]
+    },
+    {
+      "source": "20147124",
+      "target": "20113258",
+      "weight": 1,
+      "movies": [
+        "잉투기"
+      ]
+    },
+    {
+      "source": "10060144",
+      "target": "20113258",
+      "weight": 3,
+      "movies": [
+        "장산범",
+        "카트",
+        "혜화, 동"
+      ]
+    },
+    {
+      "source": "10060144",
+      "target": "10072255",
+      "weight": 1,
+      "movies": [
+        "집으로 가는 길"
+      ]
+    },
+    {
+      "source": "10060144",
+      "target": "10006098",
+      "weight": 1,
+      "movies": [
+        "코리아"
+      ]
+    },
+    {
+      "source": "10060144",
+      "target": "10061971",
+      "weight": 1,
+      "movies": [
+        "코리아"
+      ]
+    },
+    {
+      "source": "10061971",
+      "target": "20111894",
+      "weight": 1,
+      "movies": [
+        "그녀는 예뻤다"
+      ]
+    },
+    {
+      "source": "10061971",
+      "target": "10006098",
+      "weight": 1,
+      "movies": [
+        "코리아"
+      ]
+    },
+    {
+      "source": "10060277",
+      "target": "10006098",
+      "weight": 1,
+      "movies": [
+        "1724 기방난동사건"
+      ]
+    },
+    {
+      "source": "10060277",
+      "target": "10026760",
+      "weight": 1,
+      "movies": [
+        "홀리데이"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "20113258",
+      "weight": 2,
+      "movies": [
+        "가시",
+        "헬머니"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "10047370",
+      "weight": 1,
+      "movies": [
+        "가장 보통의 연애"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "10072255",
+      "weight": 2,
+      "movies": [
+        "강철비2: 정상회담",
+        "퍼펙트 게임"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "10061332",
+      "weight": 1,
+      "movies": [
+        "검은 수녀들"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "10067417",
+      "weight": 1,
+      "movies": [
+        "국가부도의 날"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "10004920",
+      "weight": 7,
+      "movies": [
+        "굿바이 싱글",
+        "굿바이 썸머",
+        "기적",
+        "싱크홀",
+        "연의 편지",
+        "임금님의 사건수첩",
+        "좀비딸"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "20156311",
+      "weight": 5,
+      "movies": [
+        "기적",
+        "발신제한",
+        "사바하",
+        "좀비딸",
+        "특수본"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "20155308",
+      "weight": 2,
+      "movies": [
+        "김복남 살인사건의 전말",
+        "노량: 죽음의 바다"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "20111894",
+      "weight": 2,
+      "movies": [
+        "니 부모 얼굴이 보고 싶다",
+        "타워"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "10026760",
+      "weight": 2,
+      "movies": [
+        "명량",
+        "최종병기 활"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "20114292",
+      "weight": 1,
+      "movies": [
+        "신이 보낸 사람"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "20113125",
+      "weight": 1,
+      "movies": [
+        "연의 편지"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "10003307",
+      "weight": 1,
+      "movies": [
+        "오피스"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "10086324",
+      "weight": 2,
+      "movies": [
+        "인질",
+        "좀비딸"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "10031352",
+      "weight": 1,
+      "movies": [
+        "탐정 홍길동: 사라진 마을"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "10001718",
+      "weight": 1,
+      "movies": [
+        "파묘"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "10029305",
+      "weight": 1,
+      "movies": [
+        "하이재킹"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "20156418",
+      "weight": 1,
+      "movies": [
+        "하이재킹"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "10004210",
+      "weight": 2,
+      "movies": [
+        "한산 리덕스",
+        "한산: 용의 출현"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "20100597",
+      "weight": 1,
+      "movies": [
+        "한여름의 판타지아"
+      ]
+    },
+    {
+      "source": "10004210",
+      "target": "20155308",
+      "weight": 2,
+      "movies": [
+        "거미집",
+        "소방관"
+      ]
+    },
+    {
+      "source": "10004210",
+      "target": "10072255",
+      "weight": 1,
+      "movies": [
+        "대외비"
+      ]
+    },
+    {
+      "source": "10004210",
+      "target": "20156418",
+      "weight": 1,
+      "movies": [
+        "돈"
+      ]
+    },
+    {
+      "source": "10004210",
+      "target": "20111894",
+      "weight": 2,
+      "movies": [
+        "성난황소",
+        "우는 남자"
+      ]
+    },
+    {
+      "source": "10004210",
+      "target": "10031352",
+      "weight": 1,
+      "movies": [
+        "염력"
+      ]
+    },
+    {
+      "source": "10004210",
+      "target": "10003307",
+      "weight": 1,
+      "movies": [
+        "용의자"
+      ]
+    },
+    {
+      "source": "10029305",
+      "target": "20156311",
+      "weight": 1,
+      "movies": [
+        "광해, 왕이 된 남자"
+      ]
+    },
+    {
+      "source": "10029305",
+      "target": "10072255",
+      "weight": 3,
+      "movies": [
+        "만분의 일초",
+        "첫잔처럼",
+        "파과"
+      ]
+    },
+    {
+      "source": "10029305",
+      "target": "10003307",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "10029305",
+      "target": "10067417",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "10029305",
+      "target": "20113258",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "10029305",
+      "target": "20156418",
+      "weight": 1,
+      "movies": [
+        "하이재킹"
+      ]
+    },
+    {
+      "source": "10067417",
+      "target": "20113258",
+      "weight": 3,
+      "movies": [
+        "KBS 드라마 스페셜",
+        "트리거",
+        "파과"
+      ]
+    },
+    {
+      "source": "10067417",
+      "target": "20156418",
+      "weight": 1,
+      "movies": [
+        "KBS 드라마 스페셜"
+      ]
+    },
+    {
+      "source": "10067417",
+      "target": "10003307",
+      "weight": 4,
+      "movies": [
+        "간신",
+        "숨바꼭질",
+        "파과",
+        "프로듀사"
+      ]
+    },
+    {
+      "source": "10067417",
+      "target": "20156311",
+      "weight": 1,
+      "movies": [
+        "내 아내의 모든 것"
+      ]
+    },
+    {
+      "source": "10067417",
+      "target": "20111894",
+      "weight": 1,
+      "movies": [
+        "방구석1열"
+      ]
+    },
+    {
+      "source": "10067417",
+      "target": "10061332",
+      "weight": 2,
+      "movies": [
+        "커플즈",
+        "트리거"
+      ]
+    },
+    {
+      "source": "10067417",
+      "target": "10072255",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "20113258",
+      "target": "20156418",
+      "weight": 4,
+      "movies": [
+        "KBS 드라마 스페셜",
+        "O'PENing",
+        "원더풀 월드",
+        "트라이: 우리는 기적이 된다"
+      ]
+    },
+    {
+      "source": "20113258",
+      "target": "20156311",
+      "weight": 1,
+      "movies": [
+        "나의 특별한 형제"
+      ]
+    },
+    {
+      "source": "20113258",
+      "target": "10003307",
+      "weight": 2,
+      "movies": [
+        "초행",
+        "파과"
+      ]
+    },
+    {
+      "source": "20113258",
+      "target": "20155308",
+      "weight": 1,
+      "movies": [
+        "트라이: 우리는 기적이 된다"
+      ]
+    },
+    {
+      "source": "20113258",
+      "target": "10061332",
+      "weight": 1,
+      "movies": [
+        "트리거"
+      ]
+    },
+    {
+      "source": "20113258",
+      "target": "10072255",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "20111894",
+      "target": "10061332",
+      "weight": 2,
+      "movies": [
+        "굿뉴스",
+        "서울의 봄"
+      ]
+    },
+    {
+      "source": "20111894",
+      "target": "10003307",
+      "weight": 2,
+      "movies": [
+        "길복순",
+        "청풍명월"
+      ]
+    },
+    {
+      "source": "20111894",
+      "target": "20156311",
+      "weight": 1,
+      "movies": [
+        "아저씨"
+      ]
+    },
+    {
+      "source": "20111894",
+      "target": "20156418",
+      "weight": 1,
+      "movies": [
+        "위기의 X"
+      ]
+    },
+    {
+      "source": "20111894",
+      "target": "10001718",
+      "weight": 1,
+      "movies": [
+        "출장 십오야"
+      ]
+    },
+    {
+      "source": "20113125",
+      "target": "10031352",
+      "weight": 1,
+      "movies": [
+        "런닝맨"
+      ]
+    },
+    {
+      "source": "20113125",
+      "target": "10004920",
+      "weight": 1,
+      "movies": [
+        "연의 편지"
+      ]
+    },
+    {
+      "source": "20156418",
+      "target": "20155308",
+      "weight": 1,
+      "movies": [
+        "트라이: 우리는 기적이 된다"
+      ]
+    },
+    {
+      "source": "10003307",
+      "target": "20155308",
+      "weight": 1,
+      "movies": [
+        "공작"
+      ]
+    },
+    {
+      "source": "10003307",
+      "target": "20156311",
+      "weight": 2,
+      "movies": [
+        "북촌방향",
+        "여교사"
+      ]
+    },
+    {
+      "source": "10003307",
+      "target": "10026760",
+      "weight": 1,
+      "movies": [
+        "알포인트"
+      ]
+    },
+    {
+      "source": "10003307",
+      "target": "10001718",
+      "weight": 1,
+      "movies": [
+        "차이나타운"
+      ]
+    },
+    {
+      "source": "10003307",
+      "target": "10072255",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "10004920",
+      "target": "20156311",
+      "weight": 2,
+      "movies": [
+        "기적",
+        "좀비딸"
+      ]
+    },
+    {
+      "source": "10004920",
+      "target": "10086324",
+      "weight": 1,
+      "movies": [
+        "좀비딸"
+      ]
+    },
+    {
+      "source": "10086324",
+      "target": "20156311",
+      "weight": 1,
+      "movies": [
+        "좀비딸"
+      ]
+    },
+    {
+      "source": "10031352",
+      "target": "20156311",
+      "weight": 1,
+      "movies": [
+        "추격자"
+      ]
+    }
+  ],
+  "meta": {
+    "nodeCount": 30,
+    "linkCount": 123,
+    "generatedAt": "2025-11-16T02:36:47.726324"
+  }
+}

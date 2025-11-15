@@ -1,0 +1,37 @@
+{
+  "ego": "10031384",
+  "label": "변준석",
+  "nodes": [
+    {
+      "id": "10031384",
+      "label": "변준석",
+      "community": 4,
+      "degree": 1,
+      "movies_count": 5,
+      "role": "감독"
+    },
+    {
+      "id": "10058494",
+      "label": "임나무",
+      "community": 4,
+      "degree": 1,
+      "movies_count": 11,
+      "role": "감독"
+    }
+  ],
+  "links": [
+    {
+      "source": "10031384",
+      "target": "10058494",
+      "weight": 1,
+      "movies": [
+        "하루"
+      ]
+    }
+  ],
+  "meta": {
+    "nodeCount": 2,
+    "linkCount": 1,
+    "generatedAt": "2025-11-16T02:36:47.809378"
+  }
+}

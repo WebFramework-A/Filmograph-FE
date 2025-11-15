@@ -1,0 +1,77 @@
+{
+  "ego": "10003957",
+  "label": "김동완",
+  "nodes": [
+    {
+      "id": "20134873",
+      "label": "박종범",
+      "community": 3,
+      "degree": 2,
+      "movies_count": 6,
+      "role": "배우"
+    },
+    {
+      "id": "10004308",
+      "label": "김병춘",
+      "community": 3,
+      "degree": 2,
+      "movies_count": 32,
+      "role": "배우"
+    },
+    {
+      "id": "10003957",
+      "label": "김동완",
+      "community": 3,
+      "degree": 3,
+      "movies_count": 16,
+      "role": "배우"
+    },
+    {
+      "id": "10067417",
+      "label": "조한철",
+      "community": 5,
+      "degree": 1,
+      "movies_count": 90,
+      "role": "배우"
+    }
+  ],
+  "links": [
+    {
+      "source": "20134873",
+      "target": "10003957",
+      "weight": 1,
+      "movies": [
+        "소리꾼"
+      ]
+    },
+    {
+      "source": "20134873",
+      "target": "10004308",
+      "weight": 1,
+      "movies": [
+        "소리꾼"
+      ]
+    },
+    {
+      "source": "10004308",
+      "target": "10003957",
+      "weight": 1,
+      "movies": [
+        "소리꾼"
+      ]
+    },
+    {
+      "source": "10003957",
+      "target": "10067417",
+      "weight": 1,
+      "movies": [
+        "연가시"
+      ]
+    }
+  ],
+  "meta": {
+    "nodeCount": 4,
+    "linkCount": 4,
+    "generatedAt": "2025-11-16T02:36:47.802866"
+  }
+}

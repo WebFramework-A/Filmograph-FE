@@ -7,6 +7,7 @@ import Searchbar from "../components/common/Searcrbar";
 import GuideCard from "../components/GraphPage/GuideCard";
 import CategoryWithDot from "../components/common/CategoryWithDot";
 import CollabNetworkGraph from "../components/GraphPage/CollabNetworkGraph";
+import EgoGraph from "../components/GraphPage/EgoGraph";
 
 type GraphCategory = "bipartite" | "ego" | "community";
 
@@ -139,11 +140,7 @@ const GraphPage = () => {
           />
         )}
          {/* 에고 네트워크 */}
-          {category == "ego" && (
-            <div className="flex items-center justify-center h-full text-sm text-white/80">
-              구현 예정
-            </div>
-          )}
+          {category == "ego" && <EgoGraph />}
 
           {/* 협업 네트워크 & 커뮤니티 */}
           {category == "community" && <CollabNetworkGraph />}

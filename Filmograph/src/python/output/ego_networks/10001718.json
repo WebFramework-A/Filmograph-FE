@@ -1,0 +1,154 @@
+{
+  "ego": "10001718",
+  "label": "고은기",
+  "nodes": [
+    {
+      "id": "10005774",
+      "label": "김준성",
+      "community": 5,
+      "degree": 3,
+      "movies_count": 57,
+      "role": "음악"
+    },
+    {
+      "id": "10001718",
+      "label": "고은기",
+      "community": 4,
+      "degree": 5,
+      "movies_count": 35,
+      "role": "감독"
+    },
+    {
+      "id": "10006098",
+      "label": "김태성",
+      "community": 0,
+      "degree": 3,
+      "movies_count": 93,
+      "role": "음악"
+    },
+    {
+      "id": "10058494",
+      "label": "임나무",
+      "community": 4,
+      "degree": 2,
+      "movies_count": 11,
+      "role": "감독"
+    },
+    {
+      "id": "10003307",
+      "label": "기주봉",
+      "community": 5,
+      "degree": 5,
+      "movies_count": 98,
+      "role": "배우"
+    },
+    {
+      "id": "20111894",
+      "label": "김성오",
+      "community": 0,
+      "degree": 4,
+      "movies_count": 53,
+      "role": "배우"
+    }
+  ],
+  "links": [
+    {
+      "source": "10005774",
+      "target": "10003307",
+      "weight": 4,
+      "movies": [
+        "간신",
+        "보이스",
+        "용의자",
+        "파과"
+      ]
+    },
+    {
+      "source": "10005774",
+      "target": "10001718",
+      "weight": 1,
+      "movies": [
+        "계춘할망"
+      ]
+    },
+    {
+      "source": "10005774",
+      "target": "20111894",
+      "weight": 1,
+      "movies": [
+        "죽지않는 인간들의 밤"
+      ]
+    },
+    {
+      "source": "10001718",
+      "target": "10058494",
+      "weight": 1,
+      "movies": [
+        "대도시의 사랑법"
+      ]
+    },
+    {
+      "source": "10001718",
+      "target": "10003307",
+      "weight": 1,
+      "movies": [
+        "차이나타운"
+      ]
+    },
+    {
+      "source": "10001718",
+      "target": "20111894",
+      "weight": 1,
+      "movies": [
+        "출장 십오야"
+      ]
+    },
+    {
+      "source": "10001718",
+      "target": "10006098",
+      "weight": 1,
+      "movies": [
+        "파묘"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "20111894",
+      "weight": 2,
+      "movies": [
+        "니 부모 얼굴이 보고 싶다",
+        "타워"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "10003307",
+      "weight": 1,
+      "movies": [
+        "오피스"
+      ]
+    },
+    {
+      "source": "10058494",
+      "target": "10003307",
+      "weight": 1,
+      "movies": [
+        "밤과 낮"
+      ]
+    },
+    {
+      "source": "10003307",
+      "target": "20111894",
+      "weight": 2,
+      "movies": [
+        "길복순",
+        "청풍명월"
+      ]
+    }
+  ],
+  "meta": {
+    "nodeCount": 6,
+    "linkCount": 11,
+    "generatedAt": "2025-11-16T02:36:47.772534"
+  }
+}

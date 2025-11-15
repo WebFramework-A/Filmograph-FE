@@ -1,0 +1,309 @@
+{
+  "ego": "10019055",
+  "label": "류성현",
+  "nodes": [
+    {
+      "id": "10061575",
+      "label": "정경순",
+      "community": 2,
+      "degree": 1,
+      "movies_count": 22,
+      "role": "배우"
+    },
+    {
+      "id": "10007517",
+      "label": "남명렬",
+      "community": 5,
+      "degree": 7,
+      "movies_count": 39,
+      "role": "배우"
+    },
+    {
+      "id": "10028600",
+      "label": "박명신",
+      "community": 5,
+      "degree": 5,
+      "movies_count": 60,
+      "role": "배우"
+    },
+    {
+      "id": "10029305",
+      "label": "박지아",
+      "community": 5,
+      "degree": 6,
+      "movies_count": 25,
+      "role": "배우"
+    },
+    {
+      "id": "10004308",
+      "label": "김병춘",
+      "community": 3,
+      "degree": 2,
+      "movies_count": 32,
+      "role": "배우"
+    },
+    {
+      "id": "10054226",
+      "label": "손지나",
+      "community": 2,
+      "degree": 4,
+      "movies_count": 23,
+      "role": "배우"
+    },
+    {
+      "id": "10003307",
+      "label": "기주봉",
+      "community": 5,
+      "degree": 7,
+      "movies_count": 98,
+      "role": "배우"
+    },
+    {
+      "id": "20113258",
+      "label": "길해연",
+      "community": 2,
+      "degree": 7,
+      "movies_count": 64,
+      "role": "배우"
+    },
+    {
+      "id": "20155308",
+      "label": "정기섭",
+      "community": 3,
+      "degree": 4,
+      "movies_count": 20,
+      "role": "배우"
+    },
+    {
+      "id": "10019055",
+      "label": "류성현",
+      "community": 3,
+      "degree": 9,
+      "movies_count": 18,
+      "role": "배우"
+    }
+  ],
+  "links": [
+    {
+      "source": "10061575",
+      "target": "10019055",
+      "weight": 1,
+      "movies": [
+        "정사"
+      ]
+    },
+    {
+      "source": "10007517",
+      "target": "20155308",
+      "weight": 1,
+      "movies": [
+        "노량: 죽음의 바다"
+      ]
+    },
+    {
+      "source": "10007517",
+      "target": "10004308",
+      "weight": 2,
+      "movies": [
+        "더 뱅커",
+        "별별 며느리"
+      ]
+    },
+    {
+      "source": "10007517",
+      "target": "10019055",
+      "weight": 1,
+      "movies": [
+        "더 뱅커"
+      ]
+    },
+    {
+      "source": "10007517",
+      "target": "10003307",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "10007517",
+      "target": "10028600",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "10007517",
+      "target": "10029305",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "10007517",
+      "target": "20113258",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "10028600",
+      "target": "10019055",
+      "weight": 1,
+      "movies": [
+        "다 이루어질지니"
+      ]
+    },
+    {
+      "source": "10028600",
+      "target": "20113258",
+      "weight": 2,
+      "movies": [
+        "트리거",
+        "파과"
+      ]
+    },
+    {
+      "source": "10028600",
+      "target": "10003307",
+      "weight": 2,
+      "movies": [
+        "파과",
+        "환상속의 그대"
+      ]
+    },
+    {
+      "source": "10028600",
+      "target": "10029305",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "10029305",
+      "target": "10019055",
+      "weight": 1,
+      "movies": [
+        "더 글로리"
+      ]
+    },
+    {
+      "source": "10029305",
+      "target": "10054226",
+      "weight": 1,
+      "movies": [
+        "더 글로리"
+      ]
+    },
+    {
+      "source": "10029305",
+      "target": "10003307",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "10029305",
+      "target": "20113258",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "10004308",
+      "target": "10019055",
+      "weight": 2,
+      "movies": [
+        "더 뱅커",
+        "크로스"
+      ]
+    },
+    {
+      "source": "10054226",
+      "target": "20113258",
+      "weight": 2,
+      "movies": [
+        "KBS 드라마 스페셜",
+        "인 허 플레이스"
+      ]
+    },
+    {
+      "source": "10054226",
+      "target": "10019055",
+      "weight": 1,
+      "movies": [
+        "더 글로리"
+      ]
+    },
+    {
+      "source": "10054226",
+      "target": "10003307",
+      "weight": 1,
+      "movies": [
+        "숨바꼭질"
+      ]
+    },
+    {
+      "source": "10003307",
+      "target": "10019055",
+      "weight": 1,
+      "movies": [
+        "공작"
+      ]
+    },
+    {
+      "source": "10003307",
+      "target": "20155308",
+      "weight": 1,
+      "movies": [
+        "공작"
+      ]
+    },
+    {
+      "source": "10003307",
+      "target": "20113258",
+      "weight": 2,
+      "movies": [
+        "초행",
+        "파과"
+      ]
+    },
+    {
+      "source": "20113258",
+      "target": "10019055",
+      "weight": 1,
+      "movies": [
+        "스마트폰을 떨어뜨렸을 뿐인데"
+      ]
+    },
+    {
+      "source": "20113258",
+      "target": "20155308",
+      "weight": 1,
+      "movies": [
+        "트라이: 우리는 기적이 된다"
+      ]
+    },
+    {
+      "source": "20155308",
+      "target": "10019055",
+      "weight": 3,
+      "movies": [
+        "공작",
+        "덕구",
+        "신세계"
+      ]
+    }
+  ],
+  "meta": {
+    "nodeCount": 10,
+    "linkCount": 26,
+    "generatedAt": "2025-11-16T02:36:47.775536"
+  }
+}

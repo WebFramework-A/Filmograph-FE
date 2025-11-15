@@ -1,0 +1,87 @@
+{
+  "ego": "20181520",
+  "label": "김지현",
+  "nodes": [
+    {
+      "id": "20141891",
+      "label": "정종헌",
+      "community": 5,
+      "degree": 3,
+      "movies_count": 48,
+      "role": "촬영"
+    },
+    {
+      "id": "10061971",
+      "label": "정영삼",
+      "community": 1,
+      "degree": 2,
+      "movies_count": 29,
+      "role": "감독"
+    },
+    {
+      "id": "10007517",
+      "label": "남명렬",
+      "community": 5,
+      "degree": 2,
+      "movies_count": 39,
+      "role": "배우"
+    },
+    {
+      "id": "20181520",
+      "label": "김지현",
+      "community": 1,
+      "degree": 3,
+      "movies_count": 28,
+      "role": "촬영"
+    }
+  ],
+  "links": [
+    {
+      "source": "20141891",
+      "target": "20181520",
+      "weight": 2,
+      "movies": [
+        "동화지만 청불입니다",
+        "우리집"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "10007517",
+      "weight": 2,
+      "movies": [
+        "제보자",
+        "파과"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "10061971",
+      "weight": 1,
+      "movies": [
+        "코리아"
+      ]
+    },
+    {
+      "source": "10061971",
+      "target": "20181520",
+      "weight": 1,
+      "movies": [
+        "그물"
+      ]
+    },
+    {
+      "source": "10007517",
+      "target": "20181520",
+      "weight": 1,
+      "movies": [
+        "커미션"
+      ]
+    }
+  ],
+  "meta": {
+    "nodeCount": 4,
+    "linkCount": 5,
+    "generatedAt": "2025-11-16T02:36:47.783678"
+  }
+}

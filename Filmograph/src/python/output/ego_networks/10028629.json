@@ -1,0 +1,639 @@
+{
+  "ego": "10028629",
+  "label": "박미현",
+  "nodes": [
+    {
+      "id": "20141891",
+      "label": "정종헌",
+      "community": 5,
+      "degree": 10,
+      "movies_count": 48,
+      "role": "촬영"
+    },
+    {
+      "id": "10028629",
+      "label": "박미현",
+      "community": 2,
+      "degree": 16,
+      "movies_count": 43,
+      "role": "배우"
+    },
+    {
+      "id": "20136040",
+      "label": "김하영",
+      "community": 3,
+      "degree": 3,
+      "movies_count": 3,
+      "role": "배우"
+    },
+    {
+      "id": "10061575",
+      "label": "정경순",
+      "community": 2,
+      "degree": 2,
+      "movies_count": 22,
+      "role": "배우"
+    },
+    {
+      "id": "10004210",
+      "label": "김민재",
+      "community": 0,
+      "degree": 8,
+      "movies_count": 33,
+      "role": "배우"
+    },
+    {
+      "id": "10089509",
+      "label": "홍석연",
+      "community": 3,
+      "degree": 5,
+      "movies_count": 30,
+      "role": "배우"
+    },
+    {
+      "id": "20134873",
+      "label": "박종범",
+      "community": 3,
+      "degree": 4,
+      "movies_count": 6,
+      "role": "배우"
+    },
+    {
+      "id": "10028600",
+      "label": "박명신",
+      "community": 5,
+      "degree": 9,
+      "movies_count": 60,
+      "role": "배우"
+    },
+    {
+      "id": "10067417",
+      "label": "조한철",
+      "community": 5,
+      "degree": 9,
+      "movies_count": 90,
+      "role": "배우"
+    },
+    {
+      "id": "10061332",
+      "label": "전수지",
+      "community": 5,
+      "degree": 6,
+      "movies_count": 30,
+      "role": "배우"
+    },
+    {
+      "id": "20156418",
+      "label": "임세미",
+      "community": 2,
+      "degree": 4,
+      "movies_count": 37,
+      "role": "배우"
+    },
+    {
+      "id": "20113258",
+      "label": "길해연",
+      "community": 2,
+      "degree": 9,
+      "movies_count": 64,
+      "role": "배우"
+    },
+    {
+      "id": "10003307",
+      "label": "기주봉",
+      "community": 5,
+      "degree": 8,
+      "movies_count": 98,
+      "role": "배우"
+    },
+    {
+      "id": "10060144",
+      "label": "장리우",
+      "community": 2,
+      "degree": 5,
+      "movies_count": 24,
+      "role": "배우"
+    },
+    {
+      "id": "20181558",
+      "label": "이재우",
+      "community": 5,
+      "degree": 8,
+      "movies_count": 23,
+      "role": "촬영"
+    },
+    {
+      "id": "10066805",
+      "label": "조은지",
+      "community": 2,
+      "degree": 3,
+      "movies_count": 35,
+      "role": "배우"
+    },
+    {
+      "id": "20181949",
+      "label": "이준오",
+      "community": 0,
+      "degree": 5,
+      "movies_count": 12,
+      "role": "음악"
+    }
+  ],
+  "links": [
+    {
+      "source": "20141891",
+      "target": "10028629",
+      "weight": 1,
+      "movies": [
+        "아이들..."
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "20181558",
+      "weight": 2,
+      "movies": [
+        "아이들...",
+        "파과"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "10003307",
+      "weight": 3,
+      "movies": [
+        "용의자",
+        "킹콩을 들다",
+        "파과"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "10004210",
+      "weight": 1,
+      "movies": [
+        "용의자"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "10061332",
+      "weight": 1,
+      "movies": [
+        "제보자"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "20181949",
+      "weight": 1,
+      "movies": [
+        "제보자"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "10060144",
+      "weight": 1,
+      "movies": [
+        "코리아"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "10028600",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "10067417",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "20113258",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "10028629",
+      "target": "20113258",
+      "weight": 3,
+      "movies": [
+        "O'PENing",
+        "너와 나",
+        "카트"
+      ]
+    },
+    {
+      "source": "10028629",
+      "target": "20156418",
+      "weight": 1,
+      "movies": [
+        "O'PENing"
+      ]
+    },
+    {
+      "source": "10028629",
+      "target": "10061575",
+      "weight": 2,
+      "movies": [
+        "가족의 탄생",
+        "속초에서의 겨울"
+      ]
+    },
+    {
+      "source": "10028629",
+      "target": "10067417",
+      "weight": 3,
+      "movies": [
+        "갯마을 차차차",
+        "내가 죽던 날",
+        "은하해방전선"
+      ]
+    },
+    {
+      "source": "10028629",
+      "target": "10003307",
+      "weight": 2,
+      "movies": [
+        "나쁜 영화",
+        "환상속의 그대"
+      ]
+    },
+    {
+      "source": "10028629",
+      "target": "20181949",
+      "weight": 1,
+      "movies": [
+        "맨홀"
+      ]
+    },
+    {
+      "source": "10028629",
+      "target": "10004210",
+      "weight": 1,
+      "movies": [
+        "생일"
+      ]
+    },
+    {
+      "source": "10028629",
+      "target": "20181558",
+      "weight": 1,
+      "movies": [
+        "아이들..."
+      ]
+    },
+    {
+      "source": "10028629",
+      "target": "10089509",
+      "weight": 1,
+      "movies": [
+        "오징어 게임"
+      ]
+    },
+    {
+      "source": "10028629",
+      "target": "20134873",
+      "weight": 1,
+      "movies": [
+        "오징어 게임"
+      ]
+    },
+    {
+      "source": "10028629",
+      "target": "20136040",
+      "weight": 1,
+      "movies": [
+        "오징어 게임"
+      ]
+    },
+    {
+      "source": "10028629",
+      "target": "10061332",
+      "weight": 1,
+      "movies": [
+        "원더랜드"
+      ]
+    },
+    {
+      "source": "10028629",
+      "target": "10028600",
+      "weight": 2,
+      "movies": [
+        "제비",
+        "환상속의 그대"
+      ]
+    },
+    {
+      "source": "10028629",
+      "target": "10060144",
+      "weight": 2,
+      "movies": [
+        "제비",
+        "카트"
+      ]
+    },
+    {
+      "source": "10028629",
+      "target": "10066805",
+      "weight": 1,
+      "movies": [
+        "황금시대"
+      ]
+    },
+    {
+      "source": "20136040",
+      "target": "10089509",
+      "weight": 1,
+      "movies": [
+        "오징어 게임"
+      ]
+    },
+    {
+      "source": "20136040",
+      "target": "20134873",
+      "weight": 1,
+      "movies": [
+        "오징어 게임"
+      ]
+    },
+    {
+      "source": "10061575",
+      "target": "10066805",
+      "weight": 1,
+      "movies": [
+        "2박 3일"
+      ]
+    },
+    {
+      "source": "10004210",
+      "target": "20156418",
+      "weight": 1,
+      "movies": [
+        "돈"
+      ]
+    },
+    {
+      "source": "10004210",
+      "target": "20181949",
+      "weight": 1,
+      "movies": [
+        "뒤틀린 집"
+      ]
+    },
+    {
+      "source": "10004210",
+      "target": "20134873",
+      "weight": 1,
+      "movies": [
+        "반도"
+      ]
+    },
+    {
+      "source": "10004210",
+      "target": "10003307",
+      "weight": 1,
+      "movies": [
+        "용의자"
+      ]
+    },
+    {
+      "source": "10004210",
+      "target": "10028600",
+      "weight": 1,
+      "movies": [
+        "작은 연못"
+      ]
+    },
+    {
+      "source": "10004210",
+      "target": "20181558",
+      "weight": 1,
+      "movies": [
+        "최선의 삶"
+      ]
+    },
+    {
+      "source": "10089509",
+      "target": "10003307",
+      "weight": 3,
+      "movies": [
+        "경축! 우리사랑",
+        "제시는 그때 스무살이었다",
+        "친구"
+      ]
+    },
+    {
+      "source": "10089509",
+      "target": "10067417",
+      "weight": 1,
+      "movies": [
+        "빈센조"
+      ]
+    },
+    {
+      "source": "10089509",
+      "target": "20134873",
+      "weight": 1,
+      "movies": [
+        "오징어 게임"
+      ]
+    },
+    {
+      "source": "10028600",
+      "target": "20181558",
+      "weight": 2,
+      "movies": [
+        "동주",
+        "파과"
+      ]
+    },
+    {
+      "source": "10028600",
+      "target": "10067417",
+      "weight": 4,
+      "movies": [
+        "마더",
+        "붉은 가족",
+        "트리거",
+        "파과"
+      ]
+    },
+    {
+      "source": "10028600",
+      "target": "10061332",
+      "weight": 2,
+      "movies": [
+        "사랑해... 말순씨",
+        "트리거"
+      ]
+    },
+    {
+      "source": "10028600",
+      "target": "10060144",
+      "weight": 1,
+      "movies": [
+        "제비"
+      ]
+    },
+    {
+      "source": "10028600",
+      "target": "20113258",
+      "weight": 2,
+      "movies": [
+        "트리거",
+        "파과"
+      ]
+    },
+    {
+      "source": "10028600",
+      "target": "10003307",
+      "weight": 2,
+      "movies": [
+        "파과",
+        "환상속의 그대"
+      ]
+    },
+    {
+      "source": "10067417",
+      "target": "20113258",
+      "weight": 3,
+      "movies": [
+        "KBS 드라마 스페셜",
+        "트리거",
+        "파과"
+      ]
+    },
+    {
+      "source": "10067417",
+      "target": "20156418",
+      "weight": 1,
+      "movies": [
+        "KBS 드라마 스페셜"
+      ]
+    },
+    {
+      "source": "10067417",
+      "target": "10003307",
+      "weight": 4,
+      "movies": [
+        "간신",
+        "숨바꼭질",
+        "파과",
+        "프로듀사"
+      ]
+    },
+    {
+      "source": "10067417",
+      "target": "20181558",
+      "weight": 2,
+      "movies": [
+        "곡성",
+        "파과"
+      ]
+    },
+    {
+      "source": "10067417",
+      "target": "10061332",
+      "weight": 2,
+      "movies": [
+        "커플즈",
+        "트리거"
+      ]
+    },
+    {
+      "source": "10061332",
+      "target": "20181949",
+      "weight": 1,
+      "movies": [
+        "제보자"
+      ]
+    },
+    {
+      "source": "10061332",
+      "target": "20113258",
+      "weight": 1,
+      "movies": [
+        "트리거"
+      ]
+    },
+    {
+      "source": "20156418",
+      "target": "20113258",
+      "weight": 4,
+      "movies": [
+        "KBS 드라마 스페셜",
+        "O'PENing",
+        "원더풀 월드",
+        "트라이: 우리는 기적이 된다"
+      ]
+    },
+    {
+      "source": "20113258",
+      "target": "20181558",
+      "weight": 2,
+      "movies": [
+        "메이트",
+        "파과"
+      ]
+    },
+    {
+      "source": "20113258",
+      "target": "10060144",
+      "weight": 3,
+      "movies": [
+        "장산범",
+        "카트",
+        "혜화, 동"
+      ]
+    },
+    {
+      "source": "20113258",
+      "target": "10003307",
+      "weight": 2,
+      "movies": [
+        "초행",
+        "파과"
+      ]
+    },
+    {
+      "source": "10003307",
+      "target": "20181558",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "10060144",
+      "target": "10066805",
+      "weight": 1,
+      "movies": [
+        "요가학원"
+      ]
+    },
+    {
+      "source": "20181558",
+      "target": "20181949",
+      "weight": 1,
+      "movies": [
+        "보희와 녹양"
+      ]
+    }
+  ],
+  "meta": {
+    "nodeCount": 17,
+    "linkCount": 57,
+    "generatedAt": "2025-11-16T02:36:47.753365"
+  }
+}

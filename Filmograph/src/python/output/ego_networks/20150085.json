@@ -1,0 +1,157 @@
+{
+  "ego": "20150085",
+  "label": "박경균",
+  "nodes": [
+    {
+      "id": "10060277",
+      "label": "장세진",
+      "community": 1,
+      "degree": 2,
+      "movies_count": 8,
+      "role": "배우"
+    },
+    {
+      "id": "10004210",
+      "label": "김민재",
+      "community": 0,
+      "degree": 1,
+      "movies_count": 33,
+      "role": "배우"
+    },
+    {
+      "id": "20110633",
+      "label": "박선주",
+      "community": 5,
+      "degree": 2,
+      "movies_count": 13,
+      "role": "배우"
+    },
+    {
+      "id": "10054593",
+      "label": "윤혜진",
+      "community": 5,
+      "degree": 3,
+      "movies_count": 14,
+      "role": "배우"
+    },
+    {
+      "id": "10026760",
+      "label": "문영동",
+      "community": 1,
+      "degree": 2,
+      "movies_count": 13,
+      "role": "배우"
+    },
+    {
+      "id": "10061971",
+      "label": "정영삼",
+      "community": 1,
+      "degree": 2,
+      "movies_count": 29,
+      "role": "감독"
+    },
+    {
+      "id": "10006506",
+      "label": "김훈희",
+      "community": 1,
+      "degree": 1,
+      "movies_count": 18,
+      "role": "촬영"
+    },
+    {
+      "id": "20150085",
+      "label": "박경균",
+      "community": 1,
+      "degree": 7,
+      "movies_count": 22,
+      "role": "촬영"
+    }
+  ],
+  "links": [
+    {
+      "source": "10060277",
+      "target": "10026760",
+      "weight": 1,
+      "movies": [
+        "홀리데이"
+      ]
+    },
+    {
+      "source": "10060277",
+      "target": "20150085",
+      "weight": 1,
+      "movies": [
+        "홀리데이"
+      ]
+    },
+    {
+      "source": "10004210",
+      "target": "20150085",
+      "weight": 1,
+      "movies": [
+        "최소한의 선의"
+      ]
+    },
+    {
+      "source": "20110633",
+      "target": "10054593",
+      "weight": 1,
+      "movies": [
+        "만남의 집"
+      ]
+    },
+    {
+      "source": "20110633",
+      "target": "20150085",
+      "weight": 1,
+      "movies": [
+        "만남의 집"
+      ]
+    },
+    {
+      "source": "10054593",
+      "target": "10061971",
+      "weight": 1,
+      "movies": [
+        "광기의 역사"
+      ]
+    },
+    {
+      "source": "10054593",
+      "target": "20150085",
+      "weight": 1,
+      "movies": [
+        "만남의 집"
+      ]
+    },
+    {
+      "source": "10026760",
+      "target": "20150085",
+      "weight": 1,
+      "movies": [
+        "홀리데이"
+      ]
+    },
+    {
+      "source": "10061971",
+      "target": "20150085",
+      "weight": 1,
+      "movies": [
+        "문영"
+      ]
+    },
+    {
+      "source": "10006506",
+      "target": "20150085",
+      "weight": 1,
+      "movies": [
+        "구르는 수레바퀴"
+      ]
+    }
+  ],
+  "meta": {
+    "nodeCount": 8,
+    "linkCount": 10,
+    "generatedAt": "2025-11-16T02:36:47.780708"
+  }
+}

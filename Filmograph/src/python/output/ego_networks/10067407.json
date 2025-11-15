@@ -1,0 +1,37 @@
+{
+  "ego": "10067407",
+  "label": "조하나",
+  "nodes": [
+    {
+      "id": "10087889",
+      "label": "할리나 레인",
+      "community": 7,
+      "degree": 1,
+      "movies_count": 44,
+      "role": "배우"
+    },
+    {
+      "id": "10067407",
+      "label": "조하나",
+      "community": 7,
+      "degree": 1,
+      "movies_count": 1,
+      "role": "배우"
+    }
+  ],
+  "links": [
+    {
+      "source": "10087889",
+      "target": "10067407",
+      "weight": 1,
+      "movies": [
+        "블라인드"
+      ]
+    }
+  ],
+  "meta": {
+    "nodeCount": 2,
+    "linkCount": 1,
+    "generatedAt": "2025-11-16T02:36:47.799867"
+  }
+}

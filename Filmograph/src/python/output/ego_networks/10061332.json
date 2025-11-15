@@ -1,0 +1,493 @@
+{
+  "ego": "10061332",
+  "label": "전수지",
+  "nodes": [
+    {
+      "id": "20141891",
+      "label": "정종헌",
+      "community": 5,
+      "degree": 9,
+      "movies_count": 48,
+      "role": "촬영"
+    },
+    {
+      "id": "10028629",
+      "label": "박미현",
+      "community": 2,
+      "degree": 6,
+      "movies_count": 43,
+      "role": "배우"
+    },
+    {
+      "id": "10005774",
+      "label": "김준성",
+      "community": 5,
+      "degree": 7,
+      "movies_count": 57,
+      "role": "음악"
+    },
+    {
+      "id": "10026804",
+      "label": "문제용",
+      "community": 5,
+      "degree": 2,
+      "movies_count": 7,
+      "role": "감독"
+    },
+    {
+      "id": "10006098",
+      "label": "김태성",
+      "community": 0,
+      "degree": 7,
+      "movies_count": 93,
+      "role": "음악"
+    },
+    {
+      "id": "10007517",
+      "label": "남명렬",
+      "community": 5,
+      "degree": 8,
+      "movies_count": 39,
+      "role": "배우"
+    },
+    {
+      "id": "10028600",
+      "label": "박명신",
+      "community": 5,
+      "degree": 9,
+      "movies_count": 60,
+      "role": "배우"
+    },
+    {
+      "id": "10067417",
+      "label": "조한철",
+      "community": 5,
+      "degree": 9,
+      "movies_count": 90,
+      "role": "배우"
+    },
+    {
+      "id": "10061332",
+      "label": "전수지",
+      "community": 5,
+      "degree": 11,
+      "movies_count": 30,
+      "role": "배우"
+    },
+    {
+      "id": "20113258",
+      "label": "길해연",
+      "community": 2,
+      "degree": 8,
+      "movies_count": 64,
+      "role": "배우"
+    },
+    {
+      "id": "20111894",
+      "label": "김성오",
+      "community": 0,
+      "degree": 5,
+      "movies_count": 53,
+      "role": "배우"
+    },
+    {
+      "id": "20181949",
+      "label": "이준오",
+      "community": 0,
+      "degree": 5,
+      "movies_count": 12,
+      "role": "음악"
+    }
+  ],
+  "links": [
+    {
+      "source": "20141891",
+      "target": "10006098",
+      "weight": 4,
+      "movies": [
+        "1724 기방난동사건",
+        "극한직업",
+        "체포왕",
+        "코리아"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "10005774",
+      "weight": 4,
+      "movies": [
+        "리벤져",
+        "시간이탈자",
+        "용의자",
+        "파과"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "10028629",
+      "weight": 1,
+      "movies": [
+        "아이들..."
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "10007517",
+      "weight": 2,
+      "movies": [
+        "제보자",
+        "파과"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "10061332",
+      "weight": 1,
+      "movies": [
+        "제보자"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "20181949",
+      "weight": 1,
+      "movies": [
+        "제보자"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "10028600",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "10067417",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "20113258",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "10028629",
+      "target": "20113258",
+      "weight": 3,
+      "movies": [
+        "O'PENing",
+        "너와 나",
+        "카트"
+      ]
+    },
+    {
+      "source": "10028629",
+      "target": "10067417",
+      "weight": 3,
+      "movies": [
+        "갯마을 차차차",
+        "내가 죽던 날",
+        "은하해방전선"
+      ]
+    },
+    {
+      "source": "10028629",
+      "target": "20181949",
+      "weight": 1,
+      "movies": [
+        "맨홀"
+      ]
+    },
+    {
+      "source": "10028629",
+      "target": "10061332",
+      "weight": 1,
+      "movies": [
+        "원더랜드"
+      ]
+    },
+    {
+      "source": "10028629",
+      "target": "10028600",
+      "weight": 2,
+      "movies": [
+        "제비",
+        "환상속의 그대"
+      ]
+    },
+    {
+      "source": "10005774",
+      "target": "10067417",
+      "weight": 4,
+      "movies": [
+        "간신",
+        "내 아내의 모든 것",
+        "세상에서 가장 아름다운 이별",
+        "파과"
+      ]
+    },
+    {
+      "source": "10005774",
+      "target": "20113258",
+      "weight": 3,
+      "movies": [
+        "날, 보러와요",
+        "살인자의 기억법",
+        "파과"
+      ]
+    },
+    {
+      "source": "10005774",
+      "target": "10007517",
+      "weight": 3,
+      "movies": [
+        "내 아내의 모든 것",
+        "파과",
+        "해피 뉴 이어"
+      ]
+    },
+    {
+      "source": "10005774",
+      "target": "10061332",
+      "weight": 1,
+      "movies": [
+        "말아톤"
+      ]
+    },
+    {
+      "source": "10005774",
+      "target": "10028600",
+      "weight": 3,
+      "movies": [
+        "전설의 고향",
+        "파과",
+        "허스토리"
+      ]
+    },
+    {
+      "source": "10005774",
+      "target": "20111894",
+      "weight": 1,
+      "movies": [
+        "죽지않는 인간들의 밤"
+      ]
+    },
+    {
+      "source": "10026804",
+      "target": "10061332",
+      "weight": 1,
+      "movies": [
+        "슈퍼맨이었던 사나이"
+      ]
+    },
+    {
+      "source": "10026804",
+      "target": "10028600",
+      "weight": 1,
+      "movies": [
+        "타짜"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "20113258",
+      "weight": 2,
+      "movies": [
+        "가시",
+        "헬머니"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "10061332",
+      "weight": 1,
+      "movies": [
+        "검은 수녀들"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "10067417",
+      "weight": 1,
+      "movies": [
+        "국가부도의 날"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "10007517",
+      "weight": 2,
+      "movies": [
+        "노량: 죽음의 바다",
+        "발신제한"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "20111894",
+      "weight": 2,
+      "movies": [
+        "니 부모 얼굴이 보고 싶다",
+        "타워"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "10028600",
+      "weight": 2,
+      "movies": [
+        "스물",
+        "최종병기 활"
+      ]
+    },
+    {
+      "source": "10007517",
+      "target": "10067417",
+      "weight": 5,
+      "movies": [
+        "경성크리처",
+        "내 아내의 모든 것",
+        "블랙머니",
+        "침묵",
+        "파과"
+      ]
+    },
+    {
+      "source": "10007517",
+      "target": "10061332",
+      "weight": 3,
+      "movies": [
+        "미안해, 고마워",
+        "비상선언",
+        "제보자"
+      ]
+    },
+    {
+      "source": "10007517",
+      "target": "20181949",
+      "weight": 1,
+      "movies": [
+        "제보자"
+      ]
+    },
+    {
+      "source": "10007517",
+      "target": "10028600",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "10007517",
+      "target": "20113258",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "10028600",
+      "target": "10067417",
+      "weight": 4,
+      "movies": [
+        "마더",
+        "붉은 가족",
+        "트리거",
+        "파과"
+      ]
+    },
+    {
+      "source": "10028600",
+      "target": "10061332",
+      "weight": 2,
+      "movies": [
+        "사랑해... 말순씨",
+        "트리거"
+      ]
+    },
+    {
+      "source": "10028600",
+      "target": "20113258",
+      "weight": 2,
+      "movies": [
+        "트리거",
+        "파과"
+      ]
+    },
+    {
+      "source": "10067417",
+      "target": "20113258",
+      "weight": 3,
+      "movies": [
+        "KBS 드라마 스페셜",
+        "트리거",
+        "파과"
+      ]
+    },
+    {
+      "source": "10067417",
+      "target": "20111894",
+      "weight": 1,
+      "movies": [
+        "방구석1열"
+      ]
+    },
+    {
+      "source": "10067417",
+      "target": "10061332",
+      "weight": 2,
+      "movies": [
+        "커플즈",
+        "트리거"
+      ]
+    },
+    {
+      "source": "10061332",
+      "target": "20111894",
+      "weight": 2,
+      "movies": [
+        "굿뉴스",
+        "서울의 봄"
+      ]
+    },
+    {
+      "source": "10061332",
+      "target": "20181949",
+      "weight": 1,
+      "movies": [
+        "제보자"
+      ]
+    },
+    {
+      "source": "10061332",
+      "target": "20113258",
+      "weight": 1,
+      "movies": [
+        "트리거"
+      ]
+    },
+    {
+      "source": "20111894",
+      "target": "20181949",
+      "weight": 1,
+      "movies": [
+        "패션왕"
+      ]
+    }
+  ],
+  "meta": {
+    "nodeCount": 12,
+    "linkCount": 43,
+    "generatedAt": "2025-11-16T02:36:47.768535"
+  }
+}
