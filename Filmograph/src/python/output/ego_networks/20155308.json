@@ -1,0 +1,377 @@
+{
+  "ego": "20155308",
+  "label": "정기섭",
+  "nodes": [
+    {
+      "id": "20141891",
+      "label": "정종헌",
+      "community": 5,
+      "degree": 7,
+      "movies_count": 48,
+      "role": "촬영"
+    },
+    {
+      "id": "10006098",
+      "label": "김태성",
+      "community": 0,
+      "degree": 7,
+      "movies_count": 93,
+      "role": "음악"
+    },
+    {
+      "id": "10006506",
+      "label": "김훈희",
+      "community": 1,
+      "degree": 2,
+      "movies_count": 18,
+      "role": "촬영"
+    },
+    {
+      "id": "10004210",
+      "label": "김민재",
+      "community": 0,
+      "degree": 5,
+      "movies_count": 33,
+      "role": "배우"
+    },
+    {
+      "id": "10007517",
+      "label": "남명렬",
+      "community": 5,
+      "degree": 7,
+      "movies_count": 39,
+      "role": "배우"
+    },
+    {
+      "id": "10089509",
+      "label": "홍석연",
+      "community": 3,
+      "degree": 3,
+      "movies_count": 30,
+      "role": "배우"
+    },
+    {
+      "id": "20156418",
+      "label": "임세미",
+      "community": 2,
+      "degree": 4,
+      "movies_count": 37,
+      "role": "배우"
+    },
+    {
+      "id": "10003307",
+      "label": "기주봉",
+      "community": 5,
+      "degree": 8,
+      "movies_count": 98,
+      "role": "배우"
+    },
+    {
+      "id": "20113258",
+      "label": "길해연",
+      "community": 2,
+      "degree": 7,
+      "movies_count": 64,
+      "role": "배우"
+    },
+    {
+      "id": "20155308",
+      "label": "정기섭",
+      "community": 3,
+      "degree": 10,
+      "movies_count": 20,
+      "role": "배우"
+    },
+    {
+      "id": "10019055",
+      "label": "류성현",
+      "community": 3,
+      "degree": 4,
+      "movies_count": 18,
+      "role": "배우"
+    }
+  ],
+  "links": [
+    {
+      "source": "20141891",
+      "target": "10006098",
+      "weight": 4,
+      "movies": [
+        "1724 기방난동사건",
+        "극한직업",
+        "체포왕",
+        "코리아"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "10006506",
+      "weight": 1,
+      "movies": [
+        "봄, 눈"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "20155308",
+      "weight": 1,
+      "movies": [
+        "봄, 눈"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "10003307",
+      "weight": 3,
+      "movies": [
+        "용의자",
+        "킹콩을 들다",
+        "파과"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "10004210",
+      "weight": 1,
+      "movies": [
+        "용의자"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "10007517",
+      "weight": 2,
+      "movies": [
+        "제보자",
+        "파과"
+      ]
+    },
+    {
+      "source": "20141891",
+      "target": "20113258",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "20113258",
+      "weight": 2,
+      "movies": [
+        "가시",
+        "헬머니"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "20155308",
+      "weight": 2,
+      "movies": [
+        "김복남 살인사건의 전말",
+        "노량: 죽음의 바다"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "10007517",
+      "weight": 2,
+      "movies": [
+        "노량: 죽음의 바다",
+        "발신제한"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "10003307",
+      "weight": 1,
+      "movies": [
+        "오피스"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "20156418",
+      "weight": 1,
+      "movies": [
+        "하이재킹"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "10004210",
+      "weight": 2,
+      "movies": [
+        "한산 리덕스",
+        "한산: 용의 출현"
+      ]
+    },
+    {
+      "source": "10006506",
+      "target": "20155308",
+      "weight": 1,
+      "movies": [
+        "봄, 눈"
+      ]
+    },
+    {
+      "source": "10004210",
+      "target": "20155308",
+      "weight": 2,
+      "movies": [
+        "거미집",
+        "소방관"
+      ]
+    },
+    {
+      "source": "10004210",
+      "target": "20156418",
+      "weight": 1,
+      "movies": [
+        "돈"
+      ]
+    },
+    {
+      "source": "10004210",
+      "target": "10003307",
+      "weight": 1,
+      "movies": [
+        "용의자"
+      ]
+    },
+    {
+      "source": "10007517",
+      "target": "20155308",
+      "weight": 1,
+      "movies": [
+        "노량: 죽음의 바다"
+      ]
+    },
+    {
+      "source": "10007517",
+      "target": "10019055",
+      "weight": 1,
+      "movies": [
+        "더 뱅커"
+      ]
+    },
+    {
+      "source": "10007517",
+      "target": "10089509",
+      "weight": 1,
+      "movies": [
+        "도가니"
+      ]
+    },
+    {
+      "source": "10007517",
+      "target": "10003307",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "10007517",
+      "target": "20113258",
+      "weight": 1,
+      "movies": [
+        "파과"
+      ]
+    },
+    {
+      "source": "10089509",
+      "target": "10003307",
+      "weight": 3,
+      "movies": [
+        "경축! 우리사랑",
+        "제시는 그때 스무살이었다",
+        "친구"
+      ]
+    },
+    {
+      "source": "10089509",
+      "target": "20155308",
+      "weight": 2,
+      "movies": [
+        "국제시장",
+        "모범택시"
+      ]
+    },
+    {
+      "source": "20156418",
+      "target": "20113258",
+      "weight": 4,
+      "movies": [
+        "KBS 드라마 스페셜",
+        "O'PENing",
+        "원더풀 월드",
+        "트라이: 우리는 기적이 된다"
+      ]
+    },
+    {
+      "source": "20156418",
+      "target": "20155308",
+      "weight": 1,
+      "movies": [
+        "트라이: 우리는 기적이 된다"
+      ]
+    },
+    {
+      "source": "10003307",
+      "target": "10019055",
+      "weight": 1,
+      "movies": [
+        "공작"
+      ]
+    },
+    {
+      "source": "10003307",
+      "target": "20155308",
+      "weight": 1,
+      "movies": [
+        "공작"
+      ]
+    },
+    {
+      "source": "10003307",
+      "target": "20113258",
+      "weight": 2,
+      "movies": [
+        "초행",
+        "파과"
+      ]
+    },
+    {
+      "source": "20113258",
+      "target": "10019055",
+      "weight": 1,
+      "movies": [
+        "스마트폰을 떨어뜨렸을 뿐인데"
+      ]
+    },
+    {
+      "source": "20113258",
+      "target": "20155308",
+      "weight": 1,
+      "movies": [
+        "트라이: 우리는 기적이 된다"
+      ]
+    },
+    {
+      "source": "20155308",
+      "target": "10019055",
+      "weight": 3,
+      "movies": [
+        "공작",
+        "덕구",
+        "신세계"
+      ]
+    }
+  ],
+  "meta": {
+    "nodeCount": 11,
+    "linkCount": 32,
+    "generatedAt": "2025-11-16T02:36:47.768535"
+  }
+}

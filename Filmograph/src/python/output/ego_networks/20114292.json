@@ -1,0 +1,37 @@
+{
+  "ego": "20114292",
+  "label": "김진무",
+  "nodes": [
+    {
+      "id": "20114292",
+      "label": "김진무",
+      "community": 0,
+      "degree": 1,
+      "movies_count": 6,
+      "role": "감독"
+    },
+    {
+      "id": "10006098",
+      "label": "김태성",
+      "community": 0,
+      "degree": 1,
+      "movies_count": 93,
+      "role": "음악"
+    }
+  ],
+  "links": [
+    {
+      "source": "20114292",
+      "target": "10006098",
+      "weight": 1,
+      "movies": [
+        "신이 보낸 사람"
+      ]
+    }
+  ],
+  "meta": {
+    "nodeCount": 2,
+    "linkCount": 1,
+    "generatedAt": "2025-11-16T02:36:47.803867"
+  }
+}

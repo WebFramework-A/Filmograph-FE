@@ -1,0 +1,37 @@
+{
+  "ego": "10089485",
+  "label": "홍범기",
+  "nodes": [
+    {
+      "id": "10089485",
+      "label": "홍범기",
+      "community": 0,
+      "degree": 1,
+      "movies_count": 18,
+      "role": "배우"
+    },
+    {
+      "id": "20113125",
+      "label": "남도형",
+      "community": 0,
+      "degree": 1,
+      "movies_count": 17,
+      "role": "배우"
+    }
+  ],
+  "links": [
+    {
+      "source": "10089485",
+      "target": "20113125",
+      "weight": 1,
+      "movies": [
+        "다이노스터: 공룡수호대"
+      ]
+    }
+  ],
+  "meta": {
+    "nodeCount": 2,
+    "linkCount": 1,
+    "generatedAt": "2025-11-16T02:36:47.791816"
+  }
+}

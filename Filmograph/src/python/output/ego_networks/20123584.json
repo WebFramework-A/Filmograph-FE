@@ -1,0 +1,37 @@
+{
+  "ego": "20123584",
+  "label": "정현철",
+  "nodes": [
+    {
+      "id": "20123584",
+      "label": "정현철",
+      "community": 5,
+      "degree": 1,
+      "movies_count": 8,
+      "role": "감독"
+    },
+    {
+      "id": "10067417",
+      "label": "조한철",
+      "community": 5,
+      "degree": 1,
+      "movies_count": 90,
+      "role": "배우"
+    }
+  ],
+  "links": [
+    {
+      "source": "20123584",
+      "target": "10067417",
+      "weight": 1,
+      "movies": [
+        "재벌집 막내아들"
+      ]
+    }
+  ],
+  "meta": {
+    "nodeCount": 2,
+    "linkCount": 1,
+    "generatedAt": "2025-11-16T02:36:47.805370"
+  }
+}

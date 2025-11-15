@@ -1,0 +1,69 @@
+{
+  "ego": "10086426",
+  "label": "필립 느와레",
+  "nodes": [
+    {
+      "id": "10024867",
+      "label": "막스 폰 시도우",
+      "community": 2,
+      "degree": 1,
+      "movies_count": 176,
+      "role": "배우"
+    },
+    {
+      "id": "10067415",
+      "label": "조한선",
+      "community": 2,
+      "degree": 1,
+      "movies_count": 28,
+      "role": "배우"
+    },
+    {
+      "id": "10086426",
+      "label": "필립 느와레",
+      "community": 2,
+      "degree": 3,
+      "movies_count": 171,
+      "role": "배우"
+    },
+    {
+      "id": "10031718",
+      "label": "브누와 쟉꼬",
+      "community": 2,
+      "degree": 1,
+      "movies_count": 14,
+      "role": "감독"
+    }
+  ],
+  "links": [
+    {
+      "source": "10024867",
+      "target": "10086426",
+      "weight": 1,
+      "movies": [
+        "타타르인의 사막"
+      ]
+    },
+    {
+      "source": "10067415",
+      "target": "10086426",
+      "weight": 1,
+      "movies": [
+        "마이 뉴 파트너"
+      ]
+    },
+    {
+      "source": "10086426",
+      "target": "10031718",
+      "weight": 1,
+      "movies": [
+        "Vivement dimanche"
+      ]
+    }
+  ],
+  "meta": {
+    "nodeCount": 4,
+    "linkCount": 3,
+    "generatedAt": "2025-11-16T02:36:47.754389"
+  }
+}

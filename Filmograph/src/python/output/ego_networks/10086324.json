@@ -1,0 +1,146 @@
+{
+  "ego": "10086324",
+  "label": "필감성",
+  "nodes": [
+    {
+      "id": "10071900",
+      "label": "천호진",
+      "community": 5,
+      "degree": 2,
+      "movies_count": 33,
+      "role": "배우"
+    },
+    {
+      "id": "10006098",
+      "label": "김태성",
+      "community": 0,
+      "degree": 3,
+      "movies_count": 93,
+      "role": "음악"
+    },
+    {
+      "id": "10086324",
+      "label": "필감성",
+      "community": 0,
+      "degree": 5,
+      "movies_count": 8,
+      "role": "감독"
+    },
+    {
+      "id": "10004308",
+      "label": "김병춘",
+      "community": 3,
+      "degree": 2,
+      "movies_count": 32,
+      "role": "배우"
+    },
+    {
+      "id": "10004920",
+      "label": "김연정",
+      "community": 0,
+      "degree": 3,
+      "movies_count": 12,
+      "role": "음악"
+    },
+    {
+      "id": "20156311",
+      "label": "김태수",
+      "community": 0,
+      "degree": 3,
+      "movies_count": 34,
+      "role": "촬영"
+    }
+  ],
+  "links": [
+    {
+      "source": "10071900",
+      "target": "10004308",
+      "weight": 2,
+      "movies": [
+        "말죽거리 잔혹사",
+        "비열한 거리"
+      ]
+    },
+    {
+      "source": "10071900",
+      "target": "10086324",
+      "weight": 1,
+      "movies": [
+        "말죽거리 잔혹사"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "10004920",
+      "weight": 7,
+      "movies": [
+        "굿바이 싱글",
+        "굿바이 썸머",
+        "기적",
+        "싱크홀",
+        "연의 편지",
+        "임금님의 사건수첩",
+        "좀비딸"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "20156311",
+      "weight": 5,
+      "movies": [
+        "기적",
+        "발신제한",
+        "사바하",
+        "좀비딸",
+        "특수본"
+      ]
+    },
+    {
+      "source": "10006098",
+      "target": "10086324",
+      "weight": 2,
+      "movies": [
+        "인질",
+        "좀비딸"
+      ]
+    },
+    {
+      "source": "10086324",
+      "target": "10004308",
+      "weight": 1,
+      "movies": [
+        "말죽거리 잔혹사"
+      ]
+    },
+    {
+      "source": "10086324",
+      "target": "10004920",
+      "weight": 1,
+      "movies": [
+        "좀비딸"
+      ]
+    },
+    {
+      "source": "10086324",
+      "target": "20156311",
+      "weight": 1,
+      "movies": [
+        "좀비딸"
+      ]
+    },
+    {
+      "source": "10004920",
+      "target": "20156311",
+      "weight": 2,
+      "movies": [
+        "기적",
+        "좀비딸"
+      ]
+    }
+  ],
+  "meta": {
+    "nodeCount": 6,
+    "linkCount": 9,
+    "generatedAt": "2025-11-16T02:36:47.796369"
+  }
+}

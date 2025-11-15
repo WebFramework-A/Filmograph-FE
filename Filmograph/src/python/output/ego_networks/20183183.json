@@ -1,0 +1,37 @@
+{
+  "ego": "20183183",
+  "label": "박재인",
+  "nodes": [
+    {
+      "id": "20111894",
+      "label": "김성오",
+      "community": 0,
+      "degree": 1,
+      "movies_count": 53,
+      "role": "배우"
+    },
+    {
+      "id": "20183183",
+      "label": "박재인",
+      "community": 0,
+      "degree": 1,
+      "movies_count": 5,
+      "role": "음악"
+    }
+  ],
+  "links": [
+    {
+      "source": "20111894",
+      "target": "20183183",
+      "weight": 1,
+      "movies": [
+        "열정같은소리하고있네"
+      ]
+    }
+  ],
+  "meta": {
+    "nodeCount": 2,
+    "linkCount": 1,
+    "generatedAt": "2025-11-16T02:36:47.803867"
+  }
+}

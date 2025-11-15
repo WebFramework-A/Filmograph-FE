@@ -1,0 +1,113 @@
+{
+  "ego": "20110633",
+  "label": "박선주",
+  "nodes": [
+    {
+      "id": "10054593",
+      "label": "윤혜진",
+      "community": 5,
+      "degree": 3,
+      "movies_count": 14,
+      "role": "배우"
+    },
+    {
+      "id": "20110633",
+      "label": "박선주",
+      "community": 5,
+      "degree": 4,
+      "movies_count": 13,
+      "role": "배우"
+    },
+    {
+      "id": "10067417",
+      "label": "조한철",
+      "community": 5,
+      "degree": 3,
+      "movies_count": 90,
+      "role": "배우"
+    },
+    {
+      "id": "10003307",
+      "label": "기주봉",
+      "community": 5,
+      "degree": 2,
+      "movies_count": 98,
+      "role": "배우"
+    },
+    {
+      "id": "20150085",
+      "label": "박경균",
+      "community": 1,
+      "degree": 2,
+      "movies_count": 22,
+      "role": "촬영"
+    }
+  ],
+  "links": [
+    {
+      "source": "10054593",
+      "target": "10067417",
+      "weight": 2,
+      "movies": [
+        "마더",
+        "세상에서 가장 아름다운 이별"
+      ]
+    },
+    {
+      "source": "10054593",
+      "target": "20110633",
+      "weight": 1,
+      "movies": [
+        "만남의 집"
+      ]
+    },
+    {
+      "source": "10054593",
+      "target": "20150085",
+      "weight": 1,
+      "movies": [
+        "만남의 집"
+      ]
+    },
+    {
+      "source": "20110633",
+      "target": "10003307",
+      "weight": 1,
+      "movies": [
+        "군함도"
+      ]
+    },
+    {
+      "source": "20110633",
+      "target": "20150085",
+      "weight": 1,
+      "movies": [
+        "만남의 집"
+      ]
+    },
+    {
+      "source": "20110633",
+      "target": "10067417",
+      "weight": 1,
+      "movies": [
+        "세자매"
+      ]
+    },
+    {
+      "source": "10067417",
+      "target": "10003307",
+      "weight": 4,
+      "movies": [
+        "간신",
+        "숨바꼭질",
+        "파과",
+        "프로듀사"
+      ]
+    }
+  ],
+  "meta": {
+    "nodeCount": 5,
+    "linkCount": 7,
+    "generatedAt": "2025-11-16T02:36:47.780708"
+  }
+}

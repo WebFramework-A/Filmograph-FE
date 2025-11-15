@@ -1,0 +1,182 @@
+{
+  "ego": "20155804",
+  "label": "윤정",
+  "nodes": [
+    {
+      "id": "10058494",
+      "label": "임나무",
+      "community": 4,
+      "degree": 5,
+      "movies_count": 11,
+      "role": "감독"
+    },
+    {
+      "id": "20155804",
+      "label": "윤정",
+      "community": 4,
+      "degree": 5,
+      "movies_count": 2,
+      "role": "배우"
+    },
+    {
+      "id": "20165316",
+      "label": "김준형",
+      "community": 4,
+      "degree": 5,
+      "movies_count": 8,
+      "role": "감독"
+    },
+    {
+      "id": "10057018",
+      "label": "이은정",
+      "community": 4,
+      "degree": 5,
+      "movies_count": 4,
+      "role": "배우"
+    },
+    {
+      "id": "20147124",
+      "label": "홍지석",
+      "community": 4,
+      "degree": 5,
+      "movies_count": 42,
+      "role": "배우"
+    },
+    {
+      "id": "10050923",
+      "label": "오태경",
+      "community": 4,
+      "degree": 5,
+      "movies_count": 30,
+      "role": "배우"
+    }
+  ],
+  "links": [
+    {
+      "source": "10058494",
+      "target": "10050923",
+      "weight": 1,
+      "movies": [
+        "사람과 고기"
+      ]
+    },
+    {
+      "source": "10058494",
+      "target": "10057018",
+      "weight": 1,
+      "movies": [
+        "사람과 고기"
+      ]
+    },
+    {
+      "source": "10058494",
+      "target": "20147124",
+      "weight": 1,
+      "movies": [
+        "사람과 고기"
+      ]
+    },
+    {
+      "source": "10058494",
+      "target": "20155804",
+      "weight": 1,
+      "movies": [
+        "사람과 고기"
+      ]
+    },
+    {
+      "source": "10058494",
+      "target": "20165316",
+      "weight": 1,
+      "movies": [
+        "사람과 고기"
+      ]
+    },
+    {
+      "source": "20155804",
+      "target": "10050923",
+      "weight": 1,
+      "movies": [
+        "사람과 고기"
+      ]
+    },
+    {
+      "source": "20155804",
+      "target": "10057018",
+      "weight": 1,
+      "movies": [
+        "사람과 고기"
+      ]
+    },
+    {
+      "source": "20155804",
+      "target": "20147124",
+      "weight": 1,
+      "movies": [
+        "사람과 고기"
+      ]
+    },
+    {
+      "source": "20155804",
+      "target": "20165316",
+      "weight": 1,
+      "movies": [
+        "사람과 고기"
+      ]
+    },
+    {
+      "source": "20165316",
+      "target": "20147124",
+      "weight": 2,
+      "movies": [
+        "버티고",
+        "사람과 고기"
+      ]
+    },
+    {
+      "source": "20165316",
+      "target": "10050923",
+      "weight": 1,
+      "movies": [
+        "사람과 고기"
+      ]
+    },
+    {
+      "source": "20165316",
+      "target": "10057018",
+      "weight": 1,
+      "movies": [
+        "사람과 고기"
+      ]
+    },
+    {
+      "source": "10057018",
+      "target": "10050923",
+      "weight": 1,
+      "movies": [
+        "사람과 고기"
+      ]
+    },
+    {
+      "source": "10057018",
+      "target": "20147124",
+      "weight": 1,
+      "movies": [
+        "사람과 고기"
+      ]
+    },
+    {
+      "source": "20147124",
+      "target": "10050923",
+      "weight": 1,
+      "movies": [
+        "사람과 고기"
+      ]
+    }
+  ],
+  "meta": {
+    "nodeCount": 6,
+    "linkCount": 15,
+    "generatedAt": "2025-11-16T02:36:47.801866"
+  }
+}

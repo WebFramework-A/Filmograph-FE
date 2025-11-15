@@ -1,0 +1,37 @@
+{
+  "ego": "10031718",
+  "label": "브누와 쟉꼬",
+  "nodes": [
+    {
+      "id": "10086426",
+      "label": "필립 느와레",
+      "community": 2,
+      "degree": 1,
+      "movies_count": 171,
+      "role": "배우"
+    },
+    {
+      "id": "10031718",
+      "label": "브누와 쟉꼬",
+      "community": 2,
+      "degree": 1,
+      "movies_count": 14,
+      "role": "감독"
+    }
+  ],
+  "links": [
+    {
+      "source": "10086426",
+      "target": "10031718",
+      "weight": 1,
+      "movies": [
+        "Vivement dimanche"
+      ]
+    }
+  ],
+  "meta": {
+    "nodeCount": 2,
+    "linkCount": 1,
+    "generatedAt": "2025-11-16T02:36:47.754389"
+  }
+}
