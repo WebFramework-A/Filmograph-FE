@@ -26,7 +26,7 @@ export const saveMovie = async (movie: MovieDetail): Promise<string> => {
     // 성공 시 "SAVED" 반환
     return "SAVED";
   } catch (err) {
-    console.error("❌ Firestore 저장 실패:", err);
+    console.error("Firestore 저장 실패:", err);
     return "ERROR";
   }
 };

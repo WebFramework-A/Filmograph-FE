@@ -8,6 +8,7 @@ import GuideCard from "../components/GraphPage/GuideCard";
 import CategoryWithDot from "../components/common/CategoryWithDot";
 import CollabNetworkGraph from "../components/GraphPage/CollabNetworkGraph";
 import EgoGraph from "../components/GraphPage/EgoGraph";
+import BipartiteGraph from "../components/GraphPage/BipartiteGraph";
 
 type GraphCategory = "bipartite" | "ego" | "community";
 
@@ -57,7 +58,7 @@ const GraphPage = () => {
     );
   }
 
-    return (
+  return (
     <div className="min-h-screen bg-[#0d5a5a] text-white">
       {/* 헤더 섹션 */}
       <div className="pt-16 pb-4 px-8">
@@ -95,51 +96,44 @@ const GraphPage = () => {
         <div className="flex justify-center gap-3 max-w-3xl mx-auto mb-4">
           <button
             onClick={() => setCategory("bipartite")}
-            className={`px-4 py-2 rounded-full text-sm border ${
-              category == "bipartite"
-                ? "bg-[#FFD700] text-black border-[#FFD700]"
-                : "border-white/40 text-white hover:bg-white/10"
-            }`}
+            className={`px-4 py-2 rounded-full text-sm border ${category == "bipartite"
+              ? "bg-[#FFD700] text-black border-[#FFD700]"
+              : "border-white/40 text-white hover:bg-white/10"
+              }`}
           >
             영화–영화인 이분 그래프
           </button>
+
           <button
             onClick={() => setCategory("ego")}
-            className={`px-4 py-2 rounded-full text-sm border ${
-              category == "ego"
-                ? "bg-[#FFD700] text-black border-[#FFD700]"
-                : "border-white/40 text-white hover:bg-white/10"
-            }`}
+            className={`px-4 py-2 rounded-full text-sm border ${category == "ego"
+              ? "bg-[#FFD700] text-black border-[#FFD700]"
+              : "border-white/40 text-white hover:bg-white/10"
+              }`}
           >
             에고 네트워크
           </button>
+
           <button
             onClick={() => setCategory("community")}
-            className={`px-4 py-2 rounded-full text-sm border ${
-              category == "community"
-                ? "bg-[#FFD700] text-black border-[#FFD700]"
-                : "border-white/40 text-white hover:bg-white/10"
-            }`}
+            className={`px-4 py-2 rounded-full text-sm border ${category == "community"
+              ? "bg-[#FFD700] text-black border-[#FFD700]"
+              : "border-white/40 text-white hover:bg-white/10"
+              }`}
           >
             협업 네트워크 & 커뮤니티
           </button>
         </div>
       </div>
-      
+
       {/* 그래프 영역 */}
       <div className="relative bg-[#0d5a5a] mx-8 rounded-lg overflow-hidden border border-white/10">
-      
+
         <div style={{ height: "500px" }}>
-           {/* 영화–영화인 이분 그래프 (기존 예시 그래프 냅둠) */}
-            {category == "bipartite" && (
-          <ForceGraph2D
-            graphData={data}
-            backgroundColor="#0d5a5a"
-            nodeLabel="id"
-            nodeAutoColorBy="group"
-          />
-        )}
-         {/* 에고 네트워크 */}
+          {/* 영화–영화인 이분 그래프 (기존 예시 그래프 냅둠) */}
+          {category == "bipartite" && <BipartiteGraph />}
+
+          {/* 에고 네트워크 */}
           {category == "ego" && <EgoGraph />}
 
           {/* 협업 네트워크 & 커뮤니티 */}
@@ -147,7 +141,7 @@ const GraphPage = () => {
         </div>
 
         {/* 종류 */}
-         {category == "bipartite" && (
+        {category == "bipartite" && (
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-6 bg-black/30 backdrop-blur-sm px-6 py-3 rounded-full">
             <CategoryWithDot color="#4FC3F7" label="배우" />
             <CategoryWithDot color="#FFD700" label="감독" />
