@@ -19,5 +19,10 @@ export default defineConfig([
       ecmaVersion: 2020,
       globals: globals.browser,
     },
+
+    rules: {
+      // 'any' 타입 사용을 허용 (오류 끄기)
+      "@typescript-eslint/no-explicit-any": "off",
+    }
   },
 ])
