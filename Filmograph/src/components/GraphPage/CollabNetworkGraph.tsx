@@ -1,7 +1,7 @@
 // src/components/GraphPage/CollabNetworkGraph.tsx
 import { useEffect, useMemo, useState, useRef } from "react";
 import ForceGraph2D from "react-force-graph-2d";
-import type { ForceGraphMethods, LinkObject,NodeObject } from "react-force-graph-2d";
+import type { ForceGraphMethods, LinkObject, NodeObject } from "react-force-graph-2d";
 
 // 타입 정의
 type NodeT = NodeObject & {
@@ -119,7 +119,7 @@ export default function CollabNetworkGraph() {
         nodeLabel={(node) =>
           `${node.label} (${node.role ?? "-"})`
         }
-        
+
         // 기본 그래프 퍼짐 정도
         linkDistance={(link: LinkObject<NodeT>) => {
           const w = (link as LinkT).weight ?? 1;
