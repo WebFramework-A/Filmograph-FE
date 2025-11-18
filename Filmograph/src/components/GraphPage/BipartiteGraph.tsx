@@ -196,6 +196,8 @@ export default function BipartiteGraph() {
                     if (node.type === "movie") {
                         color = MOVIE_COLOR;
                         ctx.fillStyle = color;
+
+                        /* 네모로 그리기
                         const rectWidth = size * 2.2;
                         const rectHeight = size * 1.4;
                         ctx.fillRect(
@@ -204,7 +206,12 @@ export default function BipartiteGraph() {
                             rectWidth,
                             rectHeight
                         );
-                    } else {
+                        */
+                        ctx.beginPath();
+                        ctx.arc(node.x, node.y, size, 0, 2 * Math.PI, false);
+                        ctx.fill();
+                    }
+                    else {
                         if (node.role === "director") color = DIRECTOR_COLOR;
                         else if (node.role === "actor") color = ACTOR_COLOR;
 
