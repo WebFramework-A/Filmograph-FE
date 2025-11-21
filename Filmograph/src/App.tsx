@@ -40,7 +40,7 @@ const router = createBrowserRouter([
         element: <LoginPage />,
       },
       {
-        path: "/detail",
+        path: "/detail/:movieId",
         element: <DetailPage />,
       },
     ],
