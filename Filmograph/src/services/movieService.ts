@@ -1,32 +1,77 @@
+// src/services/movieService.ts
 import { db } from "./firebaseConfig";
 import { doc, setDoc } from "firebase/firestore";
 import type { MovieDetail } from "../types/movie";
 import { enrichMovieData } from "./movies/posterApi";
+import { fetchMovieVideos } from "./movies/videoApi";
+import { fetchWatchProviders } from "./movies/watchProviderApi";
+import { cleanObject } from "../utils/cleanObject";
 
-/* Firestore에 영화 데이터를 저장하는 함수
-  - TMDB 데이터(포스터, 평점 등)를 enrichMovieData()로 병합
-  - TMDB 정보가 없으면 Firestore에 저장하지 않고 "SKIPPED_TMDB" 반환
-  - 정상 저장 시 "SAVED", 오류 시 "ERROR" 반환
-*/
 export const saveMovie = async (movie: MovieDetail): Promise<string> => {
   try {
-    // TMDB 데이터 병합 (포스터, 평점, 줄거리 등 추가)
+    // 1) KOBIS 필수 데이터 체크
+    if (
+      !movie.title ||
+      !movie.releaseDate ||
+      !movie.directors?.length ||
+      !movie.cast?.length ||
+      !movie.genre?.length ||
+      !movie.watchGrade ||
+      !movie.nation
+    ) {
+      return "SKIPPED_KOBIS";
+    }
+
+    // 19금 제외
+    if (movie.watchGrade.includes("청소년관람불가")) {
+      return "SKIPPED_19";
+    }
+
+    // 2) TMDB 병합
     const enriched = await enrichMovieData(movie);
 
-    // TMDB 정보가 없을 경우 저장하지 않음
-    // (예: 포스터 이미지나 평점이 없는 경우)
-    if (!enriched.posterUrl || !enriched.rating) {
-      console.log(`⏭️ TMDB 정보 없음: ${movie.title}`);
+    // TMDB 필수 데이터 누락 → 제외
+    if (
+      !enriched.posterUrl ||
+      enriched.rating == null ||
+      !enriched.overview ||
+      enriched.popularity == null
+    ) {
       return "SKIPPED_TMDB";
     }
 
-    // Firestore에 영화 문서 저장 (merge 옵션으로 기존 데이터 덮어쓰기 방지)
-    await setDoc(doc(db, "movies", enriched.id), enriched, { merge: true });
+    // 3) 영상 데이터
+    let videos = null;
+    if (enriched.tmdbId) {
+      videos = await fetchMovieVideos(enriched.tmdbId);
+    }
 
-    // 성공 시 "SAVED" 반환
+    // 4) OTT 제공처 데이터
+    let watchProviders = null;
+    if (enriched.tmdbId) {
+      watchProviders = await fetchWatchProviders(enriched.tmdbId);
+    }
+
+    // 5) 최종 병합
+    const fullyEnriched: MovieDetail = {
+      ...enriched,
+      videos: videos ?? undefined,
+      watchProviders: watchProviders ?? undefined,
+      updatedAt: new Date().toISOString(),
+    };
+
+    // undefined 모두 제거
+    const finalData = cleanObject(fullyEnriched);
+
+    // 6) Firestore 저장
+    await setDoc(doc(db, "movies", fullyEnriched.id), finalData, {
+      merge: true,
+    });
+
     return "SAVED";
+
   } catch (err) {
-    console.error("Firestore 저장 실패:", err);
+    console.error(" Firestore 저장 실패:", err);
     return "ERROR";
   }
 };
