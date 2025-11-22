@@ -9,7 +9,7 @@ import { cleanObject } from "../utils/cleanObject";
 
 export const saveMovie = async (movie: MovieDetail): Promise<string> => {
   try {
-    // 1) KOBIS 필수 데이터 체크
+    // KOBIS 필수 데이터
     if (
       !movie.title ||
       !movie.releaseDate ||
@@ -22,15 +22,15 @@ export const saveMovie = async (movie: MovieDetail): Promise<string> => {
       return "SKIPPED_KOBIS";
     }
 
-    // 19금 제외
+    // 청불 제외
     if (movie.watchGrade.includes("청소년관람불가")) {
       return "SKIPPED_19";
     }
 
-    // 2) TMDB 병합
+    // TMDB 병합
     const enriched = await enrichMovieData(movie);
 
-    // TMDB 필수 데이터 누락 → 제외
+    // TMDB 필수 데이터
     if (
       !enriched.posterUrl ||
       enriched.rating == null ||
@@ -40,19 +40,18 @@ export const saveMovie = async (movie: MovieDetail): Promise<string> => {
       return "SKIPPED_TMDB";
     }
 
-    // 3) 영상 데이터
+    // 영상 데이터
     let videos = null;
     if (enriched.tmdbId) {
       videos = await fetchMovieVideos(enriched.tmdbId);
     }
 
-    // 4) OTT 제공처 데이터
+    // OTT 제공처
     let watchProviders = null;
     if (enriched.tmdbId) {
       watchProviders = await fetchWatchProviders(enriched.tmdbId);
     }
 
-    // 5) 최종 병합
     const fullyEnriched: MovieDetail = {
       ...enriched,
       videos: videos ?? undefined,
@@ -63,7 +62,7 @@ export const saveMovie = async (movie: MovieDetail): Promise<string> => {
     // undefined 모두 제거
     const finalData = cleanObject(fullyEnriched);
 
-    // 6) Firestore 저장
+    // Firestore 저장
     await setDoc(doc(db, "movies", fullyEnriched.id), finalData, {
       merge: true,
     });

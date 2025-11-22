@@ -6,10 +6,7 @@ import type { MovieDetail, MovieImages } from "../../types/movie";
 const TMDB_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const TMDB_BASE = "https://api.themoviedb.org/3";
 
-/**
- * TMDB 멀티 검색 (movie, tv, person 등)
- *  - media_type === "movie" 인 결과만 사용
- */
+// TMDB 멀티 검색 (movie, tv, person 등)
 export const fetchMovieFromTMDB = async (title: string, year?: string) => {
   try {
     const res = await axios.get(`${TMDB_BASE}/search/multi`, {
@@ -23,13 +20,11 @@ export const fetchMovieFromTMDB = async (title: string, year?: string) => {
 
     const results = res.data?.results || [];
 
-    // movie 타입만 선택 (tv, person 제외)
     const movieResult = results.find(
       (item: any) => item.media_type === "movie"
     );
 
     if (!movieResult) {
-      console.warn(`TMDB에서 영화(type=movie) 결과 없음: ${title}`);
       return null;
     }
 
@@ -40,7 +35,7 @@ export const fetchMovieFromTMDB = async (title: string, year?: string) => {
   }
 };
 
-/** TMDB 이미지 API (backdrops + posters) */
+// TMDB 이미지 API
 const fetchTMDBImages = async (tmdbId: number): Promise<MovieImages | null> => {
   try {
     const res = await axios.get(`${TMDB_BASE}/movie/${tmdbId}/images`, {
@@ -67,27 +62,24 @@ const fetchTMDBImages = async (tmdbId: number): Promise<MovieImages | null> => {
   }
 };
 
-/** TMDB 정보 병합 */
+//  TMDB 정보 병합
 export const enrichMovieData = async (movie: MovieDetail): Promise<MovieDetail> => {
-  // 1) TMDB 데이터 찾기 (영화만)
+  // TMDB 데이터 찾기
   const tmdb = await fetchMovieFromTMDB(movie.title, movie.releaseDate);
 
   if (!tmdb) {
-    console.warn(`TMDB 결과 없음 → ${movie.title}`);
     return movie;
   }
 
   const tmdbId: number = tmdb.id;
 
-  // 2) 이미지 목록 가져오기 (스틸컷/포스터 갤러리)
+  // 스틸컷/포스터 가져오기
   const images = await fetchTMDBImages(tmdbId);
 
-  // 3) TMDB + 이미지 통합
   return {
     ...movie,
-    tmdbId, // MovieDetail에 tmdbId 필드가 있다고 가정
+    tmdbId, 
 
-    // 포스터 / 백드롭
     posterUrl: tmdb.poster_path
       ? `https://image.tmdb.org/t/p/w500${tmdb.poster_path}`
       : movie.posterUrl,
@@ -101,10 +93,9 @@ export const enrichMovieData = async (movie: MovieDetail): Promise<MovieDetail> 
     popularity: tmdb.popularity ?? movie.popularity,
     overview: tmdb.overview ?? movie.overview,
 
-    // 이미지 갤러리 통합
+    // 이미지 통합
     images: images || movie.images,
 
-    // 메타
     updatedAt: new Date().toISOString(),
   };
 };
