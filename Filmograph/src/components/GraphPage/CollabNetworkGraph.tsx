@@ -1,9 +1,13 @@
 // src/components/GraphPage/CollabNetworkGraph.tsx
 import { useEffect, useMemo, useState, useRef } from "react";
 import ForceGraph2D from "react-force-graph-2d";
-import type { ForceGraphMethods, LinkObject, NodeObject } from "react-force-graph-2d";
+import type {
+  ForceGraphMethods,
+  LinkObject,
+  NodeObject,
+} from "react-force-graph-2d";
+import * as d3 from "d3-force";
 
-// 타입 정의
 type NodeT = NodeObject & {
   id: string | number;
   label: string;
@@ -25,7 +29,10 @@ type GraphT = {
   links: LinkT[];
 };
 
-// 색상
+type CollabNetworkGraphProps = {
+  resetViewFlag: boolean;
+};
+
 const COLORS = [
   "#5B8FF9",
   "#5AD8A6",
@@ -36,15 +43,70 @@ const COLORS = [
   "#EB2F96",
 ];
 
-// 크기
-const GRAPH_WIDTH = 1000;
+const GRAPH_WIDTH = 2000;
 const GRAPH_HEIGHT = 550;
 
-export default function CollabNetworkGraph() {
+// 선택된 노드와 연결된 링크 관계 계산
+const getLinkRelation = (
+  link: LinkT,
+  selectedNode: NodeT | null,
+  getNode: (endpoint: string | number | NodeT) => NodeT | undefined
+) => {
+  if (!selectedNode) {
+    return {
+      hasSelected: false,
+      sameCommunity: false,
+      isConnectedToSelected: false,
+    };
+  }
+
+  const src = getNode(link.source);
+  const tgt = getNode(link.target);
+
+  if (!src || !tgt) {
+    return {
+      hasSelected: true,
+      sameCommunity: false,
+      isConnectedToSelected: false,
+    };
+  }
+
+  const sameCommunity =
+    src.community == selectedNode.community &&
+    tgt.community == selectedNode.community;
+
+  const isConnectedToSelected =
+    src.id == selectedNode.id || tgt.id == selectedNode.id;
+
+  return {
+    hasSelected: true,
+    sameCommunity,
+    isConnectedToSelected,
+  };
+};
+
+// 라벨 그리기
+const drawLabel = (
+  ctx: CanvasRenderingContext2D,
+  text: string,
+  x: number,
+  y: number,
+  fontSize: number
+) => {
+  ctx.font = `${fontSize}px sans-serif`;
+  ctx.fillStyle = "white";
+  ctx.textAlign = "left";
+  ctx.textBaseline = "middle";
+  ctx.fillText(text, x, y);
+};
+
+// resetViewFlag props 받기
+export default function CollabNetworkGraph({
+  resetViewFlag,
+}: CollabNetworkGraphProps) {
   const [data, setData] = useState<GraphT | null>(null);
   const [selectedNode, setSelectedNode] = useState<NodeT | null>(null);
-  const fgRef = useRef<ForceGraphMethods | null>(null);
-
+  const fgRef = useRef<ForceGraphMethods<NodeT, LinkT> | null>(null);
 
   // JSON 로드
   useEffect(() => {
@@ -78,167 +140,214 @@ export default function CollabNetworkGraph() {
         });
 
         setData({ nodes, links });
+      })
+      .catch((err) => {
+        console.error("네트워크 데이터 로드 실패:", err);
+        setData({ nodes: [], links: [] });
       });
   }, []);
 
   const graphData = useMemo(() => data ?? { nodes: [], links: [] }, [data]);
 
-  // 클릭 시 선택한 노드로 포커싱
+  // Force 설정
+  useEffect(() => {
+    if (!fgRef.current || !graphData.nodes.length) return;
+
+    const fg = fgRef.current;
+
+    const linkForce = fg.d3Force("link") as any;
+    if (linkForce) {
+      linkForce.distance((link: LinkT) => {
+        const w = link.weight ?? 1;
+        return 15 + w * 3;
+      });
+    }
+
+    const chargeForce = fg.d3Force("charge") as any;
+    if (chargeForce) {
+      chargeForce.strength(-150);
+    }
+
+    fg.d3Force(
+      "x",
+      d3
+        .forceX<NodeT>(0)
+        .strength((node) => {
+          const deg = node.neighbors?.size ?? 0;
+          if (deg <= 1) return 0.2;
+          if (deg <= 3) return 0.08;
+          return 0.02;
+        })
+    );
+
+    fg.d3Force(
+      "y",
+      d3
+        .forceY<NodeT>(0)
+        .strength((node) => {
+          const deg = node.neighbors?.size ?? 0;
+          if (deg <= 1) return 0.2;
+          if (deg <= 3) return 0.08;
+          return 0.02;
+        })
+    );
+
+    fg.d3ReheatSimulation();
+  }, [graphData]);
+
+  // 클릭 시 선택 노드 포커싱
   useEffect(() => {
     if (!selectedNode || !fgRef.current) return;
 
     if (selectedNode.x != null && selectedNode.y != null) {
       fgRef.current.centerAt(selectedNode.x, selectedNode.y, 600);
-      fgRef.current.zoom(1.8, 600);
+      fgRef.current.zoom(1.5, 600);
     }
   }, [selectedNode]);
 
+  // GraphPage에서 resetViewFlag가 변하면 전체 그래프 다시 보기
+  useEffect(() => {
+    if (!fgRef.current) return;
+
+    // 선택된 노드 초기화
+    setSelectedNode(null);
+
+    fgRef.current.zoomToFit(600, 52);
+  }, [resetViewFlag]);
+
   if (!data) {
-    return <div className="p-4 text-sm text-white">그래프 불러오는 중...</div>;
+    return (
+      <div className="p-4 text-sm text-white">
+        그래프 불러오는 중...
+      </div>
+    );
   }
 
-  // 노드 객체 가져오기
+  const nodes = data.nodes;
+
   const getNodeFromEndpoint = (
     endpoint: string | number | NodeT
   ): NodeT | undefined => {
-    if (typeof endpoint == "object") {
-      return endpoint as NodeT;
-    }
-    return data.nodes.find((n) => n.id === endpoint);
+    if (typeof endpoint == "object") return endpoint as NodeT;
+    return nodes.find((n) => n.id === endpoint);
   };
 
   return (
     <div className="w-full h-full flex items-center justify-center">
-      <ForceGraph2D<NodeT, LinkT>
-        ref={fgRef} // 아무리해도 빨간 줄이 안 없어짐.. 오류는 아니래..
-        width={GRAPH_WIDTH}
-        height={GRAPH_HEIGHT}
-        graphData={graphData}
-        backgroundColor="transparent"
-        nodeId="id"
-        nodeLabel={(node) =>
-          `${node.label} (${node.role ?? "-"})`
-        }
+      <div
+        className="relative"
+        style={{ width: GRAPH_WIDTH, height: GRAPH_HEIGHT }}
+      >
+        <ForceGraph2D<NodeT, LinkT>
+          ref={fgRef}
+          width={GRAPH_WIDTH}
+          height={GRAPH_HEIGHT}
+          graphData={graphData}
+          backgroundColor="transparent"
+          nodeId="id"
+          nodeLabel={(node) => `${node.label} (${node.role ?? "-"})`}
+          warmupTicks={70}
+          cooldownTicks={300}
+          linkColor={(link: LinkT) => {
+            if (!selectedNode) return "rgba(255,255,255,0.25)";
 
-        // 기본 그래프 퍼짐 정도
-        linkDistance={(link: LinkObject<NodeT>) => {
-          const w = (link as LinkT).weight ?? 1;
-          return 120 + w * 12;
-        }}
-        warmupTicks={70}
-        cooldownTicks={300}
-        // 선택 노드 + 같은 커뮤니티만
-        linkColor={(link: LinkT) => {
-          if (!selectedNode) return "rgba(255,255,255,0.25)";
+            const { sameCommunity, isConnectedToSelected } = getLinkRelation(
+              link,
+              selectedNode,
+              getNodeFromEndpoint
+            );
 
-          const src = getNodeFromEndpoint(link.source);
-          const tgt = getNodeFromEndpoint(link.target);
-          if (!src || !tgt) return "rgba(255,255,255,0.1)";
-
-          const sameCommunity =
-            src.community == selectedNode.community &&
-            tgt.community == selectedNode.community;
-
-          const isConnectedToSelected =
-            src.id == selectedNode.id || tgt.id === selectedNode.id;
-
-          if (sameCommunity && isConnectedToSelected) {
-            // 선택한 노드, 같은 커뮤니티 이웃
-            return "rgba(255,255,255,0.9)";
-          }
-
-          // 나머지는 거의 안 보이게
-          return "rgba(255,255,255,0.05)";
-        }}
-
-        // 링크 두께: weight 값에 따라 두께를 다르게 표현
-        linkWidth={(link: LinkT) => {
-          const w = link.weight ?? 1;
-
-          if (!selectedNode) {
-            // 선택된 노드가 없으면 weight에 따라 두께 변화
-            return 0.3 + w * 0.6;
-          }
-
-          const src = getNodeFromEndpoint(link.source);
-          const tgt = getNodeFromEndpoint(link.target);
-          if (!src || !tgt) return 0.1;
-
-          const sameCommunity =
-            src.community == selectedNode.community &&
-            tgt.community == selectedNode.community;
-
-          const isConnectedToSelected =
-            src.id === selectedNode.id || tgt.id === selectedNode.id;
-
-          if (sameCommunity && isConnectedToSelected) {
-            // 하이라이트된 링크
-            return 0.6 + w * 0.5;
-          }
-
-          // 흐려진 링크
-          return 0.15;
-        }}
-
-        // 노드 그리기
-        nodeCanvasObject={(rawNode, ctx, globalScale) => {
-          const node = rawNode as NodeT & { x: number; y: number };
-
-          const color = COLORS[(node.community ?? 0) % COLORS.length];
-
-          const isMain = selectedNode != null && selectedNode.id === node.id;
-          const isNeighbor =
-            selectedNode != null &&
-            selectedNode.neighbors?.has(node.id) === true;
-
-          const sameCommunity =
-            !selectedNode ||
-            node.community == selectedNode.community;
-
-          // 선택 노드
-          if (isMain) {
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, 11, 0, 2 * Math.PI);
-            ctx.fillStyle = "rgba(255,255,255,0.25)";
-            ctx.fill();
-          }
-
-          // 흐림 처리
-          let opacity = 1;
-          if (selectedNode) {
-            if (!sameCommunity) {
-              // 다른 커뮤니티는 거의 안 보이게
-              opacity = 0.05;
-            } else if (isMain || isNeighbor) {
-              opacity = 1;
-            } else {
-              // 같은 커뮤니티지만 직접 연결은 아닌 노드
-              opacity = 0.4;
+            if (sameCommunity && isConnectedToSelected) {
+              return "rgba(255,255,255,0.9)";
             }
-          }
+            return "rgba(255,255,255,0.05)";
+          }}
+          linkWidth={(link: LinkT) => {
+            const w = link.weight ?? 1;
 
-          ctx.beginPath();
-          ctx.globalAlpha = opacity;
-          ctx.arc(node.x, node.y, isMain ? 8 : isNeighbor ? 6 : 4, 0, 2 * Math.PI);
-          ctx.fillStyle = color;
-          ctx.fill();
-          ctx.globalAlpha = 1;
+            if (!selectedNode) {
+              return 0.3 + w * 0.6;
+            }
 
-          // 라벨 표시
-          // 아무도 선택 안 했으면 캔버스에 글자 안 그리기
-          if (!selectedNode) return;
+            const { sameCommunity, isConnectedToSelected } = getLinkRelation(
+              link,
+              selectedNode,
+              getNodeFromEndpoint
+            );
 
-          // 선택한 노드도 아니고, 같은 커뮤니티의 이웃도 아니면 글자 안 그림
-          if (!isMain && !(isNeighbor && sameCommunity)) return;
+            if (sameCommunity && isConnectedToSelected) {
+              return 0.6 + w * 0.5;
+            }
+            return 0.15;
+          }}
+          nodeCanvasObject={(rawNode, ctx, globalScale) => {
+            const node = rawNode as NodeT & { x: number; y: number };
+            const color = COLORS[(node.community ?? 0) % COLORS.length];
 
-          const fontSize = (isMain ? 14 : 12) / globalScale;
-          ctx.font = `${fontSize}px sans-serif`;
-          ctx.fillStyle = "white";
-          ctx.fillText(node.label, node.x + 12, node.y + 3);
-        }}
-        onNodeClick={(node) => setSelectedNode(node as NodeT)}
-        enableNodeDrag
-      />
+            const isMain =
+              selectedNode != null && selectedNode.id == node.id;
+            const isNeighbor =
+              selectedNode != null &&
+              selectedNode.neighbors?.has(node.id) == true;
+            const sameCommunity =
+              !selectedNode ||
+              node.community === selectedNode.community;
+
+            // 선택 노드 배경 원
+            if (isMain) {
+              ctx.beginPath();
+              ctx.arc(node.x, node.y, 11, 0, 2 * Math.PI);
+              ctx.fillStyle = "rgba(255,255,255,0.25)";
+              ctx.fill();
+            }
+
+            // 흐림 정도
+            let opacity = 1;
+            if (selectedNode) {
+              if (!sameCommunity) {
+                opacity = 0.05;
+              } else if (isMain || isNeighbor) {
+                opacity = 1;
+              } else {
+                opacity = 0.4;
+              }
+            }
+
+            // 노드 그리기
+            ctx.beginPath();
+            ctx.globalAlpha = opacity;
+            ctx.arc(
+              node.x,
+              node.y,
+              isMain ? 8 : isNeighbor ? 6 : 4,
+              0,
+              2 * Math.PI
+            );
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.globalAlpha = 1;
+
+            // 이름 표시
+            if (selectedNode) {
+              // 선택된 노드, 선택된 노드와 연결되어 있고 같은 커뮤니티인 노드만 이름 표시
+              const showLabel = isMain || (isNeighbor && sameCommunity);
+
+              if (showLabel) {
+                const fontSize = 12 / (globalScale * 0.9);
+                drawLabel(ctx, node.label, node.x + 11, node.y, fontSize);
+              }
+            } else {
+              // 줌인하면 전체 노드 이름 표시
+              if (globalScale > 1.8) {
+                const fontSize = 12 / globalScale;
+                drawLabel(ctx, node.label, node.x + 4, node.y, fontSize);
+              }
+            }
+          }}
+          onNodeClick={(node) => setSelectedNode(node as NodeT)}
+          enableNodeDrag
+        />
+      </div>
     </div>
   );
 }
