@@ -21,10 +21,11 @@ type GraphT = {
     links: LinkT[];
 };
 
-const MOVIE_COLOR = "#FF5252";
-const ACTOR_COLOR = "#5B8FF9";
-const DIRECTOR_COLOR = "#F6BD16";
-const ACTOR_DIRECTOR_COLOR = "#E040FB";
+
+const ACTOR_COLOR = "#4FC3F7";
+const DIRECTOR_COLOR = "#FFD700";
+const MOVIE_COLOR = "#FF6B6B";
+const ACTOR_DIRECTOR_COLOR = "#A7CD7B";
 
 const GRAPH_WIDTH = 1000;
 const GRAPH_HEIGHT = 600;
