@@ -1,13 +1,20 @@
 import "./styles/WatchProvidersSection.css";
 import { Tv } from "lucide-react";
+import { ImageWithFallback } from "./ImageWithFallback";
+
+const PROVIDER_LINKS: Record<string, string> = {
+  "Watcha": "https://watcha.com",
+  "wavve": "https://www.wavve.com",
+  "Google Play Movies": "https://play.google.com/store/movies",
+  "Netflix": "https://www.netflix.com",
+  "Disney Plus": "https://www.disneyplus.com",
+  "Apple TV": "https://tv.apple.com",
+};
 
 export default function WatchProvidersSection({ movie }: { movie: any }) {
   const providers = movie?.watchProviders;
 
-  // ⚠ 데이터 없으면 전체 섹션 숨김 (오류 방지)
-  if (!providers || !Array.isArray(providers) || providers.length === 0) {
-    return null;
-  }
+  if (!providers || providers.length === 0) return null;
 
   return (
     <section className="providers-wrapper">
@@ -18,22 +25,37 @@ export default function WatchProvidersSection({ movie }: { movie: any }) {
         </div>
 
         <div className="providers-grid">
-          {providers.map((p: any, idx: number) => (
-            <div key={idx} className="provider-card">
-              <div className="provider-logo-bg">
-                <Tv className="provider-logo-icon" />
-              </div>
+          {providers.map((p: any, idx: number) => {
+            const link = PROVIDER_LINKS[p.providerName] || "#";
 
-              <p className="provider-name">{p.providerName}</p>
-              <p className="provider-type">
-                {p.type === "flatrate"
-                  ? "구독"
-                  : p.type === "rent"
-                  ? "대여"
-                  : "구매"}
-              </p>
-            </div>
-          ))}
+            return (
+              <a
+                key={idx}
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="provider-card"
+              >
+                <div className="provider-logo-wrapper">
+                  <ImageWithFallback
+                    src={p.logoUrl}
+                    alt={p.providerName}
+                    className="provider-logo-img"
+                  />
+                </div>
+
+                <p className="provider-name">{p.providerName}</p>
+
+                <p className="provider-type">
+                  {p.type === "flatrate"
+                    ? "구독"
+                    : p.type === "rent"
+                    ? "대여"
+                    : "구매"}
+                </p>
+              </a>
+            );
+          })}
         </div>
       </div>
     </section>
