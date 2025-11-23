@@ -61,7 +61,7 @@ export default function MyPage() {
       }));
       setLikes(wishlist);
 
-      //장르 차트 데이터 (임시 데이터)
+      //(임시) 장르 차트 데이터
       // 실제로는 wishlist나 reviews의 영화 장르를 분석해서 카운트해야 합니다.
       const dummyGenres = [
         { name: "스릴러", value: 35, color: "#4FC3F7" },
