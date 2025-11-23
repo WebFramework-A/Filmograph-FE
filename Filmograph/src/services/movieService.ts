@@ -2,14 +2,12 @@
 import { db } from "./firebaseConfig";
 import { doc, setDoc } from "firebase/firestore";
 import type { MovieDetail } from "../types/movie";
-import { enrichMovieData } from "./movies/posterApi";
-import { fetchMovieVideos } from "./movies/videoApi";
-import { fetchWatchProviders } from "./movies/watchProviderApi";
+import { enrichMovieData } from "./movies/tmdbApi";
 import { cleanObject } from "../utils/cleanObject";
 
 export const saveMovie = async (movie: MovieDetail): Promise<string> => {
   try {
-    // KOBIS 필수 데이터
+    // KOBIS 필수 데이터 확인
     if (
       !movie.title ||
       !movie.releaseDate ||
@@ -27,10 +25,10 @@ export const saveMovie = async (movie: MovieDetail): Promise<string> => {
       return "SKIPPED_19";
     }
 
-    // TMDB 병합
+    // TMDB 데이터 병합
     const enriched = await enrichMovieData(movie);
 
-    // TMDB 필수 데이터
+    // TMDB 필수 데이터 확인
     if (
       !enriched.posterUrl ||
       enriched.rating == null ||
@@ -40,37 +38,23 @@ export const saveMovie = async (movie: MovieDetail): Promise<string> => {
       return "SKIPPED_TMDB";
     }
 
-    // 영상 데이터
-    let videos = null;
-    if (enriched.tmdbId) {
-      videos = await fetchMovieVideos(enriched.tmdbId);
-    }
-
-    // OTT 제공처
-    let watchProviders = null;
-    if (enriched.tmdbId) {
-      watchProviders = await fetchWatchProviders(enriched.tmdbId);
-    }
-
-    const fullyEnriched: MovieDetail = {
+    const finalMovie: MovieDetail = {
       ...enriched,
-      videos: videos ?? undefined,
-      watchProviders: watchProviders ?? undefined,
       updatedAt: new Date().toISOString(),
     };
 
-    // undefined 모두 제거
-    const finalData = cleanObject(fullyEnriched);
+    // undefined 제거
+    const finalData = cleanObject(finalMovie);
 
     // Firestore 저장
-    await setDoc(doc(db, "movies", fullyEnriched.id), finalData, {
+    await setDoc(doc(db, "movies", finalMovie.id), finalData, {
       merge: true,
     });
 
     return "SAVED";
 
   } catch (err) {
-    console.error(" Firestore 저장 실패:", err);
+    console.error("Firestore 저장 실패:", err);
     return "ERROR";
   }
 };

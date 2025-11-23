@@ -1,6 +1,5 @@
+// src/services/movies/movie.ts
 // KOBIS 오픈API에서 영화 목록 및 상세정보를 불러오는 모듈
-//  - fetchMovieList() : 목록 조회
-//  - fetchMovieDetail() : 상세 조회
 import axios from "axios";
 import type { MovieDetail } from "../../types/movie";
 
