@@ -2,7 +2,6 @@
   transform: scale(0.9);
   transform-origin: top center;
   width: 100%;
-  padding-bottom: 3rem;
 }
 
 .graph-container {
@@ -11,7 +10,6 @@
   background: rgba(0, 77, 79, 0.55);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 16px;
-  padding: 2rem;
 }
 
 .graph-header {

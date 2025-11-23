@@ -1,5 +1,7 @@
 .providers-wrapper {
-  padding: 2rem 1.5rem 3rem;
+  transform: scale(0.9);
+  transform-origin: top center; 
+  width: 100%;  
 }
 
 .providers-container {
