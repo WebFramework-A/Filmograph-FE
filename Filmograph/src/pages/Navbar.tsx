@@ -7,8 +7,7 @@ const Navbar = () => {
   const { user, loading } = useAuth();
 
   const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
-    `transition-colors duration-200 ${
-      isActive ? "text-yellow-300 " : "text-white hover:text-yellow-300"
+    `transition-colors duration-200 ${isActive ? "text-yellow-300 " : "text-white hover:text-yellow-300"
     }`;
 
   return (
@@ -25,9 +24,6 @@ const Navbar = () => {
         </NavLink>
         <NavLink to="/graph" className={navLinkClasses}>
           Graph
-        </NavLink>
-        <NavLink to="/detail" className={navLinkClasses}>
-          상세 페이지 (임시)
         </NavLink>
         <NavLink to="/archetype" className={navLinkClasses}>
           Archetype
