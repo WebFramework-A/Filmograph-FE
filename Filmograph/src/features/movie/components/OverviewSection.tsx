@@ -5,9 +5,6 @@ import { motion } from "framer-motion";
 export default function OverviewSection({ movie }: { movie: any }) {
   if (!movie) return null;
 
-  /** -----------------------------
-   *  A. 섹션 출력 여부 결정
-   * -----------------------------*/
   const hasOverview = !!(movie.overview || movie.synopsis);
   const hasAchievements = !!movie.achievements;
 
@@ -18,7 +15,6 @@ export default function OverviewSection({ movie }: { movie: any }) {
 
   const shouldRender = hasOverview || hasAchievements || hasStats;
 
-  // 섹션 전체 숨기기
   if (!shouldRender) return null;
 
   return (
@@ -28,7 +24,6 @@ export default function OverviewSection({ movie }: { movie: any }) {
         whileHover={{ scale: 1.01 }}
         transition={{ duration: 0.25, ease: "easeOut" }}
       >
-        {/* 줄거리 */}
         {hasOverview && (
           <>
             <h2 className="overview-title">줄거리</h2>
@@ -38,7 +33,6 @@ export default function OverviewSection({ movie }: { movie: any }) {
           </>
         )}
 
-        {/* 주요 성과 */}
         {hasAchievements && (
           <div className="overview-achievements">
             <TrendingUp className="achievements-icon" />
@@ -49,10 +43,8 @@ export default function OverviewSection({ movie }: { movie: any }) {
           </div>
         )}
 
-        {/* 통계 */}
         {hasStats && (
           <div className="overview-stats">
-            {/* 투표 수 */}
             {typeof movie.voteCount === "number" && (
               <div className="stat-card">
                 <div className="stat-header">
@@ -65,7 +57,6 @@ export default function OverviewSection({ movie }: { movie: any }) {
               </div>
             )}
 
-            {/* 인기도 */}
             {typeof movie.popularity === "number" && (
               <div className="stat-card">
                 <div className="stat-header">
@@ -76,7 +67,6 @@ export default function OverviewSection({ movie }: { movie: any }) {
               </div>
             )}
 
-            {/* 수익 */}
             {typeof movie.revenue === "number" && (
               <div className="stat-card">
                 <div className="stat-header">

@@ -1,0 +1,50 @@
+.graph-wrapper {
+  transform: scale(0.9);
+  transform-origin: top center;
+  width: 100%;
+  padding-bottom: 3rem;
+}
+
+.graph-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  background: rgba(0, 77, 79, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+.graph-header {
+  margin-bottom: 1.5rem;
+}
+
+.graph-chip {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  background: rgba(255, 230, 109, 0.12);
+  border: 1px solid rgba(255, 230, 109, 0.4);
+  color: #FFE66D;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.graph-title {
+  font-size: 2rem;
+  color: #FFFF00;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.graph-desc {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 660px;
+  line-height: 1.5;
+}
+
+.graph-canvas-box {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}

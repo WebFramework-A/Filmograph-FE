@@ -17,7 +17,6 @@ export function FavoriteButton({ movieId, size = "md" }: FavoriteButtonProps) {
   const [user] = useAuthState(auth);
   const { toast, showToast } = useToast();
 
-  // Firestore 경로
   function getDocRef() {
     if (!user) return null;
     return doc(db, "userWishlist", user.uid, "items", movieId);
@@ -68,7 +67,6 @@ export function FavoriteButton({ movieId, size = "md" }: FavoriteButtonProps) {
     }
   };
 
-  // 버튼 크기 스타일
   const sizeClasses = {
     sm: "w-8 h-8",
     md: "w-10 h-10",
@@ -100,7 +98,7 @@ export function FavoriteButton({ movieId, size = "md" }: FavoriteButtonProps) {
         />
       </motion.button>
 
-      {/* Toast UI */}
+      {/* Toast */}
       <Toast
         message={toast.message}
         show={toast.show}

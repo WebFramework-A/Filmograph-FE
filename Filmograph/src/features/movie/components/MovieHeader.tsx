@@ -13,7 +13,6 @@ export default function MovieHeader({ movie }: { movie: MovieDetail }) {
   return (
     <section className="movieHeroSection">
       <div className="scaleWrapper">
-        {/* BACKDROP */}
         <div
           className="heroBackground"
           style={{ backgroundImage: `url(${movie.backdropUrl})` }}
@@ -21,7 +20,6 @@ export default function MovieHeader({ movie }: { movie: MovieDetail }) {
         <div className="heroOverlay" />
 
         <div className="heroContainer">
-          {/* 포스터 */}
           <motion.div
             className="posterWrapper"
             whileHover={{ scale: 1.03 }}
@@ -51,14 +49,12 @@ export default function MovieHeader({ movie }: { movie: MovieDetail }) {
           >
             <div className="topGenreRow">
               <div className="genreTagBox">
-                {/* 장르 */}
                 {movie.genre?.map((g) => (
                   <span key={g} className="genrePill">
                     <Film className="genreFilmIconInside" />
                     {g}
                   </span>
                 ))}
-                {/* 제작국가 */}
                 {movie.nation && (
                   <span className="nationPill">
                     🌍 {movie.nation}
@@ -68,7 +64,6 @@ export default function MovieHeader({ movie }: { movie: MovieDetail }) {
               <FavoriteButton movieId={movie.id} size="lg" />
             </div>
 
-            {/* 제목 */}
             <h1 className="heroTitle">{movie.title}</h1>
             {movie.titleEn && <p className="heroSubtitle">{movie.titleEn}</p>}
 
@@ -106,7 +101,6 @@ export default function MovieHeader({ movie }: { movie: MovieDetail }) {
               </div>
             </div>
 
-            {/* 감독 */}
             {movie.directors && movie.directors.length > 0 && (
               <div>
                 <p className="sectionLabel">주요 감독</p>
@@ -120,7 +114,6 @@ export default function MovieHeader({ movie }: { movie: MovieDetail }) {
               </div>
             )}
 
-            {/* 출연 */}
             {movie.cast && movie.cast.length > 0 && (
               <div>
                 <p className="sectionLabel">주요 출연</p>
