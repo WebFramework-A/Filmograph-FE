@@ -1,4 +1,3 @@
-/* 전체 Hero */
 .movieHeroSection {
   position: relative;
   width: 100%;
@@ -16,7 +15,6 @@
   width: 100%;                  
 }
 
-/* 배경 */
 .heroBackground {
   position: absolute;
   inset: 0;
@@ -33,7 +31,6 @@
   z-index: -2;
 }
 
-/* 레이아웃 */
 .heroContainer {
   width: 100%;
   max-width: 1250px;
@@ -54,7 +51,7 @@
   aspect-ratio: 2 / 3;
 }
 
-/* 정보 영역 */
+/* 정보 */
 .heroInfo {
   display: flex;
   flex-direction: column;

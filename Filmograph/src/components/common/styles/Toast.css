@@ -1,0 +1,44 @@
+.toastWrapper {
+  position: fixed;
+  bottom: 12px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center; 
+  z-index: 9999;
+  pointer-events: none;    
+}
+.toastContainer {
+  background: rgba(0,0,0,0.8);
+  color: white;
+  padding: 14px 20px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  pointer-events: all;      
+}
+
+.toastMessage {
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
+}
+
+.toastButton {
+  background: #FFFF00;
+  color: #00696B;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  border: none;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.toastButton:hover {
+  background: #f5e600;
+}
