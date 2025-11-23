@@ -1,0 +1,107 @@
+.overview-wrapper {
+  padding: 2rem 1.5rem 3rem;
+}
+
+.overview-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  background: rgba(0, 77, 79, 0.55);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 2rem;
+}
+.overview-container:hover {
+  border-color: rgba(255, 255, 0, 0.3);
+}
+
+/* 제목 */
+.overview-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffff00;
+  margin-bottom: 1.2rem;
+}
+
+/* 본문 텍스트 */
+.overview-text {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.1rem;
+  line-height: 1.75;
+  margin-bottom: 1.4rem;
+}
+
+/* 주요 성과 영역 */
+.overview-achievements {
+  display: flex;
+  gap: 1rem;
+  padding-top: 1.4rem;
+  margin-top: 1.4rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.achievements-icon {
+  width: 22px;
+  height: 22px;
+  color: #ffff00;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.achievements-label {
+  color: #ffff00;
+  font-size: 1.1rem;
+  margin-bottom: 0.2rem;
+}
+
+.achievements-text {
+  color: rgba(255, 255, 255, 0.83);
+}
+
+/* 숫자 통계 */
+.overview-stats {
+  margin-top: 1.6rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.06);
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.stat-header {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.35rem;
+}
+
+.stat-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.stat-icon.yellow {
+  color: #ffff00;
+}
+
+.stat-icon.green {
+  color: #4ecdc4;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.stat-value {
+  color: #ffffff;
+  font-size: 1.25rem;
+  margin-top: 2px;
+}

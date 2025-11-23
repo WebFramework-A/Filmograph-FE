@@ -2,15 +2,16 @@
   position: relative;
   width: 100%;
   min-height: 85vh;
-  padding: 80px 0;
+  padding: 20px 0;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   color: white;
 }
+
 .scaleWrapper {
-  transform: scale(0.9);
+  transform: scale(1);
   transform-origin: top center; 
   width: 100%;                  
 }
@@ -35,13 +36,30 @@
   width: 100%;
   max-width: 1250px;
   padding: 0 2rem;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: 340px 1fr;
   gap: 3rem;
   align-items: stretch;
 }
 
-/* 포스터 */
+/* --- POSTER --- */
+.posterWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.posterGlow {
+  position: absolute;
+  inset: -12px;
+  background: rgba(255, 255, 0, 0.25);
+  filter: blur(35px);
+  border-radius: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
 .heroPoster {
   width: 100%;
   border-radius: 14px;
@@ -51,7 +69,12 @@
   aspect-ratio: 2 / 3;
 }
 
-/* 정보 */
+.posterWrapper:hover .heroPoster {
+  border-color: rgba(255, 255, 0, 0.5);
+  transition: border-color 0.25s ease;
+}
+
+/* --- INFO --- */
 .heroInfo {
   display: flex;
   flex-direction: column;
@@ -84,13 +107,26 @@
   backdrop-filter: blur(4px);
 }
 
+.nationPill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.425);
+  padding: 5px 12px;
+  border-radius: 999px;
+  color: #ffffff;
+  font-size: 0.8rem;
+  border: 1px solid rgba(121, 121, 121, 0.425)
+}
+
+
 .genreFilmIconInside {
   width: 14px;
   height: 14px;
   color: #ffff00;
 }
 
-/* 제목 */
+/* TITLE */
 .heroTitle {
   font-size: 3rem;
   font-weight: 700;
@@ -102,6 +138,7 @@
   opacity: 0.85;
 }
 
+/* STATS ROW */
 .statsRow {
   display: flex;
   align-items: center;
@@ -143,13 +180,13 @@
   font-weight: 600;
 }
 
-/* 아이콘 */
+/* ICON COLORS */
 .statIconYellow { color: #ffff00; width: 22px; height: 22px; }
 .statIconBlue   { color: #00d4d8; width: 22px; height: 22px; }
 .statIconGreen  { color: #00ffae; width: 22px; height: 22px; }
 .statIconPurple { color: #d7a1ff; width: 22px; height: 22px; }
 
-/* 감독 / 출연 */
+/* PEOPLE LIST */
 .sectionLabel {
   color: #ffff00;
   font-size: 1rem;
@@ -173,6 +210,7 @@
   background: rgba(255,255,255,0.25);
 }
 
+/* RESPONSIVE */
 @media (max-width: 900px) {
   .heroContainer {
     grid-template-columns: 1fr;
