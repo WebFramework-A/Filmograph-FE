@@ -1,5 +1,7 @@
 .overview-wrapper {
-  padding: 2rem 1.5rem 3rem;
+  transform: scale(0.9);
+  transform-origin: top center; 
+  width: 100%;    
 }
 
 .overview-container {
@@ -31,7 +33,7 @@
   margin-bottom: 1.4rem;
 }
 
-/* 주요 성과 영역 */
+/* 주요 성과 */
 .overview-achievements {
   display: flex;
   gap: 1rem;
