@@ -62,7 +62,7 @@ export default function MyPage() {
       setLikes(wishlist);
 
       //(임시) 장르 차트 데이터
-      // 실제로는 wishlist나 reviews의 영화 장르를 분석해서 카운트해야 합니다.
+      // 실제로는 wishlist나 reviews의 영화 장르를 분석해서 카운트해야
       const dummyGenres = [
         { name: "스릴러", value: 35, color: "#4FC3F7" },
         { name: "드라마", value: 20, color: "#81C784" },
@@ -130,7 +130,7 @@ export default function MyPage() {
           </div>
         </div>
 
-        {/* 2. 통계 & 찜 목록 */}
+        {/* 통계 & 찜 목록 */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           {/* 활동 통계 */}
           <div className="bg-black/20 p-6 rounded-lg border border-white/5">
