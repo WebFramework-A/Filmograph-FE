@@ -40,19 +40,29 @@ const Navbar = () => {
         ) : user ? (
           // 로그인 상태일 때
           <>
-            <NavLink to="/my" title="마이페이지">
-              <img
-                src={user.photoURL || "/default-avatar.png"} // 구글 프로필 사진 또는 기본 아바타
-                alt="마이페이지"
-                className="w-8 h-8 rounded-full hover:ring-2 hover:ring-[#34C3F1] transition-all"
-              />
-            </NavLink>
-            <button
-              onClick={logout}
-              className="px-3 py-1.5 text-sm bg-gray-700 rounded hover:bg-gray-600 transition-colors"
-            >
-              로그아웃
-            </button>
+            <div className="flex items-center gap-4">
+              {/*프로필 사진 클릭 -> 마이페이지 이동*/}
+              <NavLink
+                to="/my"
+                title="마이페이지"
+                className={({ isActive }) =>
+                  `block rounded-full p-0.5 transition-all ${isActive ? "ring-2 ring-[#34C3F1]" : "hover:ring-2 hover:ring-white/50"}`
+                }
+              >
+                <img
+                  src={user.photoURL || "/default-avatar.png"} // 구글 프로필 사진 또는 기본 아바타
+                  alt="마이페이지"
+                  className="w-8 h-8 rounded-full hover:ring-2 hover:ring-[#34C3F1] transition-all"
+                />
+              </NavLink>
+
+              <button
+                onClick={logout}
+                className="px-3 py-1.5 text-sm bg-gray-700 rounded hover:bg-gray-600 transition-colors"
+              >
+                로그아웃
+              </button>
+            </div>
           </>
         ) : (
           // 로그아웃 상태일 때
