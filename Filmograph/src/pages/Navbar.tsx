@@ -3,41 +3,42 @@ import { useAuth } from "../features/auth/hooks/useAuth";
 import { logout } from "../features/auth/services/authApi";
 
 const Navbar = () => {
-  // 3. 현재 로그인 상태와 사용자 정보를 가져옵니다.
+  // 만들어둔 사용자 인증관련 커스텀훅으로 회원 정보 가져오기
   const { user, loading } = useAuth();
 
   const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
-    `transition-colors duration-200 ${isActive ? "text-[#34C3F1] font-bold" : "text-white hover:text-gray-300"
+    `transition-colors duration-200 ${
+      isActive ? "text-yellow-300 " : "text-white hover:text-yellow-300"
     }`;
 
   return (
-    <nav className="flex items-center gap-6 px-8 py-4 bg-black/50 text-white sticky top-0 z-50 backdrop-blur-sm">
-      {/* 1. 로고 (mr-auto로 왼쪽 정렬) */}
+    <nav className="fixed top-0 left-0 z-50 w-full flex items-center justify-between px-8 py-4 bg-black/10 backdrop-blur-lg  text-white tracking-wider transition-all duration-300">
+      {/* 로고 */}
       <NavLink to="/" className="text-xl font-bold mr-auto">
         Filmograph
       </NavLink>
 
-      {/* 2. 네비게이션 링크들 */}
+      {/* 네비게이션 링크들 */}
       <div className="flex items-center gap-6">
         <NavLink to="/" className={navLinkClasses} end>
-          홈
+          Home
         </NavLink>
         <NavLink to="/graph" className={navLinkClasses}>
-          그래프 탐색
+          Graph
         </NavLink>
         <NavLink to="/detail" className={navLinkClasses}>
           상세 페이지 (임시)
         </NavLink>
         <NavLink to="/archetype" className={navLinkClasses}>
-          아키타입
+          Archetype
         </NavLink>
 
-        {/* 3. 인증 영역 (로딩, 로그인, 로그아웃 상태에 따라 UI 변경) */}
+        {/* 인증 영역 (로딩, 로그인, 로그아웃 상태에 따라 UI 변경) */}
         {loading ? (
           // 로딩 중일 때: 스켈레톤 UI
           <div className="w-8 h-8 rounded-full bg-gray-700 animate-pulse" />
         ) : user ? (
-          // 4. 로그인 상태일 때
+          // 로그인 상태일 때
           <>
             <NavLink to="/my" title="마이페이지">
               <img
@@ -54,7 +55,7 @@ const Navbar = () => {
             </button>
           </>
         ) : (
-          // 5. 로그아웃 상태일 때 (요청하신 기본 사용자 아이콘)
+          // 로그아웃 상태일 때
           <Link to="/login" title="로그인 / 회원가입">
             <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-gray-600 transition-colors">
               {/* 기본 사용자 아이콘 (SVG) */}
