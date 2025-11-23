@@ -1,1 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+KR:wght@100..900&display=swap');
+
 @import "tailwindcss";
+
+/* 전체 기본 폰트 설정 */
+@theme {
+  /* 
+    - 영어: DM Serif Display
+    - 한글: Noto Sans KR
+  */
+  --font-sans: "DM Serif Display", "Noto Sans KR", sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-weight: 100;
+  
+}
