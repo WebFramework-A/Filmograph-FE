@@ -1,0 +1,23 @@
+[
+  {
+    "id": "c1",
+    "name": "김기우",
+    "movieTitle": "기생충",
+    "description": "가난한 집 아들이지만 머리가 좋고 상황에 맞게 거짓말과 계획을 잘 짜는 인물.",
+    "profileUrl": ""
+  },
+  {
+    "id": "c2",
+    "name": "김기정",
+    "movieTitle": "기생충",
+    "description": "눈치가 빠르고 영리하며, 그림 실력을 이용해 새로운 신분을 만들어내는 인물.",
+    "profileUrl": ""
+  },
+  {
+    "id": "c3",
+    "name": "조커",
+    "movieTitle": "조커",
+    "description": "사회에서 소외되고 무시당하다가 점점 폭력과 혼란을 상징하게 되는 인물.",
+    "profileUrl": ""
+  }
+]
