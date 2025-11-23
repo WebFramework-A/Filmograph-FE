@@ -1,0 +1,81 @@
+.providers-wrapper {
+  padding: 2rem 1.5rem 3rem;
+}
+
+.providers-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  background: rgba(0, 77, 79, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+.providers-header {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1.6rem;
+}
+
+.providers-icon {
+  width: 26px;
+  height: 26px;
+  color: #ffff00;
+}
+
+.providers-title {
+  font-size: 2rem;
+  color: #ffff00;
+  font-weight: bold;
+}
+
+.providers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
+.provider-card {
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  padding: 1.2rem 1rem;
+  text-align: center;
+  border: 1px solid transparent;
+  transition: 0.25s ease;
+}
+
+.provider-card:hover {
+  transform: scale(1.03);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 0, 0.4);
+}
+
+.provider-logo-bg {
+  width: 54px;
+  height: 54px;
+  background: rgba(255, 255, 0, 0.15);
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.6rem;
+}
+
+.provider-logo-icon {
+  width: 28px;
+  height: 28px;
+  color: #ffff00;
+}
+
+.provider-name {
+  color: white;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.provider-type {
+  margin-top: 4px;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.85rem;
+}

@@ -6,6 +6,8 @@ import ScrollSection from "../features/movie/components/ScrollSection";
 import OverviewSection from "../features/movie/components/OverviewSection";
 import CrewSection from "../features/movie/components/CrewSection";
 import CastSection from "../features/movie/components/CastSection";
+import AwardsSection from "../features/movie/components/AwardsSection";
+import WatchProvidersSection from "../features/movie/components/WatchProvidersSection";
 
 export default function DetailPage() {
   const { movieId } = useParams();
@@ -21,12 +23,22 @@ export default function DetailPage() {
       <ScrollSection>
         <OverviewSection movie={movie} />
       </ScrollSection>
+      
       <ScrollSection>
         <CrewSection movie={movie} />
       </ScrollSection>
       <ScrollSection>
         <CastSection movie={movie} />
       </ScrollSection>
+
+      <ScrollSection>
+        <AwardsSection movie={movie} />
+      </ScrollSection>
+
+      <ScrollSection>
+        <WatchProvidersSection movie={movie} />
+      </ScrollSection>
+
       <pre>{JSON.stringify(movie, null, 2)}</pre>
     </div>
     
