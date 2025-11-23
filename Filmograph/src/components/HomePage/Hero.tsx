@@ -5,7 +5,7 @@ const Hero = () => {
   const navigate = useNavigate();
   return (
     <>
-      <div className="w-full min-h-screen snap-start bg-[#0d5a5a] flex items-center justify-center px-8 relative overflow-hidden">
+      <div className="w-full min-h-screen snap-start bg-[#0b4747] flex items-center justify-center px-8 relative overflow-hidden">
         <div className="w-full h-screen max-w-7xl relative flex items-center">
           {/* 왼쪽: 대표 문구 및 버튼 */}
           <div className="flex flex-col justify-center space-y-8 relative z-20 w-1/2">
