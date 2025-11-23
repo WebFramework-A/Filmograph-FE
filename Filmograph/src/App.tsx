@@ -12,6 +12,7 @@ import MyPage from "./pages/MyPage";
 import GraphPage from "./pages/GraphPage";
 import LoginPage from "./pages/LoginPage";
 import DetailPage from "./pages/DetailPage";
+import LoadPage from "./pages/LoadPage";
 
 const router = createBrowserRouter([
   {
@@ -40,7 +41,11 @@ const router = createBrowserRouter([
         element: <LoginPage />,
       },
       {
-        path: "/detail",
+        path: "/load",
+        element: <LoadPage />,
+      },
+      {
+        path: "/detail/:movieId",
         element: <DetailPage />,
       },
     ],

@@ -1,0 +1,80 @@
+.crew-wrapper {
+  transform: scale(0.9);
+  transform-origin: top center; 
+  width: 100%;      
+}
+
+.crew-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  background: rgba(0, 77, 79, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+.crew-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffff00;
+  margin-bottom: 2rem;
+}
+
+.crew-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+}
+
+.crew-block {}
+
+.crew-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #fff;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.crew-header-icon {
+  width: 22px;
+  height: 22px;
+  color: #00d4d8;
+}
+
+.crew-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.crew-card {
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.9rem 1rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: 0.25s ease;
+}
+
+.crew-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(0, 212, 216, 0.5);
+}
+
+.crew-name {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.crew-role {
+  margin-top: 3px;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.9rem;
+}
+
+.crew-empty {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.95rem;
+}

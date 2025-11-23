@@ -1,0 +1,232 @@
+.movieHeroSection {
+  position: relative;
+  width: 100%;
+  min-height: 85vh;
+  padding: 40px 0px 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: white;
+}
+
+.scaleWrapper {
+  transform: scale(1);
+  transform-origin: top center; 
+  width: 100%;                  
+}
+
+.heroBackground {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.5) blur(2px);
+  transform: scale(1.1);
+  z-index: -3;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+
+.heroContainer {
+  width: 100%;
+  max-width: 1250px;
+  padding: 0 2rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 3rem;
+  align-items: stretch;
+}
+
+/* POSTER */
+.posterWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.posterGlow {
+  position: absolute;
+  inset: -12px;
+  background: rgba(255, 255, 0, 0.25);
+  filter: blur(35px);
+  border-radius: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.heroPoster {
+  width: 100%;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.55);
+  border: 3px solid rgba(255,255,255,0.1);
+  object-fit: cover;
+  aspect-ratio: 2 / 3;
+}
+
+.posterWrapper:hover .heroPoster {
+  border-color: rgba(255, 255, 0, 0.5);
+  transition: border-color 0.25s ease;
+}
+
+/* INFO */
+.heroInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  justify-content: flex-start;
+}
+
+.topGenreRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.genreTagBox {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.genrePill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 0, 0.2);
+  padding: 5px 12px;
+  border-radius: 999px;
+  color: #ffffaa;
+  font-size: 0.8rem;
+  border: 1px solid rgba(255,255,0,0.3);
+  backdrop-filter: blur(4px);
+}
+
+.nationPill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.425);
+  padding: 5px 12px;
+  border-radius: 999px;
+  color: #ffffff;
+  font-size: 0.8rem;
+  border: 1px solid rgba(121, 121, 121, 0.425)
+}
+
+
+.genreFilmIconInside {
+  width: 14px;
+  height: 14px;
+  color: #ffff00;
+}
+
+/* TITLE */
+.heroTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #ffff00;
+}
+
+.heroSubtitle {
+  font-size: 1.2rem;
+  opacity: 0.85;
+}
+
+/* STATS ROW */
+.statsRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  margin: 1rem 0;
+  padding: 0.6rem 0;
+}
+
+.statItem {
+  display: flex;
+  align-items: top;
+  gap: 12px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 20px 16px;
+  border-radius: 12px;
+  flex: 1;
+  min-width: 120px;
+  backdrop-filter: blur(4px);
+  line-height: 1.6;
+}
+
+.statItem:hover {
+  background: rgba(255,255,0,0.15);
+  transform: translateY(-3px);
+  transition: 0.2s ease;
+}
+
+.statItem span {
+  font-size: 0.75rem;
+  color: #e1e1e1;
+  display: block;
+}
+
+.statItem strong {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* ICON COLORS */
+.statIconYellow { color: #ffff00; width: 22px; height: 22px; }
+.statIconBlue   { color: #00d4d8; width: 22px; height: 22px; }
+.statIconGreen  { color: #00ffae; width: 22px; height: 22px; }
+.statIconPurple { color: #d7a1ff; width: 22px; height: 22px; }
+
+/* PEOPLE LIST */
+.sectionLabel {
+  color: #ffff00;
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+.peopleRow {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.peopleCard {
+  background: rgba(255,255,255,0.15);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.peopleCard:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .heroContainer {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .heroPoster {
+    margin: 0 auto;
+    width: 220px;
+  }
+
+  .statsRow {
+    flex-direction: column;
+  }
+
+  .heroInfo {
+    align-items: center;
+  }
+}

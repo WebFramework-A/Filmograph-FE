@@ -1,0 +1,150 @@
+.gallery-wrapper {
+  transform: scale(0.9);
+  transform-origin: top center;
+  width: 100%;
+  padding-bottom: 3rem;
+}
+
+.gallery-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  background: rgba(0, 77, 79, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+.gallery-header {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1.6rem;
+}
+
+.gallery-icon {
+  width: 26px;
+  height: 26px;
+  color: #ffff00;
+}
+
+.gallery-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffff00;
+}
+
+.gallery-subtitle {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.2rem;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.gallery-card {
+  position: relative;
+  aspect-ratio: 16/9;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-posters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: flex-start;
+}
+
+.poster-card {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  max-height: 230px;  
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.poster-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-hover {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.65), transparent);
+  opacity: 0;
+  transition: 0.3s ease;
+}
+
+.gallery-card:hover .gallery-hover,
+.poster-card:hover .gallery-hover {
+  opacity: 1;
+}
+
+.preview-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.preview-content {
+  position: relative;
+  max-width: 80%;    
+  max-height: 80%;
+}
+
+.preview-img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+}
+
+
+.preview-close {
+  position: absolute;
+  top: -45px;
+  right: 0;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 4px;
+  transition: 0.2s ease;
+}
+
+.preview-close:hover {
+  transform: scale(1.1);
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}

@@ -1,0 +1,118 @@
+.videos-wrapper {
+  transform: scale(0.9);
+  transform-origin: top center; 
+  width: 100%;  
+}
+
+.videos-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  background: rgba(0, 77, 79, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+.videos-header {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1.6rem;
+}
+
+.videos-icon {
+  width: 26px;
+  height: 26px;
+  color: #ffff00;
+}
+
+.videos-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffff00;
+}
+
+.videos-block {
+  margin-bottom: 2rem;
+}
+
+.videos-subtitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.video-card {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.06);
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  transition: 0.25s ease;
+}
+
+.video-card:hover {
+  border-color: #ffff00;
+  transform: translateY(-4px);
+}
+
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom right, rgba(255, 255, 0, 0.1), rgba(0, 212, 216, 0.1));
+}
+
+.video-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.video-play-btn {
+  width: 70px;
+  height: 70px;
+  background: rgba(255, 255, 0, 0.25);
+  border-radius: 999px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.video-play-btn.clip {
+  background: rgba(78, 205, 196, 0.25);
+}
+
+.video-play-icon {
+  width: 35px;
+  height: 35px;
+  color: #ffff00;
+  fill: #ffff00;
+}
+
+.video-play-icon.clip {
+  color: #4ecdc4;
+  fill: #4ecdc4;
+}
+
+.video-bottom {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 0.7rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+}
+
+.video-name {
+  color: white;
+  font-size: 1rem;
+}

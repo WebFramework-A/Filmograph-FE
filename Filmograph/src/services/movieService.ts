@@ -1,30 +1,58 @@
+// src/services/movieService.ts
 import { db } from "./firebaseConfig";
 import { doc, setDoc } from "firebase/firestore";
 import type { MovieDetail } from "../types/movie";
-import { enrichMovieData } from "./movies/posterApi";
+import { enrichMovieData } from "./movies/tmdbApi";
+import { cleanObject } from "../utils/cleanObject";
 
-/* Firestore에 영화 데이터를 저장하는 함수
-  - TMDB 데이터(포스터, 평점 등)를 enrichMovieData()로 병합
-  - TMDB 정보가 없으면 Firestore에 저장하지 않고 "SKIPPED_TMDB" 반환
-  - 정상 저장 시 "SAVED", 오류 시 "ERROR" 반환
-*/
 export const saveMovie = async (movie: MovieDetail): Promise<string> => {
   try {
-    // TMDB 데이터 병합 (포스터, 평점, 줄거리 등 추가)
+    // KOBIS 필수 데이터 확인
+    if (
+      !movie.title ||
+      !movie.releaseDate ||
+      !movie.directors?.length ||
+      !movie.cast?.length ||
+      !movie.genre?.length ||
+      !movie.watchGrade ||
+      !movie.nation
+    ) {
+      return "SKIPPED_KOBIS";
+    }
+
+    // 청불 제외
+    if (movie.watchGrade.includes("청소년관람불가")) {
+      return "SKIPPED_19";
+    }
+
+    // TMDB 데이터 병합
     const enriched = await enrichMovieData(movie);
 
-    // TMDB 정보가 없을 경우 저장하지 않음
-    // (예: 포스터 이미지나 평점이 없는 경우)
-    if (!enriched.posterUrl || !enriched.rating) {
-      console.log(`⏭️ TMDB 정보 없음: ${movie.title}`);
+    // TMDB 필수 데이터 확인
+    if (
+      !enriched.posterUrl ||
+      enriched.rating == null ||
+      !enriched.overview ||
+      enriched.popularity == null
+    ) {
       return "SKIPPED_TMDB";
     }
 
-    // Firestore에 영화 문서 저장 (merge 옵션으로 기존 데이터 덮어쓰기 방지)
-    await setDoc(doc(db, "movies", enriched.id), enriched, { merge: true });
+    const finalMovie: MovieDetail = {
+      ...enriched,
+      updatedAt: new Date().toISOString(),
+    };
 
-    // 성공 시 "SAVED" 반환
+    // undefined 제거
+    const finalData = cleanObject(finalMovie);
+
+    // Firestore 저장
+    await setDoc(doc(db, "movies", finalMovie.id), finalData, {
+      merge: true,
+    });
+
     return "SAVED";
+
   } catch (err) {
     console.error("Firestore 저장 실패:", err);
     return "ERROR";

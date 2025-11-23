@@ -33,22 +33,28 @@ type GraphT = {
 
 const DEFAULT_EGO_ID = "10004308";
 
-const COLORS = [
-  "#5B8FF9",
-  "#5AD8A6",
-  "#F6BD16",
-  "#E8684A",
-  "#6F5EF9",
-  "#52C41A",
-  "#EB2F96",
-];
+// 역할 색상
+const ROLE_COLORS = {
+  actor: "#4FC3F7",
+  director: "#FFD700",
+  staff: "#FF8A65",
+};
+
+// 역할 매핑
+function mapRole(role?: string): "actor" | "director" | "staff" {
+  if (!role) return "actor";
+  if (role.includes("배우") || role.includes("출연") || role.includes("단역"))
+    return "actor";
+  if (role.includes("감독") || role.includes("연출") || role.includes("조감독"))
+    return "director";
+  return "staff";
+}
 
 // Firestore 로드
 async function fetchEgoGraph(id: string): Promise<GraphT | null> {
   try {
     const ref = doc(db, "egoGraphs", id);
     const snap = await getDoc(ref);
-
     if (!snap.exists()) return null;
 
     const raw = snap.data() as any;
@@ -64,7 +70,7 @@ function getNodeId(x: any): string {
   return typeof x === "object" ? String(x.id) : String(x);
 }
 
-// ego ↔ node 간 weight
+// ego ↔ node weight
 function getWeightBetween(
   egoId: string,
   nodeId: string | number,
@@ -98,11 +104,9 @@ export default function EgoGraph() {
     role?: string;
   } | null>(null);
 
+  const [hoverNode, setHoverNode] = useState<NodeT | null>(null);
+
   const fgRef = useRef<ForceGraphMethods | null>(null);
-  const lastClickRef = useRef<{ id: string | null; time: number }>({
-    id: null,
-    time: 0,
-  });
 
   // 초기 로드
   useEffect(() => {
@@ -137,8 +141,6 @@ export default function EgoGraph() {
       const t = getNodeId(l.target);
       return s === egoId || t === egoId;
     });
-
-    // ego와 연결된 노드만
     const allowed = new Set([egoId]);
     filteredLinks.forEach((l) => {
       allowed.add(getNodeId(l.source));
@@ -152,27 +154,29 @@ export default function EgoGraph() {
 
     // 좌표 초기화
     filteredNodes.forEach((n) => {
-      if (typeof n.x !== "number") {
-        n.x = 0;
-        n.y = 0;
-      }
+      n.x = undefined;
+      n.y = undefined;
+      n.vx = undefined;
+      n.vy = undefined;
+      n.fx = undefined;
+      n.fy = undefined;
     });
 
     setFilteredData({ nodes: filteredNodes, links: filteredLinks });
   }, [data, centerPerson]);
 
-  // weight 범위 계산
+  // weight 범위
   const egoId = centerPerson?.id ?? null;
 
   const { minW, maxW } = useMemo(() => {
     if (!filteredData || !egoId) return { minW: 1, maxW: 1 };
 
     const weights = filteredData.links
-      .filter(
-        (l) =>
-          getNodeId(l.source) === egoId ||
-          getNodeId(l.target) === egoId
-      )
+      .filter((l) => {
+        const s = getNodeId(l.source);
+        const t = getNodeId(l.target);
+        return s === egoId || t === egoId;
+      })
       .map((l) => l.weight ?? 1);
 
     return {
@@ -188,65 +192,43 @@ export default function EgoGraph() {
     if (!fgRef.current || graphData.nodes.length === 0) return;
 
     setTimeout(() => {
-      fgRef.current?.zoomToFit(800, 150);
+      fgRef.current?.zoomToFit(800, 100);
     }, 300);
-  }, [graphData]);
-
-  // 중심 변경 시 자동 zoomToFit
-  useEffect(() => {
-    if (!fgRef.current || !centerPerson) return;
-
-    setTimeout(() => {
-      fgRef.current?.zoomToFit(800, 150);
-    }, 300);
-  }, [centerPerson]);
-
+  }, [graphData, centerPerson]);
 
   if (!filteredData || !centerPerson)
     return <div className="text-white">Ego Network 불러오는 중...</div>;
 
+  const roleKey = mapRole(centerPerson.role);
+  const roleColor = ROLE_COLORS[roleKey];
+
   return (
-    <div className="w-full h-full flex flex-col items-center">
+    <div className="w-full h-full flex flex-col items-center relative pb-24">
+      {/* 상단 타이틀 */}
       <h2 className="text-xl font-bold text-white mb-4">
         {centerPerson.role && (
-          <span className="text-blue-300">({centerPerson.role}) </span>
+          <span style={{ color: roleColor }}>
+            ({centerPerson.role}){" "}
+          </span>
         )}
         {centerPerson.label}의 Ego Network
       </h2>
 
+      {/* 그래프 */}
       <ForceGraph2D<NodeT, LinkT>
         ref={fgRef}
         width={1000}
-        height={550}
+        height={430}
         backgroundColor="transparent"
         graphData={graphData}
         nodeId="id"
         enableNodeDrag={true}
-        warmupTicks={120}
-        cooldownTicks={360}
-        cooldownTime={6000}
         linkColor={() => "rgba(255,255,255,0.7)"}
-
+        onNodeHover={(node) => setHoverNode(node as NodeT | null)}
         d3Force={(name, force) => {
-          if (name === "charge") {
-            force.strength(-120);
-          }
-          if (name === "collide") {
-            force.radius((node: any) => {
-              const w = getWeightBetween(
-                egoId!,
-                node.id,
-                graphData.links
-              );
-              const norm = normalizeWeight(w, minW, maxW);
-              const eased = Math.sqrt(norm);
-              const size = 8 + eased * 12;
-              return size * 3;
-            });
-          }
+          if (name === "charge") force.strength(-120);
           return force;
         }}
-
         linkStrength={() => 0.1}
 
         // 링크 두께
@@ -267,15 +249,8 @@ export default function EgoGraph() {
           let size = 4 + eased * 4;
           if (isCenter) size = 12;
 
-          const color = COLORS[(node.community ?? 0) % COLORS.length];
-
-          // 중심 노드
-          if (isCenter) {
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, size + 6, 0, 2 * Math.PI);
-            ctx.fillStyle = "rgba(255,255,255,0.25)";
-            ctx.fill();
-          }
+          const category = mapRole(node.role);
+          const color = ROLE_COLORS[category];
 
           // 노드 원
           ctx.beginPath();
@@ -284,39 +259,56 @@ export default function EgoGraph() {
           ctx.fill();
 
           // 이름 라벨
-          const fontSize = (isCenter ? 16 : 12) / scale;
+          const fontSize = size;
           ctx.font = `${fontSize}px sans-serif`;
-          ctx.fillStyle = "white";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
 
+          // 텍스트
           const text = node.label;
-          const textWidth = ctx.measureText(text).width;
 
-          ctx.fillText(
-            text,
-            node.x - textWidth / 2,
-            node.y + fontSize / 3
-          );
+          ctx.lineWidth = 1;
+          ctx.strokeStyle = color;
+          ctx.strokeText(text, node.x, node.y);
+
+          ctx.fillStyle = "black";
+          ctx.fillText(text, node.x, node.y);
         }}
-
-        // Node Double-click: 중심 변경
         onNodeClick={async (node) => {
-          const id = String(node.id);
-          const now = Date.now();
-
-          if (
-            lastClickRef.current.id === id &&
-            now - lastClickRef.current.time < 300
-          ) {
-            await loadGraph(id);
-          }
-          lastClickRef.current = { id, time: now };
+          await loadGraph(String(node.id));
         }}
-
-        // Background click: zoomToFit
         onBackgroundClick={() => {
-          fgRef.current?.zoomToFit(800, 150);
+          fgRef.current?.zoomToFit(800, 100);
         }}
       />
+
+      {/* 하단: 설명 */}
+      <div className="
+        absolute bottom-4 left-1/2 -translate-x-1/2 
+        flex items-center gap-6 
+        bg-black/40 backdrop-blur-md px-6 py-3 
+        rounded-full text-white
+      ">
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 rounded-full" style={{ background: ROLE_COLORS.actor }} />
+          <span className="text-sm">배우</span>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 rounded-full" style={{ background: ROLE_COLORS.director }} />
+          <span className="text-sm">감독</span>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 rounded-full" style={{ background: ROLE_COLORS.staff }} />
+          <span className="text-sm">스태프</span>
+        </div>
+
+        <div className="ml-4 flex items-center gap-2 text-white/80 text-sm">
+          <span className="w-10 h-[4px] bg-white inline-block" />
+          <span>링크 두께 = 협업 횟수</span>
+        </div>
+      </div>
     </div>
   );
 }
