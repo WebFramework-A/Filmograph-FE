@@ -9,12 +9,11 @@ export default function SignUpForm() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            // 1. Firebase Authentication에 사용자 생성
+            // Firebase Authentication에 사용자 생성
             const user = await signUpWithEmail({ email, password, nickname });
 
             alert(`회원가입 성공! 환영합니다, ${nickname}님.`);
         }
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         catch (error: any) {
             alert("회원가입 실패: " + error.message);
         }
