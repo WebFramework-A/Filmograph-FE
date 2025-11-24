@@ -66,8 +66,8 @@ const GraphPage = () => {
           <button
             onClick={() => setCategory("bipartite")}
             className={`px-4 py-2 rounded-full text-sm border ${category === "bipartite"
-                ? "bg-[#FFD700] text-black border-[#FFD700]"
-                : "border-white/40 text-white hover:bg-white/10"
+              ? "bg-[#FFD700] text-black border-[#FFD700]"
+              : "border-white/40 text-white hover:bg-white/10"
               }`}
           >
             영화–영화인 이분 그래프
@@ -76,8 +76,8 @@ const GraphPage = () => {
           <button
             onClick={() => setCategory("ego")}
             className={`px-4 py-2 rounded-full text-sm border ${category === "ego"
-                ? "bg-[#FFD700] text-black border-[#FFD700]"
-                : "border-white/40 text-white hover:bg-white/10"
+              ? "bg-[#FFD700] text-black border-[#FFD700]"
+              : "border-white/40 text-white hover:bg-white/10"
               }`}
           >
             에고 네트워크
@@ -86,8 +86,8 @@ const GraphPage = () => {
           <button
             onClick={() => setCategory("community")}
             className={`px-4 py-2 rounded-full text-sm border ${category === "community"
-                ? "bg-[#FFD700] text-black border-[#FFD700]"
-                : "border-white/40 text-white hover:bg-white/10"
+              ? "bg-[#FFD700] text-black border-[#FFD700]"
+              : "border-white/40 text-white hover:bg-white/10"
               }`}
           >
             협업 네트워크 & 커뮤니티
@@ -98,8 +98,8 @@ const GraphPage = () => {
       {/* 그래프 영역 */}
       <div className="relative bg-[#0d5a5a] mx-8 rounded-lg overflow-hidden border border-white/10">
 
-        {/* 협업 네트워크일 때만 전체 보기 버튼 표시 */}
-        {category == "community" && (
+        {/* 협업 네트워크, 이분그래프일 때 전체 보기 버튼 표시 */}
+        {(category == "bipartite" || category == "community") && (
           <button
             onClick={() => setResetViewFlag(prev => !prev)}
             className="
@@ -113,14 +113,14 @@ const GraphPage = () => {
           </button>
         )}
 
-
         <div style={{ height: "500px" }}>
-          {category === "bipartite" && <BipartiteGraph />}
+          {category === "bipartite" && (
+            <BipartiteGraph resetViewFlag={resetViewFlag} />
+          )}
           {category === "ego" && <EgoGraph />}
           {category === "community" && (
             <CollabNetworkGraph resetViewFlag={resetViewFlag} />
           )}
-
         </div>
 
         {category === "bipartite" && (
