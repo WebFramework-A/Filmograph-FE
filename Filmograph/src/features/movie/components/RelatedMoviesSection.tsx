@@ -40,10 +40,8 @@ export default function RelatedMoviesSection({
     loadRelated();
   }, [relatedIds]);
 
-  // 🔥 로딩 중이면 아무것도 표시 안함
   if (loading) return null;
 
-  // 🔥 영화가 없을 때 "정보 없음"
   if (!movies || movies.length === 0) {
     return (
       <section className="related-wrapper">

@@ -56,7 +56,7 @@ export default function DetailPage() {
         <RelatedMoviesSection relatedIds={movie.relatedMovies ?? []} />
       </ScrollSection>
 
-      {/*<pre className="text-white p-6">{JSON.stringify(movie, null, 2)}</pre>*/}
+      <pre className="text-white p-6">{JSON.stringify(movie, null, 2)}</pre>
     </div>
   );
 }

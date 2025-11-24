@@ -5,9 +5,16 @@ import type { MovieDetail } from "../types/movie";
 import { enrichMovieData } from "./movies/tmdbApi";
 import { cleanObject } from "../utils/cleanObject";
 
-export const saveMovie = async (movie: MovieDetail): Promise<string> => {
+export type SaveMovieResult =
+  | "SAVED"
+  | "SKIPPED_KOBIS"
+  | "SKIPPED_19"
+  | "SKIPPED_TMDB"
+  | "ERROR";
+
+export const saveMovie = async (movie: MovieDetail): Promise<SaveMovieResult> => {
   try {
-    // KOBIS 필수 데이터 확인
+    // KOBIS 필수 데이터
     if (
       !movie.title ||
       !movie.releaseDate ||
@@ -43,16 +50,13 @@ export const saveMovie = async (movie: MovieDetail): Promise<string> => {
       updatedAt: new Date().toISOString(),
     };
 
-    // undefined 제거
+    // undefined / null 제거
     const finalData = cleanObject(finalMovie);
 
     // Firestore 저장
-    await setDoc(doc(db, "movies", finalMovie.id), finalData, {
-      merge: true,
-    });
+    await setDoc(doc(db, "movies", finalMovie.id), finalData, { merge: true });
 
     return "SAVED";
-
   } catch (err) {
     console.error("Firestore 저장 실패:", err);
     return "ERROR";
