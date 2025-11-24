@@ -5,7 +5,6 @@ const MOVIE_COLOR = "#FF5252";
 const ACTOR_COLOR = "#5B8FF9";
 const DIRECTOR_COLOR = "#F6BD16";
 
-// 샘플 데이터 (장식용. 메인 페이지에서 화면 채우려고 넣은거임)
 const sampleGraphData = {
   nodes: [
     { id: "m1", name: "영화1", type: "movie", val: 3 },
@@ -26,6 +25,17 @@ const sampleGraphData = {
     { id: "d2", name: "감독2", type: "person", role: "director", val: 2 },
     { id: "d3", name: "감독3", type: "person", role: "director", val: 2 },
     { id: "d4", name: "감독4", type: "person", role: "director", val: 2 },
+
+    { id: "m9", name: "영화9", type: "movie", val: 3 },
+    { id: "m10", name: "영화10", type: "movie", val: 3 },
+    { id: "m11", name: "영화11", type: "movie", val: 3 },
+    { id: "d5", name: "감독5", type: "person", role: "director", val: 2 },
+    { id: "a7", name: "배우7", type: "person", role: "actor", val: 2 },
+    { id: "a8", name: "배우8", type: "person", role: "actor", val: 2 },
+    { id: "a9", name: "배우9", type: "person", role: "actor", val: 2 },
+    { id: "a10", name: "배우10", type: "person", role: "actor", val: 2 },
+    { id: "a11", name: "배우11", type: "person", role: "actor", val: 2 },
+    { id: "a12", name: "배우12", type: "person", role: "actor", val: 2 },
   ],
   links: [
     { source: "m1", target: "a1" },
@@ -51,6 +61,24 @@ const sampleGraphData = {
     { source: "a1", target: "a2" },
     { source: "a3", target: "a4" },
     { source: "a5", target: "a6" },
+
+    { source: "m9", target: "d5" },
+    { source: "m9", target: "a7" },
+    { source: "m9", target: "a8" },
+
+    { source: "m10", target: "d5" },
+    { source: "m10", target: "a8" },
+    { source: "m10", target: "a9" },
+    { source: "m10", target: "a10" },
+
+    { source: "m11", target: "d2" },
+    { source: "m11", target: "a11" },
+    { source: "m11", target: "a12" },
+
+    { source: "a7", target: "m2" },
+    { source: "a9", target: "a11" },
+    { source: "a12", target: "m8" },
+    { source: "d5", target: "d4" },
   ],
 };
 
@@ -79,16 +107,19 @@ export default function DecorativeGraph() {
   useEffect(() => {
     if (fgRef.current) {
       setTimeout(() => {
-        fgRef.current.zoomToFit(400, 80);
+        // 그래프가 넓게 퍼지므로 줌 아웃을 살짝 더 해서 전체가 보이게 조정
+        //fgRef.current.zoomToFit(0, 0);
       }, 100);
     }
   }, [dimensions]);
 
   useEffect(() => {
     if (fgRef.current) {
-      // d3Force 설정
-      fgRef.current.d3Force("charge").strength(-30);
-      fgRef.current.d3Force("link").distance(60);
+      // charge: 노드끼리 밀어내는 힘 (절댓값이 클수록 멀리 밀어냄)
+      fgRef.current.d3Force("charge").strength(-150);
+
+      // link: 연결된 노드 사이의 거리
+      fgRef.current.d3Force("link").distance(100);
     }
   }, [dimensions]);
 
@@ -102,7 +133,7 @@ export default function DecorativeGraph() {
         graphData={sampleGraphData}
         nodeId="id"
         nodeLabel={() => ""}
-        enableNodeDrag={false}
+        enableNodeDrag={true}
         enableZoomInteraction={false}
         enablePanInteraction={false}
         warmupTicks={100}
@@ -140,6 +171,13 @@ export default function DecorativeGraph() {
           ctx.fill();
 
           // 노드 본체
+          ctx.fillStyle = color;
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, size, 0, 2 * Math.PI, false);
+          ctx.fill();
+        }}
+        nodePointerAreaPaint={(node: any, color, ctx) => {
+          const size = node.type === "movie" ? 8 : 6;
           ctx.fillStyle = color;
           ctx.beginPath();
           ctx.arc(node.x, node.y, size, 0, 2 * Math.PI, false);

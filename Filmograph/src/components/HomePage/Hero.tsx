@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import DecorativeGraph from "./DecorativeGraph";
+import Arrow from "../common/Arrow";
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -9,45 +10,23 @@ const Hero = () => {
         <div className="w-full h-screen max-w-7xl relative flex items-center">
           {/* 왼쪽: 대표 문구 및 버튼 */}
           <div className="flex flex-col justify-center space-y-8 relative z-20 w-1/2">
-            <h1 className="text-5xl font-bold text-[#FFD700] tracking-wider">
+            <h1 className="text-5xl xl:text-7xl font-bold text-[#FFD700] tracking-wider">
               Connect Movies,
               <br />
               Explore Worlds
             </h1>
-            <p className="text-xl text-white/80">
+            <p className="text-xl xl:text-2xl text-white/80">
               당신이 몰랐던 영화의 연결고리
             </p>
 
             {/* 시작하기 */}
-            <div
-              onClick={() => navigate("/graph")}
-              className="w-fit cursor-pointer group"
-            >
-              <div className="flex flex-col w-full max-w-md">
-                <h1 className="text-lg font-light text-yellow-100 mb-1 tracking-widest">
-                  시작하기
-                </h1>
-
-                <div className="relative w-40 h-px bg-yellow-100 origin-left group-hover:animate-[slide_0.8s_ease-in-out_forwards]">
-                  <div className="absolute right-0 bottom-0 w-4 h-px bg-yellow-100 origin-bottom-right -rotate-320"></div>
-                </div>
-
-                {/* (커스텀 애니메이션) 호버하면 화살표 애니메이션용  */}
-                <style>
-                  {`
-                  @keyframes slide {
-                    0% { transform: scaleX(0); }
-                    100% { transform: scaleX(1); }
-                  }
-                `}
-                </style>
-              </div>
-            </div>
+            <Arrow title="시작하기" onClick={() => navigate("/graph")} />
           </div>
 
           {/* 오른쪽: 그래프 */}
           <div className="absolute right-0 top-0 h-full w-full md:w-[65%] flex items-center justify-center z-10 pointer-events-none">
-            <div className="w-full h-[600px] flex items-center justify-center relative">
+            {/* 노드 움직이게끔 pointer-events-auto 추가함ㅜㅜ */}
+            <div className="w-full h-full flex items-center justify-center relative pointer-events-auto">
               {/* 왼쪽 & 오른쪽 겹치는 부분에 블러처리용 오버레이 */}
               <div
                 className="absolute inset-0 pointer-events-none z-20"
