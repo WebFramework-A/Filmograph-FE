@@ -49,6 +49,9 @@ const Navbar = () => {
                   src={user.photoURL || "/default-avatar.png"} // 구글 프로필 사진 또는 기본 아바타
                   alt="마이페이지"
                   className="w-8 h-8 rounded-full hover:ring-2 hover:ring-[#34C3F1] transition-all"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = "/default-avatar.png";
+                  }}
                 />
               </NavLink>
 
