@@ -86,6 +86,9 @@ const Navbar = () => {
                   src={user.photoURL || "/default-avatar.png"}
                   alt="마이페이지"
                   className="w-8 h-8 rounded-full hover:ring-2 hover:ring-yellow-300 transition-all"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = "/default-avatar.png";
+                  }}
                 />
               </NavLink>
 
