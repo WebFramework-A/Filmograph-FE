@@ -29,9 +29,9 @@ const GraphPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0d5a5a] text-white">
+    <div className="min-h-screen bg-[#0d5a5a] text-white pt-20">
       {/* 헤더 */}
-      <div className="pt-16 pb-4 px-8">
+      <div className="pb-4 px-8">
         <h1 className="text-5xl font-bold text-center mb-4 text-[#FFD700]">
           영화 관계망
         </h1>
@@ -65,33 +65,30 @@ const GraphPage = () => {
         <div className="flex justify-center gap-3 max-w-3xl mx-auto mb-4">
           <button
             onClick={() => setCategory("bipartite")}
-            className={`px-4 py-2 rounded-full text-sm border ${
-              category === "bipartite"
+            className={`px-4 py-2 rounded-full text-sm border ${category === "bipartite"
                 ? "bg-[#FFD700] text-black border-[#FFD700]"
                 : "border-white/40 text-white hover:bg-white/10"
-            }`}
+              }`}
           >
             영화–영화인 이분 그래프
           </button>
 
           <button
             onClick={() => setCategory("ego")}
-            className={`px-4 py-2 rounded-full text-sm border ${
-              category === "ego"
+            className={`px-4 py-2 rounded-full text-sm border ${category === "ego"
                 ? "bg-[#FFD700] text-black border-[#FFD700]"
                 : "border-white/40 text-white hover:bg-white/10"
-            }`}
+              }`}
           >
             에고 네트워크
           </button>
 
           <button
             onClick={() => setCategory("community")}
-            className={`px-4 py-2 rounded-full text-sm border ${
-              category === "community"
+            className={`px-4 py-2 rounded-full text-sm border ${category === "community"
                 ? "bg-[#FFD700] text-black border-[#FFD700]"
                 : "border-white/40 text-white hover:bg-white/10"
-            }`}
+              }`}
           >
             협업 네트워크 & 커뮤니티
           </button>

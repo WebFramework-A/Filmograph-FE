@@ -88,7 +88,7 @@ export default function MyPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0d5a5a] text-white p-8">
+    <div className="min-h-screen bg-[#0d5a5a] text-white p-8 pt-20">
       <div className="max-w-6xl mx-auto">
         {/* 헤더 */}
         <div className="flex justify-between items-end border-b border-white/20 pb-4 mb-8">
