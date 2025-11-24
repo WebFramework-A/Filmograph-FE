@@ -1,7 +1,7 @@
 .videos-wrapper {
   transform: scale(0.9);
-  transform-origin: top center; 
-  width: 100%;  
+  transform-origin: top center;
+  width: 100%;
 }
 
 .videos-container {
@@ -57,6 +57,7 @@
   background: rgba(255, 255, 255, 0.06);
   border: 2px solid rgba(255, 255, 255, 0.12);
   transition: 0.25s ease;
+  cursor: pointer;
 }
 
 .video-card:hover {
@@ -64,10 +65,20 @@
   transform: translateY(-4px);
 }
 
+.video-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .video-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom right, rgba(255, 255, 0, 0.1), rgba(0, 212, 216, 0.1));
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 0, 0.1),
+    rgba(0, 212, 216, 0.1)
+  );
 }
 
 .video-center {
@@ -115,4 +126,78 @@
 .video-name {
   color: white;
   font-size: 1rem;
+}
+
+.video-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.video-modal {
+  position: relative;
+  width: 90%;
+  max-width: 900px;
+  aspect-ratio: 16 / 9;
+  background: black;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 25px rgba(255, 255, 0, 0.25);
+}
+
+.video-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.video-modal-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 2rem;
+  color: white;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  transition: 0.2s;
+}
+
+.video-modal-close:hover {
+  color: #ffff00;
+}
+
+.videos-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.videos-pagination {
+  display: flex;
+  gap: 8px;
+}
+
+.videos-pagination button {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.videos-pagination button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.videos-pagination button:disabled {
+  opacity: 0.4;
 }

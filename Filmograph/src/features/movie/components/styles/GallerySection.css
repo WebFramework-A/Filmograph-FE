@@ -2,7 +2,6 @@
   transform: scale(0.9);
   transform-origin: top center;
   width: 100%;
-  padding-bottom: 3rem;
 }
 
 .gallery-container {
@@ -86,6 +85,7 @@
   background: linear-gradient(to top, rgba(0, 0, 0, 0.65), transparent);
   opacity: 0;
   transition: 0.3s ease;
+  
 }
 
 .gallery-card:hover .gallery-hover,
@@ -107,35 +107,63 @@
 
 .preview-content {
   position: relative;
-  max-width: 80%;    
-  max-height: 80%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .preview-img {
+  max-width: 80vw;
+  max-height: 80vh;
   width: auto;
   height: auto;
-  max-width: 100%;
-  max-height: 100%;
   object-fit: contain;
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0,0,0,0.5);
 }
 
-
 .preview-close {
   position: absolute;
-  top: -45px;
-  right: 0;
+  top: -35px; 
+  right: 0px;  
   background: transparent;
   border: none;
   color: white;
+  font-size: 30px;
   cursor: pointer;
-  padding: 4px;
-  transition: 0.2s ease;
 }
 
 .preview-close:hover {
   transform: scale(1.1);
+}
+
+.gallery-subtitle-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gallery-pagination {
+  display: flex;
+  gap: 8px;
+}
+
+.gallery-pagination button {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.gallery-pagination button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.gallery-pagination button:disabled {
+  opacity: 0.4;
 }
 
 
