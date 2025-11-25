@@ -29,6 +29,18 @@ const router = createBrowserRouter([
         element: <GraphPage />,
       },
       {
+        path: "/graph1",
+        element: <NotFoundPage />,
+      },
+      {
+        path: "/graph2",
+        element: <NotFoundPage />,
+      },
+      {
+        path: "/graph3",
+        element: <NotFoundPage />,
+      },
+      {
         path: "/archetype",
         element: <ArchetypePage />,
       },

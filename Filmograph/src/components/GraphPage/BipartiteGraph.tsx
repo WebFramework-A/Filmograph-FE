@@ -21,11 +21,15 @@ type GraphT = {
     links: LinkT[];
 };
 
+// Props 타입 정의 (CollabNetworkGraph와 동일)
+type BipartiteGraphProps = {
+    resetViewFlag: boolean;
+};
 
-const ACTOR_COLOR = "#4FC3F7";
-const DIRECTOR_COLOR = "#FFD700";
-const MOVIE_COLOR = "#FF6B6B";
-const ACTOR_DIRECTOR_COLOR = "#A7CD7B";
+const MOVIE_COLOR = "#FF5252";
+const ACTOR_COLOR = "#5B8FF9";
+const DIRECTOR_COLOR = "#F6BD16";
+const ACTOR_DIRECTOR_COLOR = "#E040FB";
 
 const GRAPH_WIDTH = 1000;
 const GRAPH_HEIGHT = 600;
@@ -37,15 +41,15 @@ function normalizeWeight(w: number, minW: number, maxW: number): number {
 
 const getNodeBaseSize = (node: NodeT, minVal: number, maxVal: number) => {
     const norm = normalizeWeight(node.val ?? 1, minVal, maxVal);
-    // 이 부분은 노드 크기를 키운 버전으로 유지했습니다.
     return 10 + norm * 10;
 }
 
-export default function BipartiteGraph() {
+// props로 resetViewFlag를 받음
+export default function BipartiteGraph({ resetViewFlag }: BipartiteGraphProps) {
     const [data, setData] = useState<GraphT | null>(null);
     const fgRef = useRef<any>(null);
 
-    // 1. 데이터 로딩
+    // 데이터 로딩
     useEffect(() => {
         async function fetchBipartiteData() {
             try {
@@ -78,7 +82,8 @@ export default function BipartiteGraph() {
                                     role: "actor",
                                     val: 1,
                                 });
-                            } else {
+                            }
+                            else {
                                 const node = nodesMap.get(personId)!;
                                 node.val = (node.val || 1) + 0.5;
                                 if (node.role === 'director') node.role = 'actor/director';
@@ -98,7 +103,8 @@ export default function BipartiteGraph() {
                                     role: "director",
                                     val: 1,
                                 });
-                            } else {
+                            }
+                            else {
                                 const node = nodesMap.get(personId)!;
                                 node.val = (node.val || 1) + 0.5;
                                 if (node.role === 'actor') node.role = 'actor/director';
@@ -134,20 +140,27 @@ export default function BipartiteGraph() {
     useEffect(() => {
         if (fgRef.current && graphData.nodes.length > 0) {
             setTimeout(() => {
-                fgRef.current.zoomToFit(400, 50);
-            }, 500);
+                //중간 위로 올리기
+                fgRef.current.centerAt(0, 1500, 0)
+                //줌 (배율, 걸리는 시간)
+                fgRef.current.zoom(0.04, 0)
+
+            }, 200);
         }
     }, [graphData]);
 
+    // resetViewFlag가 바뀔 때마다 전체 보기 실행
+    useEffect(() => {
+        if (!fgRef.current) return;
+        fgRef.current.centerAt(0, 1500, 0)
+        fgRef.current.zoom(0.04, 0)
+    }, [resetViewFlag]);
 
-    if (!data) return <div className="text-white">Loading...</div>;
+
+    if (!data) return <div className="flex items-center justify-center text-white">그래프 불러오는 중· · ·</div>;
 
     return (
         <div className="w-full h-full flex flex-col items-center">
-            <h2 className="text-xl font-bold text-white mb-4">
-                영화 - 영화인 관계도 (Bipartite Graph)
-            </h2>
-
             <ForceGraph2D
                 ref={fgRef}
                 width={GRAPH_WIDTH}
@@ -162,16 +175,15 @@ export default function BipartiteGraph() {
                 linkColor={() => "rgba(255,255,255,0.3)"}
                 linkWidth={0.5}
 
-                // [복원된 부분] d3Force prop 사용
                 d3Force={(name: string, force: any) => {
                     if (name === "charge") {
                         force.strength(-10);
-                        force.distanceMax(200); // 200이 아닌 10으로 되어있던 것도 오류 원인일 수 있습니다.
+                        force.distanceMax(200);
                     }
                     if (name === "link") {
                         force.distance(20);
                         force.strength(1);
-                        force.iterations(10); // 링크 팽팽하게 하는 코드 추가
+                        force.iterations(10);
                     }
                     if (name === "collide") {
                         force.radius((node: any) => {
@@ -181,9 +193,14 @@ export default function BipartiteGraph() {
                         });
                         force.strength(0.8);
                     }
+                    /*
+                    //센터 위로
+                    if (name === "center") {
+                        force.y(-2000); // 노드들이 y=-150 좌표(위쪽)로 모이려고 함
+                    }
+                    */
                 }}
 
-                // 노드 그리기
                 nodeCanvasObject={(rawNode, ctx, globalScale) => {
                     const node = rawNode as NodeT;
                     if (node.x === undefined || node.y === undefined) return;
@@ -194,24 +211,28 @@ export default function BipartiteGraph() {
 
                     let color = ACTOR_DIRECTOR_COLOR;
 
+                    // 영화 노드 설정
                     if (node.type === "movie") {
                         color = MOVIE_COLOR;
                         ctx.fillStyle = color;
 
-                        /* 네모로 그리기
-                        const rectWidth = size * 2.2;
-                        const rectHeight = size * 1.4;
-                        ctx.fillRect(
-                            node.x - rectWidth / 2,
-                            node.y - rectHeight / 2,
-                            rectWidth,
-                            rectHeight
-                        );
-                        */
+                        /* 네모로 그리기 */
+                        // const rectWidth = size * 2.2;
+                        // const rectHeight = size * 1.4;
+                        // ctx.fillRect(
+                        //   node.x - rectWidth / 2,
+                        //   node.y - rectHeight / 2,
+                        //   rectWidth,
+                        //   rectHeight
+                        // );
+
+                        // 원형으로 그리기
                         ctx.beginPath();
                         ctx.arc(node.x, node.y, size, 0, 2 * Math.PI, false);
                         ctx.fill();
                     }
+
+                    // 영화인 노드 설정
                     else {
                         if (node.role === "director") color = DIRECTOR_COLOR;
                         else if (node.role === "actor") color = ACTOR_COLOR;
@@ -222,7 +243,6 @@ export default function BipartiteGraph() {
                         ctx.fill();
                     }
 
-                    // 텍스트 라벨 (시맨틱 줌)
                     if (globalScale > 1.5) {
                         const fontSize = 12 / globalScale;
                         ctx.font = `${fontSize}px Sans-Serif`;
@@ -230,7 +250,6 @@ export default function BipartiteGraph() {
                         ctx.textAlign = "center";
                         ctx.textBaseline = "middle";
 
-                        // 텍스트 위치
                         ctx.fillText(node.name, node.x, node.y);
                     }
                 }}
@@ -241,7 +260,9 @@ export default function BipartiteGraph() {
                 }}
 
                 onBackgroundClick={() => {
-                    fgRef.current?.zoomToFit(800, 150);
+                    //배율 조정
+                    fgRef.current.centerAt(0, 1500, 0)
+                    fgRef.current.zoom(0.04, 0)
                 }}
             />
         </div>
