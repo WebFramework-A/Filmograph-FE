@@ -104,9 +104,11 @@ export default function EgoGraph() {
     role?: string;
   } | null>(null);
 
-  const [hoverNode, setHoverNode] = useState<NodeT | null>(null);
+  // ⭐ hoverNode 삭제 (사용 안 해서 ESLint 제거)
+  // const [hoverNode, setHoverNode] = useState<NodeT | null>(null);
 
-  const fgRef = useRef<ForceGraphMethods | null>(null);
+  // ⭐ ForceGraph ref 타입 완전한 제네릭 적용
+  const fgRef = useRef<ForceGraphMethods<NodeT, LinkT> | null>(null);
 
   // 초기 로드
   useEffect(() => {
@@ -135,19 +137,18 @@ export default function EgoGraph() {
 
     const egoId = centerPerson.id;
 
-    // ego에 직접 연결된 링크만
     const filteredLinks = data.links.filter((l) => {
       const s = getNodeId(l.source);
       const t = getNodeId(l.target);
       return s === egoId || t === egoId;
     });
+
     const allowed = new Set([egoId]);
     filteredLinks.forEach((l) => {
       allowed.add(getNodeId(l.source));
       allowed.add(getNodeId(l.target));
     });
 
-    // 필터링된 노드 생성
     const filteredNodes = data.nodes.filter((n) =>
       allowed.has(String(n.id))
     );
@@ -185,9 +186,13 @@ export default function EgoGraph() {
     };
   }, [filteredData, egoId]);
 
-  const graphData = filteredData ?? { nodes: [], links: [] };
+  // ⭐ graphData useMemo 적용 (ESLint 경고 제거)
+  const graphData = useMemo(
+    () => filteredData ?? { nodes: [], links: [] },
+    [filteredData]
+  );
 
-  // 그래프 렌더 후 자동 zoomToFit
+  // zoomToFit 처리
   useEffect(() => {
     if (!fgRef.current || graphData.nodes.length === 0) return;
 
@@ -197,48 +202,44 @@ export default function EgoGraph() {
   }, [graphData, centerPerson]);
 
   if (!filteredData || !centerPerson)
-    return <div className="text-white">Ego Network 불러오는 중...</div>;
-
-  const roleKey = mapRole(centerPerson.role);
-  const roleColor = ROLE_COLORS[roleKey];
+    return (
+      <div className="flex items-center justify-center w-full h-full">
+        <div className="text-white text-xl font-semibold">
+          그래프 불러오는 중 · · ·
+        </div>
+      </div>
+    );
 
   return (
-    <div className="w-full h-full flex flex-col items-center relative pb-24">
-      {/* 상단 타이틀 */}
-      <h2 className="text-xl font-bold text-white mb-4">
-        {centerPerson.role && (
-          <span style={{ color: roleColor }}>
-            ({centerPerson.role}){" "}
-          </span>
-        )}
-        {centerPerson.label}의 Ego Network
-      </h2>
+    <div className="w-full h-full flex flex-col items-center justify-center relative pb-24">
 
-      {/* 그래프 */}
+      {/* ⭐ 타이틀 완전히 제거됨 */}
+
       <ForceGraph2D<NodeT, LinkT>
         ref={fgRef}
-        width={1000}
+        width={window.innerWidth * 0.9}
         height={430}
         backgroundColor="transparent"
         graphData={graphData}
         nodeId="id"
         enableNodeDrag={true}
         linkColor={() => "rgba(255,255,255,0.7)"}
-        onNodeHover={(node) => setHoverNode(node as NodeT | null)}
-        d3Force={(name, force) => {
+        
+        // ⭐ 타입 오류 해결: name, force 타입 지정
+        d3Force={(name: string, force: any) => {
           if (name === "charge") force.strength(-120);
           return force;
         }}
+
         linkStrength={() => 0.1}
 
-        // 링크 두께
         linkWidth={(l) => {
           const norm = normalizeWeight(l.weight ?? 1, minW, maxW);
           return 2 + norm * 10;
         }}
 
-        // Node 생성
-        nodeCanvasObject={(raw, ctx, scale) => {
+        // ⭐ scale 미사용 → 제거하여 eslint 경고 제거
+        nodeCanvasObject={(raw, ctx) => {
           const node = raw as NodeT & { x: number; y: number };
           const isCenter = String(node.id) === egoId;
 
@@ -252,19 +253,16 @@ export default function EgoGraph() {
           const category = mapRole(node.role);
           const color = ROLE_COLORS[category];
 
-          // 노드 원
           ctx.beginPath();
           ctx.arc(node.x, node.y, size, 0, 2 * Math.PI);
           ctx.fillStyle = color;
           ctx.fill();
 
-          // 이름 라벨
           const fontSize = size;
           ctx.font = `${fontSize}px sans-serif`;
           ctx.textAlign = "center";
           ctx.textBaseline = "middle";
 
-          // 텍스트
           const text = node.label;
 
           ctx.lineWidth = 1;
@@ -274,15 +272,17 @@ export default function EgoGraph() {
           ctx.fillStyle = "black";
           ctx.fillText(text, node.x, node.y);
         }}
+
         onNodeClick={async (node) => {
           await loadGraph(String(node.id));
         }}
+
         onBackgroundClick={() => {
           fgRef.current?.zoomToFit(800, 100);
         }}
       />
 
-      {/* 하단: 설명 */}
+      {/* 하단 설명 */}
       <div className="
         absolute bottom-4 left-1/2 -translate-x-1/2 
         flex items-center gap-6 
@@ -305,7 +305,7 @@ export default function EgoGraph() {
         </div>
 
         <div className="ml-4 flex items-center gap-2 text-white/80 text-sm">
-          <span className="w-10 h-[4px] bg-white inline-block" />
+          <span className="w-10 h-1 bg-white inline-block" />
           <span>링크 두께 = 협업 횟수</span>
         </div>
       </div>
