@@ -115,7 +115,8 @@ export default function BipartiteGraph({ resetViewFlag }: BipartiteGraphProps) {
                                     role: "director",
                                     val: 1,
                                 });
-                            } else {
+                            }
+                            else {
                                 const node = nodesMap.get(personId)!;
                                 node.val = (node.val || 1) + 0.5;
                                 if (node.role === 'actor') node.role = 'actor/director';
@@ -129,7 +130,8 @@ export default function BipartiteGraph({ resetViewFlag }: BipartiteGraphProps) {
                     nodes: Array.from(nodesMap.values()),
                     links
                 });
-            } catch (error) {
+            }
+            catch (error) {
                 console.error("데이터 로딩 실패:", error);
             }
         }
@@ -162,7 +164,8 @@ export default function BipartiteGraph({ resetViewFlag }: BipartiteGraphProps) {
                 if (sourceId === targetNode.id) {
                     hNodes.add(targetId);
                     hLinks.add(link);
-                } else if (targetId === targetNode.id) {
+                }
+                else if (targetId === targetNode.id) {
                     hNodes.add(sourceId);
                     hLinks.add(link);
                 }
@@ -302,7 +305,8 @@ export default function BipartiteGraph({ resetViewFlag }: BipartiteGraphProps) {
 
                     if (hasActiveHighlight && !isHighlighted) {
                         ctx.globalAlpha = 0.1; // 흐리게 처리
-                    } else {
+                    }
+                    else {
                         ctx.globalAlpha = 1;   // 정상 출력
                     }
 

@@ -1,21 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../features/auth/hooks/useAuth";
 import { db } from "../services/firebaseConfig";
-import { doc, getDoc, collection, getDocs } from "firebase/firestore";
+import { doc, getDoc, collection, getDocs, query, where, getCountFromServer } from "firebase/firestore";
 
 // 분리한 컴포넌트들 임포트
 import Profile from "../components/MyPage/Profile";
 import Status from "../components/MyPage/Status";
 import MyLikes from "../components/MyPage/MyLikes";
-import GenreChartSection from "../components/MyPage/GenreChart";
+import GenreChart from "../components/MyPage/GenreChart";
 
-// 데이터 타입 정의 (하위 컴포넌트에서도 쓰일 수 있으므로 types 폴더로 빼는 것도 좋습니다)
+// 데이터 타입 정의
 export interface WishlistItem {
   id: string;
   title: string;
   posterUrl?: string;
   addedAt: any;
+  genres?: string[];
 }
 
 export interface GenreData {
@@ -25,6 +26,37 @@ export interface GenreData {
   [key: string]: any;
 }
 
+const processGenreData = (movies: WishlistItem[]) => {
+  const COLORS = ["#FF5252", "#5B8FF9", "#F6BD16", "#E040FB", "#4FC3F7", "#66BB6A"];
+  const genreCount: { [key: string]: number } = {};
+  let totalGenres = 0;
+
+  movies.forEach((movie) => {
+    const genres = movie.genres || [];
+    genres.forEach((genre) => {
+      if (genre) {
+        genreCount[genre] = (genreCount[genre] || 0) + 1;
+        totalGenres++;
+      }
+    });
+  });
+
+  if (totalGenres === 0) return [];
+
+  const sortedGenres = Object.entries(genreCount)
+    .map(([name, count]) => ({
+      name,
+      value: (count / totalGenres) * 100,
+      count,
+    }))
+    .sort((a, b) => b.value - a.value);
+
+  return sortedGenres.slice(0, 5).map((item, index) => ({
+    ...item,
+    color: COLORS[index % COLORS.length],
+  }));
+};
+
 export default function MyPage() {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
@@ -33,8 +65,9 @@ export default function MyPage() {
   const [userInfo, setUserInfo] = useState<any>(null);
   const [likes, setLikes] = useState<WishlistItem[]>([]);
   const [genreData, setGenreData] = useState<GenreData[]>([]);
+  const [reviewCount, setReviewCount] = useState(0);
 
-  // (임시) 통계 데이터
+  // (임시) Status 컴포넌트용 더미 데이터 (임시)
   const stats = {
     reviewCount: 12,
     ratingCount: 45,
@@ -48,44 +81,67 @@ export default function MyPage() {
     }
   }, [user, loading, navigate]);
 
-  // 데이터 로딩 트리거
   useEffect(() => {
-    if (user) {
-      fetchMyData(user.uid);
-    }
-  }, [user]);
+    const newGenreData = processGenreData(likes);
+    setGenreData(newGenreData);
+  }, [likes]);
 
-  // 실제 데이터 가져오는 함수 (영화 정보 Join 포함)
-  const fetchMyData = async (uid: string) => {
+  const fetchMyData = useCallback(async (uid: string) => {
     try {
-      //  유저 정보
+      // 유저 정보 가져오기
       const userDoc = await getDoc(doc(db, "users", uid));
       if (userDoc.exists()) setUserInfo(userDoc.data());
 
-      // 찜 목록 + 영화 상세 정보 병합
+      // 찜 목록 가져오기
       const wishlistRef = collection(db, "userWishlist", uid, "items");
       const wishlistSnap = await getDocs(wishlistRef);
 
+      // 리뷰 개수 가져오기 
+      let myReviewCount = 0;
+      try {
+        /*
+        const reviewsQuery = query(collection(db, "reviews"), where("userId", "==", uid));
+        const reviewsSnapshot = await getCountFromServer(reviewsQuery);
+        myReviewCount = reviewsSnapshot.data().count;
+        */
+      }
+      catch (error) {
+        console.error("리뷰 카운트 로드 실패 (아직 컬렉션 없음)", error);
+      }
+      setReviewCount(myReviewCount);
+
+      // 영화 상세 정보 매핑
       const promises = wishlistSnap.docs.map(async (itemDoc) => {
         const itemData = itemDoc.data();
         const movieId = itemData.movieId || itemDoc.id;
 
-        // movies 컬렉션에서 제목, 포스터 조회
         const movieDocRef = doc(db, "movies", movieId);
         const movieSnap = await getDoc(movieDocRef);
-        const movieData = movieSnap.exists() ? movieSnap.data() : null;
+        const movieData = movieSnap.exists() ? (movieSnap.data() as any) : null;
+        const rawGenre = movieData?.genre || movieData?.genres;
+
+        let finalGenres: string[] = [];
+
+        if (typeof rawGenre === 'string') {
+          finalGenres = rawGenre.split(',').map((g: string) => g.trim()).filter(Boolean);
+        }
+        else if (Array.isArray(rawGenre)) {
+          finalGenres = rawGenre.map((g: any) =>
+            typeof g === 'string' ? g : g.name
+          ).filter(Boolean);
+        }
 
         return {
           id: movieId,
           title: movieData?.title || movieData?.movieNm || "제목 없음",
           posterUrl: movieData?.posterUrl || null,
           addedAt: itemData.addedAt,
+          genres: finalGenres,
         } as WishlistItem;
       });
 
       const resolvedList = await Promise.all(promises);
 
-      // 최신순 정렬 (addedAt 기준)
       resolvedList.sort((a, b) => {
         const timeA = a.addedAt?.seconds || 0;
         const timeB = b.addedAt?.seconds || 0;
@@ -93,21 +149,17 @@ export default function MyPage() {
       });
 
       setLikes(resolvedList);
-
-      // !(임시) 차트 데이터 (임시)
-      setGenreData([
-        { name: "스릴러", value: 35, color: "#4FC3F7" },
-        { name: "드라마", value: 20, color: "#81C784" },
-        { name: "로맨스", value: 5, color: "#FFD54F" },
-        { name: "액션", value: 25, color: "#E0E0E0" },
-        { name: "SF", value: 10, color: "#90A4AE" },
-        { name: "애니메이션", value: 3, color: "#A1887F" },
-      ]);
-
-    } catch (error) {
+    }
+    catch (error) {
       console.error("데이터 로딩 실패:", error);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      fetchMyData(user.uid);
+    }
+  }, [user, fetchMyData]);
 
   if (loading || !userInfo) {
     return <div className="flex items-center justify-center h-screen bg-[#0d5a5a] text-white">로딩 중...</div>;
@@ -122,17 +174,22 @@ export default function MyPage() {
           <p className="text-sm text-white/70">나의 영화 취향과 활동을 확인하세요</p>
         </div>
 
-        {/* 프로필 섹션 컴포넌트 */}
-        <Profile userInfo={userInfo} currentUser={user} />
+        <Profile
+          userInfo={userInfo}
+          currentUser={user}
+          reviewCount={reviewCount}
+          likeCount={likes.length}
+        />
 
         {/* 통계 & 찜 목록 레이아웃 */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          {/* Status는 더미 데이터를 사용 중 */}
           <Status status={stats} />
           <MyLikes likes={likes} setLikes={setLikes} />
         </div>
 
         {/* 차트 섹션 컴포넌트 */}
-        <GenreChartSection genreData={genreData} />
+        <GenreChart genreData={genreData} />
       </div>
     </div>
   );
