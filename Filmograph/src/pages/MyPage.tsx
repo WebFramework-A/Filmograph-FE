@@ -118,7 +118,7 @@ export default function MyPage() {
       <div className="max-w-6xl mx-auto">
         {/* 헤더 */}
         <div className="flex justify-between items-end border-b border-white/20 pb-4 mb-8">
-          <h1 className="text-4xl font-bold text-[#FFD700]">My Page</h1>
+          <h1 className="text-4xl font-bold text-yellow-200">My Page</h1>
           <p className="text-sm text-white/70">나의 영화 취향과 활동을 확인하세요</p>
         </div>
 

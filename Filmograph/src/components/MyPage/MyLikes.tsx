@@ -13,7 +13,7 @@ export default function MyLikes({ likes }: Props) {
     return (
         <div className="bg-black/20 p-6 rounded-lg border border-white/5 shadow-md flex flex-col h-full relative transition-all duration-300">
             <div className="flex items-center justify-between mb-4">
-                <h3 className="text-xl font-bold text-[#FFD700] flex items-center gap-2">
+                <h3 className="text-xl font-bold text-yellow-200 flex items-center gap-2">
                     <span>♥</span> 찜한 영화
                     <span className="text-sm text-white/60 font-normal">({likes.length})</span>
                 </h3>

@@ -19,7 +19,8 @@ export default function Profile({ userInfo, currentUser }: Props) {
         if (userInfo?.nickname) {
             setNewNickname(userInfo.nickname);
             setDisplayNickname(userInfo.nickname);
-        } else if (currentUser?.displayName) {
+        }
+        else if (currentUser?.displayName) {
             setNewNickname(currentUser.displayName);
             setDisplayNickname(currentUser.displayName);
         }
@@ -57,7 +58,7 @@ export default function Profile({ userInfo, currentUser }: Props) {
                 <img
                     src={userInfo.photoURL || currentUser?.photoURL || "/default-avatar.png"}
                     alt="Profile"
-                    className="w-32 h-32 rounded-full border-4 border-[#FFD700] object-cover shadow-lg"
+                    className="w-32 h-32 rounded-full border-4 border-yellow-200 object-cover shadow-lg"
                     onError={(e) => {
                         (e.target as HTMLImageElement).src = "/default-avatar.png";
                     }}

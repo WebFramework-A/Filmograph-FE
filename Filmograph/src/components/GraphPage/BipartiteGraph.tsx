@@ -32,7 +32,7 @@ const DIRECTOR_COLOR = "#F6BD16";
 const ACTOR_DIRECTOR_COLOR = "#E040FB";
 
 const GRAPH_WIDTH = 1000;
-const GRAPH_HEIGHT = 600;
+const GRAPH_HEIGHT = 550;
 
 function normalizeWeight(w: number, minW: number, maxW: number): number {
     if (minW === maxW) return 0.5;
@@ -243,7 +243,7 @@ export default function BipartiteGraph({ resetViewFlag }: BipartiteGraphProps) {
                         ctx.fill();
                     }
 
-                    if (globalScale > 1.5) {
+                    if (globalScale > 0.5) {
                         const fontSize = 12 / globalScale;
                         ctx.font = `${fontSize}px Sans-Serif`;
                         ctx.fillStyle = "rgba(255, 255, 255, 0.9)";

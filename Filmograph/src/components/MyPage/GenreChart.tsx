@@ -8,7 +8,7 @@ interface Props {
 export default function GenreChart({ genreData }: Props) {
     return (
         <div className="bg-black/20 p-8 rounded-lg border border-white/5 shadow-md">
-            <h3 className="text-2xl font-bold text-[#FFD700] mb-6">취향 분석</h3>
+            <h3 className="text-2xl font-bold text-yellow-200 mb-6">취향 분석</h3>
             <div className="flex flex-col md:flex-row items-center justify-center gap-12">
                 {/* 파이 차트 */}
                 <div className="w-64 h-64">
