@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { ZoomIn, ZoomOut } from "lucide-react";
+import { useState } from "react";
 
 import Searchbar from "../components/common/Searcrbar";
 import GuideCard from "../components/GraphPage/GuideCard";
@@ -14,19 +13,9 @@ type GraphCategory = "bipartite" | "ego" | "community";
 const GraphPage = () => {
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [zoom, setZoom] = useState(100);
   const [category, setCategory] = useState<GraphCategory>("bipartite");
   // CollabNetworkGraph에게 리셋 신호 보내기
   const [resetViewFlag, setResetViewFlag] = useState(false);
-
-
-  const handleZoomIn = () => {
-    setZoom((prev) => Math.min(prev + 10, 200));
-  };
-
-  const handleZoomOut = () => {
-    setZoom((prev) => Math.max(prev - 10, 50));
-  };
 
   return (
     <div className="min-h-screen bg-[#0d5a5a] text-white pt-20">
@@ -43,22 +32,6 @@ const GraphPage = () => {
         {/* 검색바 & 줌 */}
         <div className="flex items-center justify-between max-w-6xl mx-auto mb-4">
           <Searchbar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-
-          <div className="flex items-center gap-3">
-            <button
-              onClick={handleZoomOut}
-              className="p-2 hover:bg-white/10 rounded transition"
-            >
-              <ZoomOut size={20} />
-            </button>
-            <span className="text-sm min-w-12 text-center">{zoom}%</span>
-            <button
-              onClick={handleZoomIn}
-              className="p-2 hover:bg-white/10 rounded transition"
-            >
-              <ZoomIn size={20} />
-            </button>
-          </div>
         </div>
 
         {/* 카테고리 버튼 */}

@@ -217,8 +217,10 @@ export default function CollabNetworkGraph({
 
   if (!data) {
     return (
-      <div className="p-4 text-sm text-white">
-        그래프 불러오는 중...
+      <div className="flex items-center justify-center w-full h-full">
+        <div className="text-white text-xl font-semibold">
+          그래프 불러오는 중 · · ·
+        </div>
       </div>
     );
   }
