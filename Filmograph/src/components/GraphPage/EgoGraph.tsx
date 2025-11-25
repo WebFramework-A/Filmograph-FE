@@ -3,13 +3,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import ForceGraph2D from "react-force-graph-2d";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../services/firebaseConfig";
-import type {
-  ForceGraphMethods,
-  LinkObject,
-  NodeObject,
-} from "react-force-graph-2d";
+import type { LinkObject, NodeObject } from "react-force-graph-2d";
 
-// 타입 정의
 type NodeT = NodeObject & {
   id: string | number;
   label: string;
@@ -33,14 +28,12 @@ type GraphT = {
 
 const DEFAULT_EGO_ID = "10004308";
 
-// 역할 색상
 const ROLE_COLORS = {
   actor: "#4FC3F7",
   director: "#FFD700",
   staff: "#FF8A65",
 };
 
-// 역할 매핑
 function mapRole(role?: string): "actor" | "director" | "staff" {
   if (!role) return "actor";
   if (role.includes("배우") || role.includes("출연") || role.includes("단역"))
@@ -50,7 +43,6 @@ function mapRole(role?: string): "actor" | "director" | "staff" {
   return "staff";
 }
 
-// Firestore 로드
 async function fetchEgoGraph(id: string): Promise<GraphT | null> {
   try {
     const ref = doc(db, "egoGraphs", id);
@@ -65,12 +57,10 @@ async function fetchEgoGraph(id: string): Promise<GraphT | null> {
   }
 }
 
-// 유틸 함수
 function getNodeId(x: any): string {
   return typeof x === "object" ? String(x.id) : String(x);
 }
 
-// ego ↔ node weight
 function getWeightBetween(
   egoId: string,
   nodeId: string | number,
@@ -88,13 +78,11 @@ function getWeightBetween(
   return edge?.weight ?? 1;
 }
 
-// weight 정규화
 function normalizeWeight(w: number, minW: number, maxW: number): number {
   if (minW === maxW) return 0.5;
   return (w - minW) / (maxW - minW);
 }
 
-// 메인 컴포넌트
 export default function EgoGraph() {
   const [data, setData] = useState<GraphT | null>(null);
   const [filteredData, setFilteredData] = useState<GraphT | null>(null);
@@ -104,13 +92,8 @@ export default function EgoGraph() {
     role?: string;
   } | null>(null);
 
-  // ⭐ hoverNode 삭제 (사용 안 해서 ESLint 제거)
-  // const [hoverNode, setHoverNode] = useState<NodeT | null>(null);
+  const fgRef = useRef<any>(null);
 
-  // ⭐ ForceGraph ref 타입 완전한 제네릭 적용
-  const fgRef = useRef<ForceGraphMethods<NodeT, LinkT> | null>(null);
-
-  // 초기 로드
   useEffect(() => {
     loadGraph(DEFAULT_EGO_ID);
   }, []);
@@ -131,7 +114,6 @@ export default function EgoGraph() {
     }
   }
 
-  // 1-hop 필터링
   useEffect(() => {
     if (!data || !centerPerson) return;
 
@@ -153,7 +135,6 @@ export default function EgoGraph() {
       allowed.has(String(n.id))
     );
 
-    // 좌표 초기화
     filteredNodes.forEach((n) => {
       n.x = undefined;
       n.y = undefined;
@@ -166,7 +147,6 @@ export default function EgoGraph() {
     setFilteredData({ nodes: filteredNodes, links: filteredLinks });
   }, [data, centerPerson]);
 
-  // weight 범위
   const egoId = centerPerson?.id ?? null;
 
   const { minW, maxW } = useMemo(() => {
@@ -186,13 +166,11 @@ export default function EgoGraph() {
     };
   }, [filteredData, egoId]);
 
-  // ⭐ graphData useMemo 적용 (ESLint 경고 제거)
   const graphData = useMemo(
     () => filteredData ?? { nodes: [], links: [] },
     [filteredData]
   );
 
-  // zoomToFit 처리
   useEffect(() => {
     if (!fgRef.current || graphData.nodes.length === 0) return;
 
@@ -200,6 +178,12 @@ export default function EgoGraph() {
       fgRef.current?.zoomToFit(800, 100);
     }, 300);
   }, [graphData, centerPerson]);
+
+  useEffect(() => {
+    if (!fgRef.current) return;
+
+    fgRef.current.d3Force("charge")?.strength(-120);
+  }, [graphData]);
 
   if (!filteredData || !centerPerson)
     return (
@@ -212,9 +196,6 @@ export default function EgoGraph() {
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center relative pb-24">
-
-      {/* ⭐ 타이틀 완전히 제거됨 */}
-
       <ForceGraph2D<NodeT, LinkT>
         ref={fgRef}
         width={window.innerWidth * 0.9}
@@ -224,21 +205,12 @@ export default function EgoGraph() {
         nodeId="id"
         enableNodeDrag={true}
         linkColor={() => "rgba(255,255,255,0.7)"}
-        
-        // ⭐ 타입 오류 해결: name, force 타입 지정
-        d3Force={(name: string, force: any) => {
-          if (name === "charge") force.strength(-120);
-          return force;
-        }}
-
-        linkStrength={() => 0.1}
 
         linkWidth={(l) => {
           const norm = normalizeWeight(l.weight ?? 1, minW, maxW);
           return 2 + norm * 10;
         }}
 
-        // ⭐ scale 미사용 → 제거하여 eslint 경고 제거
         nodeCanvasObject={(raw, ctx) => {
           const node = raw as NodeT & { x: number; y: number };
           const isCenter = String(node.id) === egoId;
@@ -282,25 +254,35 @@ export default function EgoGraph() {
         }}
       />
 
-      {/* 하단 설명 */}
-      <div className="
+      <div
+        className="
         absolute bottom-4 left-1/2 -translate-x-1/2 
         flex items-center gap-6 
         bg-black/40 backdrop-blur-md px-6 py-3 
         rounded-full text-white
-      ">
+      "
+      >
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full" style={{ background: ROLE_COLORS.actor }} />
+          <div
+            className="w-3 h-3 rounded-full"
+            style={{ background: ROLE_COLORS.actor }}
+          />
           <span className="text-sm">배우</span>
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full" style={{ background: ROLE_COLORS.director }} />
+          <div
+            className="w-3 h-3 rounded-full"
+            style={{ background: ROLE_COLORS.director }}
+          />
           <span className="text-sm">감독</span>
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full" style={{ background: ROLE_COLORS.staff }} />
+          <div
+            className="w-3 h-3 rounded-full"
+            style={{ background: ROLE_COLORS.staff }}
+          />
           <span className="text-sm">스태프</span>
         </div>
 

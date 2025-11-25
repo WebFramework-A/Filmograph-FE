@@ -350,7 +350,7 @@ export default function MovieGraphSection({ movieId }: { movieId: string }) {
             viewport={{ once: true }}
           >
             <Network className="w-5 h-5 text-[#FFE66D]" />
-            <span className="text-[#FFE66D] text-sm">관계망 시각화</span>
+            <span className="text-[#FFE66D] text-sm">네트워크 시각화</span>
           </motion.div>
 
           <motion.h2
@@ -359,7 +359,7 @@ export default function MovieGraphSection({ movieId }: { movieId: string }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            영화 관계망
+            영화 네트워크
           </motion.h2>
 
           <motion.p
