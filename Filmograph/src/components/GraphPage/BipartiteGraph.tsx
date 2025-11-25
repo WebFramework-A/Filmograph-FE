@@ -48,6 +48,26 @@ const getNodeBaseSize = (node: NodeT, minVal: number, maxVal: number) => {
     return 10 + norm * 10;
 }
 
+// 캔버스 텍스트 줄바꿈 계산 함수
+function getWrappedLines(ctx: CanvasRenderingContext2D, text: string, maxWidth: number): string[] {
+    const words = text.split(" ");
+    const lines: string[] = [];
+    let currentLine = words[0];
+
+    for (let i = 1; i < words.length; i++) {
+        const word = words[i];
+        const width = ctx.measureText(currentLine + " " + word).width;
+        if (width < maxWidth) {
+            currentLine += " " + word;
+        } else {
+            lines.push(currentLine);
+            currentLine = word;
+        }
+    }
+    lines.push(currentLine);
+    return lines;
+}
+
 export default function BipartiteGraph({ resetViewFlag }: BipartiteGraphProps) {
     const [data, setData] = useState<GraphT | null>(null);
 
@@ -181,12 +201,13 @@ export default function BipartiteGraph({ resetViewFlag }: BipartiteGraphProps) {
         fgRef.current.d3Force('charge')?.strength(-500).distanceMax(500);
 
         // Link (링크 장력)
-        fgRef.current.d3Force('link')?.distance(40).strength(1).iterations(10);
+        fgRef.current.d3Force('link')?.distance(40).strength(1).iterations(5);
 
         // Collide (충돌 방지)
         const collideForce = fgRef.current.d3Force('collide');
         if (collideForce) {
-            collideForce.strength(0.8);
+            collideForce.strength(1);
+            collideForce.iterations(2); //반복 횟수 - 정확도 향상
             collideForce.radius((node: any) => {
                 const baseSize = getNodeBaseSize(node, minVal, maxVal);
                 const buffer = node.type === 'movie' ? baseSize * 1.5 : baseSize;
@@ -340,7 +361,27 @@ export default function BipartiteGraph({ resetViewFlag }: BipartiteGraphProps) {
                         ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
                         ctx.textAlign = "center";
                         ctx.textBaseline = "middle";
-                        ctx.fillText(node.name, node.x, node.y);
+                        // 줄바꿈 로직 적용
+                        // 화면 확대/축소 비율에 맞춰 폭 조절
+                        const maxWidth = 120 / globalScale;
+
+                        // 헬퍼 함수로 줄바꿈된 텍스트 배열 가져오기
+                        const lines = getWrappedLines(ctx, node.name, maxWidth);
+
+                        // 줄 간격 (폰트 크기의 1.2배)
+                        const lineHeight = fontSize * 1.2;
+
+                        // 여러 줄 그리기
+                        lines.forEach((line, i) => {
+                            // 텍스트 블록 전체를 수직 중앙 정렬하기 위한 Y 좌표 계산
+                            // (i - (전체줄수 - 1) / 2) 공식을 사용하여 중앙 기준 위아래로 펼침
+                            const dy = (i - (lines.length - 1) / 2) * lineHeight;
+
+                            // node.y 위치를 기준으로 dy만큼 이동하여 그리기
+                            if (node.x !== undefined && node.y !== undefined) {
+                                ctx.fillText(line, node.x, node.y + dy);
+                            }
+                        });
                     }
 
                     // 캔버스 설정 복구
