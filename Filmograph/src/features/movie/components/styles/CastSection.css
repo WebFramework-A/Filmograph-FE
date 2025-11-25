@@ -11,13 +11,35 @@
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 16px;
   padding: 2rem;
+  position: relative; 
+  overflow: hidden;  
+}
+
+.cast-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .cast-title {
   font-size: 2rem;
   font-weight: bold;
   color: #ffff00;
-  margin-bottom: 2rem;
+  margin-bottom: 1.2rem;
+}
+
+.cast-grid-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  min-height: 220px;
+}
+
+.cast-slide {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
 }
 
 .cast-grid {
@@ -49,4 +71,31 @@
 .cast-role {
   margin-top: 4px;
   color: rgba(255, 255, 255, 0.65);
+}
+
+.paging-buttons {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1.2rem;
+}
+
+.paging-buttons button {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.paging-buttons button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(0, 212, 216, 0.7);
+}
+
+.paging-buttons button:disabled {
+  opacity: 0.35;
+  cursor: default;
 }
