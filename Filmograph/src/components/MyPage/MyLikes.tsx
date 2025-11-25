@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import type { WishlistItem } from "../../pages/MyPage";
 import { db } from "../../services/firebaseConfig";
@@ -13,11 +12,6 @@ interface Props {
 export default function MyLikes({ likes, setLikes }: Props) {
     const navigate = useNavigate();
     const { user } = useAuth();
-
-    // [수정] 로컬 showAll 상태 대신 페이지 이동을 하므로 state 제거 가능
-    // 하지만 여기서는 '미리보기(2개)'와 '페이지 이동' 버튼을 위해 유지하거나
-    // 아예 버튼 클릭 시 navigate만 하도록 변경할 수 있습니다.
-    // 요청하신 대로 "모두 보기 누르면 다른 링크로 리다이렉트" 방식으로 구현합니다.
 
     const handleRemoveLike = async (e: React.MouseEvent, movieId: string) => {
         e.stopPropagation();
