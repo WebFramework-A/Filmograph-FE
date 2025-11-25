@@ -128,7 +128,7 @@ export default function MyPage() {
         {/* 통계 & 찜 목록 레이아웃 */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           <Status status={stats} />
-          <MyLikes likes={likes} />
+          <MyLikes likes={likes} setLikes={setLikes} />
         </div>
 
         {/* 차트 섹션 컴포넌트 */}
