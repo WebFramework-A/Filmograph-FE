@@ -8,212 +8,247 @@
   <graph edgedefault="undirected">
     <node id="김태성">
       <data key="d0">93</data>
-      <data key="d1">29</data>
+      <data key="d1">31</data>
       <data key="d2">음악</data>
+    </node>
+    <node id="유아인">
+      <data key="d0">38</data>
+      <data key="d1">17</data>
+      <data key="d2">배우</data>
     </node>
     <node id="장세진">
       <data key="d0">8</data>
-      <data key="d1">4</data>
+      <data key="d1">2</data>
       <data key="d2">배우</data>
     </node>
-    <node id="정종헌">
-      <data key="d0">48</data>
-      <data key="d1">24</data>
-      <data key="d2">촬영</data>
-    </node>
-    <node id="정경순">
-      <data key="d0">22</data>
-      <data key="d1">3</data>
+    <node id="고창석">
+      <data key="d0">75</data>
+      <data key="d1">29</data>
       <data key="d2">배우</data>
     </node>
-    <node id="조은지">
+    <node id="김윤석">
       <data key="d0">35</data>
-      <data key="d1">11</data>
+      <data key="d1">26</data>
       <data key="d2">배우</data>
     </node>
-    <node id="김홍익">
-      <data key="d0">7</data>
-      <data key="d1">1</data>
-      <data key="d2">감독</data>
-    </node>
-    <node id="김훈희">
-      <data key="d0">18</data>
-      <data key="d1">5</data>
-      <data key="d2">촬영</data>
-    </node>
-    <node id="손지나">
-      <data key="d0">23</data>
-      <data key="d1">10</data>
-      <data key="d2">배우</data>
-    </node>
-    <node id="조한선">
-      <data key="d0">28</data>
-      <data key="d1">5</data>
-      <data key="d2">배우</data>
-    </node>
-    <node id="조한철">
-      <data key="d0">90</data>
-      <data key="d1">25</data>
-      <data key="d2">배우</data>
-    </node>
-    <node id="길해연">
-      <data key="d0">64</data>
+    <node id="문성근">
+      <data key="d0">66</data>
       <data key="d1">23</data>
       <data key="d2">배우</data>
     </node>
-    <node id="임세미">
-      <data key="d0">37</data>
-      <data key="d1">11</data>
+    <node id="매티아스 브랜트">
+      <data key="d0">108</data>
+      <data key="d1">2</data>
       <data key="d2">배우</data>
     </node>
-    <node id="박미현">
-      <data key="d0">43</data>
-      <data key="d1">16</data>
+    <node id="바바라 오어">
+      <data key="d0">122</data>
+      <data key="d1">2</data>
       <data key="d2">배우</data>
     </node>
-    <node id="브누와 쟉꼬">
-      <data key="d0">14</data>
-      <data key="d1">1</data>
+    <node id="변준석">
+      <data key="d0">5</data>
+      <data key="d1">2</data>
       <data key="d2">감독</data>
     </node>
-    <node id="필립 느와레">
-      <data key="d0">171</data>
-      <data key="d1">3</data>
+    <node id="전무송">
+      <data key="d0">38</data>
+      <data key="d1">8</data>
+      <data key="d2">배우</data>
+    </node>
+    <node id="문정희">
+      <data key="d0">28</data>
+      <data key="d1">20</data>
+      <data key="d2">배우</data>
+    </node>
+    <node id="유순웅">
+      <data key="d0">25</data>
+      <data key="d1">17</data>
+      <data key="d2">배우</data>
+    </node>
+    <node id="김재록">
+      <data key="d0">44</data>
+      <data key="d1">20</data>
+      <data key="d2">배우</data>
+    </node>
+    <node id="오지혜">
+      <data key="d0">24</data>
+      <data key="d1">13</data>
+      <data key="d2">배우</data>
+    </node>
+    <node id="이한위">
+      <data key="d0">95</data>
+      <data key="d1">31</data>
       <data key="d2">배우</data>
     </node>
     <node id="엄혜정">
       <data key="d0">12</data>
-      <data key="d1">3</data>
+      <data key="d1">7</data>
       <data key="d2">촬영</data>
+    </node>
+    <node id="이수연">
+      <data key="d0">9</data>
+      <data key="d1">2</data>
+      <data key="d2">감독</data>
+    </node>
+    <node id="막스 폰 시도우">
+      <data key="d0">176</data>
+      <data key="d1">2</data>
+      <data key="d2">배우</data>
+    </node>
+    <node id="박성웅">
+      <data key="d0">86</data>
+      <data key="d1">28</data>
+      <data key="d2">배우</data>
+    </node>
+    <node id="손지나">
+      <data key="d0">23</data>
+      <data key="d1">13</data>
+      <data key="d2">배우</data>
+    </node>
+    <node id="박미현">
+      <data key="d0">43</data>
+      <data key="d1">13</data>
+      <data key="d2">배우</data>
+    </node>
+    <node id="윤종빈">
+      <data key="d0">6</data>
+      <data key="d1">3</data>
+      <data key="d2">감독</data>
+    </node>
+    <node id="고서희">
+      <data key="d0">27</data>
+      <data key="d1">22</data>
+      <data key="d2">배우</data>
+    </node>
+    <node id="정경순">
+      <data key="d0">22</data>
+      <data key="d1">8</data>
+      <data key="d2">배우</data>
     </node>
     <node id="기주봉">
       <data key="d0">98</data>
-      <data key="d1">27</data>
+      <data key="d1">30</data>
       <data key="d2">배우</data>
     </node>
     <node id="김준성">
       <data key="d0">57</data>
-      <data key="d1">21</data>
+      <data key="d1">31</data>
       <data key="d2">음악</data>
     </node>
-    <node id="천호진">
-      <data key="d0">33</data>
-      <data key="d1">15</data>
-      <data key="d2">배우</data>
-    </node>
-    <node id="이용녀">
-      <data key="d0">58</data>
-      <data key="d1">18</data>
-      <data key="d2">배우</data>
-    </node>
-    <node id="최민철">
-      <data key="d0">16</data>
-      <data key="d1">14</data>
-      <data key="d2">배우</data>
-    </node>
-    <node id="오수진">
-      <data key="d0">27</data>
-      <data key="d1">2</data>
-      <data key="d2">음악</data>
-    </node>
-    <node id="정영삼">
-      <data key="d0">29</data>
-      <data key="d1">8</data>
-      <data key="d2">감독</data>
-    </node>
-    <node id="김민재">
-      <data key="d0">33</data>
-      <data key="d1">16</data>
-      <data key="d2">배우</data>
-    </node>
-    <node id="정기섭">
-      <data key="d0">20</data>
+    <node id="김병춘">
+      <data key="d0">32</data>
       <data key="d1">10</data>
+      <data key="d2">배우</data>
+    </node>
+    <node id="남문철">
+      <data key="d0">38</data>
+      <data key="d1">21</data>
+      <data key="d2">배우</data>
+    </node>
+    <node id="서동수">
+      <data key="d0">13</data>
+      <data key="d1">11</data>
       <data key="d2">배우</data>
     </node>
     <node id="전수지">
       <data key="d0">30</data>
-      <data key="d1">11</data>
+      <data key="d1">18</data>
       <data key="d2">배우</data>
     </node>
-    <node id="남명렬">
-      <data key="d0">39</data>
-      <data key="d1">20</data>
-      <data key="d2">배우</data>
-    </node>
-    <node id="홍석연">
-      <data key="d0">30</data>
-      <data key="d1">11</data>
+    <node id="김영재">
+      <data key="d0">47</data>
+      <data key="d1">21</data>
       <data key="d2">배우</data>
     </node>
     <node id="고은기">
       <data key="d0">35</data>
-      <data key="d1">5</data>
+      <data key="d1">10</data>
       <data key="d2">감독</data>
-    </node>
-    <node id="이재우">
-      <data key="d0">23</data>
-      <data key="d1">15</data>
-      <data key="d2">촬영</data>
-    </node>
-    <node id="서범식">
-      <data key="d0">18</data>
-      <data key="d1">3</data>
-      <data key="d2">배우</data>
     </node>
     <node id="류성현">
       <data key="d0">18</data>
+      <data key="d1">16</data>
+      <data key="d2">배우</data>
+    </node>
+    <node id="백성현">
+      <data key="d0">34</data>
       <data key="d1">9</data>
       <data key="d2">배우</data>
     </node>
-    <node id="윤혜진">
-      <data key="d0">14</data>
-      <data key="d1">9</data>
+    <node id="박기헌">
+      <data key="d0">39</data>
+      <data key="d1">16</data>
+      <data key="d2">음악</data>
+    </node>
+    <node id="오태경">
+      <data key="d0">30</data>
+      <data key="d1">17</data>
+      <data key="d2">배우</data>
+    </node>
+    <node id="원호섭">
+      <data key="d0">3</data>
+      <data key="d1">3</data>
       <data key="d2">배우</data>
     </node>
     <node id="박지아">
       <data key="d0">25</data>
-      <data key="d1">16</data>
-      <data key="d2">배우</data>
-    </node>
-    <node id="김태수">
-      <data key="d0">34</data>
-      <data key="d1">18</data>
-      <data key="d2">촬영</data>
-    </node>
-    <node id="박경균">
-      <data key="d0">22</data>
-      <data key="d1">7</data>
-      <data key="d2">촬영</data>
-    </node>
-    <node id="박선주">
-      <data key="d0">13</data>
-      <data key="d1">4</data>
-      <data key="d2">배우</data>
-    </node>
-    <node id="김성오">
-      <data key="d0">53</data>
       <data key="d1">14</data>
+      <data key="d2">배우</data>
+    </node>
+    <node id="남명렬">
+      <data key="d0">39</data>
+      <data key="d1">23</data>
+      <data key="d2">배우</data>
+    </node>
+    <node id="오창경">
+      <data key="d0">32</data>
+      <data key="d1">12</data>
+      <data key="d2">배우</data>
+    </node>
+    <node id="김훈희">
+      <data key="d0">18</data>
+      <data key="d1">6</data>
+      <data key="d2">촬영</data>
+    </node>
+    <node id="이정현">
+      <data key="d0">18</data>
+      <data key="d1">13</data>
       <data key="d2">배우</data>
     </node>
     <node id="김연정">
       <data key="d0">12</data>
-      <data key="d1">6</data>
+      <data key="d1">3</data>
       <data key="d2">음악</data>
     </node>
-    <node id="김지현">
+    <node id="서영희">
       <data key="d0">28</data>
-      <data key="d1">3</data>
-      <data key="d2">촬영</data>
-    </node>
-    <node id="김병춘">
-      <data key="d0">32</data>
-      <data key="d1">11</data>
+      <data key="d1">17</data>
       <data key="d2">배우</data>
     </node>
-    <node id="오태경">
-      <data key="d0">30</data>
-      <data key="d1">12</data>
+    <node id="신임호">
+      <data key="d0">21</data>
+      <data key="d1">1</data>
+      <data key="d2">감독</data>
+    </node>
+    <node id="박명신">
+      <data key="d0">60</data>
+      <data key="d1">35</data>
+      <data key="d2">배우</data>
+    </node>
+    <node id="박대민">
+      <data key="d0">8</data>
+      <data key="d1">6</data>
+      <data key="d2">감독</data>
+    </node>
+    <node id="이태현">
+      <data key="d0">28</data>
+      <data key="d1">13</data>
+      <data key="d2">음악</data>
+    </node>
+    <node id="윤혜진">
+      <data key="d0">14</data>
+      <data key="d1">5</data>
       <data key="d2">배우</data>
     </node>
     <node id="이마리오">
@@ -221,272 +256,260 @@
       <data key="d1">1</data>
       <data key="d2">감독</data>
     </node>
-    <node id="장리우">
-      <data key="d0">24</data>
-      <data key="d1">11</data>
-      <data key="d2">배우</data>
-    </node>
-    <node id="하나리">
-      <data key="d0">1</data>
-      <data key="d1">1</data>
-      <data key="d2">배우</data>
-    </node>
-    <node id="백경민">
-      <data key="d0">1</data>
-      <data key="d1">1</data>
-      <data key="d2">촬영</data>
-    </node>
     <node id="문제용">
       <data key="d0">7</data>
-      <data key="d1">3</data>
+      <data key="d1">8</data>
       <data key="d2">감독</data>
     </node>
-    <node id="박명신">
-      <data key="d0">60</data>
-      <data key="d1">25</data>
+    <node id="장리우">
+      <data key="d0">24</data>
+      <data key="d1">9</data>
       <data key="d2">배우</data>
     </node>
-    <node id="남도형">
-      <data key="d0">17</data>
+    <node id="염혜란">
+      <data key="d0">1</data>
+      <data key="d1">2</data>
+      <data key="d2">배우</data>
+    </node>
+    <node id="이종우">
+      <data key="d0">34</data>
+      <data key="d1">19</data>
+      <data key="d2">촬영</data>
+    </node>
+    <node id="김현철">
+      <data key="d0">6</data>
+      <data key="d1">3</data>
+      <data key="d2">음악</data>
+    </node>
+    <node id="권상우">
+      <data key="d0">45</data>
+      <data key="d1">16</data>
+      <data key="d2">배우</data>
+    </node>
+    <node id="이병헌">
+      <data key="d0">10</data>
       <data key="d1">6</data>
       <data key="d2">배우</data>
     </node>
-    <node id="홍범기">
-      <data key="d0">18</data>
-      <data key="d1">1</data>
+    <node id="박기덕">
+      <data key="d0">8</data>
+      <data key="d1">3</data>
+      <data key="d2">배우</data>
+    </node>
+    <node id="안지혜">
+      <data key="d0">8</data>
+      <data key="d1">3</data>
+      <data key="d2">배우</data>
+    </node>
+    <node id="고동업">
+      <data key="d0">8</data>
+      <data key="d1">7</data>
+      <data key="d2">배우</data>
+    </node>
+    <node id="장명갑">
+      <data key="d0">8</data>
+      <data key="d1">7</data>
       <data key="d2">배우</data>
     </node>
     <node id="임나무">
       <data key="d0">11</data>
-      <data key="d1">9</data>
+      <data key="d1">5</data>
+      <data key="d2">감독</data>
+    </node>
+    <node id="김병우">
+      <data key="d0">5</data>
+      <data key="d1">1</data>
       <data key="d2">감독</data>
     </node>
     <node id="변봉선">
       <data key="d0">23</data>
-      <data key="d1">9</data>
+      <data key="d1">16</data>
       <data key="d2">촬영</data>
     </node>
-    <node id="이준오">
-      <data key="d0">12</data>
-      <data key="d1">8</data>
-      <data key="d2">음악</data>
-    </node>
-    <node id="홍지석">
-      <data key="d0">42</data>
-      <data key="d1">9</data>
+    <node id="김민재">
+      <data key="d0">33</data>
+      <data key="d1">15</data>
       <data key="d2">배우</data>
     </node>
-    <node id="필감성">
+    <node id="오기환">
       <data key="d0">8</data>
-      <data key="d1">5</data>
+      <data key="d1">4</data>
+      <data key="d2">감독</data>
+    </node>
+    <node id="윤진서">
+      <data key="d0">25</data>
+      <data key="d1">6</data>
+      <data key="d2">배우</data>
+    </node>
+    <node id="강이관">
+      <data key="d0">18</data>
+      <data key="d1">9</data>
       <data key="d2">감독</data>
     </node>
     <node id="문영동">
       <data key="d0">13</data>
-      <data key="d1">6</data>
-      <data key="d2">배우</data>
-    </node>
-    <node id="마그너스 본 혼">
-      <data key="d0">2</data>
-      <data key="d1">1</data>
-      <data key="d2">감독</data>
-    </node>
-    <node id="트린 디어홈">
-      <data key="d0">70</data>
-      <data key="d1">1</data>
-      <data key="d2">배우</data>
-    </node>
-    <node id="박종범">
-      <data key="d0">6</data>
       <data key="d1">7</data>
       <data key="d2">배우</data>
     </node>
-    <node id="김준형">
-      <data key="d0">8</data>
-      <data key="d1">5</data>
-      <data key="d2">감독</data>
-    </node>
-    <node id="조하나">
-      <data key="d0">1</data>
-      <data key="d1">1</data>
-      <data key="d2">배우</data>
-    </node>
-    <node id="할리나 레인">
-      <data key="d0">44</data>
-      <data key="d1">1</data>
+    <node id="김혜정">
+      <data key="d0">12</data>
+      <data key="d1">7</data>
       <data key="d2">배우</data>
     </node>
     <node id="이은정">
       <data key="d0">4</data>
-      <data key="d1">5</data>
+      <data key="d1">2</data>
       <data key="d2">배우</data>
     </node>
-    <node id="윤정">
-      <data key="d0">2</data>
-      <data key="d1">5</data>
-      <data key="d2">배우</data>
-    </node>
-    <node id="조은성">
-      <data key="d0">8</data>
-      <data key="d1">1</data>
+    <node id="구태진">
+      <data key="d0">14</data>
+      <data key="d1">15</data>
       <data key="d2">감독</data>
+    </node>
+    <node id="이동삼">
+      <data key="d0">21</data>
+      <data key="d1">7</data>
+      <data key="d2">촬영</data>
     </node>
     <node id="김동완">
       <data key="d0">16</data>
       <data key="d1">3</data>
       <data key="d2">배우</data>
     </node>
-    <node id="김진무">
-      <data key="d0">6</data>
-      <data key="d1">1</data>
-      <data key="d2">감독</data>
-    </node>
-    <node id="홍준표">
-      <data key="d0">10</data>
-      <data key="d1">3</data>
-      <data key="d2">감독</data>
-    </node>
-    <node id="박재인">
-      <data key="d0">5</data>
-      <data key="d1">1</data>
-      <data key="d2">음악</data>
-    </node>
-    <node id="김하영">
-      <data key="d0">3</data>
-      <data key="d1">3</data>
-      <data key="d2">배우</data>
-    </node>
-    <node id="정현철">
-      <data key="d0">8</data>
-      <data key="d1">1</data>
-      <data key="d2">감독</data>
-    </node>
-    <node id="박철민">
-      <data key="d0">2</data>
-      <data key="d1">2</data>
-      <data key="d2">배우</data>
-    </node>
-    <node id="이병수">
+    <node id="윤희철">
       <data key="d0">4</data>
+      <data key="d1">1</data>
+      <data key="d2">배우</data>
+    </node>
+    <node id="다코타 존슨">
+      <data key="d0">55</data>
+      <data key="d1">3</data>
+      <data key="d2">배우</data>
+    </node>
+    <node id="이원식">
+      <data key="d0">20</data>
       <data key="d1">2</data>
       <data key="d2">감독</data>
     </node>
-    <node id="이원재">
-      <data key="d0">6</data>
-      <data key="d1">2</data>
+    <node id="김홍표">
+      <data key="d0">7</data>
+      <data key="d1">4</data>
       <data key="d2">배우</data>
     </node>
     <node id="김세연">
       <data key="d0">14</data>
-      <data key="d1">2</data>
+      <data key="d1">4</data>
       <data key="d2">감독</data>
     </node>
-    <node id="막스 폰 시도우">
-      <data key="d0">176</data>
-      <data key="d1">1</data>
+    <node id="윤관우">
+      <data key="d0">6</data>
+      <data key="d1">2</data>
       <data key="d2">배우</data>
     </node>
-    <node id="변준석">
-      <data key="d0">5</data>
-      <data key="d1">1</data>
-      <data key="d2">감독</data>
-    </node>
-    <node id="박현영">
+    <node id="김희원">
       <data key="d0">1</data>
       <data key="d1">1</data>
       <data key="d2">배우</data>
     </node>
+    <edge source="김태성" target="유아인">
+      <data key="d3">2</data>
+      <data key="d4">#살아있다, 국가부도의 날</data>
+    </edge>
     <edge source="김태성" target="장세진">
       <data key="d3">1</data>
       <data key="d4">1724 기방난동사건</data>
     </edge>
-    <edge source="김태성" target="정종헌">
-      <data key="d3">4</data>
-      <data key="d4">1724 기방난동사건, 극한직업, 체포왕, 코리아</data>
+    <edge source="김태성" target="고창석">
+      <data key="d3">6</data>
+      <data key="d4">1987, 기적, 니 부모 얼굴이 보고 싶다, 드림, 바람과 함께 사라지다, 싱크홀</data>
     </edge>
-    <edge source="김태성" target="길해연">
-      <data key="d3">2</data>
-      <data key="d4">가시, 헬머니</data>
+    <edge source="김태성" target="김윤석">
+      <data key="d3">3</data>
+      <data key="d4">1987, 검은 사제들, 노량: 죽음의 바다</data>
+    </edge>
+    <edge source="김태성" target="문성근">
+      <data key="d3">1</data>
+      <data key="d4">1987</data>
+    </edge>
+    <edge source="김태성" target="고서희">
+      <data key="d3">3</data>
+      <data key="d4">가루지기, 보호자, 점쟁이들</data>
     </edge>
     <edge source="김태성" target="엄혜정">
       <data key="d3">1</data>
       <data key="d4">가장 보통의 연애</data>
     </edge>
-    <edge source="김태성" target="최민철">
+    <edge source="김태성" target="남문철">
       <data key="d3">2</data>
-      <data key="d4">강철비2: 정상회담, 퍼펙트 게임</data>
+      <data key="d4">감기, 검은 사제들</data>
     </edge>
     <edge source="김태성" target="전수지">
       <data key="d3">1</data>
       <data key="d4">검은 수녀들</data>
     </edge>
-    <edge source="김태성" target="조한철">
-      <data key="d3">1</data>
-      <data key="d4">국가부도의 날</data>
-    </edge>
     <edge source="김태성" target="김연정">
       <data key="d3">7</data>
       <data key="d4">굿바이 싱글, 굿바이 썸머, 기적, 싱크홀, 연의 편지, 임금님의 사건수첩, 좀비딸</data>
     </edge>
-    <edge source="김태성" target="김태수">
-      <data key="d3">5</data>
-      <data key="d4">기적, 발신제한, 사바하, 좀비딸, 특수본</data>
+    <edge source="김태성" target="유순웅">
+      <data key="d3">1</data>
+      <data key="d4">기적</data>
     </edge>
-    <edge source="김태성" target="정기섭">
-      <data key="d3">2</data>
-      <data key="d4">김복남 살인사건의 전말, 노량: 죽음의 바다</data>
+    <edge source="김태성" target="서영희">
+      <data key="d3">1</data>
+      <data key="d4">김복남 살인사건의 전말</data>
     </edge>
     <edge source="김태성" target="남명렬">
       <data key="d3">2</data>
       <data key="d4">노량: 죽음의 바다, 발신제한</data>
     </edge>
-    <edge source="김태성" target="김성오">
-      <data key="d3">2</data>
-      <data key="d4">니 부모 얼굴이 보고 싶다, 타워</data>
+    <edge source="김태성" target="문정희">
+      <data key="d3">1</data>
+      <data key="d4">노량: 죽음의 바다</data>
     </edge>
-    <edge source="김태성" target="홍지석">
-      <data key="d3">2</data>
-      <data key="d4">드림, 보호자</data>
+    <edge source="김태성" target="김영재">
+      <data key="d3">4</data>
+      <data key="d4">돌멩이, 안녕! 유에프오, 영재를 기다리며, 특수본</data>
     </edge>
     <edge source="김태성" target="문영동">
       <data key="d3">2</data>
       <data key="d4">명량, 최종병기 활</data>
     </edge>
-    <edge source="김태성" target="이용녀">
+    <edge source="김태성" target="이정현">
       <data key="d3">1</data>
-      <data key="d4">분홍신</data>
+      <data key="d4">명량</data>
+    </edge>
+    <edge source="김태성" target="박성웅">
+      <data key="d3">3</data>
+      <data key="d4">보호자, 오피스, 인질</data>
     </edge>
     <edge source="김태성" target="박명신">
       <data key="d3">2</data>
       <data key="d4">스물, 최종병기 활</data>
     </edge>
-    <edge source="김태성" target="김진무">
+    <edge source="김태성" target="권상우">
       <data key="d3">1</data>
-      <data key="d4">신이 보낸 사람</data>
+      <data key="d4">슬픔보다 더 슬픈 이야기</data>
     </edge>
-    <edge source="김태성" target="남도형">
-      <data key="d3">1</data>
-      <data key="d4">연의 편지</data>
-    </edge>
-    <edge source="김태성" target="홍준표">
-      <data key="d3">1</data>
-      <data key="d4">연의 편지</data>
+    <edge source="김태성" target="이한위">
+      <data key="d3">4</data>
+      <data key="d4">슬픔보다 더 슬픈 이야기, 체포왕, 최종병기 활, 타워</data>
     </edge>
     <edge source="김태성" target="기주봉">
       <data key="d3">1</data>
       <data key="d4">오피스</data>
     </edge>
-    <edge source="김태성" target="필감성">
-      <data key="d3">2</data>
-      <data key="d4">인질, 좀비딸</data>
+    <edge source="김태성" target="다코타 존슨">
+      <data key="d3">1</data>
+      <data key="d4">오피스</data>
     </edge>
     <edge source="김태성" target="장리우">
       <data key="d3">1</data>
       <data key="d4">코리아</data>
     </edge>
-    <edge source="김태성" target="정영삼">
+    <edge source="김태성" target="김재록">
       <data key="d3">1</data>
-      <data key="d4">코리아</data>
+      <data key="d4">크로싱</data>
     </edge>
     <edge source="김태성" target="변봉선">
       <data key="d3">1</data>
@@ -496,11 +519,11 @@
       <data key="d3">1</data>
       <data key="d4">파묘</data>
     </edge>
-    <edge source="김태성" target="박지아">
+    <edge source="김태성" target="이종우">
       <data key="d3">1</data>
-      <data key="d4">하이재킹</data>
+      <data key="d4">파묘</data>
     </edge>
-    <edge source="김태성" target="임세미">
+    <edge source="김태성" target="박지아">
       <data key="d3">1</data>
       <data key="d4">하이재킹</data>
     </edge>
@@ -508,193 +531,829 @@
       <data key="d3">2</data>
       <data key="d4">한산 리덕스, 한산: 용의 출현</data>
     </edge>
-    <edge source="김태성" target="박현영">
+    <edge source="김태성" target="이병헌">
       <data key="d3">1</data>
-      <data key="d4">한여름의 판타지아</data>
+      <data key="d4">힘내세요, 병헌씨</data>
     </edge>
-    <edge source="장세진" target="정종헌">
+    <edge source="유아인" target="이병헌">
       <data key="d3">1</data>
-      <data key="d4">1724 기방난동사건</data>
+      <data key="d4">방구석1열</data>
+    </edge>
+    <edge source="유아인" target="고은기">
+      <data key="d3">1</data>
+      <data key="d4">백상예술대상</data>
+    </edge>
+    <edge source="유아인" target="문성근">
+      <data key="d3">2</data>
+      <data key="d4">버닝, 이창동: 아이러니의 예술</data>
+    </edge>
+    <edge source="유아인" target="김민재">
+      <data key="d3">1</data>
+      <data key="d4">베테랑</data>
+    </edge>
+    <edge source="유아인" target="고창석">
+      <data key="d3">2</data>
+      <data key="d4">서양골동양과자점 앤티크, 승부</data>
+    </edge>
+    <edge source="유아인" target="남명렬">
+      <data key="d3">1</data>
+      <data key="d4">서양골동양과자점 앤티크</data>
+    </edge>
+    <edge source="유아인" target="서동수">
+      <data key="d3">1</data>
+      <data key="d4">소리도 없이</data>
+    </edge>
+    <edge source="유아인" target="남문철">
+      <data key="d3">1</data>
+      <data key="d4">승부</data>
+    </edge>
+    <edge source="유아인" target="문정희">
+      <data key="d3">1</data>
+      <data key="d4">승부</data>
+    </edge>
+    <edge source="유아인" target="전무송">
+      <data key="d3">1</data>
+      <data key="d4">승부</data>
+    </edge>
+    <edge source="유아인" target="이한위">
+      <data key="d3">2</data>
+      <data key="d4">야심만만, 패션왕</data>
+    </edge>
+    <edge source="유아인" target="김영재">
+      <data key="d3">2</data>
+      <data key="d4">완득이, 우아한 거짓말</data>
+    </edge>
+    <edge source="유아인" target="김윤석">
+      <data key="d3">1</data>
+      <data key="d4">완득이</data>
+    </edge>
+    <edge source="유아인" target="박명신">
+      <data key="d3">1</data>
+      <data key="d4">우리에게 내일은 없다</data>
+    </edge>
+    <edge source="유아인" target="안지혜">
+      <data key="d3">1</data>
+      <data key="d4">육룡이 나르샤</data>
+    </edge>
+    <edge source="유아인" target="오기환">
+      <data key="d3">1</data>
+      <data key="d4">패션왕</data>
     </edge>
     <edge source="장세진" target="문영동">
       <data key="d3">1</data>
       <data key="d4">홀리데이</data>
     </edge>
-    <edge source="장세진" target="박경균">
-      <data key="d3">1</data>
-      <data key="d4">홀리데이</data>
-    </edge>
-    <edge source="정종헌" target="김지현">
-      <data key="d3">2</data>
-      <data key="d4">동화지만 청불입니다, 우리집</data>
-    </edge>
-    <edge source="정종헌" target="김준성">
-      <data key="d3">4</data>
-      <data key="d4">리벤져, 시간이탈자, 용의자, 파과</data>
-    </edge>
-    <edge source="정종헌" target="김훈희">
-      <data key="d3">1</data>
-      <data key="d4">봄, 눈</data>
-    </edge>
-    <edge source="정종헌" target="정기섭">
-      <data key="d3">1</data>
-      <data key="d4">봄, 눈</data>
-    </edge>
-    <edge source="정종헌" target="김병춘">
-      <data key="d3">1</data>
-      <data key="d4">비열한 거리</data>
-    </edge>
-    <edge source="정종헌" target="천호진">
-      <data key="d3">2</data>
-      <data key="d4">비열한 거리, 파과</data>
-    </edge>
-    <edge source="정종헌" target="박미현">
-      <data key="d3">1</data>
-      <data key="d4">아이들...</data>
-    </edge>
-    <edge source="정종헌" target="이재우">
-      <data key="d3">2</data>
-      <data key="d4">아이들..., 파과</data>
-    </edge>
-    <edge source="정종헌" target="기주봉">
+    <edge source="고창석" target="김윤석">
       <data key="d3">3</data>
-      <data key="d4">용의자, 킹콩을 들다, 파과</data>
+      <data key="d4">1987, 암수살인, 야수</data>
     </edge>
-    <edge source="정종헌" target="김민재">
-      <data key="d3">1</data>
-      <data key="d4">용의자</data>
-    </edge>
-    <edge source="정종헌" target="남명렬">
+    <edge source="고창석" target="문성근">
       <data key="d3">2</data>
-      <data key="d4">제보자, 파과</data>
+      <data key="d4">1987, 남자친구</data>
     </edge>
-    <edge source="정종헌" target="전수지">
+    <edge source="고창석" target="김영재">
       <data key="d3">1</data>
-      <data key="d4">제보자</data>
+      <data key="d4">결백</data>
     </edge>
-    <edge source="정종헌" target="이준오">
-      <data key="d3">1</data>
-      <data key="d4">제보자</data>
-    </edge>
-    <edge source="정종헌" target="장리우">
-      <data key="d3">1</data>
-      <data key="d4">코리아</data>
-    </edge>
-    <edge source="정종헌" target="정영삼">
-      <data key="d3">1</data>
-      <data key="d4">코리아</data>
-    </edge>
-    <edge source="정종헌" target="박명신">
-      <data key="d3">1</data>
-      <data key="d4">파과</data>
-    </edge>
-    <edge source="정종헌" target="박지아">
-      <data key="d3">1</data>
-      <data key="d4">파과</data>
-    </edge>
-    <edge source="정종헌" target="조한철">
-      <data key="d3">1</data>
-      <data key="d4">파과</data>
-    </edge>
-    <edge source="정종헌" target="최민철">
-      <data key="d3">1</data>
-      <data key="d4">파과</data>
-    </edge>
-    <edge source="정종헌" target="길해연">
-      <data key="d3">1</data>
-      <data key="d4">파과</data>
-    </edge>
-    <edge source="정종헌" target="이용녀">
+    <edge source="고창석" target="김연정">
       <data key="d3">2</data>
-      <data key="d4">파과, 하이힐</data>
+      <data key="d4">기적, 싱크홀</data>
     </edge>
-    <edge source="정종헌" target="김태수">
+    <edge source="고창석" target="유순웅">
       <data key="d3">1</data>
-      <data key="d4">평행이론</data>
+      <data key="d4">기적</data>
     </edge>
-    <edge source="정경순" target="조은지">
+    <edge source="고창석" target="김준성">
       <data key="d3">1</data>
-      <data key="d4">2박 3일</data>
+      <data key="d4">늑대사냥</data>
     </edge>
-    <edge source="정경순" target="박미현">
+    <edge source="고창석" target="안지혜">
+      <data key="d3">1</data>
+      <data key="d4">늑대사냥</data>
+    </edge>
+    <edge source="고창석" target="이종우">
       <data key="d3">2</data>
-      <data key="d4">가족의 탄생, 속초에서의 겨울</data>
+      <data key="d4">마지막 늑대, 의형제</data>
     </edge>
-    <edge source="정경순" target="류성현">
+    <edge source="고창석" target="기주봉">
       <data key="d3">1</data>
-      <data key="d4">정사</data>
+      <data key="d4">봉이 김선달</data>
     </edge>
-    <edge source="조은지" target="윤혜진">
+    <edge source="고창석" target="박대민">
       <data key="d3">1</data>
-      <data key="d4">달콤, 살벌한 연인</data>
+      <data key="d4">봉이 김선달</data>
     </edge>
-    <edge source="조은지" target="변봉선">
+    <edge source="고창석" target="이태현">
       <data key="d3">1</data>
-      <data key="d4">런닝맨</data>
+      <data key="d4">봉이 김선달</data>
     </edge>
-    <edge source="조은지" target="남도형">
+    <edge source="고창석" target="이한위">
+      <data key="d3">5</data>
+      <data key="d4">빌리브, 야수, 예의없는 것들, 자전차왕 엄복동, 헬로우 고스트</data>
+    </edge>
+    <edge source="고창석" target="남명렬">
       <data key="d3">1</data>
-      <data key="d4">런닝맨</data>
+      <data key="d4">서양골동양과자점 앤티크</data>
     </edge>
-    <edge source="조은지" target="조은성">
+    <edge source="고창석" target="박명신">
+      <data key="d3">2</data>
+      <data key="d4">슬로우 비디오, 친절한 금자씨</data>
+    </edge>
+    <edge source="고창석" target="남문철">
       <data key="d3">1</data>
-      <data key="d4">션샤인 러브</data>
+      <data key="d4">승부</data>
     </edge>
-    <edge source="조은지" target="서범식">
+    <edge source="고창석" target="문정희">
+      <data key="d3">3</data>
+      <data key="d4">승부, 암수살인, 야수</data>
+    </edge>
+    <edge source="고창석" target="전무송">
+      <data key="d3">2</data>
+      <data key="d4">승부, 인생은 아름다워</data>
+    </edge>
+    <edge source="고창석" target="오창경">
       <data key="d3">1</data>
-      <data key="d4">악녀</data>
+      <data key="d4">시체가 돌아왔다</data>
     </edge>
-    <edge source="조은지" target="장리우">
+    <edge source="고창석" target="문제용">
       <data key="d3">1</data>
-      <data key="d4">요가학원</data>
+      <data key="d4">아부의 왕</data>
     </edge>
-    <edge source="조은지" target="김태수">
+    <edge source="고창석" target="윤희철">
       <data key="d3">1</data>
-      <data key="d4">장르만 로맨스</data>
+      <data key="d4">아이스케키</data>
     </edge>
-    <edge source="조은지" target="김병춘">
+    <edge source="고창석" target="권상우">
       <data key="d3">1</data>
-      <data key="d4">죽어도 해피엔딩</data>
+      <data key="d4">야수</data>
     </edge>
-    <edge source="조은지" target="박미현">
+    <edge source="고창석" target="오태경">
       <data key="d3">1</data>
-      <data key="d4">황금시대</data>
+      <data key="d4">인사동 스캔들</data>
     </edge>
-    <edge source="조은지" target="이용녀">
+    <edge source="고창석" target="박성웅">
       <data key="d3">1</data>
-      <data key="d4">후궁 : 제왕의 첩</data>
+      <data key="d4">찌라시: 위험한 소문</data>
     </edge>
-    <edge source="김홍익" target="김훈희">
+    <edge source="고창석" target="고은기">
+      <data key="d3">1</data>
+      <data key="d4">출장 십오야</data>
+    </edge>
+    <edge source="고창석" target="이병헌">
+      <data key="d3">1</data>
+      <data key="d4">출장 십오야</data>
+    </edge>
+    <edge source="고창석" target="장명갑">
+      <data key="d3">1</data>
+      <data key="d4">퀵</data>
+    </edge>
+    <edge source="고창석" target="류성현">
+      <data key="d3">1</data>
+      <data key="d4">택시운전사</data>
+    </edge>
+    <edge source="김윤석" target="문성근">
+      <data key="d3">3</data>
+      <data key="d4">1987, 바이러스, 화이: 괴물을 삼킨 아이</data>
+    </edge>
+    <edge source="김윤석" target="서동수">
+      <data key="d3">2</data>
+      <data key="d4">거북이 달린다, 타짜</data>
+    </edge>
+    <edge source="김윤석" target="남문철">
+      <data key="d3">2</data>
+      <data key="d4">검은 사제들, 극비수사</data>
+    </edge>
+    <edge source="김윤석" target="이태현">
+      <data key="d3">1</data>
+      <data key="d4">극비수사</data>
+    </edge>
+    <edge source="김윤석" target="유순웅">
+      <data key="d3">2</data>
+      <data key="d4">남한산성, 바이러스</data>
+    </edge>
+    <edge source="김윤석" target="문제용">
+      <data key="d3">2</data>
+      <data key="d4">내 생애 가장 아름다운 일주일, 타짜</data>
+    </edge>
+    <edge source="김윤석" target="서영희">
+      <data key="d3">2</data>
+      <data key="d4">내 생애 가장 아름다운 일주일, 추격자</data>
+    </edge>
+    <edge source="김윤석" target="남명렬">
+      <data key="d3">1</data>
+      <data key="d4">노량: 죽음의 바다</data>
+    </edge>
+    <edge source="김윤석" target="문정희">
       <data key="d3">4</data>
-      <data key="d4">CCTV, 스위트홈 감독판, 안동, 히어로</data>
+      <data key="d4">노량: 죽음의 바다, 암수살인, 야수, 파랑주의보</data>
     </edge>
-    <edge source="김훈희" target="박경균">
+    <edge source="김윤석" target="김준성">
       <data key="d3">1</data>
-      <data key="d4">구르는 수레바퀴</data>
+      <data key="d4">당신, 거기 있어줄래요</data>
     </edge>
-    <edge source="김훈희" target="정기섭">
+    <edge source="김윤석" target="장리우">
       <data key="d3">1</data>
-      <data key="d4">봄, 눈</data>
+      <data key="d4">당신, 거기 있어줄래요</data>
     </edge>
-    <edge source="김훈희" target="박명신">
+    <edge source="김윤석" target="박명신">
+      <data key="d3">4</data>
+      <data key="d4">모가디슈, 시실리 2km, 타짜, 화이: 괴물을 삼킨 아이</data>
+    </edge>
+    <edge source="김윤석" target="강이관">
+      <data key="d3">1</data>
+      <data key="d4">바이러스</data>
+    </edge>
+    <edge source="김윤석" target="손지나">
+      <data key="d3">1</data>
+      <data key="d4">범죄의 재구성</data>
+    </edge>
+    <edge source="김윤석" target="백성현">
+      <data key="d3">1</data>
+      <data key="d4">베사메무쵸</data>
+    </edge>
+    <edge source="김윤석" target="김훈희">
       <data key="d3">1</data>
       <data key="d4">시실리 2km</data>
     </edge>
-    <edge source="손지나" target="조한선">
+    <edge source="김윤석" target="권상우">
       <data key="d3">1</data>
-      <data key="d4">KBS 드라마 스페셜</data>
+      <data key="d4">야수</data>
     </edge>
-    <edge source="손지나" target="조한철">
-      <data key="d3">2</data>
-      <data key="d4">KBS 드라마 스페셜, 숨바꼭질</data>
+    <edge source="김윤석" target="이한위">
+      <data key="d3">1</data>
+      <data key="d4">야수</data>
     </edge>
-    <edge source="손지나" target="길해연">
-      <data key="d3">2</data>
-      <data key="d4">KBS 드라마 스페셜, 인 허 플레이스</data>
+    <edge source="김윤석" target="김영재">
+      <data key="d3">1</data>
+      <data key="d4">완득이</data>
     </edge>
-    <edge source="손지나" target="임세미">
+    <edge source="김윤석" target="구태진">
+      <data key="d3">1</data>
+      <data key="d4">추격자</data>
+    </edge>
+    <edge source="김윤석" target="김세연">
+      <data key="d3">1</data>
+      <data key="d4">추격자</data>
+    </edge>
+    <edge source="김윤석" target="변봉선">
+      <data key="d3">1</data>
+      <data key="d4">추격자</data>
+    </edge>
+    <edge source="김윤석" target="이동삼">
+      <data key="d3">1</data>
+      <data key="d4">파랑주의보</data>
+    </edge>
+    <edge source="문성근" target="남명렬">
       <data key="d3">2</data>
-      <data key="d4">KBS 드라마 스페셜, 방과 후 전쟁활동</data>
+      <data key="d4">기억의 밤, 블랙머니</data>
+    </edge>
+    <edge source="문성근" target="오지혜">
+      <data key="d3">3</data>
+      <data key="d4">꽃잎, 남영동1985, 초록물고기</data>
+    </edge>
+    <edge source="문성근" target="이정현">
+      <data key="d3">1</data>
+      <data key="d4">꽃잎</data>
+    </edge>
+    <edge source="문성근" target="서동수">
+      <data key="d3">1</data>
+      <data key="d4">남영동1985</data>
+    </edge>
+    <edge source="문성근" target="정경순">
+      <data key="d3">1</data>
+      <data key="d4">내 남편과 결혼해줘</data>
+    </edge>
+    <edge source="문성근" target="김현철">
+      <data key="d3">1</data>
+      <data key="d4">네온 속으로 노을지다</data>
+    </edge>
+    <edge source="문성근" target="남문철">
+      <data key="d3">3</data>
+      <data key="d4">도희야, 블랙머니, 실종</data>
+    </edge>
+    <edge source="문성근" target="박명신">
+      <data key="d3">3</data>
+      <data key="d4">동주, 작은 연못, 화이: 괴물을 삼킨 아이</data>
+    </edge>
+    <edge source="문성근" target="강이관">
+      <data key="d3">1</data>
+      <data key="d4">바이러스</data>
+    </edge>
+    <edge source="문성근" target="유순웅">
+      <data key="d3">1</data>
+      <data key="d4">바이러스</data>
+    </edge>
+    <edge source="문성근" target="류성현">
+      <data key="d3">1</data>
+      <data key="d4">배가본드</data>
+    </edge>
+    <edge source="문성근" target="김재록">
+      <data key="d3">1</data>
+      <data key="d4">블랙머니</data>
+    </edge>
+    <edge source="문성근" target="박성웅">
+      <data key="d3">1</data>
+      <data key="d4">석조저택 살인사건</data>
+    </edge>
+    <edge source="문성근" target="박지아">
+      <data key="d3">1</data>
+      <data key="d4">석조저택 살인사건</data>
+    </edge>
+    <edge source="문성근" target="김민재">
+      <data key="d3">1</data>
+      <data key="d4">작은 연못</data>
+    </edge>
+    <edge source="문성근" target="서영희">
+      <data key="d3">1</data>
+      <data key="d4">질투는 나의 힘</data>
+    </edge>
+    <edge source="문성근" target="이한위">
+      <data key="d3">1</data>
+      <data key="d4">한반도</data>
+    </edge>
+    <edge source="문성근" target="오태경">
+      <data key="d3">1</data>
+      <data key="d4">해변의 여인</data>
+    </edge>
+    <edge source="문성근" target="고은기">
+      <data key="d3">1</data>
+      <data key="d4">협녀, 칼의 기억</data>
+    </edge>
+    <edge source="매티아스 브랜트" target="바바라 오어">
+      <data key="d3">16</data>
+      <data key="d4">3 nach 9, Das Ende einer Nacht, Deutscher Fernsehpreis, Deutscher Filmpreis, Die Wölfe, Donna Leon, Goldene Kamera, Grimme-Preis, Kölner Treff, NDR Talk Show, Polizeiruf 110, Verratene Freunde, Vier sind einer zuviel, Zimmer frei!, 미러 넘버 3, 트랜짓</data>
+    </edge>
+    <edge source="매티아스 브랜트" target="막스 폰 시도우">
+      <data key="d3">1</data>
+      <data key="d4">Grimme-Preis</data>
+    </edge>
+    <edge source="바바라 오어" target="막스 폰 시도우">
+      <data key="d3">1</data>
+      <data key="d4">Grimme-Preis</data>
+    </edge>
+    <edge source="변준석" target="전무송">
+      <data key="d3">1</data>
+      <data key="d4">48+1</data>
+    </edge>
+    <edge source="변준석" target="임나무">
+      <data key="d3">1</data>
+      <data key="d4">하루</data>
+    </edge>
+    <edge source="전무송" target="남문철">
+      <data key="d3">1</data>
+      <data key="d4">승부</data>
+    </edge>
+    <edge source="전무송" target="문정희">
+      <data key="d3">1</data>
+      <data key="d4">승부</data>
+    </edge>
+    <edge source="전무송" target="이동삼">
+      <data key="d3">1</data>
+      <data key="d4">악어</data>
+    </edge>
+    <edge source="전무송" target="이태현">
+      <data key="d3">1</data>
+      <data key="d4">커튼콜</data>
+    </edge>
+    <edge source="전무송" target="오태경">
+      <data key="d3">1</data>
+      <data key="d4">황진이</data>
+    </edge>
+    <edge source="문정희" target="유순웅">
+      <data key="d3">1</data>
+      <data key="d4">7년의 밤</data>
+    </edge>
+    <edge source="문정희" target="박기헌">
+      <data key="d3">2</data>
+      <data key="d4">고양이를 부탁해, 나도 아내가 있었으면 좋겠다</data>
+    </edge>
+    <edge source="문정희" target="오태경">
+      <data key="d3">1</data>
+      <data key="d4">고양이를 부탁해</data>
+    </edge>
+    <edge source="문정희" target="박미현">
+      <data key="d3">2</data>
+      <data key="d4">내가 죽던 날, 카트</data>
+    </edge>
+    <edge source="문정희" target="남명렬">
+      <data key="d3">2</data>
+      <data key="d4">노량: 죽음의 바다, 미안해, 고마워</data>
+    </edge>
+    <edge source="문정희" target="이정현">
+      <data key="d3">1</data>
+      <data key="d4">리미트</data>
+    </edge>
+    <edge source="문정희" target="전수지">
+      <data key="d3">1</data>
+      <data key="d4">미안해, 고마워</data>
+    </edge>
+    <edge source="문정희" target="기주봉">
+      <data key="d3">1</data>
+      <data key="d4">숨바꼭질</data>
+    </edge>
+    <edge source="문정희" target="손지나">
+      <data key="d3">1</data>
+      <data key="d4">숨바꼭질</data>
+    </edge>
+    <edge source="문정희" target="남문철">
+      <data key="d3">1</data>
+      <data key="d4">승부</data>
+    </edge>
+    <edge source="문정희" target="권상우">
+      <data key="d3">1</data>
+      <data key="d4">야수</data>
+    </edge>
+    <edge source="문정희" target="이한위">
+      <data key="d3">1</data>
+      <data key="d4">야수</data>
+    </edge>
+    <edge source="문정희" target="김동완">
+      <data key="d3">1</data>
+      <data key="d4">연가시</data>
+    </edge>
+    <edge source="문정희" target="장리우">
+      <data key="d3">1</data>
+      <data key="d4">카트</data>
+    </edge>
+    <edge source="문정희" target="이동삼">
+      <data key="d3">1</data>
+      <data key="d4">파랑주의보</data>
+    </edge>
+    <edge source="유순웅" target="김준성">
+      <data key="d3">1</data>
+      <data key="d4">광해, 왕이 된 남자</data>
+    </edge>
+    <edge source="유순웅" target="박지아">
+      <data key="d3">1</data>
+      <data key="d4">광해, 왕이 된 남자</data>
+    </edge>
+    <edge source="유순웅" target="김연정">
+      <data key="d3">1</data>
+      <data key="d4">기적</data>
+    </edge>
+    <edge source="유순웅" target="장명갑">
+      <data key="d3">1</data>
+      <data key="d4">담보</data>
+    </edge>
+    <edge source="유순웅" target="강이관">
+      <data key="d3">1</data>
+      <data key="d4">바이러스</data>
+    </edge>
+    <edge source="유순웅" target="고서희">
+      <data key="d3">1</data>
+      <data key="d4">배심원들</data>
+    </edge>
+    <edge source="유순웅" target="김재록">
+      <data key="d3">1</data>
+      <data key="d4">빗자루, 금붕어 되다</data>
+    </edge>
+    <edge source="유순웅" target="장리우">
+      <data key="d3">1</data>
+      <data key="d4">이장</data>
+    </edge>
+    <edge source="유순웅" target="오창경">
+      <data key="d3">1</data>
+      <data key="d4">챔피언</data>
+    </edge>
+    <edge source="유순웅" target="김병춘">
+      <data key="d3">1</data>
+      <data key="d4">크로스</data>
+    </edge>
+    <edge source="유순웅" target="류성현">
+      <data key="d3">1</data>
+      <data key="d4">크로스</data>
+    </edge>
+    <edge source="유순웅" target="이태현">
+      <data key="d3">1</data>
+      <data key="d4">크로스</data>
+    </edge>
+    <edge source="김재록" target="오지혜">
+      <data key="d3">1</data>
+      <data key="d4">8월의 크리스마스</data>
+    </edge>
+    <edge source="김재록" target="이한위">
+      <data key="d3">1</data>
+      <data key="d4">8월의 크리스마스</data>
+    </edge>
+    <edge source="김재록" target="이종우">
+      <data key="d3">1</data>
+      <data key="d4">내겐 너무 소중한 너</data>
+    </edge>
+    <edge source="김재록" target="김준성">
+      <data key="d3">1</data>
+      <data key="d4">말아톤</data>
+    </edge>
+    <edge source="김재록" target="백성현">
+      <data key="d3">1</data>
+      <data key="d4">말아톤</data>
+    </edge>
+    <edge source="김재록" target="전수지">
+      <data key="d3">2</data>
+      <data key="d4">말아톤, 슈퍼맨이었던 사나이</data>
+    </edge>
+    <edge source="김재록" target="김영재">
+      <data key="d3">1</data>
+      <data key="d4">말임씨를 부탁해</data>
+    </edge>
+    <edge source="김재록" target="윤혜진">
+      <data key="d3">2</data>
+      <data key="d4">방문자, 소년, 소녀를 만나다</data>
+    </edge>
+    <edge source="김재록" target="박명신">
+      <data key="d3">3</data>
+      <data key="d4">부산행, 붉은 가족, 얼굴</data>
+    </edge>
+    <edge source="김재록" target="남명렬">
+      <data key="d3">1</data>
+      <data key="d4">블랙머니</data>
+    </edge>
+    <edge source="김재록" target="남문철">
+      <data key="d3">1</data>
+      <data key="d4">블랙머니</data>
+    </edge>
+    <edge source="김재록" target="문제용">
+      <data key="d3">1</data>
+      <data key="d4">슈퍼맨이었던 사나이</data>
+    </edge>
+    <edge source="김재록" target="고동업">
+      <data key="d3">1</data>
+      <data key="d4">얼굴</data>
+    </edge>
+    <edge source="김재록" target="고서희">
+      <data key="d3">1</data>
+      <data key="d4">얼굴</data>
+    </edge>
+    <edge source="김재록" target="김혜정">
+      <data key="d3">1</data>
+      <data key="d4">얼굴</data>
+    </edge>
+    <edge source="김재록" target="변봉선">
+      <data key="d3">1</data>
+      <data key="d4">얼굴</data>
+    </edge>
+    <edge source="김재록" target="손지나">
+      <data key="d3">1</data>
+      <data key="d4">인 허 플레이스</data>
+    </edge>
+    <edge source="오지혜" target="이한위">
+      <data key="d3">1</data>
+      <data key="d4">8월의 크리스마스</data>
+    </edge>
+    <edge source="오지혜" target="박지아">
+      <data key="d3">2</data>
+      <data key="d4">귀향, 그 겨울, 나는</data>
+    </edge>
+    <edge source="오지혜" target="이정현">
+      <data key="d3">1</data>
+      <data key="d4">꽃잎</data>
+    </edge>
+    <edge source="오지혜" target="서동수">
+      <data key="d3">1</data>
+      <data key="d4">남영동1985</data>
+    </edge>
+    <edge source="오지혜" target="기주봉">
+      <data key="d3">1</data>
+      <data key="d4">번지점프를 하다</data>
+    </edge>
+    <edge source="오지혜" target="김동완">
+      <data key="d3">1</data>
+      <data key="d4">소리꾼</data>
+    </edge>
+    <edge source="오지혜" target="김병춘">
+      <data key="d3">1</data>
+      <data key="d4">소리꾼</data>
+    </edge>
+    <edge source="오지혜" target="김영재">
+      <data key="d3">1</data>
+      <data key="d4">싱글즈</data>
+    </edge>
+    <edge source="오지혜" target="정경순">
+      <data key="d3">1</data>
+      <data key="d4">태백산맥</data>
+    </edge>
+    <edge source="오지혜" target="박대민">
+      <data key="d3">1</data>
+      <data key="d4">홈캠</data>
+    </edge>
+    <edge source="오지혜" target="이태현">
+      <data key="d3">1</data>
+      <data key="d4">홈캠</data>
+    </edge>
+    <edge source="이한위" target="박성웅">
+      <data key="d3">4</data>
+      <data key="d4">SNL 코리아, 악마가 너의 이름을 부를 때, 정승필 실종사건, 해어화</data>
+    </edge>
+    <edge source="이한위" target="기주봉">
+      <data key="d3">2</data>
+      <data key="d4">공동경비구역 JSA, 소름</data>
+    </edge>
+    <edge source="이한위" target="원호섭">
+      <data key="d3">1</data>
+      <data key="d4">공동경비구역 JSA</data>
+    </edge>
+    <edge source="이한위" target="박명신">
+      <data key="d3">6</data>
+      <data key="d4">그녀의 사생활, 사랑해... 말순씨, 오아시스, 인어공주, 전설의 고향, 최종병기 활</data>
+    </edge>
+    <edge source="이한위" target="박기덕">
+      <data key="d3">1</data>
+      <data key="d4">늑대들</data>
+    </edge>
+    <edge source="이한위" target="고서희">
+      <data key="d3">2</data>
+      <data key="d4">박하사탕, 오아시스</data>
+    </edge>
+    <edge source="이한위" target="정경순">
+      <data key="d3">1</data>
+      <data key="d4">병원선</data>
+    </edge>
+    <edge source="이한위" target="김민재">
+      <data key="d3">1</data>
+      <data key="d4">뷰티 인사이드</data>
+    </edge>
+    <edge source="이한위" target="박기헌">
+      <data key="d3">1</data>
+      <data key="d4">사랑방 선수와 어머니</data>
+    </edge>
+    <edge source="이한위" target="전수지">
+      <data key="d3">1</data>
+      <data key="d4">사랑해... 말순씨</data>
+    </edge>
+    <edge source="이한위" target="권상우">
+      <data key="d3">2</data>
+      <data key="d4">슬픔보다 더 슬픈 이야기, 야수</data>
+    </edge>
+    <edge source="이한위" target="남명렬">
+      <data key="d3">2</data>
+      <data key="d4">악마가 너의 이름을 부를 때, 커피프린스 1호점</data>
+    </edge>
+    <edge source="이한위" target="김병춘">
+      <data key="d3">1</data>
+      <data key="d4">여신강림</data>
+    </edge>
+    <edge source="이한위" target="구태진">
+      <data key="d3">1</data>
+      <data key="d4">오아시스</data>
+    </edge>
+    <edge source="이한위" target="이종우">
+      <data key="d3">2</data>
+      <data key="d4">오아시스, 외출</data>
+    </edge>
+    <edge source="이한위" target="이원식">
+      <data key="d3">1</data>
+      <data key="d4">외출</data>
+    </edge>
+    <edge source="이한위" target="백성현">
+      <data key="d3">1</data>
+      <data key="d4">울학교 이티</data>
+    </edge>
+    <edge source="이한위" target="이병헌">
+      <data key="d3">1</data>
+      <data key="d4">위대한 소원</data>
+    </edge>
+    <edge source="이한위" target="김준성">
+      <data key="d3">1</data>
+      <data key="d4">전설의 고향</data>
+    </edge>
+    <edge source="이한위" target="김홍표">
+      <data key="d3">1</data>
+      <data key="d4">전설의 고향</data>
+    </edge>
+    <edge source="이한위" target="남문철">
+      <data key="d3">1</data>
+      <data key="d4">전설의 고향</data>
+    </edge>
+    <edge source="이한위" target="문영동">
+      <data key="d3">1</data>
+      <data key="d4">최종병기 활</data>
+    </edge>
+    <edge source="이한위" target="오기환">
+      <data key="d3">1</data>
+      <data key="d4">패션왕</data>
+    </edge>
+    <edge source="엄혜정" target="이수연">
+      <data key="d3">2</data>
+      <data key="d4">E.D. 571, 해빙</data>
+    </edge>
+    <edge source="엄혜정" target="김영재">
+      <data key="d3">1</data>
+      <data key="d4">나는 날아가고… 너는 마법에 걸려있으니까</data>
+    </edge>
+    <edge source="엄혜정" target="이마리오">
+      <data key="d3">1</data>
+      <data key="d4">나를 닮은 얼굴</data>
+    </edge>
+    <edge source="엄혜정" target="이동삼">
+      <data key="d3">1</data>
+      <data key="d4">역전의 명수</data>
+    </edge>
+    <edge source="엄혜정" target="이종우">
+      <data key="d3">1</data>
+      <data key="d4">영어완전정복</data>
+    </edge>
+    <edge source="엄혜정" target="손지나">
+      <data key="d3">1</data>
+      <data key="d4">해빙</data>
+    </edge>
+    <edge source="이수연" target="손지나">
+      <data key="d3">1</data>
+      <data key="d4">해빙</data>
+    </edge>
+    <edge source="박성웅" target="손지나">
+      <data key="d3">2</data>
+      <data key="d4">KBS 드라마 스페셜, 백야행: 하얀 어둠 속을 걷다</data>
+    </edge>
+    <edge source="박성웅" target="기주봉">
+      <data key="d3">3</data>
+      <data key="d4">공작, 살인의뢰, 오피스</data>
+    </edge>
+    <edge source="박성웅" target="남문철">
+      <data key="d3">2</data>
+      <data key="d4">공작, 남자가 사랑할 때</data>
+    </edge>
+    <edge source="박성웅" target="류성현">
+      <data key="d3">2</data>
+      <data key="d4">공작, 신세계</data>
+    </edge>
+    <edge source="박성웅" target="오창경">
+      <data key="d3">1</data>
+      <data key="d4">국민사형투표</data>
+    </edge>
+    <edge source="박성웅" target="박미현">
+      <data key="d3">1</data>
+      <data key="d4">나인 퍼즐</data>
+    </edge>
+    <edge source="박성웅" target="권상우">
+      <data key="d3">3</data>
+      <data key="d4">놀라운 토요일, 라디오스타, 아는 형님</data>
+    </edge>
+    <edge source="박성웅" target="이병헌">
+      <data key="d3">1</data>
+      <data key="d4">놀면 뭐하니?</data>
+    </edge>
+    <edge source="박성웅" target="박기헌">
+      <data key="d3">2</data>
+      <data key="d4">대무가, 여의도</data>
+    </edge>
+    <edge source="박성웅" target="백성현">
+      <data key="d3">1</data>
+      <data key="d4">라디오스타</data>
+    </edge>
+    <edge source="박성웅" target="변봉선">
+      <data key="d3">2</data>
+      <data key="d4">런닝맨, 젠틀맨</data>
+    </edge>
+    <edge source="박성웅" target="김준성">
+      <data key="d3">1</data>
+      <data key="d4">메소드</data>
+    </edge>
+    <edge source="박성웅" target="김민재">
+      <data key="d3">1</data>
+      <data key="d4">무뢰한</data>
+    </edge>
+    <edge source="박성웅" target="서동수">
+      <data key="d3">1</data>
+      <data key="d4">백야행: 하얀 어둠 속을 걷다</data>
+    </edge>
+    <edge source="박성웅" target="고서희">
+      <data key="d3">2</data>
+      <data key="d4">보호자, 헌트</data>
+    </edge>
+    <edge source="박성웅" target="김병춘">
+      <data key="d3">1</data>
+      <data key="d4">사장님을 잠금해제</data>
+    </edge>
+    <edge source="박성웅" target="박지아">
+      <data key="d3">2</data>
+      <data key="d4">석조저택 살인사건, 클로젯</data>
+    </edge>
+    <edge source="박성웅" target="김영재">
+      <data key="d3">1</data>
+      <data key="d4">성냥팔이 소녀의 재림</data>
+    </edge>
+    <edge source="박성웅" target="남명렬">
+      <data key="d3">1</data>
+      <data key="d4">악마가 너의 이름을 부를 때</data>
+    </edge>
+    <edge source="박성웅" target="구태진">
+      <data key="d3">2</data>
+      <data key="d4">안시성, 역린</data>
+    </edge>
+    <edge source="박성웅" target="이태현">
+      <data key="d3">1</data>
+      <data key="d4">오케이 마담</data>
+    </edge>
+    <edge source="박성웅" target="다코타 존슨">
+      <data key="d3">1</data>
+      <data key="d4">오피스</data>
+    </edge>
+    <edge source="박성웅" target="이종우">
+      <data key="d3">1</data>
+      <data key="d4">헌트</data>
+    </edge>
+    <edge source="박성웅" target="정경순">
+      <data key="d3">1</data>
+      <data key="d4">헌트</data>
     </edge>
     <edge source="손지나" target="오태경">
       <data key="d3">1</data>
@@ -708,245 +1367,53 @@
       <data key="d3">1</data>
       <data key="d4">더 글로리</data>
     </edge>
-    <edge source="손지나" target="천호진">
+    <edge source="손지나" target="윤종빈">
       <data key="d3">1</data>
-      <data key="d4">범죄의 재구성</data>
+      <data key="d4">방과 후 전쟁활동</data>
+    </edge>
+    <edge source="손지나" target="서동수">
+      <data key="d3">1</data>
+      <data key="d4">백야행: 하얀 어둠 속을 걷다</data>
     </edge>
     <edge source="손지나" target="기주봉">
       <data key="d3">1</data>
       <data key="d4">숨바꼭질</data>
     </edge>
-    <edge source="손지나" target="엄혜정">
+    <edge source="손지나" target="장명갑">
       <data key="d3">1</data>
-      <data key="d4">해빙</data>
+      <data key="d4">하우치</data>
     </edge>
-    <edge source="조한선" target="조한철">
-      <data key="d3">1</data>
-      <data key="d4">KBS 드라마 스페셜</data>
-    </edge>
-    <edge source="조한선" target="길해연">
-      <data key="d3">2</data>
-      <data key="d4">KBS 드라마 스페셜, 빙의</data>
-    </edge>
-    <edge source="조한선" target="임세미">
-      <data key="d3">1</data>
-      <data key="d4">KBS 드라마 스페셜</data>
-    </edge>
-    <edge source="조한선" target="필립 느와레">
-      <data key="d3">1</data>
-      <data key="d4">마이 뉴 파트너</data>
-    </edge>
-    <edge source="조한철" target="길해연">
-      <data key="d3">3</data>
-      <data key="d4">KBS 드라마 스페셜, 트리거, 파과</data>
-    </edge>
-    <edge source="조한철" target="임세미">
-      <data key="d3">1</data>
-      <data key="d4">KBS 드라마 스페셜</data>
-    </edge>
-    <edge source="조한철" target="기주봉">
-      <data key="d3">4</data>
-      <data key="d4">간신, 숨바꼭질, 파과, 프로듀사</data>
-    </edge>
-    <edge source="조한철" target="김준성">
-      <data key="d3">4</data>
-      <data key="d4">간신, 내 아내의 모든 것, 세상에서 가장 아름다운 이별, 파과</data>
-    </edge>
-    <edge source="조한철" target="천호진">
-      <data key="d3">3</data>
-      <data key="d4">간신, 김종욱 찾기, 파과</data>
-    </edge>
-    <edge source="조한철" target="박미현">
-      <data key="d3">3</data>
-      <data key="d4">갯마을 차차차, 내가 죽던 날, 은하해방전선</data>
-    </edge>
-    <edge source="조한철" target="남명렬">
-      <data key="d3">5</data>
-      <data key="d4">경성크리처, 내 아내의 모든 것, 블랙머니, 침묵, 파과</data>
-    </edge>
-    <edge source="조한철" target="이용녀">
-      <data key="d3">2</data>
-      <data key="d4">곡성, 파과</data>
-    </edge>
-    <edge source="조한철" target="이재우">
-      <data key="d3">2</data>
-      <data key="d4">곡성, 파과</data>
-    </edge>
-    <edge source="조한철" target="김태수">
-      <data key="d3">1</data>
-      <data key="d4">내 아내의 모든 것</data>
-    </edge>
-    <edge source="조한철" target="박명신">
-      <data key="d3">4</data>
-      <data key="d4">마더, 붉은 가족, 트리거, 파과</data>
-    </edge>
-    <edge source="조한철" target="윤혜진">
-      <data key="d3">2</data>
-      <data key="d4">마더, 세상에서 가장 아름다운 이별</data>
-    </edge>
-    <edge source="조한철" target="김성오">
-      <data key="d3">1</data>
-      <data key="d4">방구석1열</data>
-    </edge>
-    <edge source="조한철" target="홍석연">
-      <data key="d3">1</data>
-      <data key="d4">빈센조</data>
-    </edge>
-    <edge source="조한철" target="박선주">
-      <data key="d3">1</data>
-      <data key="d4">세자매</data>
-    </edge>
-    <edge source="조한철" target="김동완">
-      <data key="d3">1</data>
-      <data key="d4">연가시</data>
-    </edge>
-    <edge source="조한철" target="정현철">
-      <data key="d3">1</data>
-      <data key="d4">재벌집 막내아들</data>
-    </edge>
-    <edge source="조한철" target="전수지">
-      <data key="d3">2</data>
-      <data key="d4">커플즈, 트리거</data>
-    </edge>
-    <edge source="조한철" target="박지아">
-      <data key="d3">1</data>
-      <data key="d4">파과</data>
-    </edge>
-    <edge source="조한철" target="최민철">
-      <data key="d3">1</data>
-      <data key="d4">파과</data>
-    </edge>
-    <edge source="조한철" target="오태경">
-      <data key="d3">1</data>
-      <data key="d4">힘을 내요, 미스터 리</data>
-    </edge>
-    <edge source="길해연" target="임세미">
-      <data key="d3">4</data>
-      <data key="d4">KBS 드라마 스페셜, O'PENing, 원더풀 월드, 트라이: 우리는 기적이 된다</data>
-    </edge>
-    <edge source="길해연" target="박미현">
-      <data key="d3">3</data>
-      <data key="d4">O'PENing, 너와 나, 카트</data>
-    </edge>
-    <edge source="길해연" target="김태수">
-      <data key="d3">1</data>
-      <data key="d4">나의 특별한 형제</data>
-    </edge>
-    <edge source="길해연" target="김준성">
-      <data key="d3">3</data>
-      <data key="d4">날, 보러와요, 살인자의 기억법, 파과</data>
-    </edge>
-    <edge source="길해연" target="이재우">
-      <data key="d3">2</data>
-      <data key="d4">메이트, 파과</data>
-    </edge>
-    <edge source="길해연" target="임나무">
-      <data key="d3">1</data>
-      <data key="d4">배니싱: 미제사건</data>
-    </edge>
-    <edge source="길해연" target="류성현">
-      <data key="d3">1</data>
-      <data key="d4">스마트폰을 떨어뜨렸을 뿐인데</data>
-    </edge>
-    <edge source="길해연" target="홍지석">
-      <data key="d3">1</data>
-      <data key="d4">잉투기</data>
-    </edge>
-    <edge source="길해연" target="장리우">
-      <data key="d3">3</data>
-      <data key="d4">장산범, 카트, 혜화, 동</data>
-    </edge>
-    <edge source="길해연" target="기주봉">
-      <data key="d3">2</data>
-      <data key="d4">초행, 파과</data>
-    </edge>
-    <edge source="길해연" target="정기섭">
-      <data key="d3">1</data>
-      <data key="d4">트라이: 우리는 기적이 된다</data>
-    </edge>
-    <edge source="길해연" target="박명신">
-      <data key="d3">2</data>
-      <data key="d4">트리거, 파과</data>
-    </edge>
-    <edge source="길해연" target="전수지">
-      <data key="d3">1</data>
-      <data key="d4">트리거</data>
-    </edge>
-    <edge source="길해연" target="남명렬">
-      <data key="d3">1</data>
-      <data key="d4">파과</data>
-    </edge>
-    <edge source="길해연" target="박지아">
-      <data key="d3">1</data>
-      <data key="d4">파과</data>
-    </edge>
-    <edge source="길해연" target="천호진">
-      <data key="d3">1</data>
-      <data key="d4">파과</data>
-    </edge>
-    <edge source="길해연" target="최민철">
-      <data key="d3">1</data>
-      <data key="d4">파과</data>
-    </edge>
-    <edge source="길해연" target="이용녀">
-      <data key="d3">1</data>
-      <data key="d4">파과</data>
-    </edge>
-    <edge source="임세미" target="박미현">
+    <edge source="박미현" target="윤종빈">
       <data key="d3">1</data>
       <data key="d4">O'PENing</data>
     </edge>
-    <edge source="임세미" target="김민재">
-      <data key="d3">1</data>
-      <data key="d4">돈</data>
-    </edge>
-    <edge source="임세미" target="김병춘">
-      <data key="d3">1</data>
-      <data key="d4">여신강림</data>
-    </edge>
-    <edge source="임세미" target="김성오">
-      <data key="d3">1</data>
-      <data key="d4">위기의 X</data>
-    </edge>
-    <edge source="임세미" target="정기섭">
-      <data key="d3">1</data>
-      <data key="d4">트라이: 우리는 기적이 된다</data>
-    </edge>
-    <edge source="임세미" target="박지아">
-      <data key="d3">1</data>
-      <data key="d4">하이재킹</data>
+    <edge source="박미현" target="정경순">
+      <data key="d3">2</data>
+      <data key="d4">가족의 탄생, 속초에서의 겨울</data>
     </edge>
     <edge source="박미현" target="기주봉">
       <data key="d3">2</data>
       <data key="d4">나쁜 영화, 환상속의 그대</data>
     </edge>
-    <edge source="박미현" target="이준오">
-      <data key="d3">1</data>
-      <data key="d4">맨홀</data>
+    <edge source="박미현" target="강이관">
+      <data key="d3">3</data>
+      <data key="d4">사과, 시선 너머, 원더랜드</data>
     </edge>
     <edge source="박미현" target="김민재">
       <data key="d3">1</data>
       <data key="d4">생일</data>
     </edge>
-    <edge source="박미현" target="이재우">
-      <data key="d3">1</data>
-      <data key="d4">아이들...</data>
-    </edge>
-    <edge source="박미현" target="홍석연">
-      <data key="d3">1</data>
-      <data key="d4">오징어 게임</data>
-    </edge>
-    <edge source="박미현" target="박종범">
-      <data key="d3">1</data>
-      <data key="d4">오징어 게임</data>
-    </edge>
-    <edge source="박미현" target="김하영">
-      <data key="d3">1</data>
-      <data key="d4">오징어 게임</data>
+    <edge source="박미현" target="오창경">
+      <data key="d3">2</data>
+      <data key="d4">오징어 게임, 은하해방전선</data>
     </edge>
     <edge source="박미현" target="전수지">
       <data key="d3">1</data>
       <data key="d4">원더랜드</data>
+    </edge>
+    <edge source="박미현" target="이종우">
+      <data key="d3">1</data>
+      <data key="d4">장화, 홍련</data>
     </edge>
     <edge source="박미현" target="박명신">
       <data key="d3">2</data>
@@ -956,61 +1423,133 @@
       <data key="d3">2</data>
       <data key="d4">제비, 카트</data>
     </edge>
-    <edge source="브누와 쟉꼬" target="필립 느와레">
+    <edge source="박미현" target="김희원">
       <data key="d3">1</data>
-      <data key="d4">Vivement dimanche</data>
+      <data key="d4">황금시대</data>
     </edge>
-    <edge source="필립 느와레" target="막스 폰 시도우">
+    <edge source="윤종빈" target="전수지">
       <data key="d3">1</data>
-      <data key="d4">타타르인의 사막</data>
+      <data key="d4">약한영웅</data>
     </edge>
-    <edge source="엄혜정" target="이마리오">
+    <edge source="고서희" target="김병춘">
       <data key="d3">1</data>
-      <data key="d4">나를 닮은 얼굴</data>
+      <data key="d4">갈매기</data>
+    </edge>
+    <edge source="고서희" target="김훈희">
+      <data key="d3">1</data>
+      <data key="d4">구르는 수레바퀴</data>
+    </edge>
+    <edge source="고서희" target="서영희">
+      <data key="d3">2</data>
+      <data key="d4">궁녀, 마돈나</data>
+    </edge>
+    <edge source="고서희" target="전수지">
+      <data key="d3">1</data>
+      <data key="d4">기생수: 더 그레이</data>
+    </edge>
+    <edge source="고서희" target="오태경">
+      <data key="d3">1</data>
+      <data key="d4">대치동 스캔들</data>
+    </edge>
+    <edge source="고서희" target="기주봉">
+      <data key="d3">1</data>
+      <data key="d4">멋진 하루</data>
+    </edge>
+    <edge source="고서희" target="김영재">
+      <data key="d3">1</data>
+      <data key="d4">밀양</data>
+    </edge>
+    <edge source="고서희" target="김혜정">
+      <data key="d3">2</data>
+      <data key="d4">밀양, 얼굴</data>
+    </edge>
+    <edge source="고서희" target="박명신">
+      <data key="d3">3</data>
+      <data key="d4">밀양, 얼굴, 오아시스</data>
+    </edge>
+    <edge source="고서희" target="고동업">
+      <data key="d3">1</data>
+      <data key="d4">얼굴</data>
+    </edge>
+    <edge source="고서희" target="변봉선">
+      <data key="d3">1</data>
+      <data key="d4">얼굴</data>
+    </edge>
+    <edge source="고서희" target="구태진">
+      <data key="d3">1</data>
+      <data key="d4">오아시스</data>
+    </edge>
+    <edge source="고서희" target="이종우">
+      <data key="d3">2</data>
+      <data key="d4">오아시스, 헌트</data>
+    </edge>
+    <edge source="고서희" target="박기헌">
+      <data key="d3">1</data>
+      <data key="d4">잔혹한 출근</data>
+    </edge>
+    <edge source="고서희" target="류성현">
+      <data key="d3">1</data>
+      <data key="d4">제8일의 밤</data>
+    </edge>
+    <edge source="고서희" target="김준성">
+      <data key="d3">1</data>
+      <data key="d4">차우</data>
+    </edge>
+    <edge source="고서희" target="정경순">
+      <data key="d3">1</data>
+      <data key="d4">헌트</data>
+    </edge>
+    <edge source="정경순" target="류성현">
+      <data key="d3">1</data>
+      <data key="d4">정사</data>
+    </edge>
+    <edge source="정경순" target="이종우">
+      <data key="d3">1</data>
+      <data key="d4">헌트</data>
     </edge>
     <edge source="기주봉" target="김준성">
       <data key="d3">4</data>
       <data key="d4">간신, 보이스, 용의자, 파과</data>
     </edge>
-    <edge source="기주봉" target="천호진">
-      <data key="d3">2</data>
-      <data key="d4">간신, 파과</data>
-    </edge>
-    <edge source="기주봉" target="홍석연">
-      <data key="d3">3</data>
-      <data key="d4">경축! 우리사랑, 제시는 그때 스무살이었다, 친구</data>
-    </edge>
-    <edge source="기주봉" target="이용녀">
-      <data key="d3">2</data>
-      <data key="d4">경축! 우리사랑, 파과</data>
-    </edge>
-    <edge source="기주봉" target="서범식">
+    <edge source="기주봉" target="원호섭">
       <data key="d3">1</data>
-      <data key="d4">공공의 적</data>
+      <data key="d4">공동경비구역 JSA</data>
+    </edge>
+    <edge source="기주봉" target="남문철">
+      <data key="d3">1</data>
+      <data key="d4">공작</data>
     </edge>
     <edge source="기주봉" target="류성현">
       <data key="d3">1</data>
       <data key="d4">공작</data>
     </edge>
-    <edge source="기주봉" target="정기섭">
-      <data key="d3">1</data>
-      <data key="d4">공작</data>
-    </edge>
-    <edge source="기주봉" target="박선주">
+    <edge source="기주봉" target="이정현">
       <data key="d3">1</data>
       <data key="d4">군함도</data>
     </edge>
-    <edge source="기주봉" target="김성오">
-      <data key="d3">2</data>
-      <data key="d4">길복순, 청풍명월</data>
+    <edge source="기주봉" target="서영희">
+      <data key="d3">1</data>
+      <data key="d4">라이어</data>
     </edge>
     <edge source="기주봉" target="임나무">
       <data key="d3">1</data>
       <data key="d4">밤과 낮</data>
     </edge>
-    <edge source="기주봉" target="김태수">
-      <data key="d3">2</data>
-      <data key="d4">북촌방향, 여교사</data>
+    <edge source="기주봉" target="백성현">
+      <data key="d3">1</data>
+      <data key="d4">보이스</data>
+    </edge>
+    <edge source="기주봉" target="박대민">
+      <data key="d3">1</data>
+      <data key="d4">봉이 김선달</data>
+    </edge>
+    <edge source="기주봉" target="이태현">
+      <data key="d3">1</data>
+      <data key="d4">봉이 김선달</data>
+    </edge>
+    <edge source="기주봉" target="박기헌">
+      <data key="d3">1</data>
+      <data key="d4">순수의 시대</data>
     </edge>
     <edge source="기주봉" target="문영동">
       <data key="d3">1</data>
@@ -1020,13 +1559,21 @@
       <data key="d3">1</data>
       <data key="d4">알포인트</data>
     </edge>
-    <edge source="기주봉" target="김민재">
+    <edge source="기주봉" target="다코타 존슨">
+      <data key="d3">1</data>
+      <data key="d4">오피스</data>
+    </edge>
+    <edge source="기주봉" target="김영재">
+      <data key="d3">2</data>
+      <data key="d4">와일드 카드, 채식주의자</data>
+    </edge>
+    <edge source="기주봉" target="구태진">
       <data key="d3">1</data>
       <data key="d4">용의자</data>
     </edge>
-    <edge source="기주봉" target="박철민">
+    <edge source="기주봉" target="김민재">
       <data key="d3">1</data>
-      <data key="d4">제시는 그때 스무살이었다</data>
+      <data key="d4">용의자</data>
     </edge>
     <edge source="기주봉" target="고은기">
       <data key="d3">1</data>
@@ -1044,22 +1591,6 @@
       <data key="d3">1</data>
       <data key="d4">파과</data>
     </edge>
-    <edge source="기주봉" target="최민철">
-      <data key="d3">1</data>
-      <data key="d4">파과</data>
-    </edge>
-    <edge source="기주봉" target="이재우">
-      <data key="d3">1</data>
-      <data key="d4">파과</data>
-    </edge>
-    <edge source="김준성" target="천호진">
-      <data key="d3">3</data>
-      <data key="d4">간신, 간호중, 파과</data>
-    </edge>
-    <edge source="김준성" target="이용녀">
-      <data key="d3">5</data>
-      <data key="d4">간호중, 베스트셀러, 이층의 악당, 파과, 허스토리</data>
-    </edge>
     <edge source="김준성" target="고은기">
       <data key="d3">1</data>
       <data key="d4">계춘할망</data>
@@ -1068,21 +1599,57 @@
       <data key="d3">2</data>
       <data key="d4">광해, 왕이 된 남자, 파과</data>
     </edge>
-    <edge source="김준성" target="김태수">
-      <data key="d3">3</data>
-      <data key="d4">광해, 왕이 된 남자, 내 아내의 모든 것, 전설의 고향</data>
-    </edge>
     <edge source="김준성" target="남명렬">
       <data key="d3">3</data>
       <data key="d4">내 아내의 모든 것, 파과, 해피 뉴 이어</data>
+    </edge>
+    <edge source="김준성" target="염혜란">
+      <data key="d3">1</data>
+      <data key="d4">내 아내의 모든 것</data>
+    </edge>
+    <edge source="김준성" target="안지혜">
+      <data key="d3">1</data>
+      <data key="d4">늑대사냥</data>
+    </edge>
+    <edge source="김준성" target="김영재">
+      <data key="d3">2</data>
+      <data key="d4">다시, 봄, 저 산 너머</data>
     </edge>
     <edge source="김준성" target="장리우">
       <data key="d3">2</data>
       <data key="d4">당신, 거기 있어줄래요, 집으로 가는 길</data>
     </edge>
+    <edge source="김준성" target="권상우">
+      <data key="d3">3</data>
+      <data key="d4">두번할까요, 통증, 해피 뉴 이어</data>
+    </edge>
+    <edge source="김준성" target="이정현">
+      <data key="d3">2</data>
+      <data key="d4">두번할까요, 죽지않는 인간들의 밤</data>
+    </edge>
+    <edge source="김준성" target="윤진서">
+      <data key="d3">1</data>
+      <data key="d4">리벤져</data>
+    </edge>
+    <edge source="김준성" target="백성현">
+      <data key="d3">2</data>
+      <data key="d4">말아톤, 보이스</data>
+    </edge>
     <edge source="김준성" target="전수지">
       <data key="d3">1</data>
       <data key="d4">말아톤</data>
+    </edge>
+    <edge source="김준성" target="구태진">
+      <data key="d3">2</data>
+      <data key="d4">살인자의 기억법, 용의자</data>
+    </edge>
+    <edge source="김준성" target="서동수">
+      <data key="d3">1</data>
+      <data key="d4">세븐 데이즈</data>
+    </edge>
+    <edge source="김준성" target="서영희">
+      <data key="d3">2</data>
+      <data key="d4">세상에서 가장 아름다운 이별, 죽지않는 인간들의 밤</data>
     </edge>
     <edge source="김준성" target="윤혜진">
       <data key="d3">1</data>
@@ -1092,205 +1659,113 @@
       <data key="d3">1</data>
       <data key="d4">용의자</data>
     </edge>
+    <edge source="김준성" target="김홍표">
+      <data key="d3">1</data>
+      <data key="d4">전설의 고향</data>
+    </edge>
+    <edge source="김준성" target="남문철">
+      <data key="d3">1</data>
+      <data key="d4">전설의 고향</data>
+    </edge>
     <edge source="김준성" target="박명신">
       <data key="d3">3</data>
       <data key="d4">전설의 고향, 파과, 허스토리</data>
     </edge>
-    <edge source="김준성" target="이병수">
-      <data key="d3">1</data>
-      <data key="d4">종이꽃</data>
-    </edge>
-    <edge source="김준성" target="이원재">
-      <data key="d3">1</data>
-      <data key="d4">종이꽃</data>
-    </edge>
-    <edge source="김준성" target="김성오">
+    <edge source="김준성" target="장명갑">
       <data key="d3">1</data>
       <data key="d4">죽지않는 인간들의 밤</data>
-    </edge>
-    <edge source="김준성" target="최민철">
-      <data key="d3">2</data>
-      <data key="d4">집으로 가는 길, 파과</data>
     </edge>
     <edge source="김준성" target="변봉선">
       <data key="d3">1</data>
       <data key="d4">캐치미</data>
     </edge>
-    <edge source="김준성" target="이재우">
+    <edge source="김준성" target="오창경">
       <data key="d3">1</data>
-      <data key="d4">파과</data>
+      <data key="d4">허스토리</data>
     </edge>
-    <edge source="천호진" target="이용녀">
-      <data key="d3">3</data>
-      <data key="d4">간호중, 불꽃처럼 나비처럼, 파과</data>
-    </edge>
-    <edge source="천호진" target="김병춘">
+    <edge source="김병춘" target="남명렬">
       <data key="d3">2</data>
-      <data key="d4">말죽거리 잔혹사, 비열한 거리</data>
+      <data key="d4">더 뱅커, 별별 며느리</data>
     </edge>
-    <edge source="천호진" target="필감성">
+    <edge source="김병춘" target="류성현">
+      <data key="d3">2</data>
+      <data key="d4">더 뱅커, 크로스</data>
+    </edge>
+    <edge source="김병춘" target="권상우">
       <data key="d3">1</data>
       <data key="d4">말죽거리 잔혹사</data>
     </edge>
-    <edge source="천호진" target="김민재">
+    <edge source="김병춘" target="김동완">
       <data key="d3">1</data>
-      <data key="d4">베테랑</data>
+      <data key="d4">소리꾼</data>
     </edge>
-    <edge source="천호진" target="남명렬">
+    <edge source="김병춘" target="이태현">
       <data key="d3">1</data>
-      <data key="d4">파과</data>
+      <data key="d4">크로스</data>
     </edge>
-    <edge source="천호진" target="박명신">
+    <edge source="남문철" target="류성현">
       <data key="d3">1</data>
-      <data key="d4">파과</data>
+      <data key="d4">공작</data>
     </edge>
-    <edge source="천호진" target="박지아">
-      <data key="d3">1</data>
-      <data key="d4">파과</data>
-    </edge>
-    <edge source="천호진" target="최민철">
-      <data key="d3">1</data>
-      <data key="d4">파과</data>
-    </edge>
-    <edge source="천호진" target="이재우">
-      <data key="d3">1</data>
-      <data key="d4">파과</data>
-    </edge>
-    <edge source="이용녀" target="홍석연">
-      <data key="d3">1</data>
-      <data key="d4">경축! 우리사랑</data>
-    </edge>
-    <edge source="이용녀" target="이재우">
+    <edge source="남문철" target="이태현">
       <data key="d3">2</data>
-      <data key="d4">곡성, 파과</data>
+      <data key="d4">극비수사, 리멤버</data>
     </edge>
-    <edge source="이용녀" target="윤혜진">
-      <data key="d3">1</data>
-      <data key="d4">나는 곤경에 처했다!</data>
-    </edge>
-    <edge source="이용녀" target="오태경">
-      <data key="d3">1</data>
-      <data key="d4">나쁜 놈이 더 잘 잔다</data>
-    </edge>
-    <edge source="이용녀" target="오수진">
+    <edge source="남문철" target="김민재">
       <data key="d3">2</data>
-      <data key="d4">부전시장, 설해</data>
+      <data key="d4">돈, 악질경찰</data>
     </edge>
-    <edge source="이용녀" target="김태수">
-      <data key="d3">1</data>
-      <data key="d4">신의 한 수</data>
-    </edge>
-    <edge source="이용녀" target="박명신">
-      <data key="d3">3</data>
-      <data key="d4">친절한 금자씨, 파과, 허스토리</data>
-    </edge>
-    <edge source="이용녀" target="남명렬">
-      <data key="d3">1</data>
-      <data key="d4">파과</data>
-    </edge>
-    <edge source="이용녀" target="박지아">
-      <data key="d3">1</data>
-      <data key="d4">파과</data>
-    </edge>
-    <edge source="이용녀" target="최민철">
-      <data key="d3">1</data>
-      <data key="d4">파과</data>
-    </edge>
-    <edge source="최민철" target="김민재">
-      <data key="d3">1</data>
-      <data key="d4">대외비</data>
-    </edge>
-    <edge source="최민철" target="박지아">
-      <data key="d3">3</data>
-      <data key="d4">만분의 일초, 첫잔처럼, 파과</data>
-    </edge>
-    <edge source="최민철" target="장리우">
-      <data key="d3">1</data>
-      <data key="d4">집으로 가는 길</data>
-    </edge>
-    <edge source="최민철" target="남명렬">
-      <data key="d3">1</data>
-      <data key="d4">파과</data>
-    </edge>
-    <edge source="최민철" target="박명신">
-      <data key="d3">1</data>
-      <data key="d4">파과</data>
-    </edge>
-    <edge source="최민철" target="이재우">
-      <data key="d3">1</data>
-      <data key="d4">파과</data>
-    </edge>
-    <edge source="오수진" target="정영삼">
-      <data key="d3">1</data>
-      <data key="d4">개 같은 것들</data>
-    </edge>
-    <edge source="정영삼" target="윤혜진">
-      <data key="d3">1</data>
-      <data key="d4">광기의 역사</data>
-    </edge>
-    <edge source="정영삼" target="김성오">
-      <data key="d3">1</data>
-      <data key="d4">그녀는 예뻤다</data>
-    </edge>
-    <edge source="정영삼" target="김지현">
-      <data key="d3">1</data>
-      <data key="d4">그물</data>
-    </edge>
-    <edge source="정영삼" target="박경균">
-      <data key="d3">1</data>
-      <data key="d4">문영</data>
-    </edge>
-    <edge source="정영삼" target="장리우">
-      <data key="d3">1</data>
-      <data key="d4">코리아</data>
-    </edge>
-    <edge source="김민재" target="정기섭">
+    <edge source="남문철" target="남명렬">
       <data key="d3">2</data>
-      <data key="d4">거미집, 소방관</data>
+      <data key="d4">블랙머니, 침묵</data>
     </edge>
-    <edge source="김민재" target="이준오">
+    <edge source="남문철" target="오창경">
       <data key="d3">1</data>
-      <data key="d4">뒤틀린 집</data>
+      <data key="d4">악질경찰</data>
     </edge>
-    <edge source="김민재" target="박종범">
+    <edge source="남문철" target="고은기">
       <data key="d3">1</data>
-      <data key="d4">반도</data>
+      <data key="d4">유열의 음악앨범</data>
     </edge>
-    <edge source="김민재" target="김성오">
+    <edge source="남문철" target="김홍표">
+      <data key="d3">1</data>
+      <data key="d4">전설의 고향</data>
+    </edge>
+    <edge source="남문철" target="박명신">
+      <data key="d3">1</data>
+      <data key="d4">전설의 고향</data>
+    </edge>
+    <edge source="남문철" target="김영재">
+      <data key="d3">1</data>
+      <data key="d4">침묵</data>
+    </edge>
+    <edge source="서동수" target="박대민">
+      <data key="d3">1</data>
+      <data key="d4">그림자 살인</data>
+    </edge>
+    <edge source="서동수" target="오태경">
+      <data key="d3">1</data>
+      <data key="d4">그림자 살인</data>
+    </edge>
+    <edge source="서동수" target="문제용">
+      <data key="d3">1</data>
+      <data key="d4">타짜</data>
+    </edge>
+    <edge source="서동수" target="박명신">
+      <data key="d3">1</data>
+      <data key="d4">타짜</data>
+    </edge>
+    <edge source="전수지" target="박기헌">
+      <data key="d3">1</data>
+      <data key="d4">내 사랑 내 곁에</data>
+    </edge>
+    <edge source="전수지" target="오창경">
       <data key="d3">2</data>
-      <data key="d4">성난황소, 우는 남자</data>
+      <data key="d4">너는 결코 서둘지 말라, 제보자</data>
     </edge>
-    <edge source="김민재" target="변봉선">
+    <edge source="전수지" target="백성현">
       <data key="d3">1</data>
-      <data key="d4">염력</data>
-    </edge>
-    <edge source="김민재" target="박명신">
-      <data key="d3">1</data>
-      <data key="d4">작은 연못</data>
-    </edge>
-    <edge source="김민재" target="이재우">
-      <data key="d3">1</data>
-      <data key="d4">최선의 삶</data>
-    </edge>
-    <edge source="김민재" target="박경균">
-      <data key="d3">1</data>
-      <data key="d4">최소한의 선의</data>
-    </edge>
-    <edge source="정기섭" target="류성현">
-      <data key="d3">3</data>
-      <data key="d4">공작, 덕구, 신세계</data>
-    </edge>
-    <edge source="정기섭" target="홍석연">
-      <data key="d3">2</data>
-      <data key="d4">국제시장, 모범택시</data>
-    </edge>
-    <edge source="정기섭" target="남명렬">
-      <data key="d3">1</data>
-      <data key="d4">노량: 죽음의 바다</data>
-    </edge>
-    <edge source="전수지" target="김성오">
-      <data key="d3">2</data>
-      <data key="d4">굿뉴스, 서울의 봄</data>
+      <data key="d4">말아톤</data>
     </edge>
     <edge source="전수지" target="남명렬">
       <data key="d3">3</data>
@@ -1304,93 +1779,73 @@
       <data key="d3">1</data>
       <data key="d4">슈퍼맨이었던 사나이</data>
     </edge>
-    <edge source="전수지" target="이준오">
+    <edge source="전수지" target="강이관">
+      <data key="d3">1</data>
+      <data key="d4">원더랜드</data>
+    </edge>
+    <edge source="전수지" target="김영재">
       <data key="d3">1</data>
       <data key="d4">제보자</data>
     </edge>
-    <edge source="남명렬" target="김태수">
-      <data key="d3">2</data>
-      <data key="d4">내 아내의 모든 것, 발신제한</data>
-    </edge>
-    <edge source="남명렬" target="김병춘">
-      <data key="d3">2</data>
-      <data key="d4">더 뱅커, 별별 며느리</data>
-    </edge>
-    <edge source="남명렬" target="류성현">
-      <data key="d3">1</data>
-      <data key="d4">더 뱅커</data>
-    </edge>
-    <edge source="남명렬" target="홍석연">
-      <data key="d3">1</data>
-      <data key="d4">도가니</data>
-    </edge>
-    <edge source="남명렬" target="이준오">
+    <edge source="전수지" target="이종우">
       <data key="d3">1</data>
       <data key="d4">제보자</data>
     </edge>
-    <edge source="남명렬" target="김지현">
+    <edge source="전수지" target="윤관우">
       <data key="d3">1</data>
-      <data key="d4">커미션</data>
+      <data key="d4">트리거</data>
     </edge>
-    <edge source="남명렬" target="박명신">
+    <edge source="김영재" target="윤진서">
       <data key="d3">1</data>
-      <data key="d4">파과</data>
+      <data key="d4">따로 또 같이</data>
     </edge>
-    <edge source="남명렬" target="박지아">
+    <edge source="김영재" target="김혜정">
       <data key="d3">1</data>
-      <data key="d4">파과</data>
+      <data key="d4">밀양</data>
     </edge>
-    <edge source="남명렬" target="이재우">
+    <edge source="김영재" target="박명신">
       <data key="d3">1</data>
-      <data key="d4">파과</data>
+      <data key="d4">밀양</data>
     </edge>
-    <edge source="홍석연" target="김병춘">
+    <edge source="김영재" target="남명렬">
       <data key="d3">2</data>
-      <data key="d4">극락도 살인사건, 조폭 마누라 3</data>
+      <data key="d4">제보자, 침묵</data>
     </edge>
-    <edge source="홍석연" target="백경민">
+    <edge source="김영재" target="오창경">
       <data key="d3">1</data>
-      <data key="d4">낭만닥터 김사부</data>
+      <data key="d4">제보자</data>
     </edge>
-    <edge source="홍석연" target="박종범">
+    <edge source="김영재" target="이종우">
       <data key="d3">1</data>
-      <data key="d4">오징어 게임</data>
+      <data key="d4">제보자</data>
     </edge>
-    <edge source="홍석연" target="김하영">
+    <edge source="김영재" target="김현철">
       <data key="d3">1</data>
-      <data key="d4">오징어 게임</data>
+      <data key="d4">태양의 노래</data>
     </edge>
-    <edge source="홍석연" target="박철민">
+    <edge source="김영재" target="박지아">
       <data key="d3">1</data>
-      <data key="d4">제시는 그때 스무살이었다</data>
+      <data key="d4">해안선</data>
     </edge>
     <edge source="고은기" target="임나무">
       <data key="d3">1</data>
       <data key="d4">대도시의 사랑법</data>
     </edge>
-    <edge source="고은기" target="김성오">
-      <data key="d3">1</data>
-      <data key="d4">출장 십오야</data>
-    </edge>
-    <edge source="이재우" target="박명신">
+    <edge source="고은기" target="이병헌">
       <data key="d3">2</data>
-      <data key="d4">동주, 파과</data>
+      <data key="d4">유 퀴즈 온 더 블럭, 출장 십오야</data>
     </edge>
-    <edge source="이재우" target="이준오">
+    <edge source="고은기" target="이종우">
       <data key="d3">1</data>
-      <data key="d4">보희와 녹양</data>
+      <data key="d4">파묘</data>
     </edge>
-    <edge source="이재우" target="박지아">
+    <edge source="류성현" target="백성현">
       <data key="d3">1</data>
-      <data key="d4">파과</data>
+      <data key="d4">고려 거란 전쟁</data>
     </edge>
-    <edge source="이재우" target="김태수">
+    <edge source="류성현" target="고동업">
       <data key="d3">1</data>
-      <data key="d4">황해</data>
-    </edge>
-    <edge source="서범식" target="박명신">
-      <data key="d3">2</data>
-      <data key="d4">연예인 매니저로 살아남기, 오아시스</data>
+      <data key="d4">다 이루어질지니</data>
     </edge>
     <edge source="류성현" target="박명신">
       <data key="d3">1</data>
@@ -1400,131 +1855,71 @@
       <data key="d3">1</data>
       <data key="d4">더 글로리</data>
     </edge>
-    <edge source="류성현" target="김병춘">
+    <edge source="류성현" target="남명렬">
+      <data key="d3">1</data>
+      <data key="d4">더 뱅커</data>
+    </edge>
+    <edge source="류성현" target="이태현">
       <data key="d3">2</data>
-      <data key="d4">더 뱅커, 크로스</data>
+      <data key="d4">올빼미, 크로스</data>
     </edge>
-    <edge source="윤혜진" target="박명신">
-      <data key="d3">1</data>
-      <data key="d4">마더</data>
-    </edge>
-    <edge source="윤혜진" target="박선주">
-      <data key="d3">1</data>
-      <data key="d4">만남의 집</data>
-    </edge>
-    <edge source="윤혜진" target="박경균">
-      <data key="d3">1</data>
-      <data key="d4">만남의 집</data>
-    </edge>
-    <edge source="윤혜진" target="홍지석">
-      <data key="d3">1</data>
-      <data key="d4">방문자</data>
-    </edge>
-    <edge source="박지아" target="김태수">
-      <data key="d3">1</data>
-      <data key="d4">광해, 왕이 된 남자</data>
-    </edge>
-    <edge source="박지아" target="박명신">
-      <data key="d3">1</data>
-      <data key="d4">파과</data>
-    </edge>
-    <edge source="김태수" target="김연정">
+    <edge source="백성현" target="권상우">
       <data key="d3">2</data>
-      <data key="d4">기적, 좀비딸</data>
+      <data key="d4">라디오스타, 천국의 계단</data>
     </edge>
-    <edge source="김태수" target="홍지석">
+    <edge source="박기헌" target="오태경">
       <data key="d3">1</data>
-      <data key="d4">롱 리브 더 킹: 목포 영웅</data>
+      <data key="d4">고양이를 부탁해</data>
     </edge>
-    <edge source="김태수" target="김성오">
+    <edge source="박기헌" target="박지아">
       <data key="d3">1</data>
-      <data key="d4">아저씨</data>
+      <data key="d4">귀신의 향기</data>
     </edge>
-    <edge source="김태수" target="박명신">
+    <edge source="박기헌" target="신임호">
       <data key="d3">1</data>
-      <data key="d4">전설의 고향</data>
+      <data key="d4">그날, 바다</data>
     </edge>
-    <edge source="김태수" target="필감성">
+    <edge source="박기헌" target="박기덕">
       <data key="d3">1</data>
-      <data key="d4">좀비딸</data>
+      <data key="d4">두 남자</data>
     </edge>
-    <edge source="김태수" target="김세연">
+    <edge source="박기헌" target="오기환">
       <data key="d3">1</data>
-      <data key="d4">추격자</data>
+      <data key="d4">선물</data>
     </edge>
-    <edge source="김태수" target="변봉선">
+    <edge source="박기헌" target="김훈희">
       <data key="d3">1</data>
-      <data key="d4">추격자</data>
+      <data key="d4">세이예스</data>
     </edge>
-    <edge source="박경균" target="박선주">
-      <data key="d3">1</data>
-      <data key="d4">만남의 집</data>
+    <edge source="박기헌" target="이동삼">
+      <data key="d3">2</data>
+      <data key="d4">세이예스, 해적 디스코왕 되다</data>
     </edge>
-    <edge source="박경균" target="문영동">
+    <edge source="박기헌" target="윤진서">
       <data key="d3">1</data>
-      <data key="d4">홀리데이</data>
+      <data key="d4">슈퍼스타 감사용</data>
     </edge>
-    <edge source="김성오" target="오태경">
+    <edge source="박기헌" target="구태진">
       <data key="d3">1</data>
-      <data key="d4">널 기다리며</data>
+      <data key="d4">히트맨</data>
     </edge>
-    <edge source="김성오" target="김병춘">
+    <edge source="박기헌" target="권상우">
       <data key="d3">1</data>
-      <data key="d4">사장님을 잠금해제</data>
+      <data key="d4">히트맨</data>
     </edge>
-    <edge source="김성오" target="박재인">
+    <edge source="오태경" target="박대민">
       <data key="d3">1</data>
-      <data key="d4">열정같은소리하고있네</data>
+      <data key="d4">그림자 살인</data>
     </edge>
-    <edge source="김성오" target="이준오">
+    <edge source="오태경" target="이종우">
       <data key="d3">1</data>
-      <data key="d4">패션왕</data>
-    </edge>
-    <edge source="김연정" target="박종범">
-      <data key="d3">1</data>
-      <data key="d4">아빠는 딸</data>
-    </edge>
-    <edge source="김연정" target="남도형">
-      <data key="d3">1</data>
-      <data key="d4">연의 편지</data>
-    </edge>
-    <edge source="김연정" target="홍준표">
-      <data key="d3">1</data>
-      <data key="d4">연의 편지</data>
-    </edge>
-    <edge source="김연정" target="필감성">
-      <data key="d3">1</data>
-      <data key="d4">좀비딸</data>
-    </edge>
-    <edge source="김병춘" target="필감성">
-      <data key="d3">1</data>
-      <data key="d4">말죽거리 잔혹사</data>
-    </edge>
-    <edge source="김병춘" target="김동완">
-      <data key="d3">1</data>
-      <data key="d4">소리꾼</data>
-    </edge>
-    <edge source="김병춘" target="박종범">
-      <data key="d3">1</data>
-      <data key="d4">소리꾼</data>
+      <data key="d4">마이 웨이</data>
     </edge>
     <edge source="오태경" target="이은정">
       <data key="d3">1</data>
       <data key="d4">사람과 고기</data>
     </edge>
     <edge source="오태경" target="임나무">
-      <data key="d3">1</data>
-      <data key="d4">사람과 고기</data>
-    </edge>
-    <edge source="오태경" target="홍지석">
-      <data key="d3">1</data>
-      <data key="d4">사람과 고기</data>
-    </edge>
-    <edge source="오태경" target="윤정">
-      <data key="d3">1</data>
-      <data key="d4">사람과 고기</data>
-    </edge>
-    <edge source="오태경" target="김준형">
       <data key="d3">1</data>
       <data key="d4">사람과 고기</data>
     </edge>
@@ -1536,113 +1931,285 @@
       <data key="d3">1</data>
       <data key="d4">올드보이</data>
     </edge>
-    <edge source="장리우" target="하나리">
+    <edge source="오태경" target="윤진서">
       <data key="d3">1</data>
-      <data key="d4">나의 해방일지</data>
+      <data key="d4">올드보이</data>
     </edge>
-    <edge source="장리우" target="문제용">
+    <edge source="오태경" target="구태진">
       <data key="d3">1</data>
-      <data key="d4">내 심장을 쏴라</data>
+      <data key="d4">음란서생</data>
     </edge>
-    <edge source="장리우" target="박명신">
+    <edge source="원호섭" target="장리우">
       <data key="d3">1</data>
-      <data key="d4">제비</data>
+      <data key="d4">변호인</data>
     </edge>
-    <edge source="문제용" target="박명신">
+    <edge source="박지아" target="강이관">
       <data key="d3">1</data>
-      <data key="d4">타짜</data>
+      <data key="d4">만분의 일초</data>
+    </edge>
+    <edge source="박지아" target="남명렬">
+      <data key="d3">1</data>
+      <data key="d4">파과</data>
+    </edge>
+    <edge source="박지아" target="박명신">
+      <data key="d3">1</data>
+      <data key="d4">파과</data>
+    </edge>
+    <edge source="남명렬" target="오창경">
+      <data key="d3">2</data>
+      <data key="d4">교섭, 제보자</data>
+    </edge>
+    <edge source="남명렬" target="염혜란">
+      <data key="d3">1</data>
+      <data key="d4">내 아내의 모든 것</data>
+    </edge>
+    <edge source="남명렬" target="이종우">
+      <data key="d3">1</data>
+      <data key="d4">제보자</data>
+    </edge>
+    <edge source="남명렬" target="권상우">
+      <data key="d3">2</data>
+      <data key="d4">탐정: 리턴즈, 해피 뉴 이어</data>
+    </edge>
+    <edge source="남명렬" target="서영희">
+      <data key="d3">1</data>
+      <data key="d4">탐정: 리턴즈</data>
+    </edge>
+    <edge source="남명렬" target="박명신">
+      <data key="d3">1</data>
+      <data key="d4">파과</data>
+    </edge>
+    <edge source="오창경" target="김민재">
+      <data key="d3">1</data>
+      <data key="d4">악질경찰</data>
+    </edge>
+    <edge source="오창경" target="이종우">
+      <data key="d3">1</data>
+      <data key="d4">제보자</data>
+    </edge>
+    <edge source="오창경" target="박명신">
+      <data key="d3">2</data>
+      <data key="d4">컨피던스 맨 KR, 허스토리</data>
+    </edge>
+    <edge source="김훈희" target="김혜정">
+      <data key="d3">1</data>
+      <data key="d4">사생결단</data>
+    </edge>
+    <edge source="김훈희" target="이동삼">
+      <data key="d3">1</data>
+      <data key="d4">세이예스</data>
+    </edge>
+    <edge source="김훈희" target="박명신">
+      <data key="d3">1</data>
+      <data key="d4">시실리 2km</data>
+    </edge>
+    <edge source="이정현" target="권상우">
+      <data key="d3">1</data>
+      <data key="d4">두번할까요</data>
+    </edge>
+    <edge source="이정현" target="문영동">
+      <data key="d3">1</data>
+      <data key="d4">명량</data>
+    </edge>
+    <edge source="이정현" target="김민재">
+      <data key="d3">1</data>
+      <data key="d4">반도</data>
+    </edge>
+    <edge source="이정현" target="강이관">
+      <data key="d3">1</data>
+      <data key="d4">범죄소년</data>
+    </edge>
+    <edge source="이정현" target="변봉선">
+      <data key="d3">1</data>
+      <data key="d4">범죄소년</data>
+    </edge>
+    <edge source="이정현" target="서영희">
+      <data key="d3">1</data>
+      <data key="d4">죽지않는 인간들의 밤</data>
+    </edge>
+    <edge source="이정현" target="장명갑">
+      <data key="d3">1</data>
+      <data key="d4">죽지않는 인간들의 밤</data>
+    </edge>
+    <edge source="서영희" target="문제용">
+      <data key="d3">1</data>
+      <data key="d4">내 생애 가장 아름다운 일주일</data>
+    </edge>
+    <edge source="서영희" target="김민재">
+      <data key="d3">1</data>
+      <data key="d4">뒤틀린 집</data>
+    </edge>
+    <edge source="서영희" target="윤혜진">
+      <data key="d3">1</data>
+      <data key="d4">세상에서 가장 아름다운 이별</data>
+    </edge>
+    <edge source="서영희" target="김현철">
+      <data key="d3">1</data>
+      <data key="d4">연리지</data>
+    </edge>
+    <edge source="서영희" target="장명갑">
+      <data key="d3">1</data>
+      <data key="d4">죽지않는 인간들의 밤</data>
+    </edge>
+    <edge source="서영희" target="구태진">
+      <data key="d3">1</data>
+      <data key="d4">추격자</data>
+    </edge>
+    <edge source="서영희" target="김세연">
+      <data key="d3">1</data>
+      <data key="d4">추격자</data>
+    </edge>
+    <edge source="서영희" target="변봉선">
+      <data key="d3">1</data>
+      <data key="d4">추격자</data>
+    </edge>
+    <edge source="서영희" target="권상우">
+      <data key="d3">1</data>
+      <data key="d4">탐정: 리턴즈</data>
+    </edge>
+    <edge source="박명신" target="고동업">
+      <data key="d3">2</data>
+      <data key="d4">다 이루어질지니, 얼굴</data>
+    </edge>
+    <edge source="박명신" target="윤혜진">
+      <data key="d3">1</data>
+      <data key="d4">마더</data>
+    </edge>
+    <edge source="박명신" target="강이관">
+      <data key="d3">1</data>
+      <data key="d4">모르는 이야기</data>
+    </edge>
+    <edge source="박명신" target="김혜정">
+      <data key="d3">2</data>
+      <data key="d4">밀양, 얼굴</data>
     </edge>
     <edge source="박명신" target="변봉선">
       <data key="d3">1</data>
       <data key="d4">얼굴</data>
     </edge>
+    <edge source="박명신" target="구태진">
+      <data key="d3">1</data>
+      <data key="d4">오아시스</data>
+    </edge>
+    <edge source="박명신" target="이종우">
+      <data key="d3">1</data>
+      <data key="d4">오아시스</data>
+    </edge>
+    <edge source="박명신" target="윤진서">
+      <data key="d3">1</data>
+      <data key="d4">올드보이</data>
+    </edge>
+    <edge source="박명신" target="김민재">
+      <data key="d3">1</data>
+      <data key="d4">작은 연못</data>
+    </edge>
+    <edge source="박명신" target="김홍표">
+      <data key="d3">1</data>
+      <data key="d4">전설의 고향</data>
+    </edge>
+    <edge source="박명신" target="장리우">
+      <data key="d3">1</data>
+      <data key="d4">제비</data>
+    </edge>
     <edge source="박명신" target="문영동">
       <data key="d3">1</data>
       <data key="d4">최종병기 활</data>
     </edge>
-    <edge source="남도형" target="홍범기">
+    <edge source="박명신" target="문제용">
       <data key="d3">1</data>
-      <data key="d4">다이노스터: 공룡수호대</data>
+      <data key="d4">타짜</data>
     </edge>
-    <edge source="남도형" target="변봉선">
+    <edge source="박명신" target="윤관우">
       <data key="d3">1</data>
-      <data key="d4">런닝맨</data>
+      <data key="d4">트리거</data>
     </edge>
-    <edge source="남도형" target="홍준표">
+    <edge source="박대민" target="이태현">
+      <data key="d3">5</data>
+      <data key="d4">드라이브, 봉이 김선달, 자기만의 방, 특송, 홈캠</data>
+    </edge>
+    <edge source="이태현" target="윤혜진">
       <data key="d3">1</data>
-      <data key="d4">연의 편지</data>
+      <data key="d4">기묘한 가족</data>
+    </edge>
+    <edge source="이태현" target="권상우">
+      <data key="d3">1</data>
+      <data key="d4">해적: 도깨비 깃발</data>
+    </edge>
+    <edge source="문제용" target="장리우">
+      <data key="d3">1</data>
+      <data key="d4">내 심장을 쏴라</data>
+    </edge>
+    <edge source="이종우" target="구태진">
+      <data key="d3">1</data>
+      <data key="d4">오아시스</data>
+    </edge>
+    <edge source="이종우" target="이원식">
+      <data key="d3">1</data>
+      <data key="d4">외출</data>
+    </edge>
+    <edge source="이종우" target="권상우">
+      <data key="d3">1</data>
+      <data key="d4">화산고</data>
+    </edge>
+    <edge source="권상우" target="구태진">
+      <data key="d3">1</data>
+      <data key="d4">히트맨</data>
+    </edge>
+    <edge source="박기덕" target="고동업">
+      <data key="d3">1</data>
+      <data key="d4">스물다섯 스물하나</data>
+    </edge>
+    <edge source="고동업" target="김혜정">
+      <data key="d3">1</data>
+      <data key="d4">얼굴</data>
+    </edge>
+    <edge source="고동업" target="변봉선">
+      <data key="d3">1</data>
+      <data key="d4">얼굴</data>
+    </edge>
+    <edge source="장명갑" target="이동삼">
+      <data key="d3">1</data>
+      <data key="d4">해운대</data>
     </edge>
     <edge source="임나무" target="이은정">
       <data key="d3">1</data>
       <data key="d4">사람과 고기</data>
     </edge>
-    <edge source="임나무" target="홍지석">
-      <data key="d3">1</data>
-      <data key="d4">사람과 고기</data>
-    </edge>
-    <edge source="임나무" target="윤정">
-      <data key="d3">1</data>
-      <data key="d4">사람과 고기</data>
-    </edge>
-    <edge source="임나무" target="김준형">
-      <data key="d3">1</data>
-      <data key="d4">사람과 고기</data>
-    </edge>
-    <edge source="임나무" target="변준석">
-      <data key="d3">1</data>
-      <data key="d4">하루</data>
-    </edge>
-    <edge source="변봉선" target="이준오">
+    <edge source="김병우" target="변봉선">
       <data key="d3">1</data>
       <data key="d4">더 테러 라이브</data>
+    </edge>
+    <edge source="변봉선" target="강이관">
+      <data key="d3">1</data>
+      <data key="d4">범죄소년</data>
+    </edge>
+    <edge source="변봉선" target="김혜정">
+      <data key="d3">1</data>
+      <data key="d4">얼굴</data>
+    </edge>
+    <edge source="변봉선" target="김민재">
+      <data key="d3">1</data>
+      <data key="d4">염력</data>
+    </edge>
+    <edge source="변봉선" target="구태진">
+      <data key="d3">1</data>
+      <data key="d4">추격자</data>
     </edge>
     <edge source="변봉선" target="김세연">
       <data key="d3">1</data>
       <data key="d4">추격자</data>
     </edge>
-    <edge source="홍지석" target="김준형">
-      <data key="d3">2</data>
-      <data key="d4">버티고, 사람과 고기</data>
-    </edge>
-    <edge source="홍지석" target="이은정">
+    <edge source="김민재" target="구태진">
       <data key="d3">1</data>
-      <data key="d4">사람과 고기</data>
+      <data key="d4">용의자</data>
     </edge>
-    <edge source="홍지석" target="윤정">
+    <edge source="오기환" target="윤진서">
       <data key="d3">1</data>
-      <data key="d4">사람과 고기</data>
+      <data key="d4">두 사람이다</data>
     </edge>
-    <edge source="마그너스 본 혼" target="트린 디어홈">
+    <edge source="구태진" target="김세연">
       <data key="d3">1</data>
-      <data key="d4">바늘을 든 소녀</data>
-    </edge>
-    <edge source="박종범" target="김동완">
-      <data key="d3">1</data>
-      <data key="d4">소리꾼</data>
-    </edge>
-    <edge source="박종범" target="김하영">
-      <data key="d3">1</data>
-      <data key="d4">오징어 게임</data>
-    </edge>
-    <edge source="김준형" target="이은정">
-      <data key="d3">1</data>
-      <data key="d4">사람과 고기</data>
-    </edge>
-    <edge source="김준형" target="윤정">
-      <data key="d3">1</data>
-      <data key="d4">사람과 고기</data>
-    </edge>
-    <edge source="조하나" target="할리나 레인">
-      <data key="d3">1</data>
-      <data key="d4">블라인드</data>
-    </edge>
-    <edge source="이은정" target="윤정">
-      <data key="d3">1</data>
-      <data key="d4">사람과 고기</data>
-    </edge>
-    <edge source="이병수" target="이원재">
-      <data key="d3">1</data>
-      <data key="d4">종이꽃</data>
+      <data key="d4">추격자</data>
     </edge>
   </graph>
 </graphml>
