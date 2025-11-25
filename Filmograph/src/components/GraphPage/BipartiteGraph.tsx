@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import ForceGraph2D from "react-force-graph-2d";
 import { db } from "../../services/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 import type {
     Node as CommonNode,
@@ -55,6 +56,11 @@ export default function BipartiteGraph({ resetViewFlag }: BipartiteGraphProps) {
     const [selectedNode, setSelectedNode] = useState<NodeT | null>(null);
 
     const fgRef = useRef<any>(null);
+
+    // 더블 클릭 감지를 위한 마지막 클릭 시간 저장소
+    const lastClickTimeRef = useRef<number>(0);
+    // 페이지 이동 함수
+    const navigate = useNavigate();
 
     // 데이터 로딩
     useEffect(() => {
@@ -239,26 +245,38 @@ export default function BipartiteGraph({ resetViewFlag }: BipartiteGraphProps) {
                 }}
 
                 onNodeClick={(node: any) => {
-                    setSelectedNode(node);
-                    // 1. 클릭한 노드와 연결된 이웃 노드들의 ID 찾기
-                    const relatedNodeIds = new Set([node.id]);
+                    const now = Date.now();
 
-                    graphData.links.forEach((link: any) => {
-                        // link.source/target이 객체일 수도, ID일 수도 있어서 안전하게 처리
-                        const sId = typeof link.source === 'object' ? link.source.id : link.source;
-                        const tId = typeof link.target === 'object' ? link.target.id : link.target;
+                    //더블 클릭 감지
+                    if (now - lastClickTimeRef.current < 300) {
+                        if (node.type === "movie") {
+                            navigate(`/detail/${node.id}`);
+                        }
+                    }
+                    else {
+                        setSelectedNode(node);
+                        // 클릭한 노드와 연결된 이웃 노드들의 ID 찾기
+                        const relatedNodeIds = new Set([node.id]);
 
-                        if (sId === node.id) relatedNodeIds.add(tId);
-                        if (tId === node.id) relatedNodeIds.add(sId);
-                    });
+                        graphData.links.forEach((link: any) => {
+                            // link.source/target이 객체일 수도, ID일 수도 있어서 안전하게 처리
+                            const sId = typeof link.source === 'object' ? link.source.id : link.source;
+                            const tId = typeof link.target === 'object' ? link.target.id : link.target;
 
-                    // 2. 해당 노드들의 범위에 맞춰서 줌 (zoomToFit)
-                    // zoomToFit(duration, padding, filterFunction)
-                    fgRef.current?.zoomToFit(
-                        500,  // 애니메이션 시간
-                        10,  // 화면 가장자리 여백 px
-                        (n: any) => relatedNodeIds.has(n.id) // 이 함수가 true인 노드들만 화면에 담음
-                    );
+                            if (sId === node.id) relatedNodeIds.add(tId);
+                            if (tId === node.id) relatedNodeIds.add(sId);
+                        });
+
+                        // 해당 노드들의 범위에 맞춰서 줌 (zoomToFit)
+                        // zoomToFit(duration, padding, filterFunction)
+                        fgRef.current?.zoomToFit(
+                            500,  // 애니메이션 시간
+                            10,  // 화면 가장자리 여백 px
+                            (n: any) => relatedNodeIds.has(n.id) // 이 함수가 true인 노드들만 화면에 담음
+                        );
+                    }
+                    // 마지막 클릭 시간 갱신
+                    lastClickTimeRef.current = now;
                 }}
 
                 onBackgroundClick={() => {
