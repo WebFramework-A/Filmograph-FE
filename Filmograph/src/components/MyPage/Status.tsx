@@ -1,94 +1,49 @@
-import { LevelDefinition } from "../../utils/levelUtils";
+import { ReactNode } from "react";
 
-interface ProgressData {
-    nextLevelName: string;
-    reviewsLeft: number;
-    likesLeft: number;
-    totalProgress: number;
-    targetReviews: number;
-    targetLikes: number;
+interface StatusProps {
+    status: {
+        reviewCount: number;
+        ratingCount: number;
+        avgRating: number;
+    };
 }
 
-interface Props {
-    currentLevel: LevelDefinition;
-    reviewCount: number;
-    likeCount: number;
-    progress: ProgressData | null;
-}
-
-export default function Status({ currentLevel, reviewCount, likeCount, progress }: Props) {
-    // 만렙인 경우
-    if (!progress) {
-        return (
-            <div className="bg-black/20 p-6 rounded-lg border border-white/5 shadow-md flex flex-col justify-center items-center h-full">
-                <h3 className="text-2xl font-bold text-[#E040FB] mb-2"> MAX LEVEL !!!</h3>
-                <p className="text-white/70">모든 업적을 달성하셨습니다!</p>
-                <p className="mt-4 text-sm text-white/50">현재 {reviewCount}개의 리뷰와 {likeCount}개의 찜을 보유 중</p>
-            </div>
-        );
-    }
-
+export default function Status({ status }: StatusProps) {
     return (
-        <div className="bg-black/20 p-6 rounded-lg border border-white/5 shadow-md h-full flex flex-col justify-between">
-            <div>
-                <h3 className="text-xl font-bold text-yellow-200 mb-1">레벨업 진행 상황</h3>
-                <p className="text-sm text-white/60 mb-6">
-                    다음 등급 <span className="text-[#4FC3F7] font-bold">'{progress.nextLevelName}'</span>까지
-                </p>
+        <div className="bg-black/20 p-6 rounded-lg border border-white/5 shadow-md flex flex-col h-full">
+            <h3 className="text-xl font-bold text-yellow-200 mb-4">내 활동 요약</h3>
 
-                {/* 미션 목록 */}
-                <div className="space-y-4 mb-6">
-                    {/* 리뷰 미션 */}
-                    <div>
-                        <div className="flex justify-between text-sm mb-1">
-                            <span className="text-white/80">📝 리뷰 작성</span>
-                            <span className={progress.reviewsLeft <= 0 ? "text-green-400" : "text-white/50"}>
-                                {progress.reviewsLeft <= 0
-                                    ? "완료!"
-                                    : `${progress.reviewsLeft}개 남음`}
-                            </span>
-                        </div>
-                        {/* 개별 진행바 */}
-                        <div className="w-full bg-white/10 rounded-full h-1.5">
-                            <div
-                                className={`h-1.5 rounded-full transition-all duration-500 ${progress.reviewsLeft <= 0 ? "bg-green-400" : "bg-white/40"}`}
-                                style={{ width: `${Math.min(100, (reviewCount / progress.targetReviews) * 100)}%` }}
-                            ></div>
-                        </div>
-                    </div>
-
-                    {/* 찜 미션 */}
-                    <div>
-                        <div className="flex justify-between text-sm mb-1">
-                            <span className="text-white/80">♥ 찜한 영화</span>
-                            <span className={progress.likesLeft <= 0 ? "text-green-400" : "text-white/50"}>
-                                {progress.likesLeft <= 0
-                                    ? "완료!"
-                                    : `${progress.likesLeft}개 남음`}
-                            </span>
-                        </div>
-                        {/* 개별 진행바 */}
-                        <div className="w-full bg-white/10 rounded-full h-1.5">
-                            <div
-                                className={`h-1.5 rounded-full transition-all duration-500 ${progress.likesLeft <= 0 ? "bg-green-400" : "bg-white/40"}`}
-                                style={{ width: `${Math.min(100, (likeCount / progress.targetLikes) * 100)}%` }}
-                            ></div>
-                        </div>
-                    </div>
+            <div className="grid grid-cols-3 gap-4 mb-6 text-center">
+                <div className="bg-white/5 p-3 rounded-lg">
+                    <div className="text-2xl font-bold text-white">{status.reviewCount}</div>
+                    <div className="text-xs text-white/60 mt-1">리뷰</div>
+                </div>
+                <div className="bg-white/5 p-3 rounded-lg">
+                    <div className="text-2xl font-bold text-white">{status.ratingCount}</div>
+                    <div className="text-xs text-white/60 mt-1">평가</div>
+                </div>
+                <div className="bg-white/5 p-3 rounded-lg">
+                    <div className="text-2xl font-bold text-[#FFD700]">{status.avgRating}</div>
+                    <div className="text-xs text-white/60 mt-1">평점</div>
                 </div>
             </div>
 
-            {/* 전체 통합 진행률 */}
-            <div>
-                <div className="flex justify-between items-end mb-2">
-                    <span className="text-xs text-white/40">Total Progress</span>
-                    <span className="text-2xl font-bold text-[#FFD700]">{progress.totalProgress}%</span>
-                </div>
-                <div className="w-full bg-black/40 rounded-full h-3 border border-white/10">
-                    <div
-                        className="bg-gradient-to-r from-yellow-600 to-yellow-300 h-full rounded-full transition-all duration-700 shadow-[0_0_10px_rgba(255,215,0,0.3)]"
-                        style={{ width: `${progress.totalProgress}%` }}
-                    ></div>
+            <div className="flex-1">
+                <h4 className="text-sm font-bold text-white/80 mb-3">최근 활동</h4>
+                {/* 더미 데이터 리뷰 목록 */}
+                <div className="space-y-3">
+                    {[1, 2].map((i) => (
+                        <div key={i} className="flex gap-3 items-start bg-white/5 p-3 rounded text-sm">
+                            <div className="w-8 h-8 rounded bg-gray-600 flex-shrink-0"></div>
+                            <div>
+                                <p className="font-bold text-white">영화 제목 {i}</p>
+                                <p className="text-white/60 text-xs line-clamp-2">
+                                    이 영화는 정말 인상 깊었습니다. 연출과 연기가 모두 훌륭하네요.
+                                    다음에도 다시 보고 싶은 작품입니다. (더미 리뷰입니다)
+                                </p>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>

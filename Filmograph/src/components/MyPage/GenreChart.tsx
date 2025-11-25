@@ -9,20 +9,25 @@ interface Props {
 export default function GenreChart({ genreData }: Props) {
 
     //데이터 분석 - 찜 이용하여 가장 선호하는 장르
-    const topGenre = useMemo(() => {
-        if (genreData.length === 0) return null;
-        return genreData.reduce((prev, current) =>
-            prev.value > current.value ? prev : current
-        );
+    const topGenres = useMemo(() => {
+        if (genreData.length === 0) return [];
+
+        //동률 처리하기
+        // 장르 중 가장 높은 비중(숫자) 찾기
+        const maxVal = Math.max(...genreData.map((d) => d.value));
+
+        // 비중이 같은 장르들을 모두 필터링해서 배열로 만듦
+        return genreData.filter((d) => d.value === maxVal);
     }, [genreData]);
 
-    // 장르 다양성 멘트 (예: 상위 1개가 50% 이상이면 편식, 아니면 골고루)
+    // 멘트 로직
     const diversityComment = useMemo(() => {
-        if (!topGenre) return "데이터가 충분하지 않습니다.";
-        return topGenre.value > 50
+        if (topGenres.length === 0) return "데이터가 충분하지 않습니다.";
+
+        return topGenres[0].value > 50
             ? "한 우물만 파는 뚝심있는 취향이시군요!"
             : "다양한 장르를 골고루 즐기시는 편이네요!";
-    }, [topGenre]);
+    }, [topGenres]);
 
     if (genreData.length === 0) {
         return (
@@ -88,11 +93,19 @@ export default function GenreChart({ genreData }: Props) {
                         <ul className="list-disc pl-4 space-y-1 text-white/80">
                             <li>
                                 가장 선호하는 장르는{" "}
-                                <span className="font-bold"
-                                    style={{ color: topGenre?.color || "text-yellow-200" }}
-                                >
-                                    {topGenre?.name}
-                                </span>
+                                {/* 동률인 장르 쉼표로 연결 모두 표시 */}
+                                {topGenres.map((genre, index) => (
+                                    <span key={genre.name}>
+                                        <span
+                                            className="font-bold"
+                                            style={{ color: genre.color }}
+                                        >
+                                            {genre.name}
+                                        </span>
+                                        {/* 마지막 요소가 아니면 뒤에 쉼표 추가 */}
+                                        {index < topGenres.length - 1 ? ", " : ""}
+                                    </span>
+                                ))}
                                 입니다.
                             </li>
                             {/*멘트 출력*/}

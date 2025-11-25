@@ -10,7 +10,7 @@ export interface LevelDefinition {
     criteria: LevelCriteria;
 }
 
-// 1. 레벨 정의 (4~5단계)
+// 레벨 정의 (5단계) 조건 설정
 export const LEVEL_SYSTEM: LevelDefinition[] = [
     {
         level: 1,
@@ -44,7 +44,7 @@ export const LEVEL_SYSTEM: LevelDefinition[] = [
     },
 ];
 
-// 2. 현재 레벨 계산 함수
+// 현재 레벨 계산 함수
 export const calculateUserLevel = (reviewCount: number, likeCount: number) => {
     // 조건을 만족하는 가장 높은 레벨을 찾음 (역순 탐색)
     for (let i = LEVEL_SYSTEM.length - 1; i >= 0; i--) {
@@ -56,7 +56,7 @@ export const calculateUserLevel = (reviewCount: number, likeCount: number) => {
     return LEVEL_SYSTEM[0]; // 기본 비기너
 };
 
-// 3. 다음 레벨까지 남은 수치와 퍼센트 계산
+// 다음 레벨까지 남은 수치와 퍼센트 계산
 export const getNextLevelProgress = (currentLevelVal: number, reviewCount: number, likeCount: number) => {
     const nextLevel = LEVEL_SYSTEM.find((l) => l.level === currentLevelVal + 1);
 
@@ -68,13 +68,17 @@ export const getNextLevelProgress = (currentLevelVal: number, reviewCount: numbe
     const reviewsLeft = Math.max(0, nextLevel.criteria.minReviews - reviewCount);
     const likesLeft = Math.max(0, nextLevel.criteria.minLikes - likeCount);
 
-    // 퍼센트 계산 (단순화를 위해 두 조건의 달성률 평균을 사용하거나, 더 낮은 쪽을 기준으로 할 수 있음)
-    // 여기서는 '가장 늦은 진도'를 기준으로 전체 퍼센트를 잡습니다.
+    const totalMin = Math.max(0, nextLevel.criteria.minLikes + nextLevel.criteria.minReviews);
+    const totalCount = Math.max(0, reviewCount + likeCount);
+
+    /*
+    // 개별 퍼센트 계산 
     const reviewProgress = Math.min(100, (reviewCount / nextLevel.criteria.minReviews) * 100);
     const likeProgress = Math.min(100, (likeCount / nextLevel.criteria.minLikes) * 100);
+    */
 
-    // 전체 진행률: 두 조건 중 더 낮은 달성률을 전체 진행률로 표시 (둘 다 채워야 레벨업하므로)
-    const totalProgress = Math.floor((reviewProgress + likeProgress) / 2);
+    // 전체 진행률
+    const totalProgress = Math.floor((totalCount / totalMin) * 100);
 
     return {
         nextLevelName: nextLevel.name,
