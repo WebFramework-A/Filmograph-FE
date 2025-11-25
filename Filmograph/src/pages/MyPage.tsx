@@ -10,6 +10,8 @@ import Status from "../components/MyPage/Status";
 import MyLikes from "../components/MyPage/MyLikes";
 import GenreChart from "../components/MyPage/GenreChart";
 
+import { calculateUserLevel, getNextLevelProgress, LevelDefinition } from "../utils/levelUtils";
+
 // 데이터 타입 정의 (하위 컴포넌트에서도 쓰일 수 있으므로 types 폴더로 빼는 것도 좋습니다)
 export interface WishlistItem {
   id: string;
@@ -69,9 +71,13 @@ export default function MyPage() {
   const navigate = useNavigate();
 
   // 상태 관리
-  const [userInfo, setUserInfo] = useState<any>(null);
-  const [likes, setLikes] = useState<WishlistItem[]>([]);
-  const [genreData, setGenreData] = useState<GenreData[]>([]);
+  const [userInfo, setUserInfo] = useState<any>(null);  //프로필
+  const [likes, setLikes] = useState<WishlistItem[]>([]); //찜 목록
+  const [genreData, setGenreData] = useState<GenreData[]>([]);  //장르차트
+  const [reviewCount, setReviewCount] = useState(0);  //리뷰
+  //레벨관련
+  const [currentLevel, setCurrentLevel] = useState<LevelDefinition | null>(null);
+  const [levelProgress, setLevelProgress] = useState<any>(null);
 
   // (임시) 통계 데이터
   const stats = {
@@ -100,9 +106,27 @@ export default function MyPage() {
       const userDoc = await getDoc(doc(db, "users", uid));
       if (userDoc.exists()) setUserInfo(userDoc.data());
 
+
       // 찜 목록 + 영화 상세 정보 병합
       const wishlistRef = collection(db, "userWishlist", uid, "items");
       const wishlistSnap = await getDocs(wishlistRef);
+
+      /*리뷰 목록 틀 잡기
+      const reviewsQuery = query(collection(db, "reviews"), where("userId", "==", uid));
+      const reviewsSnapshot = await getCountFromServer(reviewsQuery);
+      const myReviewCount = reviewsSnapshot.data().count;
+
+      setReviewCount(myReviewCount);
+      */
+
+      /* 레벨 계산 (찜 개수는 wishlistSnap.size 사용) --- */
+      const myLikeCount = wishlistSnap.size;
+
+      const level = calculateUserLevel(myReviewCount, myLikeCount);
+      const progress = getNextLevelProgress(level.level, myReviewCount, myLikeCount);
+
+      setCurrentLevel(level);
+      setLevelProgress(progress);
 
       const promises = wishlistSnap.docs.map(async (itemDoc) => {
         const itemData = itemDoc.data();
@@ -151,7 +175,6 @@ export default function MyPage() {
 
       // 찜 목록 상태 업데이트
       setLikes(resolvedList);
-
     }
     catch (error) {
       console.error("데이터 로딩 실패:", error);
@@ -165,7 +188,22 @@ export default function MyPage() {
     }
   }, [user, fetchMyData]);
 
-  if (loading || !userInfo) {
+  // 찜 목록이 변하면(삭제 등) 레벨도 다시 계산해야 함 (간단한 동기화)
+  useEffect(() => {
+    if (currentLevel) { // 초기 로딩 이후에만
+      const newLevel = calculateUserLevel(reviewCount, likes.length);
+      const newProgress = getNextLevelProgress(newLevel.level, reviewCount, likes.length);
+
+      // 레벨이나 진척도가 바뀌었을 때만 업데이트 (불필요한 렌더링 방지)
+      if (newLevel.level !== currentLevel.level || JSON.stringify(newProgress) !== JSON.stringify(levelProgress)) {
+        setCurrentLevel(newLevel);
+        setLevelProgress(newProgress);
+      }
+    }
+  }, [likes.length, reviewCount]);
+
+
+  if (loading || !userInfo || !currentLevel) {
     return <div className="flex items-center justify-center h-screen bg-[#0d5a5a] text-white">로딩 중...</div>;
   }
 
