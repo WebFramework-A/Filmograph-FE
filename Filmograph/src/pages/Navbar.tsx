@@ -7,9 +7,10 @@ const Navbar = () => {
   const { user, loading } = useAuth();
 
   const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
-    `transition-colors duration-200 ${isActive
-      ? "text-yellow-300 "
-      : "text-white hover:text-yellow-300 duration-400"
+    `transition-colors duration-200 ${
+      isActive
+        ? "text-yellow-300 "
+        : "text-white hover:text-yellow-300 duration-400"
     }`;
 
   return (
@@ -42,19 +43,19 @@ const Navbar = () => {
             {/* 드롭다운 메뉴 3개 */}
             <div className="bg-black/80 backdrop-blur-md rounded-md shadow-lg py-2 flex flex-col gap-1 border border-white/10 overflow-hidden">
               <Link
-                to="/graph/1"
+                to="/graph/movie"
                 className="px-4 py-2 hover:bg-white/10 hover:text-yellow-300 text-sm text-center transition-colors"
               >
                 영화 & 영화인
               </Link>
               <Link
-                to="/graph/2"
+                to="/graph/ego"
                 className="px-4 py-2 hover:bg-white/10 hover:text-yellow-300 text-sm text-center transition-colors"
               >
-                특정 영화인
+                에고 네트워크
               </Link>
               <Link
-                to="/graph/3"
+                to="/graph/collaboration"
                 className="px-4 py-2 hover:bg-white/10 hover:text-yellow-300 text-sm text-center transition-colors"
               >
                 협업 네트워킹
@@ -76,7 +77,8 @@ const Navbar = () => {
                 to="/my"
                 title="마이페이지"
                 className={({ isActive }) =>
-                  `block rounded-full p-0.5 transition-all ${isActive ? "ring-2 ring-yellow-200 duration-500" : ""
+                  `block rounded-full p-0.5 transition-all ${
+                    isActive ? "ring-2 ring-yellow-200 duration-500" : ""
                   }`
                 }
               >
