@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../features/auth/hooks/useAuth";
-import { db } from "../services/firebaseConfig";
+import { useAuth } from "../../features/auth/hooks/useAuth";
+import { db } from "../../services/firebaseConfig";
 import { doc, getDoc, collection, getDocs, deleteDoc } from "firebase/firestore";
-import type { WishlistItem } from "./MyPage";
+import type { WishlistItem } from "../../pages/MyPage";
 
 export default function WishlistPage() {
     const { user, loading } = useAuth();

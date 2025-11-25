@@ -12,6 +12,7 @@ import WatchProvidersSection from "../features/movie/components/WatchProvidersSe
 import GallerySection from "../features/movie/components/GallerySection";
 import MovieGraphSection from "../features/movie/components/MovieGraphSection";
 import RelatedMoviesSection from "../features/movie/components/RelatedMoviesSection";
+import ReviewsSection from "../features/movie/components/ReviewsSection";
 
 export default function DetailPage() {
   const { movieId } = useParams();
@@ -45,7 +46,7 @@ export default function DetailPage() {
       </ScrollSection>
 
       <ScrollSection>
-          <VideosSection movie={movie} />      
+        <VideosSection movie={movie} />
       </ScrollSection>
 
       <ScrollSection>
@@ -58,6 +59,10 @@ export default function DetailPage() {
 
       <ScrollSection>
         <RelatedMoviesSection relatedIds={movie.relatedMovies ?? []} />
+      </ScrollSection>
+
+      <ScrollSection>
+        <ReviewsSection movie={movie} />
       </ScrollSection>
 
       <pre className="text-white p-6">{JSON.stringify(movie, null, 2)}</pre>
