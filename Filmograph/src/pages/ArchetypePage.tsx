@@ -30,10 +30,9 @@ const ArchetypePage = () => {
                 캐릭터 아키타입
               </h1>
             </div>
-            {/* 오른쪽 숫자(캐릭터 수)는 제거 */}
           </div>
 
-          <div className="mt-6 h-px w-full bg-gradient-to-r from-emerald-200/40 via-emerald-100/60 to-transparent" />
+          <div className="mt-6 h-px w-full bg-linear-to-r from-emerald-200/40 via-emerald-100/60 to-transparent" />
         </header>
 
         {/* 아키타입 선택 화면 - 잡지 인덱스 스타일 */}
@@ -45,13 +44,13 @@ const ArchetypePage = () => {
                   archetype index
                 </p>
                 <h2 className="mt-1 text-xl font-semibold text-emerald-50">
-                  보고 싶은 캐릭터 아키타입을 먼저 골라보세요.
+                  보고 싶은 캐릭터 아키타입을 선택하세요.
                 </h2>
               </div>
             </div>
 
             <div className="grid gap-4 md:grid-cols-3">
-              {ARCHETYPE_RULES.map((rule, index) => (
+              {ARCHETYPE_RULES.map((rule) => (
                 <button
                   key={rule.id}
                   type="button"
@@ -60,10 +59,7 @@ const ArchetypePage = () => {
                 >
                   {/* 상단: 타입 넘버 & 태그 */}
                   <div className="flex items-center justify-between text-[11px] font-medium uppercase tracking-[0.22em] text-emerald-100/80">
-                    <span>type {(index + 1).toString().padStart(2, "0")}</span>
-                    <span className="rounded-full border border-emerald-100/40 px-2 py-0.5 text-[10px]">
-                      archetype
-                    </span>
+                    <span>type</span>
                   </div>
 
                   {/* 가운데: 이름 + 설명 */}
@@ -77,7 +73,7 @@ const ArchetypePage = () => {
                   </div>
 
                   {/* 하단: 키워드만 표시 (캐릭터 수 제거) */}
-                  <div className="mt-4 flex flex-wrap gap-1">
+                  <div className="mt-4 flex flex-wrap gap-1 items-baseline">
                     {rule.keywords.slice(0, 3).map((kw) => (
                       <span
                         key={kw}
@@ -87,36 +83,43 @@ const ArchetypePage = () => {
                       </span>
                     ))}
                     {rule.keywords.length > 3 && (
-                      <span className="text-[10px] text-emerald-50/70">
+                      <span
+                        className="inline-block transform -translate-y-[1px] text-[11px] leading-none text-emerald-50/70"
+                      >
                         + more
                       </span>
                     )}
                   </div>
-                </button>
-              ))}
-            </div>
-          </section>
-        )}
+
+
+                          </button>
+                        ))}
+                      </div>
+                    </section>
+                  )}
 
         {/* 아키타입 선택 후: 잡지식 레이아웃으로 캐릭터 보여주기 */}
         {selectedArchetype && selectedRule && (
           <section className="mt-4">
             {/* 잡지 1페이지처럼 보이는 큰 카드 */}
-            <div className="rounded-[32px] bg-slate-50 text-slate-900 px-6 py-8 shadow-[0_26px_70px_rgba(0,0,0,0.6)] md:px-10 md:py-10">
+            <div className="rounded-4xl bg-slate-50 text-slate-900 px-6 py-8 shadow-[0_26px_70px_rgba(0,0,0,0.6)] md:px-10 md:py-10">
               {/* 상단 헤더 영역 */}
               <div className="mb-10 flex flex-col gap-8 border-b border-slate-200 pb-8 md:flex-row md:items-start md:justify-between">
                 {/* 왼쪽: 메인 타이포 */}
                 <div className="max-w-2xl">
-                  <button
-                    type="button"
-                    onClick={() => setSelectedArchetype(null)}
-                    className="mb-6 text-[11px] font-semibold uppercase tracking-[0.25em] text-slate-500 hover:text-slate-900"
-                  >
+                  <div onClick={() => setSelectedArchetype(null)}
+                  className="
+                    mb-8 cursor-pointer select-none
+                    border-b border-dashed border-slate-200
+                    pb-2 text-[12px] font-semibold uppercase tracking-[0.25em]
+                    text-slate-500
+                    transition-colors
+                    hover:text-yellow-400" >
                     ← back to index
-                  </button>
+                  </div>
 
                   <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-slate-500">
-                    character study
+                    character archetype
                   </p>
                   <h2 className="mt-3 text-3xl font-semibold italic tracking-tight md:text-4xl">
                     {selectedRule.name}
@@ -181,10 +184,10 @@ const ArchetypePage = () => {
                         className="group flex flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white transition hover:-translate-y-1 hover:border-slate-900/70 hover:shadow-[0_22px_55px_rgba(0,0,0,0.25)]"
                       >
                         {/* 이미지 자리 (지금은 플레이스홀더, 나중에 포스터/스틸컷 넣기) */}
-                        <div className="relative aspect-[4/5] overflow-hidden bg-slate-900">
+                        <div className="relative aspect-4/5 overflow-hidden bg-slate-900">
                           {/* <img src={ch.profileUrl} alt={ch.name} className="h-full w-full object-cover" /> */}
 
-                          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90" />
+                          <div className="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent opacity-90" />
                           <div className="absolute bottom-4 left-4 right-4">
                             <p className="text-[11px] uppercase tracking-[0.3em] text-slate-200/80">
                               {String(idx + 1).padStart(2, "0")}
@@ -200,9 +203,6 @@ const ArchetypePage = () => {
 
                         {/* 텍스트 영역 */}
                         <div className="flex flex-1 flex-col gap-3 px-4 py-4">
-                          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
-                            match score · {ch.archetypeScore}
-                          </p>
                           <p className="line-clamp-3 text-[13px] leading-relaxed text-slate-700">
                             {ch.description}
                           </p>
