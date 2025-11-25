@@ -35,7 +35,7 @@ const GraphPage = () => {
         </div>
 
         {/* 카테고리 버튼 */}
-        <div className="flex justify-center gap-3 max-w-3xl mx-auto mb-4">
+        <div className="flex justify-center gap-3 max-w-3xl mx-auto mb-6">
           <button
             onClick={() => setCategory("bipartite")}
             className={`px-4 py-2 rounded-full text-sm border ${category === "bipartite"
@@ -72,7 +72,7 @@ const GraphPage = () => {
       <div className="relative bg-[#0d5a5a] mx-8 rounded-lg overflow-hidden border border-white/10">
 
         {/* 협업 네트워크, 이분그래프일 때 전체 보기 버튼 표시 */}
-        {(category == "bipartite" || category == "community") && (
+        {(category === "bipartite" || category === "community") && (
           <button
             onClick={() => setResetViewFlag(prev => !prev)}
             className="
@@ -95,15 +95,18 @@ const GraphPage = () => {
             <CollabNetworkGraph resetViewFlag={resetViewFlag} />
           )}
         </div>
+      </div>
 
-        {category === "bipartite" && (
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-6 bg-black/30 backdrop-blur-sm px-6 py-3 rounded-full">
+      {/* 범례 위치 이동: 그래프 박스 아래로 배치 */}
+      {category === "bipartite" && (
+        <div className="flex justify-center mt-6 mb-2">
+          <div className="flex items-center gap-6 bg-black/20 px-6 py-2 rounded-full border border-white/10">
             <CategoryWithDot color="#4FC3F7" label="배우" />
             <CategoryWithDot color="#FFD700" label="감독" />
             <CategoryWithDot color="#FF6B6B" label="영화" />
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
       {/* 가이드 */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-8 py-12 max-w-6xl mx-auto">
