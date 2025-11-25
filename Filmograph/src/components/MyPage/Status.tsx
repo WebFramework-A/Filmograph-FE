@@ -9,7 +9,7 @@ interface Props {
 export default function Status({ status }: Props) {
     return (
         <div className="bg-black/20 p-6 rounded-lg border border-white/5 shadow-md h-full">
-            <h3 className="text-xl font-bold text-[#FFD700] mb-6 flex items-center gap-2">
+            <h3 className="text-xl font-bold text-yellow-200 mb-6 flex items-center gap-2">
                 활동 통계
             </h3>
             <div className="space-y-6">
