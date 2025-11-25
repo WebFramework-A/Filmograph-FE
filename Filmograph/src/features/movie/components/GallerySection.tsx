@@ -1,11 +1,10 @@
 import "./styles/GallerySection.css";
 import { Image as ImageIcon, X } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { ImageWithFallback } from "./ImageWithFallback";
 
 export default function GallerySection({ movie }: { movie: any }) {
   const images = movie?.images ?? {};
-
   const backdrops = images.backdrops ?? [];
   const posters = images.posters ?? [];
 
@@ -14,15 +13,28 @@ export default function GallerySection({ movie }: { movie: any }) {
 
   const [preview, setPreview] = useState<string | null>(null);
 
-  /* ================================
-     ⭐ 1) 스틸컷 (2줄 기준, 고정 6개 페이징)
-     ================================ */
-  const backdropPageSize = 6;
+  const [backdropPageSize, setBackdropPageSize] = useState(8);
   const [pageBackdrop, setPageBackdrop] = useState(0);
 
-  const backdropMaxPage = Math.floor(
-    (backdrops.length - 1) / backdropPageSize
-  );
+  useEffect(() => {
+    const updateBackdropSize = () => {
+      const w = window.innerWidth;
+
+      let perRow = 4;
+      if (w >= 1200) perRow = 4;
+      else if (w >= 900) perRow = 3;
+      else perRow = 2;
+
+      setBackdropPageSize(perRow * 2);
+    };
+
+    updateBackdropSize();
+    window.addEventListener("resize", updateBackdropSize);
+    return () => window.removeEventListener("resize", updateBackdropSize);
+  }, []);
+
+  const backdropMaxPage =
+    Math.floor(backdrops.length / backdropPageSize) - 1;
 
   const getBackdropPage = () =>
     backdrops.slice(
@@ -30,44 +42,33 @@ export default function GallerySection({ movie }: { movie: any }) {
       pageBackdrop * backdropPageSize + backdropPageSize
     );
 
-  /* ================================
-     ⭐ 2) 포스터 (1줄 자동 꽉 채우기)
-     ================================ */
-  const posterRowRef = useRef<HTMLDivElement>(null);
-  const [posterPerPage, setPosterPerPage] = useState(5);
+  const [posterPerPage, setPosterPerPage] = useState(6);
   const [pagePoster, setPagePoster] = useState(0);
 
   useEffect(() => {
-    const handleResize = () => {
-      if (!posterRowRef.current) return;
+    const updatePosterSize = () => {
+      const w = window.innerWidth;
 
-      const containerWidth = posterRowRef.current.clientWidth;
-      const cardWidth = 150; // 최소 카드 너비
-      const gap = 16;
-
-      const count = Math.floor(containerWidth / (cardWidth + gap));
-      setPosterPerPage(Math.max(count, 1));
+      if (w >= 1200) setPosterPerPage(6);
+      else if (w >= 900) setPosterPerPage(4);
+      else setPosterPerPage(2);
     };
 
-    handleResize(); // 최초 계산
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    updatePosterSize();
+    window.addEventListener("resize", updatePosterSize);
+    return () => window.removeEventListener("resize", updatePosterSize);
   }, []);
 
-  const posterMaxPage = Math.floor(
-    (posters.length - 1) / posterPerPage
-  );
+  const posterMaxPage =
+    Math.floor(posters.length / posterPerPage) - 1;
 
   const getPosterPage = () =>
     posters.slice(
       pagePoster * posterPerPage,
       pagePoster * posterPerPage + posterPerPage
     );
-
-  /* ================================
-     ⭐ 모달 스크롤 제어
-     ================================ */
-  useEffect(() => {
+    
+    useEffect(() => {
     document.body.style.overflow = preview ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
@@ -85,9 +86,6 @@ export default function GallerySection({ movie }: { movie: any }) {
             <h2 className="gallery-title">갤러리</h2>
           </div>
 
-          {/* ================================
-             ⭐ 스틸컷
-             ================================ */}
           {hasBackdrops && (
             <div className="gallery-block">
               <div className="gallery-subtitle-row">
@@ -101,8 +99,12 @@ export default function GallerySection({ movie }: { movie: any }) {
                     >
                       {"<"}
                     </button>
+
                     <button
-                      disabled={pageBackdrop === backdropMaxPage}
+                      disabled={
+                        pageBackdrop === backdropMaxPage ||
+                        getBackdropPage().length < backdropPageSize
+                      }
                       onClick={() => setPageBackdrop((p) => p + 1)}
                     >
                       {">"}
@@ -112,7 +114,7 @@ export default function GallerySection({ movie }: { movie: any }) {
               </div>
 
               <div className="gallery-grid">
-                {getBackdropPage().map((img, idx) => (
+                {getBackdropPage().map((img: string, idx: number) => (
                   <div
                     key={idx}
                     className="gallery-card"
@@ -126,9 +128,6 @@ export default function GallerySection({ movie }: { movie: any }) {
             </div>
           )}
 
-          {/* ================================
-             ⭐ 포스터 (1줄 꽉 채움)
-             ================================ */}
           {hasPosters && (
             <div className="gallery-block">
               <div className="gallery-subtitle-row">
@@ -142,8 +141,12 @@ export default function GallerySection({ movie }: { movie: any }) {
                     >
                       {"<"}
                     </button>
+
                     <button
-                      disabled={pagePoster === posterMaxPage}
+                      disabled={
+                        pagePoster === posterMaxPage ||
+                        getPosterPage().length < posterPerPage
+                      }
                       onClick={() => setPagePoster((p) => p + 1)}
                     >
                       {">"}
@@ -152,8 +155,8 @@ export default function GallerySection({ movie }: { movie: any }) {
                 )}
               </div>
 
-              <div className="gallery-posters" ref={posterRowRef}>
-                {getPosterPage().map((img, idx) => (
+              <div className="gallery-posters">
+                {getPosterPage().map((img: string, idx: number) => (
                   <div
                     key={idx}
                     className="poster-card"
@@ -169,9 +172,6 @@ export default function GallerySection({ movie }: { movie: any }) {
         </div>
       </section>
 
-      {/* ================================
-         ⭐ 미리보기 모달
-         ================================ */}
       {preview && (
         <div className="preview-modal">
           <div className="preview-content">

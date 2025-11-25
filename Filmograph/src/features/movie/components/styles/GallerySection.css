@@ -32,115 +32,112 @@
   color: #ffff00;
 }
 
+.gallery-subtitle-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .gallery-subtitle {
   color: rgba(255, 255, 255, 0.85);
   font-size: 1.2rem;
-  margin-top: 20px;
-  margin-bottom: 10px;
+  margin: 20px 0 10px;
+}
+
+.gallery-block {
+  margin-bottom: 2.5rem;
 }
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1rem;
 }
 
-.gallery-card {
-  position: relative;
-  aspect-ratio: 16/9;
-  border-radius: 12px;
-  overflow: hidden;
+/* ≥1200px = 4 */
+@media (min-width: 1200px) {
+  .gallery-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
-.gallery-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+/* 900px~1199px = 3 */
+@media (min-width: 900px) and (max-width: 1199px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* <900px = 2 */
+@media (max-width: 899px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .gallery-posters {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   gap: 1rem;
-  justify-content: flex-start;
+  width: 100%;
 }
 
+/* ≥1200px = 6 */
+@media (min-width: 1200px) {
+  .gallery-posters {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* 900px~1199px = 4 */
+@media (min-width: 900px) and (max-width: 1199px) {
+  .gallery-posters {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* <900px = 2 */
+@media (max-width: 899px) {
+  .gallery-posters {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.gallery-card,
 .poster-card {
   position: relative;
-  aspect-ratio: 2 / 3;
-  max-height: 230px;  
   border-radius: 12px;
   overflow: hidden;
 }
 
+/* 스틸컷 16:9 */
+.gallery-card {
+  aspect-ratio: 16/9;
+}
+
+/* 포스터 2:3 */
+.poster-card {
+  aspect-ratio: 2 / 3;
+  max-height: 240px;
+}
+
+.gallery-img,
 .poster-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
+/* hover 그라데이션 */
 .gallery-hover {
   position: absolute;
   inset: 0;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.65), transparent);
   opacity: 0;
   transition: 0.3s ease;
-  
 }
 
 .gallery-card:hover .gallery-hover,
 .poster-card:hover .gallery-hover {
   opacity: 1;
-}
-
-.preview-modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.85);
-  backdrop-filter: blur(6px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  overflow: hidden;
-}
-
-.preview-content {
-  position: relative;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.preview-img {
-  max-width: 80vw;
-  max-height: 80vh;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  border-radius: 12px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
-}
-
-.preview-close {
-  position: absolute;
-  top: -35px; 
-  right: 0px;  
-  background: transparent;
-  border: none;
-  color: white;
-  font-size: 30px;
-  cursor: pointer;
-}
-
-.preview-close:hover {
-  transform: scale(1.1);
-}
-
-.gallery-subtitle-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .gallery-pagination {
@@ -164,15 +161,44 @@
 
 .gallery-pagination button:disabled {
   opacity: 0.4;
+  cursor: default;
 }
 
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+.preview-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
 }
 
-@keyframes scaleIn {
-  from { opacity: 0; transform: scale(0.85); }
-  to   { opacity: 1; transform: scale(1); }
+.preview-content {
+  position: relative;
+}
+
+.preview-img {
+  max-width: 80vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+.preview-close {
+  position: absolute;
+  top: -35px;
+  right: 0px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.preview-close:hover {
+  transform: scale(1.1);
 }

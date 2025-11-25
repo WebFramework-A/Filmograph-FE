@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 type VideoItem = {
   key: string;
-  site: string;  
+  site: string;
   name: string;
 };
 
@@ -15,9 +15,6 @@ export default function VideosSection({ movie }: { movie: any }) {
 
   const [vimeoThumbs, setVimeoThumbs] = useState<Record<string, string>>({});
 
-  const getYoutubeThumb = (key: string) =>
-    `https://img.youtube.com/vi/${key}/hqdefault.jpg`;
-
   const fetchVimeoThumb = async (key: string) => {
     if (vimeoThumbs[key]) return vimeoThumbs[key];
 
@@ -25,6 +22,7 @@ export default function VideosSection({ movie }: { movie: any }) {
       const res = await fetch(`https://vimeo.com/api/v2/video/${key}.json`);
       const data = await res.json();
       const thumb = data[0]?.thumbnail_large;
+
       setVimeoThumbs((prev) => ({ ...prev, [key]: thumb }));
       return thumb;
     } catch (err) {
@@ -33,17 +31,11 @@ export default function VideosSection({ movie }: { movie: any }) {
     }
   };
 
-  const getThumb = async (video: VideoItem): Promise<string> => {
-    if (video.site === "YouTube") return getYoutubeThumb(video.key);
-    if (video.site === "Vimeo") return fetchVimeoThumb(video.key);
-    return "/fallback-thumb.png";
-  };
-
   useEffect(() => {
-    const allVideos = [
-      ...(videos.trailers ?? []),
-      ...(videos.clips ?? []),
-      ...(videos.teasers ?? []),
+    const allVideos: VideoItem[] = [
+      ...(videos?.trailers ?? []),
+      ...(videos?.clips ?? []),
+      ...(videos?.teasers ?? []),
     ];
 
     allVideos.forEach((v: VideoItem) => {
@@ -51,8 +43,7 @@ export default function VideosSection({ movie }: { movie: any }) {
         fetchVimeoThumb(v.key);
       }
     });
-  }, [videos]);
-
+  }, [videos, vimeoThumbs]);
 
   const [pageTrailer, setPageTrailer] = useState(0);
   const [pageClip, setPageClip] = useState(0);
@@ -77,7 +68,7 @@ export default function VideosSection({ movie }: { movie: any }) {
 
   const pageSize = 2;
 
-  const paginate = (arr: any[], page: number) =>
+  const paginate = (arr: VideoItem[], page: number) =>
     arr.slice(page * pageSize, (page + 1) * pageSize);
 
   return (
@@ -96,8 +87,7 @@ export default function VideosSection({ movie }: { movie: any }) {
             videos={paginate(videos.trailers, pageTrailer)}
             totalCount={videos.trailers.length}
             pageSize={pageSize}
-            getThumb={getThumb}
-            onClick={(v) => setOpenVideo(v)}
+            onClick={(v: VideoItem) => setOpenVideo(v)}
           />
         )}
 
@@ -110,8 +100,7 @@ export default function VideosSection({ movie }: { movie: any }) {
             videos={paginate(videos.clips, pageClip)}
             totalCount={videos.clips.length}
             pageSize={pageSize}
-            getThumb={getThumb}
-            onClick={(v) => setOpenVideo(v)}
+            onClick={(v: VideoItem) => setOpenVideo(v)}
           />
         )}
       </div>
@@ -143,10 +132,18 @@ function VideoCategory({
   page,
   setPage,
   pageSize,
-  getThumb,
   isClip,
   onClick,
-}: any) {
+}: {
+  title: string;
+  videos: VideoItem[];
+  totalCount: number;
+  page: number;
+  setPage: (p: number) => void;
+  pageSize: number;
+  isClip?: boolean;
+  onClick: (v: VideoItem) => void;
+}) {
   const maxPage = Math.floor((totalCount - 1) / pageSize);
 
   return (
@@ -181,7 +178,6 @@ function VideoCategory({
                   : `https://img.youtube.com/vi/${v.key}/hqdefault.jpg`
               }
             />
-
             <div className="video-overlay" />
             <div className="video-center">
               <div className={`video-play-btn ${isClip ? "clip" : ""}`}>
