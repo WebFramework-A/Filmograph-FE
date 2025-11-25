@@ -9,10 +9,12 @@ import NotFoundPage from "./pages/NotFoundPage";
 import HomeLayout from "./layouts/HomeLayout";
 import ArchetypePage from "./pages/ArchetypePage";
 import MyPage from "./pages/MyPage";
-import GraphPage from "./pages/GraphPage";
 import LoginPage from "./pages/LoginPage";
 import DetailPage from "./pages/DetailPage";
 import LoadPage from "./pages/LoadPage";
+import WishlistPage from "./pages/WishlistPage";
+import GraphHome from "./pages/GraphHome";
+import GraphDetail from "./components/GraphPage/GraphDetail";
 
 const router = createBrowserRouter([
   {
@@ -26,20 +28,13 @@ const router = createBrowserRouter([
       },
       {
         path: "/graph",
-        element: <GraphPage />,
+        element: <GraphHome />,
       },
       {
-        path: "/graph1",
-        element: <NotFoundPage />,
+        path: "/graph/:graphType",
+        element: <GraphDetail />,
       },
-      {
-        path: "/graph2",
-        element: <NotFoundPage />,
-      },
-      {
-        path: "/graph3",
-        element: <NotFoundPage />,
-      },
+
       {
         path: "/archetype",
         element: <ArchetypePage />,
@@ -59,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: "/detail/:movieId",
         element: <DetailPage />,
+      },
+      {
+        path: "/wishlist",
+        element: <WishlistPage />,
       },
     ],
   },
