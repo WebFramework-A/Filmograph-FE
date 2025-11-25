@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../features/auth/hooks/useAuth";
 import { db } from "../services/firebaseConfig";
@@ -8,7 +8,7 @@ import { doc, getDoc, collection, getDocs } from "firebase/firestore";
 import Profile from "../components/MyPage/Profile";
 import Status from "../components/MyPage/Status";
 import MyLikes from "../components/MyPage/MyLikes";
-import GenreChartSection from "../components/MyPage/GenreChart";
+import GenreChart from "../components/MyPage/GenreChart";
 
 // 데이터 타입 정의 (하위 컴포넌트에서도 쓰일 수 있으므로 types 폴더로 빼는 것도 좋습니다)
 export interface WishlistItem {
@@ -16,6 +16,7 @@ export interface WishlistItem {
   title: string;
   posterUrl?: string;
   addedAt: any;
+  genres?: string[]; // 장르 분석을 위해 genres 필드 추가 (항상 문자열 배열로 관리)
 }
 
 export interface GenreData {
@@ -24,6 +25,44 @@ export interface GenreData {
   color: string;
   [key: string]: any;
 }
+
+const processGenreData = (movies: WishlistItem[]) => {
+  // 장르 차트 색깔 설정
+  const COLORS = ["#FF5252", "#5B8FF9", "#F6BD16", "#E040FB", "#4FC3F7", "#66BB6A"];
+  const genreCount: { [key: string]: number } = {};
+  let totalGenres = 0;
+
+  // 모든 영화의 장르 카운트
+  movies.forEach((movie) => {
+    // movie.genres가 배열이라고 가정 (데이터 구조에 따라 수정 필요)
+    const genres = movie.genres || [];
+
+    genres.forEach((genre) => {
+      // 문자열 혹은 객체 처리
+      if (genre) {
+        genreCount[genre] = (genreCount[genre] || 0) + 1;
+        totalGenres++;
+      }
+    });
+  });
+
+  if (totalGenres === 0) return [];
+
+  //  배열로 변환 및 정렬 (상위 비중 높은 순)
+  const sortedGenres = Object.entries(genreCount)
+    .map(([name, count]) => ({
+      name,
+      value: (count / totalGenres) * 100, // 퍼센트 계산
+      count, // (필요하면 원본 개수도 저장)
+    }))
+    .sort((a, b) => b.value - a.value); // 높은 순 정렬
+
+  //  상위 5개 자르고 나머지는 '기타'로 합치기 (여기선 단순히 상위 5개만 추출)
+  return sortedGenres.slice(0, 5).map((item, index) => ({
+    ...item,
+    color: COLORS[index % COLORS.length], // 색상 순환 할당
+  }));
+};
 
 export default function MyPage() {
   const { user, loading } = useAuth();
@@ -48,17 +87,16 @@ export default function MyPage() {
     }
   }, [user, loading, navigate]);
 
-  // 데이터 로딩 트리거
   useEffect(() => {
-    if (user) {
-      fetchMyData(user.uid);
-    }
-  }, [user]);
+    // likes가 빈 배열이어도 processGenreData가 잘 처리하므로 안전함
+    const newGenreData = processGenreData(likes);
+    setGenreData(newGenreData);
+  }, [likes]);
 
   // 실제 데이터 가져오는 함수 (영화 정보 Join 포함)
-  const fetchMyData = async (uid: string) => {
+  const fetchMyData = useCallback(async (uid: string) => {
     try {
-      //  유저 정보
+      // 유저 정보 가져오기
       const userDoc = await getDoc(doc(db, "users", uid));
       if (userDoc.exists()) setUserInfo(userDoc.data());
 
@@ -70,16 +108,35 @@ export default function MyPage() {
         const itemData = itemDoc.data();
         const movieId = itemData.movieId || itemDoc.id;
 
-        // movies 컬렉션에서 제목, 포스터 조회
+        // movies 컬렉션에서 제목, 포스터, 장르 조회
         const movieDocRef = doc(db, "movies", movieId);
         const movieSnap = await getDoc(movieDocRef);
-        const movieData = movieSnap.exists() ? movieSnap.data() : null;
+
+        // movie 장르 데이터 받아오기
+        const movieData = movieSnap.exists() ? (movieSnap.data() as any) : null;
+
+        const rawGenre = movieData?.genre || movieData?.genres;
+
+        // 데이터 정제
+        let finalGenres: string[] = [];
+
+        if (typeof rawGenre === 'string') {
+          // "액션, 스릴러" 처럼 문자열인 경우 -> 콤마로 잘라서 배열화
+          finalGenres = rawGenre.split(',').map((g: string) => g.trim()).filter(Boolean);
+        }
+        else if (Array.isArray(rawGenre)) {
+          // ["액션", "스릴러"] 또는 [{name:"액션"}] 배열인 경우
+          finalGenres = rawGenre.map((g: any) =>
+            typeof g === 'string' ? g : g.name
+          ).filter(Boolean);
+        }
 
         return {
           id: movieId,
           title: movieData?.title || movieData?.movieNm || "제목 없음",
           posterUrl: movieData?.posterUrl || null,
           addedAt: itemData.addedAt,
+          genres: finalGenres, // 컴포넌트 내부에서는 항상 배열로 사용
         } as WishlistItem;
       });
 
@@ -92,22 +149,21 @@ export default function MyPage() {
         return timeB - timeA;
       });
 
+      // 찜 목록 상태 업데이트
       setLikes(resolvedList);
 
-      // !(임시) 차트 데이터 (임시)
-      setGenreData([
-        { name: "스릴러", value: 35, color: "#4FC3F7" },
-        { name: "드라마", value: 20, color: "#81C784" },
-        { name: "로맨스", value: 5, color: "#FFD54F" },
-        { name: "액션", value: 25, color: "#E0E0E0" },
-        { name: "SF", value: 10, color: "#90A4AE" },
-        { name: "애니메이션", value: 3, color: "#A1887F" },
-      ]);
-
-    } catch (error) {
+    }
+    catch (error) {
       console.error("데이터 로딩 실패:", error);
     }
-  };
+  }, []);
+
+  // 데이터 로딩 트리거
+  useEffect(() => {
+    if (user) {
+      fetchMyData(user.uid);
+    }
+  }, [user, fetchMyData]);
 
   if (loading || !userInfo) {
     return <div className="flex items-center justify-center h-screen bg-[#0d5a5a] text-white">로딩 중...</div>;
@@ -128,11 +184,12 @@ export default function MyPage() {
         {/* 통계 & 찜 목록 레이아웃 */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           <Status status={stats} />
+          {/* setLikes를 전달하여 하위 컴포넌트에서 찜 해제 시 리스트 즉시 업데이트 */}
           <MyLikes likes={likes} setLikes={setLikes} />
         </div>
 
         {/* 차트 섹션 컴포넌트 */}
-        <GenreChartSection genreData={genreData} />
+        <GenreChart genreData={genreData} />
       </div>
     </div>
   );
