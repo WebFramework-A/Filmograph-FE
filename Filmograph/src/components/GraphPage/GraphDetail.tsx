@@ -34,12 +34,11 @@ const GraphDetail = () => {
 
       {/* 검색바 및 컨트롤 영역 */}
       <div className="relative w-full max-w-6xl mx-auto mt-5 px-4 flex justify-center items-center">
-
         <div className="text-lg text-center bg-black px-4 py-1 rounded">
           여기에 나중에 검색바 넣어야됨
         </div>
 
-        {/* 3. 전체 그래프 보기 버튼 (EgoGraph 제외하고 표시) */}
+        {/* 전체 그래프 보기 버튼 (EgoGraph 제외하고 표시) */}
         {(graphType === "movie" || graphType === "collaboration") && (
           <button
             onClick={handleResetView}
