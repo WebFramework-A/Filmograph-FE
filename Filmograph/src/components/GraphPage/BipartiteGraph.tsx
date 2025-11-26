@@ -3,6 +3,8 @@ import ForceGraph2D from "react-force-graph-2d";
 import { db } from "../../services/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import useGraphSearch from "../../hooks/useGraphSearch";
+
 
 import type {
     Node as CommonNode,
@@ -25,6 +27,8 @@ type GraphT = {
 // Props 타입 정의
 type BipartiteGraphProps = {
     resetViewFlag: boolean;
+    searchTerm?: string;      // 🔥 추가
+    onNoResult?: () => void;
 };
 
 // 노드 색깔 설정
@@ -70,7 +74,7 @@ function getWrappedLines(ctx: CanvasRenderingContext2D, text: string, maxWidth: 
     return lines;
 }
 
-export default function BipartiteGraph({ resetViewFlag }: BipartiteGraphProps) {
+export default function BipartiteGraph({ resetViewFlag, searchTerm, onNoResult }: BipartiteGraphProps) {
     const [data, setData] = useState<GraphT | null>(null);
 
     // 하이라이팅을 위한 State
@@ -191,6 +195,32 @@ export default function BipartiteGraph({ resetViewFlag }: BipartiteGraphProps) {
     }, [data]);
 
     const graphData = useMemo(() => data ?? { nodes: [], links: [] }, [data]);
+
+    useGraphSearch({
+        searchTerm: searchTerm ?? "",
+        graphData,
+        searchKey: "name",
+        onMatch: (target) => {
+        setSelectedNode(target as NodeT);
+
+    const related = new Set([target.id]);
+    
+    graphData.links.forEach((link: any) => {
+      const s = typeof link.source === "object" ? link.source.id : link.source;
+      const t = typeof link.target === "object" ? link.target.id : link.target;
+
+      if (s === target.id) related.add(t);
+      if (t === target.id) related.add(s);
+    });
+
+    fgRef.current?.zoomToFit(
+      600,
+      10,
+      (n: any) => related.has(n.id)
+        ); },
+    onNoResult: () => onNoResult?.()});
+
+   
 
     // 하이라이팅 대상 계산
     const { highlightNodes, highlightLinks } = useMemo(() => {

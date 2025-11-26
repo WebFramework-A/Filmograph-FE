@@ -10,12 +10,25 @@ interface ToastProps {
   actionUrl?: string;
 }
 
-export function Toast({ message, show, onClose, actionLabel, actionUrl }: ToastProps) {
+export function Toast({
+  message,
+  show,
+  onClose,
+  actionLabel,
+  actionUrl,
+}: ToastProps) {
   return (
     <AnimatePresence>
       {show && (
-        <motion.div className="toastWrapper">
+        <motion.div
+          key="toast-wrapper"
+          className="toastWrapper"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
           <motion.div
+            key="toast-box"
             className="toastContainer"
             initial={{ y: 80, opacity: 0 }}
             animate={{ y: 30, opacity: 1 }}
@@ -25,11 +38,7 @@ export function Toast({ message, show, onClose, actionLabel, actionUrl }: ToastP
             <div className="toastMessage">{message}</div>
 
             {actionLabel && actionUrl && (
-              <Link
-                to={actionUrl}
-                className="toastButton"
-                onClick={onClose}
-              >
+              <Link to={actionUrl} className="toastButton" onClick={onClose}>
                 {actionLabel}
               </Link>
             )}
