@@ -33,8 +33,10 @@ const ACTOR_COLOR = "#5B8FF9";
 const DIRECTOR_COLOR = "#F6BD16";
 const ACTOR_DIRECTOR_COLOR = "#E040FB";
 
+/*
 const GRAPH_WIDTH = 2000;
 const GRAPH_HEIGHT = 550;
+*/
 
 // 가중치 정규화
 function normalizeWeight(w: number, minW: number, maxW: number): number {
@@ -81,6 +83,27 @@ export default function BipartiteGraph({ resetViewFlag }: BipartiteGraphProps) {
     const lastClickTimeRef = useRef<number>(0);
     // 페이지 이동 함수
     const navigate = useNavigate();
+
+    //그래프 크기 관련 함수
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [dimensions, setDimensions] = useState({ width: 1000, height: 550 });
+
+    // 화면 크기가 바뀔 때마다 그래프 크기 재계산
+    useEffect(() => {
+        const updateDimensions = () => {
+            if (containerRef.current) {
+                setDimensions({
+                    width: containerRef.current.offsetWidth, // 부모 div의 너비에 맞춤
+                    height: 550 // 높이는 고정하거나 window.innerHeight 등을 이용해 조절 가능
+                });
+            }
+        };
+
+        window.addEventListener('resize', updateDimensions);
+        updateDimensions(); // 초기 실행
+
+        return () => window.removeEventListener('resize', updateDimensions);
+    }, []);
 
     // 데이터 로딩
     useEffect(() => {
@@ -237,23 +260,27 @@ export default function BipartiteGraph({ resetViewFlag }: BipartiteGraphProps) {
 
     if (!data) {
         return (
-            <div 
-            className="w-full flex items-center justify-center"
-            style={{ height: '550px' }} >
-            <div className="text-white text-xl font-semibold">
-                그래프 불러오는 중 · · ·
+            <div
+                className="w-full flex items-center justify-center"
+                style={{ height: '550px' }} >
+                <div className="text-white text-xl font-semibold">
+                    그래프 불러오는 중 · · ·
+                </div>
             </div>
-            </div>
-            );
-        }
+        );
+    }
 
 
     return (
-        <div className="w-full h-full flex flex-col items-center">
+        <div ref={containerRef} className="w-full h-full flex flex-col items-center">
             <ForceGraph2D
                 ref={fgRef}
+                /* 
                 width={GRAPH_WIDTH}
                 height={GRAPH_HEIGHT}
+                */
+                width={dimensions.width}
+                height={dimensions.height}
                 backgroundColor="transparent"
                 graphData={graphData}
                 nodeId="id"
