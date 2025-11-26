@@ -1,13 +1,12 @@
 import { useState, useEffect, useMemo } from "react";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../services/firebaseConfig";
-// [추가] 레벨 계산 로직 임포트 (경로 확인 필요)
 import { calculateUserLevel, getNextLevelProgress } from "../../utils/levelUtils";
 
 interface Props {
     userInfo: any;
     currentUser: any;
-    // [추가] 레벨 계산을 위한 props
+    // 레벨 계산을 위한 props
     reviewCount: number;
     likeCount: number;
 }
@@ -29,7 +28,7 @@ export default function Profile({ userInfo, currentUser, reviewCount, likeCount 
         }
     }, [userInfo, currentUser]);
 
-    // [추가] 레벨 및 진행도 계산
+    // 레벨 및 진행도 계산
     const currentLevel = useMemo(() =>
         calculateUserLevel(reviewCount, likeCount),
         [reviewCount, likeCount]);
@@ -63,6 +62,13 @@ export default function Profile({ userInfo, currentUser, reviewCount, likeCount 
         }
     };
 
+    // 프로필 업데이트 키 이벤트
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            handleUpdateProfile();
+        }
+    };
+
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             {/* 왼쪽: 프로필 사진 및 닉네임 */}
@@ -83,6 +89,7 @@ export default function Profile({ userInfo, currentUser, reviewCount, likeCount 
                                 type="text"
                                 value={newNickname}
                                 onChange={(e) => setNewNickname(e.target.value)}
+                                onKeyDown={handleKeyDown}   //엔터키이벤트
                                 className="bg-white/10 border border-white/30 rounded px-3 py-2 text-white focus:outline-none focus:border-[#FFD700]"
                                 placeholder="새 닉네임"
                                 maxLength={10}
@@ -155,7 +162,7 @@ export default function Profile({ userInfo, currentUser, reviewCount, likeCount 
                     </span>
                 </div>
 
-                {/* [수정] 상태(활동중) 대신 레벨업 목표 표시 */}
+                {/* 레벨업 목표 표시 */}
                 {progress ? (
                     <div className="pt-2">
                         <div className="flex justify-between items-end mb-2">

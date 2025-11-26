@@ -7,7 +7,7 @@ import { type Review } from "../features/review/types/review";
 
 // 분리한 컴포넌트들 임포트
 import Profile from "../components/MyPage/Profile";
-import Status from "../components/MyPage/Status";
+import Status from "../components/MyPage/MyReviews";
 import MyLikes from "../components/MyPage/MyLikes";
 import GenreChart from "../components/MyPage/GenreChart";
 
@@ -98,7 +98,8 @@ export default function MyPage() {
 
       // 리뷰 개수 가져오기 
       let myReviews: Review[] = [];
-      let totalReviewCount = 0;
+      let totalRatingCount = 0;  //별점 개수
+      let totalReviewCount = 0;   //리뷰 개수
       let totalRatingSum = 0;
       try {
         const reviewsRef = collection(db, "reviews");
@@ -107,9 +108,16 @@ export default function MyPage() {
         const allMyReviewsQuery = query(reviewsRef, where("userId", "==", uid));
         const allSnap = await getDocs(allMyReviewsQuery);
 
-        totalReviewCount = allSnap.size;
+        totalRatingCount = allSnap.size; // 전체 문서 개수 = 평가 횟수
+
         allSnap.forEach(doc => {
-          totalRatingSum += (doc.data().rating || 0);
+          const data = doc.data();
+          totalRatingSum += (data.rating || 0);
+
+          // 내용이 있고 공백이 아니면 '리뷰'로 카운트
+          if (data.content && data.content.trim().length > 0) {
+            totalReviewCount++;
+          }
         });
 
         // 최근 3개만 가져오기 (Status 컴포넌트 표시용)
@@ -136,9 +144,9 @@ export default function MyPage() {
 
       // 통계 업데이트
       setStats({
-        reviewCount: totalReviewCount,
-        ratingCount: totalReviewCount, // 평가와 리뷰 수가 같다면
-        avgRating: totalReviewCount > 0 ? (totalRatingSum / totalReviewCount) : 0
+        reviewCount: totalReviewCount,  //리뷰 개수
+        ratingCount: totalRatingCount, // 별점 개수
+        avgRating: totalReviewCount > 0 ? (totalRatingSum / totalRatingCount) : 0
       });
 
       // 영화 상세 정보 매핑
@@ -223,7 +231,7 @@ export default function MyPage() {
           <Status
             status={stats}
             recentReviews={recentReviews}
-            onReviewDeleted={handleReviewDeleted} // [중요] 여기서 함수 전달!
+            onReviewDeleted={handleReviewDeleted} // 여기서 함수 전달!
           />
           {/*찜 목록*/}
           <MyLikes likes={likes} setLikes={setLikes} />

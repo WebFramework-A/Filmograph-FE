@@ -12,7 +12,7 @@ import MyPage from "./pages/MyPage";
 import LoginPage from "./pages/LoginPage";
 import DetailPage from "./pages/DetailPage";
 import LoadPage from "./pages/LoadPage";
-import WishlistPage from "./components/MyPage/WishlistPage";
+import WishlistPage from "./components/MyPage/MyLikesPage";
 import MyReviewsPage from "./components/MyPage/MyReviewsPage";
 import GraphHome from "./pages/GraphHome";
 import GraphDetail from "./components/GraphPage/GraphDetail";

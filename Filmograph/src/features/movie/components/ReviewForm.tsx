@@ -1,20 +1,19 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../../auth/hooks/useAuth";
-// [수정] updateReview 추가 임포트 (수정 기능을 위해 필요)
 import { addReview, updateReview } from "../../review/services/reviewService";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../services/firebaseConfig";
-import { type Review } from "../../review/types/review"; // 타입 import
+import { type Review } from "../../review/types/review";
 
 interface Props {
     movieId: string;
     movieTitle: string;
     onReviewSubmitted: () => void; // 리뷰 작성 후 목록 새로고침용 함수
-    initialData?: Review | null;   // [추가] 수정 시 기존 데이터 받기
-    onCancelEdit?: () => void;     // [추가] 수정 취소 버튼용 함수
+    initialData?: Review | null;   // 수정 시 기존 데이터 받기
+    onCancelEdit?: () => void;     // 수정 취소 버튼용 함수
 }
 
-// [수정] props에서 initialData, onCancelEdit를 '구조 분해 할당'으로 받아야 함수 안에서 쓸 수 있습니다.
+// props에서 initialData, onCancelEdit를 '구조 분해 할당'으로 받아
 export default function ReviewForm({
     movieId,
     movieTitle,
@@ -30,7 +29,7 @@ export default function ReviewForm({
     const [isAnonymous, setIsAnonymous] = useState(false); // 익명 여부
     const [isSubmitting, setIsSubmitting] = useState(false); // 제출 중 로딩 상태
 
-    // [추가] 수정 모드일 때 초기값 채워넣기
+    // 수정 모드일 때 초기값 채워넣기
     // initialData가 변경될 때마다(수정 버튼 클릭 시) 폼을 해당 데이터로 채웁니다.
     useEffect(() => {
         if (initialData) {
@@ -53,27 +52,31 @@ export default function ReviewForm({
             alert("로그인이 필요합니다.");
             return;
         }
+
+        // 리뷰 작성 없이 별점만 해도 등록 가능하게 변경
+        /*
         if (!content.trim()) {
             alert("내용을 입력해주세요.");
             return;
         }
+        */
 
         setIsSubmitting(true);
         try {
-            // 1. Firestore에서 최신 유저 정보(닉네임) 가져오기
+            // Firestore에서 최신 유저 정보(닉네임) 가져오기
             // (Auth 정보는 토큰 갱신 전까지 옛날 닉네임일 수 있어서 DB를 직접 조회합니다)
             const userDocRef = doc(db, "users", user.uid);
             const userSnapshot = await getDoc(userDocRef);
 
             let currentNickname = user.displayName || "익명";
-            const currentPhoto = user.photoURL || ""; // [수정] const 사용 (ESLint 권장)
+            const currentPhoto = user.photoURL || "";
 
             if (userSnapshot.exists()) {
                 const u = userSnapshot.data();
                 if (u.nickname) currentNickname = u.nickname;
             }
 
-            // 2. 수정 모드 vs 작성 모드 분기 처리
+            // 수정 모드 vs 작성 모드 분기 처리
             if (initialData) {
                 // [수정 모드] updateReview 호출
                 await updateReview({
@@ -105,11 +108,11 @@ export default function ReviewForm({
                 alert("리뷰가 등록되었습니다!");
             }
 
-            // 3. 폼 초기화 및 목록 갱신
+            // 폼 초기화 및 목록 갱신
             setContent("");
             setRating(5);
             setIsAnonymous(false);
-            onReviewSubmitted(); // 부모 컴포넌트에게 "새로고침해!" 라고 알림
+            onReviewSubmitted(); // 부모 컴포넌트에게 새로고침하라고 알림
 
         }
         catch (error) {

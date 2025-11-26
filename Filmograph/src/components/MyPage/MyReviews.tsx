@@ -10,11 +10,11 @@ interface StatusProps {
         avgRating: number;
     };
     recentReviews: Review[]; // 최근 리뷰 데이터 받기
-    onReviewDeleted?: () => void; // [선택적] 삭제 후 콜백
+    onReviewDeleted?: () => void; // 삭제 후 콜백
 }
 
-export default function Status(props: StatusProps) { // [수정] props 전체를 받음
-    const { status, recentReviews, onReviewDeleted } = props; // [수정] 여기서 분해 할당
+export default function Status(props: StatusProps) { // props 전체를 받음
+    const { status, recentReviews, onReviewDeleted } = props; // 여기서 분해 할당
     const navigate = useNavigate();
     const { user } = useAuth(); // 본인 확인용
 
