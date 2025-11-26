@@ -104,10 +104,10 @@ export default function EgoGraph() {
     role?: string;
   } | null>(null);
 
-  // ⭐ hoverNode 삭제 (사용 안 해서 ESLint 제거)
+  // hoverNode 삭제 (사용 안 해서 ESLint 제거)
   // const [hoverNode, setHoverNode] = useState<NodeT | null>(null);
 
-  // ⭐ ForceGraph ref 타입 완전한 제네릭 적용
+  // ForceGraph ref 타입 완전한 제네릭 적용
   const fgRef = useRef<ForceGraphMethods<NodeT, LinkT> | null>(null);
 
   // 초기 로드
@@ -202,18 +202,22 @@ export default function EgoGraph() {
   }, [graphData, centerPerson]);
 
   if (!filteredData || !centerPerson)
-    return (
-      <div className="flex items-center justify-center w-full h-full">
-        <div className="text-white text-xl font-semibold">
-          그래프 불러오는 중 · · ·
-        </div>
+  return (
+    <div
+      className="w-full flex items-center justify-center"
+      style={{ height: "550px" }}   // ← 그래프 위치 높이 맞춰주기
+    >
+      <div className="text-white text-xl font-semibold">
+        그래프 불러오는 중 · · ·
       </div>
-    );
+    </div>
+  );
+
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center relative pb-24">
 
-      {/* ⭐ 타이틀 완전히 제거됨 */}
+      {/*  타이틀 완전히 제거됨 */}
 
       <ForceGraph2D<NodeT, LinkT>
         ref={fgRef}
@@ -225,7 +229,7 @@ export default function EgoGraph() {
         enableNodeDrag={true}
         linkColor={() => "rgba(255,255,255,0.7)"}
         
-        // ⭐ 타입 오류 해결: name, force 타입 지정
+        // 타입 오류 해결: name, force 타입 지정
         d3Force={(name: string, force: any) => {
           if (name === "charge") force.strength(-120);
           return force;
@@ -238,7 +242,7 @@ export default function EgoGraph() {
           return 2 + norm * 10;
         }}
 
-        // ⭐ scale 미사용 → 제거하여 eslint 경고 제거
+        // scale 미사용 → 제거하여 eslint 경고 제거
         nodeCanvasObject={(raw, ctx) => {
           const node = raw as NodeT & { x: number; y: number };
           const isCenter = String(node.id) === egoId;
