@@ -88,6 +88,7 @@ export default function ReviewsSection({ movie }: Props) {
                                             <img src={review.userInfo.photoURL} alt="user" className="w-full h-full object-cover" />
                                         )}
                                     </div>
+
                                     <div>
                                         <p className="text-sm font-bold text-white">
                                             {/* 익명 여부에 따라 닉네임 표시 */}

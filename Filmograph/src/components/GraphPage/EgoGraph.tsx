@@ -1,4 +1,3 @@
-// src/components/GraphPage/EgoGraph.tsx
 import { useEffect, useMemo, useRef, useState } from "react";
 import ForceGraph2D from "react-force-graph-2d";
 import { doc, getDoc } from "firebase/firestore";
@@ -202,16 +201,16 @@ export default function EgoGraph() {
   }, [graphData, centerPerson]);
 
   if (!filteredData || !centerPerson)
-  return (
-    <div
-      className="w-full flex items-center justify-center"
-      style={{ height: "550px" }}   // ← 그래프 위치 높이 맞춰주기
-    >
-      <div className="text-white text-xl font-semibold">
-        그래프 불러오는 중 · · ·
+    return (
+      <div
+        className="w-full flex items-center justify-center"
+        style={{ height: "550px" }}   // ← 그래프 위치 높이 맞춰주기
+      >
+        <div className="text-white text-xl font-semibold">
+          그래프 불러오는 중 · · ·
+        </div>
       </div>
-    </div>
-  );
+    );
 
 
   return (
@@ -228,7 +227,7 @@ export default function EgoGraph() {
         nodeId="id"
         enableNodeDrag={true}
         linkColor={() => "rgba(255,255,255,0.7)"}
-        
+
         // 타입 오류 해결: name, force 타입 지정
         d3Force={(name: string, force: any) => {
           if (name === "charge") force.strength(-120);
