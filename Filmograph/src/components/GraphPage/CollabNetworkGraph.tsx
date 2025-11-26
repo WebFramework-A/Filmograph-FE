@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState, useRef } from "react";
 import ForceGraph2D from "react-force-graph-2d";
 import type { ForceGraphMethods, LinkObject, NodeObject } from "react-force-graph-2d";
 import * as d3 from "d3-force";
+import useGraphSearch from "../../hooks/useGraphSearch";
 
 // 타입 정의 
 type NodeT = NodeObject & {
@@ -28,7 +29,10 @@ type GraphT = {
 
 type CollabNetworkGraphProps = {
   resetViewFlag: boolean;
+  searchTerm: string;
+  onNoResult: () => void;
 };
+
 
 // 색상 정의
 const COLORS = [
@@ -42,11 +46,11 @@ const COLORS = [
 ];
 
 const GRAPH_WIDTH = 2000;
-const GRAPH_HEIGHT = 550;
+const GRAPH_HEIGHT = 518;
 
 // 카메라 위치
 const INITIAL_CENTER_X = 0;
-const INITIAL_CENTER_Y = -1; 
+const INITIAL_CENTER_Y = 0; 
 const INITIAL_ZOOM = 0.94;
 
 // 함수
@@ -105,11 +109,17 @@ const drawLabel = (
 
 // 컴포넌트
 export default function CollabNetworkGraph({
-  resetViewFlag,
+  resetViewFlag, searchTerm, onNoResult
 }: CollabNetworkGraphProps) {
   const [data, setData] = useState<GraphT | null>(null);
   const [selectedNode, setSelectedNode] = useState<NodeT | null>(null);
+  const focusNode = (node: NodeT | null) => {
+  setSelectedNode(node);
+};
+
   const fgRef = useRef<ForceGraphMethods<NodeT, LinkT> | null>(null);
+
+
 
   // JSON 로드
   useEffect(() => {
@@ -125,7 +135,7 @@ export default function CollabNetworkGraph({
           idToNode.set(node.id, node);
 
           // 초기 위치
-          node.y = (node.y ?? 0) - 120;
+          node.y = (node.y ?? 0) - 200;
         });
 
         links.forEach((link) => {
@@ -168,13 +178,13 @@ export default function CollabNetworkGraph({
     if (linkForce) {
       linkForce.distance((link: LinkT) => {
         const w = link.weight ?? 1;
-        return 15 + w * 3;
+        return 25 + w * 17;
       });
     }
 
     const chargeForce = fg.d3Force("charge") as any;
     if (chargeForce) {
-      chargeForce.strength(-150);
+      chargeForce.strength(-120);
     }
 
     fg.d3Force(
@@ -213,6 +223,23 @@ export default function CollabNetworkGraph({
       fgRef.current.zoom(1.5, 600);
     }
   }, [selectedNode]);
+
+useGraphSearch({
+  searchTerm,
+  graphData,
+  searchKey: "label",
+  onMatch: (target) => {
+    setSelectedNode(target as NodeT);
+
+    // 기존 Collab 확대 로직 그대로 사용
+    if (target.x != null && target.y != null && fgRef.current) {
+      fgRef.current.centerAt(target.x, target.y, 600);
+      fgRef.current.zoom(1.5, 600);
+    }
+  },
+  onNoResult,
+});
+
 
   // 전체 그래프 보기
   useEffect(() => {
@@ -356,7 +383,8 @@ export default function CollabNetworkGraph({
               drawLabel(ctx, node.label, node.x, node.y, fontSize);
             }
           }}
-          onNodeClick={(node) => setSelectedNode(node as NodeT)}
+          onNodeClick={(node) => focusNode(node as NodeT)}
+
           enableNodeDrag
         />
       </div>
