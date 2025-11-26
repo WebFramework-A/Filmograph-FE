@@ -235,7 +235,18 @@ export default function BipartiteGraph({ resetViewFlag }: BipartiteGraphProps) {
         fgRef.current.zoom(0.06, 0)
     }, [resetViewFlag]);
 
-    if (!data) return <div className="flex items-center justify-center text-white">그래프 불러오는 중· · ·</div>;
+    if (!data) {
+        return (
+            <div 
+            className="w-full flex items-center justify-center"
+            style={{ height: '550px' }} >
+            <div className="text-white text-xl font-semibold">
+                그래프 불러오는 중 · · ·
+            </div>
+            </div>
+            );
+        }
+
 
     return (
         <div className="w-full h-full flex flex-col items-center">
