@@ -1,13 +1,10 @@
 // src/components/GraphPage/CollabNetworkGraph.tsx
 import { useEffect, useMemo, useState, useRef } from "react";
 import ForceGraph2D from "react-force-graph-2d";
-import type {
-  ForceGraphMethods,
-  LinkObject,
-  NodeObject,
-} from "react-force-graph-2d";
+import type { ForceGraphMethods, LinkObject, NodeObject } from "react-force-graph-2d";
 import * as d3 from "d3-force";
 
+// 타입 정의 
 type NodeT = NodeObject & {
   id: string | number;
   label: string;
@@ -33,6 +30,7 @@ type CollabNetworkGraphProps = {
   resetViewFlag: boolean;
 };
 
+// 색상 정의
 const COLORS = [
   "#5B8FF9",
   "#5AD8A6",
@@ -46,7 +44,12 @@ const COLORS = [
 const GRAPH_WIDTH = 2000;
 const GRAPH_HEIGHT = 550;
 
-// 선택된 노드와 연결된 링크 관계 계산
+// 카메라 위치
+const INITIAL_CENTER_X = 0;
+const INITIAL_CENTER_Y = -1; 
+const INITIAL_ZOOM = 0.94;
+
+// 함수
 const getLinkRelation = (
   link: LinkT,
   selectedNode: NodeT | null,
@@ -95,12 +98,12 @@ const drawLabel = (
 ) => {
   ctx.font = `${fontSize}px sans-serif`;
   ctx.fillStyle = "white";
-  ctx.textAlign = "left";
+  ctx.textAlign = "center";
   ctx.textBaseline = "middle";
   ctx.fillText(text, x, y);
 };
 
-// resetViewFlag props 받기
+// 컴포넌트
 export default function CollabNetworkGraph({
   resetViewFlag,
 }: CollabNetworkGraphProps) {
@@ -120,11 +123,14 @@ export default function CollabNetworkGraph({
         nodes.forEach((node) => {
           node.neighbors = new Set();
           idToNode.set(node.id, node);
+
+          // 초기 위치
+          node.y = (node.y ?? 0) - 120;
         });
 
         links.forEach((link) => {
           const a = idToNode.get(
-            typeof link.source == "object"
+            typeof link.source === "object"
               ? (link.source as NodeT).id
               : (link.source as string | number)
           );
@@ -147,7 +153,10 @@ export default function CollabNetworkGraph({
       });
   }, []);
 
-  const graphData = useMemo(() => data ?? { nodes: [], links: [] }, [data]);
+  const graphData = useMemo(
+    () => data ?? { nodes: [], links: [] },
+    [data]
+  );
 
   // Force 설정
   useEffect(() => {
@@ -195,7 +204,7 @@ export default function CollabNetworkGraph({
     fg.d3ReheatSimulation();
   }, [graphData]);
 
-  // 클릭 시 선택 노드 포커싱
+  //  노드 클릭 시 포커싱
   useEffect(() => {
     if (!selectedNode || !fgRef.current) return;
 
@@ -205,19 +214,24 @@ export default function CollabNetworkGraph({
     }
   }, [selectedNode]);
 
-  // GraphPage에서 resetViewFlag가 변하면 전체 그래프 다시 보기
+  // 전체 그래프 보기
   useEffect(() => {
     if (!fgRef.current) return;
 
-    // 선택된 노드 초기화
     setSelectedNode(null);
 
-    fgRef.current.zoomToFit(600, 52);
+    const fg = fgRef.current;
+    fg.centerAt(INITIAL_CENTER_X, INITIAL_CENTER_Y, 600);
+    fg.zoom(INITIAL_ZOOM, 600);
   }, [resetViewFlag]);
 
+  // 로딩 상태
   if (!data) {
     return (
-      <div className="flex items-center justify-center w-full h-full">
+      <div
+        className="w-full flex items-center justify-center"
+        style={{ height: GRAPH_HEIGHT }}
+      >
         <div className="text-white text-xl font-semibold">
           그래프 불러오는 중 · · ·
         </div>
@@ -230,12 +244,13 @@ export default function CollabNetworkGraph({
   const getNodeFromEndpoint = (
     endpoint: string | number | NodeT
   ): NodeT | undefined => {
-    if (typeof endpoint == "object") return endpoint as NodeT;
+    if (typeof endpoint === "object") return endpoint as NodeT;
     return nodes.find((n) => n.id === endpoint);
   };
 
+  // 렌더링
   return (
-    <div className="w-full h-full flex items-center justify-center">
+    <div className="w-full h-full flex justify-center mt-0">
       <div
         className="relative"
         style={{ width: GRAPH_WIDTH, height: GRAPH_HEIGHT }}
@@ -290,10 +305,9 @@ export default function CollabNetworkGraph({
               selectedNode != null && selectedNode.id == node.id;
             const isNeighbor =
               selectedNode != null &&
-              selectedNode.neighbors?.has(node.id) == true;
+              selectedNode.neighbors?.has(node.id) === true;
             const sameCommunity =
-              !selectedNode ||
-              node.community === selectedNode.community;
+              !selectedNode || node.community === selectedNode.community;
 
             // 선택 노드 배경 원
             if (isMain) {
@@ -307,11 +321,11 @@ export default function CollabNetworkGraph({
             let opacity = 1;
             if (selectedNode) {
               if (!sameCommunity) {
-                opacity = 0.05;
+                opacity = 0.08;
               } else if (isMain || isNeighbor) {
                 opacity = 1;
               } else {
-                opacity = 0.4;
+                opacity = 0.55;
               }
             }
 
@@ -331,19 +345,15 @@ export default function CollabNetworkGraph({
 
             // 이름 표시
             if (selectedNode) {
-              // 선택된 노드, 선택된 노드와 연결되어 있고 같은 커뮤니티인 노드만 이름 표시
               const showLabel = isMain || (isNeighbor && sameCommunity);
 
               if (showLabel) {
                 const fontSize = 12 / (globalScale * 0.9);
-                drawLabel(ctx, node.label, node.x + 11, node.y, fontSize);
+                drawLabel(ctx, node.label, node.x, node.y, fontSize);
               }
-            } else {
-              // 줌인하면 전체 노드 이름 표시
-              if (globalScale > 1.8) {
-                const fontSize = 12 / globalScale;
-                drawLabel(ctx, node.label, node.x + 4, node.y, fontSize);
-              }
+            } else if (globalScale > 1.8) {
+              const fontSize = 12 / globalScale;
+              drawLabel(ctx, node.label, node.x, node.y, fontSize);
             }
           }}
           onNodeClick={(node) => setSelectedNode(node as NodeT)}
