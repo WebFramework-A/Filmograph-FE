@@ -7,10 +7,11 @@ import Footer from "./Footer";
 const HomePage = () => {
   return (
     <div className="h-screen w-full overflow-x-hidden overflow-y-scroll snap-y snap-mandatory scroll-smooth">
+      <GraphDescription />
+
       <Hero />
       <About />
       <HowToUse />
-      <GraphDescription />
       <Footer />
     </div>
   );
