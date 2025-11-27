@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Heart } from "lucide-react";   // ← Bookmark 대신 Heart 사용!
+import { Bookmark } from "lucide-react";
 import { motion } from "framer-motion";
 import { auth, db } from "../../../services/firebaseConfig";
 import { doc, getDoc, setDoc, deleteDoc } from "firebase/firestore";
@@ -84,16 +84,14 @@ export function FavoriteButton({ movieId, size = "md" }: FavoriteButtonProps) {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={toggleFavorite}
-        className={`${sizeClasses[size]} rounded-full flex items-center justify-center transition-all ${
-          favorite
+        className={`${sizeClasses[size]} rounded-full flex items-center justify-center transition-all ${favorite
             ? "bg-[#FF6B81]/90 text-white"
             : "bg-white/10 text-white hover:bg-white/20"
-        }`}
-      >
-        <Heart
-          className={`${iconSizes[size]} transition-all ${
-            favorite ? "fill-[#ffffff]" : "fill-none"
           }`}
+      >
+        <Bookmark
+          className={`${iconSizes[size]} transition-all ${favorite ? "fill-[#00696B]" : "fill-none"
+            }`}
         />
       </motion.button>
 
@@ -102,7 +100,7 @@ export function FavoriteButton({ movieId, size = "md" }: FavoriteButtonProps) {
         show={toast.show}
         actionUrl={toast.actionUrl}
         actionLabel={toast.actionLabel}
-        onClose={() => {}}
+        onClose={() => { }}
       />
     </>
   );
