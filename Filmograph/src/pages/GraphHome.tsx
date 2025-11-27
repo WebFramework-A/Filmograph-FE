@@ -88,7 +88,7 @@ const GraphHome = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-30 bg-[#0d5a5a]">
+    <div className="min-h-screen pt-30 bg-[#0b4747]">
       {/* 헤더 */}
       <div className="pb-4 px-8">
         <h1 className="text-6xl font-normal text-center mb-4 text-yellow-300">
