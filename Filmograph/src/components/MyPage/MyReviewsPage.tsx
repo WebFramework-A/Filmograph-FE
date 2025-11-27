@@ -54,7 +54,7 @@ export default function MyReviewsPage() {
     };
 
     return (
-        <div className="min-h-screen bg-[#0d5a5a] text-white pt-24 px-8">
+        <div className="min-h-screen bg-[#0b4747] text-white pt-24 px-8">
             <div className="max-w-4xl mx-auto">
                 <div className="flex items-center gap-4 mb-8">
                     <button

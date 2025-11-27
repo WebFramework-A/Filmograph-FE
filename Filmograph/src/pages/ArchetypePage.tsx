@@ -27,7 +27,7 @@ const ArchetypePage = () => {
     : null;
 
   return (
-    <div className="min-h-screen bg-[#0d5a5a] text-white p-8 pt-20">
+    <div className="min-h-screen bg-[#0b4747] text-white p-8 pt-20">
       <div className="max-w-6xl mx-auto">
         {/* 잡지 헤더 */}
         <header className="mb-10 md:mb-14">

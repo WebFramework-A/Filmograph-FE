@@ -66,7 +66,7 @@ export default function WishlistPage() {
     if (loading || isLoadingData) return <div className="text-white text-center pt-20">로딩 중...</div>;
 
     return (
-        <div className="min-h-screen bg-[#0d5a5a] text-white p-8 pt-24">
+        <div className="min-h-screen bg-[#0b4747] text-white p-8 pt-24">
             <div className="max-w-6xl mx-auto">
                 <div className="flex items-center gap-4 mb-8 border-b border-white/20 pb-4">
                     <button onClick={() => navigate(-1)} className="text-2xl hover:text-[#FFD700]">←</button>
