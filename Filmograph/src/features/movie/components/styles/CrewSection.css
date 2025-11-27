@@ -17,13 +17,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 1rem;
+  min-height: 50px; 
 }
 
 .crew-title {
   font-size: 2rem;
   font-weight: bold;
   color: #ffff00;
-  margin-bottom: 2rem;
 }
 
 .crew-columns {
@@ -41,28 +42,30 @@
   align-items: center;
   gap: 0.6rem;
   color: #fff;
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
+  font-size: 1.4rem;
 }
 
 .crew-header-icon {
   width: 22px;
   height: 22px;
   color: #00d4d8;
+  margin-left: 8px;
 }
 
 .crew-list-container {
   position: relative;
   width: 100%;
   overflow: hidden;
-  min-height: 180px;
+  min-height: 80px;
 }
 
 .crew-slide {
-  position: absolute;
   width: 100%;
-  top: 0;
-  left: 0;
+  position: relative;
+}
+.no-animation {
+  transform: none !important;
+  opacity: 1 !important;
 }
 
 .crew-list {
@@ -104,16 +107,13 @@
 .paging-buttons {
   display: flex;
   gap: 8px;
-  margin-bottom: 1.2rem;
 }
 
 .paging-buttons button {
   background: rgba(255, 255, 255, 0.12);
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.25);
-  padding: 6px 14px;
   border-radius: 8px;
-  font-size: 1rem;
   cursor: pointer;
   transition: 0.25s ease;
 }
@@ -126,4 +126,9 @@
 .paging-buttons button:disabled {
   opacity: 0.35;
   cursor: default;
+}
+
+.paging-buttons.small button {
+  padding: 4px 12px;
+  font-size: 0.8rem;
 }

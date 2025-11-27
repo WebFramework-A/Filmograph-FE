@@ -13,9 +13,6 @@
   border-radius: 16px;
   padding: 2rem;
 }
-.overview-container:hover {
-  border-color: rgba(255, 255, 0, 0.3);
-}
 
 /* 제목 */
 .overview-title {

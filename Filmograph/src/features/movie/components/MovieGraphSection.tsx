@@ -339,7 +339,7 @@ export default function MovieGraphSection({ movieId }: { movieId: string }) {
     : "grab";
 
   return (
-    <section className="px-6 pb-16 transform scale-90">
+    <section className="transform scale-90">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">

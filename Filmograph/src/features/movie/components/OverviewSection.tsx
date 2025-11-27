@@ -20,10 +20,7 @@ export default function OverviewSection({ movie }: { movie: any }) {
   return (
     <section className="overview-wrapper">
       <motion.div
-        className="overview-container"
-        whileHover={{ scale: 1.01 }}
-        transition={{ duration: 0.25, ease: "easeOut" }}
-      >
+        className="overview-container">
         {hasOverview && (
           <>
             <h2 className="overview-title">줄거리</h2>

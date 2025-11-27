@@ -55,7 +55,7 @@ export default function ReviewsSection({ movie }: Props) {
     };
 
     return (
-        <div className="max-w-7xl mx-auto px-4 py-12">
+        <div className="max-w-7xl mx-auto px-4 py-12 w-[93%] mx-auto">
             <h2 className="text-2xl font-bold text-yellow-400 mb-6">
                 관람객 리뷰 <span className="text-white/60 text-lg">({reviews.length})</span>
             </h2>

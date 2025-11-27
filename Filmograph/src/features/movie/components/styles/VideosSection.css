@@ -33,7 +33,6 @@
 }
 
 .videos-block {
-  margin-bottom: 2rem;
 }
 
 .videos-subtitle {
@@ -44,7 +43,6 @@
 
 .videos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1rem;
 }
 
@@ -117,15 +115,17 @@
 
 .video-bottom {
   position: absolute;
-  bottom: 0;
+  top: 0;
   width: 100%;
   padding: 0.7rem;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), transparent);
 }
 
 .video-name {
-  color: white;
-  font-size: 1rem;
+  color: rgb(231, 231, 231);
+  font-size: 1.1rem;
+  text-shadow: 0 0 6px rgba(0,0,0,0.6);
+  font-weight: 400;
 }
 
 .video-modal-backdrop {
