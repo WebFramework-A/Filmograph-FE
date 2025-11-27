@@ -1,23 +1,206 @@
 [
+
   {
-    "id": "c1",
-    "name": "김기우",
-    "movieTitle": "기생충",
-    "description": "가난한 집 아들이지만 머리가 좋고 상황에 맞게 거짓말과 계획을 잘 짜는 인물.",
+    "id": "hero-1",
+    "name": "어벤져스: 캡틴 아메리카",
+    "movieTitle": "어벤져스",
+    "description": "희생과 책임을 중시하며 정의를 위해 끝까지 싸우는 전형적 히어로.",
     "profileUrl": ""
   },
   {
-    "id": "c2",
-    "name": "김기정",
-    "movieTitle": "기생충",
-    "description": "눈치가 빠르고 영리하며, 그림 실력을 이용해 새로운 신분을 만들어내는 인물.",
+    "id": "hero-2",
+    "name": "토르",
+    "movieTitle": "어벤져스",
+    "description": "강력한 힘과 정의감으로 세계를 지키는 신적 존재.",
     "profileUrl": ""
   },
   {
-    "id": "c3",
+    "id": "hero-3",
+    "name": "원더우먼",
+    "movieTitle": "원더우먼",
+    "description": "용기, 진실, 정의를 상징하는 강인한 전사형 히어로.",
+    "profileUrl": ""
+  },
+
+
+  {
+    "id": "villain-1",
     "name": "조커",
-    "movieTitle": "조커",
-    "description": "사회에서 소외되고 무시당하다가 점점 폭력과 혼란을 상징하게 되는 인물.",
+    "movieTitle": "다크나이트",
+    "description": "혼돈과 파괴를 추구하며 사회 규칙을 무너뜨리는 대표적 악당.",
+    "profileUrl": ""
+  },
+  {
+    "id": "villain-2",
+    "name": "타노스",
+    "movieTitle": "어벤져스: 인피니티 워",
+    "description": "스스로의 왜곡된 가치관을 위해 우주 절반을 희생시키려는 강력한 빌런.",
+    "profileUrl": ""
+  },
+  {
+    "id": "villain-3",
+    "name": "볼드모트",
+    "movieTitle": "해리포터",
+    "description": "죽음을 두려워해 모든 것을 파괴하며 권력을 탐하는 암흑 마법사.",
+    "profileUrl": ""
+  },
+
+
+  {
+    "id": "outsider-1",
+    "name": "엘",
+    "movieTitle": "데스노트",
+    "description": "사회적 규범이나 관계에서 벗어나 독특하게 행동하는 천재 탐정.",
+    "profileUrl": ""
+  },
+  {
+    "id": "outsider-2",
+    "name": "가오나시",
+    "movieTitle": "센과 치히로의 행방불명",
+    "description": "정체와 소속을 잃은 채 외로움 속에서 사람들에게 집착하는 존재.",
+    "profileUrl": ""
+  },
+  {
+    "id": "outsider-3",
+    "name": "트래비스 빅클",
+    "movieTitle": "택시 드라이버",
+    "description": "사회에 적응하지 못하고 고립되며 폭력으로 치닫는 인물.",
+    "profileUrl": ""
+  },
+
+ 
+  {
+    "id": "avenger-1",
+    "name": "올드보이 오대수",
+    "movieTitle": "올드보이",
+    "description": "억울한 감금 뒤 복수를 위해 진실을 파헤치는 집요한 인물.",
+    "profileUrl": ""
+  },
+  {
+    "id": "avenger-2",
+    "name": "존 윅",
+    "movieTitle": "존 윅",
+    "description": "사랑하는 존재를 잃고 그 분노를 복수로 폭발시키는 암살자.",
+    "profileUrl": ""
+  },
+  {
+    "id": "avenger-3",
+    "name": "킬 빌 - 브라이드",
+    "movieTitle": "킬 빌",
+    "description": "자신을 배신한 조직에게 복수하기 위해 모든 것을 걸고 싸운다.",
+    "profileUrl": ""
+  },
+
+
+  {
+    "id": "explorer-1",
+    "name": "인디아나 존스",
+    "movieTitle": "인디아나 존스",
+    "description": "새로운 지식과 보물을 찾기 위해 위험을 감수하며 모험을 떠나는 탐험가.",
+    "profileUrl": ""
+  },
+  {
+    "id": "explorer-2",
+    "name": "라라 크로프트",
+    "movieTitle": "툼 레이더",
+    "description": "고대 유적과 비밀을 찾아 떠나는 대담한 탐험가.",
+    "profileUrl": ""
+  },
+  {
+    "id": "explorer-3",
+    "name": "업 - 칼",
+    "movieTitle": "UP",
+    "description": "오랜 꿈을 이루기 위해 비행 모험을 떠나는 노 탐험가.",
+    "profileUrl": ""
+  },
+
+
+  {
+    "id": "candy-1",
+    "name": "도라에몽",
+    "movieTitle": "도라에몽",
+    "description": "천진난만함과 따뜻한 마음으로 주변을 보살피는 힐링형 캐릭터.",
+    "profileUrl": ""
+  },
+  {
+    "id": "candy-2",
+    "name": "엘사",
+    "movieTitle": "겨울왕국",
+    "description": "아름답고 순수한 내면을 가진 동시에 스스로의 힘을 받아들이며 성장하는 인물.",
+    "profileUrl": ""
+  },
+  {
+    "id": "candy-3",
+    "name": "포뇨",
+    "movieTitle": "벼랑 위의 포뇨",
+    "description": "순수한 호기심과 애정을 가진 사랑스러운 바다 생명체.",
+    "profileUrl": ""
+  },
+
+  {
+    "id": "brain-1",
+    "name": "셜록 홈즈",
+    "movieTitle": "셜록 홈즈",
+    "description": "압도적인 추리력과 관찰력으로 사건을 해결하는 천재 탐정.",
+    "profileUrl": ""
+  },
+  {
+    "id": "brain-2",
+    "name": "키미코",
+    "movieTitle": "기생충",
+    "description": "기민한 머리 회전과 빠른 판단력으로 상황을 이끄는 인물.",
+    "profileUrl": ""
+  },
+  {
+    "id": "brain-3",
+    "name": "브루스 웨인",
+    "movieTitle": "다크나이트",
+    "description": "천재적 두뇌와 전략적 사고로 고담을 지키는 히어로.",
+    "profileUrl": ""
+  },
+
+
+  {
+    "id": "mage-1",
+    "name": "해리 포터",
+    "movieTitle": "해리 포터",
+    "description": "마법 세계의 운명을 짊어진 용감한 젊은 마법사.",
+    "profileUrl": ""
+  },
+  {
+    "id": "mage-2",
+    "name": "간달프",
+    "movieTitle": "반지의 제왕",
+    "description": "지혜와 강력한 마법으로 세계를 이끄는 고대의 마법사.",
+    "profileUrl": ""
+  },
+  {
+    "id": "mage-3",
+    "name": "닥터 스트레인지",
+    "movieTitle": "닥터 스트레인지",
+    "description": "시간과 차원을 넘나드는 마법으로 세계를 지키는 히어로 마법사.",
+    "profileUrl": ""
+  },
+
+  {
+    "id": "spy-1",
+    "name": "제임스 본드",
+    "movieTitle": "007",
+    "description": "세련된 위장술과 잠입 능력을 가진 세계적인 스파이.",
+    "profileUrl": ""
+  },
+  {
+    "id": "spy-2",
+    "name": "에단 헌트",
+    "movieTitle": "미션 임파서블",
+    "description": "고난도 작전과 침투를 수행하는 전문 비밀요원.",
+    "profileUrl": ""
+  },
+  {
+    "id": "spy-3",
+    "name": "블랙 위도우",
+    "movieTitle": "어벤져스",
+    "description": "첩보, 잠입, 심리전 능력을 모두 갖춘 베테랑 스파이.",
     "profileUrl": ""
   }
 ]
