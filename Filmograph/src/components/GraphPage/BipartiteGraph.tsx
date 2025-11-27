@@ -3,6 +3,8 @@ import ForceGraph2D from "react-force-graph-2d";
 import { db } from "../../services/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import useGraphSearch from "../../hooks/useGraphSearch";
+
 
 import type {
     Node as CommonNode,
@@ -25,6 +27,8 @@ type GraphT = {
 // Props 타입 정의
 type BipartiteGraphProps = {
     resetViewFlag: boolean;
+    searchTerm?: string;      // 🔥 추가
+    onNoResult?: () => void;
 };
 
 // 노드 색깔 설정
@@ -33,8 +37,10 @@ const ACTOR_COLOR = "#5B8FF9";
 const DIRECTOR_COLOR = "#F6BD16";
 const ACTOR_DIRECTOR_COLOR = "#E040FB";
 
+/*
 const GRAPH_WIDTH = 2000;
 const GRAPH_HEIGHT = 550;
+*/
 
 // 가중치 정규화
 function normalizeWeight(w: number, minW: number, maxW: number): number {
@@ -48,7 +54,27 @@ const getNodeBaseSize = (node: NodeT, minVal: number, maxVal: number) => {
     return 10 + norm * 10;
 }
 
-export default function BipartiteGraph({ resetViewFlag }: BipartiteGraphProps) {
+// 캔버스 텍스트 줄바꿈 계산 함수
+function getWrappedLines(ctx: CanvasRenderingContext2D, text: string, maxWidth: number): string[] {
+    const words = text.split(" ");
+    const lines: string[] = [];
+    let currentLine = words[0];
+
+    for (let i = 1; i < words.length; i++) {
+        const word = words[i];
+        const width = ctx.measureText(currentLine + " " + word).width;
+        if (width < maxWidth) {
+            currentLine += " " + word;
+        } else {
+            lines.push(currentLine);
+            currentLine = word;
+        }
+    }
+    lines.push(currentLine);
+    return lines;
+}
+
+export default function BipartiteGraph({ resetViewFlag, searchTerm, onNoResult }: BipartiteGraphProps) {
     const [data, setData] = useState<GraphT | null>(null);
 
     // 하이라이팅을 위한 State
@@ -61,6 +87,27 @@ export default function BipartiteGraph({ resetViewFlag }: BipartiteGraphProps) {
     const lastClickTimeRef = useRef<number>(0);
     // 페이지 이동 함수
     const navigate = useNavigate();
+
+    //그래프 크기 관련 함수
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [dimensions, setDimensions] = useState({ width: 2000, height: 518 });
+
+    // 화면 크기가 바뀔 때마다 그래프 크기 재계산
+    useEffect(() => {
+        const updateDimensions = () => {
+            if (containerRef.current) {
+                setDimensions({
+                    width: containerRef.current.offsetWidth, // 부모 div의 너비에 맞춤
+                    height: 518 // 높이는 고정하거나 window.innerHeight 등을 이용해 조절 가능
+                });
+            }
+        };
+
+        window.addEventListener('resize', updateDimensions);
+        updateDimensions(); // 초기 실행
+
+        return () => window.removeEventListener('resize', updateDimensions);
+    }, []);
 
     // 데이터 로딩
     useEffect(() => {
@@ -149,6 +196,34 @@ export default function BipartiteGraph({ resetViewFlag }: BipartiteGraphProps) {
 
     const graphData = useMemo(() => data ?? { nodes: [], links: [] }, [data]);
 
+    useGraphSearch({
+        searchTerm: searchTerm ?? "",
+        graphData,
+        searchKey: "name",
+        onMatch: (target) => {
+            setSelectedNode(target as NodeT);
+
+            const related = new Set([target.id]);
+
+            graphData.links.forEach((link: any) => {
+                const s = typeof link.source === "object" ? link.source.id : link.source;
+                const t = typeof link.target === "object" ? link.target.id : link.target;
+
+                if (s === target.id) related.add(t);
+                if (t === target.id) related.add(s);
+            });
+
+            fgRef.current?.zoomToFit(
+                600,
+                10,
+                (n: any) => related.has(n.id)
+            );
+        },
+        onNoResult: () => onNoResult?.()
+    });
+
+
+
     // 하이라이팅 대상 계산
     const { highlightNodes, highlightLinks } = useMemo(() => {
         const targetNode = hoverNode || selectedNode;
@@ -181,12 +256,13 @@ export default function BipartiteGraph({ resetViewFlag }: BipartiteGraphProps) {
         fgRef.current.d3Force('charge')?.strength(-500).distanceMax(500);
 
         // Link (링크 장력)
-        fgRef.current.d3Force('link')?.distance(40).strength(1).iterations(10);
+        fgRef.current.d3Force('link')?.distance(40).strength(1).iterations(5);
 
         // Collide (충돌 방지)
         const collideForce = fgRef.current.d3Force('collide');
         if (collideForce) {
-            collideForce.strength(0.8);
+            collideForce.strength(1);
+            collideForce.iterations(2); //반복 횟수 - 정확도 향상
             collideForce.radius((node: any) => {
                 const baseSize = getNodeBaseSize(node, minVal, maxVal);
                 const buffer = node.type === 'movie' ? baseSize * 1.5 : baseSize;
@@ -199,7 +275,7 @@ export default function BipartiteGraph({ resetViewFlag }: BipartiteGraphProps) {
     useEffect(() => {
         if (fgRef.current && graphData.nodes.length > 0) {
             setTimeout(() => {
-                //fgRef.current.centerAt(0, 150, 0)
+                fgRef.current.centerAt(0, 0, 0)
                 fgRef.current.zoom(0.06, 0)
             }, 200);
         }
@@ -210,18 +286,33 @@ export default function BipartiteGraph({ resetViewFlag }: BipartiteGraphProps) {
         if (!fgRef.current) return;
         setSelectedNode(null);
         setHoverNode(null);
-        //fgRef.current.centerAt(0, 150, 0)
+        fgRef.current.centerAt(0, 0, 100)
         fgRef.current.zoom(0.06, 0)
     }, [resetViewFlag]);
 
-    if (!data) return <div className="flex items-center justify-center text-white">그래프 불러오는 중· · ·</div>;
+    if (!data) {
+        return (
+            <div
+                className="w-full flex items-center justify-center"
+                style={{ height: '550px' }} >
+                <div className="text-white text-xl font-semibold">
+                    그래프 불러오는 중 · · ·
+                </div>
+            </div>
+        );
+    }
+
 
     return (
-        <div className="w-full h-full flex flex-col items-center">
+        <div ref={containerRef} className="w-full h-full flex flex-col items-center">
             <ForceGraph2D
                 ref={fgRef}
+                /* 
                 width={GRAPH_WIDTH}
                 height={GRAPH_HEIGHT}
+                */
+                width={dimensions.width}
+                height={dimensions.height}
                 backgroundColor="transparent"
                 graphData={graphData}
                 nodeId="id"
@@ -282,10 +373,11 @@ export default function BipartiteGraph({ resetViewFlag }: BipartiteGraphProps) {
                     lastClickTimeRef.current = now;
                 }}
 
+                //그래프 배경 클릭시
                 onBackgroundClick={() => {
                     setSelectedNode(null);
                     setHoverNode(null);
-                    /*
+                    /* 전체 그래프 보기 버튼 따로 만들었으니 삭제
                     fgRef.current.centerAt(0, 150, 0)
                     fgRef.current.zoom(0.06, 0)
                     */
@@ -340,7 +432,27 @@ export default function BipartiteGraph({ resetViewFlag }: BipartiteGraphProps) {
                         ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
                         ctx.textAlign = "center";
                         ctx.textBaseline = "middle";
-                        ctx.fillText(node.name, node.x, node.y);
+                        // 줄바꿈 로직 적용
+                        // 화면 확대/축소 비율에 맞춰 폭 조절
+                        const maxWidth = 120 / globalScale;
+
+                        // 헬퍼 함수로 줄바꿈된 텍스트 배열 가져오기
+                        const lines = getWrappedLines(ctx, node.name, maxWidth);
+
+                        // 줄 간격 (폰트 크기의 1.2배)
+                        const lineHeight = fontSize * 1.2;
+
+                        // 여러 줄 그리기
+                        lines.forEach((line, i) => {
+                            // 텍스트 블록 전체를 수직 중앙 정렬하기 위한 Y 좌표 계산
+                            // (i - (전체줄수 - 1) / 2) 공식을 사용하여 중앙 기준 위아래로 펼침
+                            const dy = (i - (lines.length - 1) / 2) * lineHeight;
+
+                            // node.y 위치를 기준으로 dy만큼 이동하여 그리기
+                            if (node.x !== undefined && node.y !== undefined) {
+                                ctx.fillText(line, node.x, node.y + dy);
+                            }
+                        });
                     }
 
                     // 캔버스 설정 복구

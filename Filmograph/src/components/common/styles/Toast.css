@@ -1,17 +1,17 @@
 .toastWrapper {
   position: fixed;
-  bottom: 12px;
+  top: 90%;
   left: 0;
   width: 100%;
   display: flex;
   justify-content: center; 
   z-index: 9999;
-  pointer-events: none;    
+  pointer-events: none;  
 }
 .toastContainer {
   background: rgba(0,0,0,0.8);
   color: white;
-  padding: 14px 20px;
+  padding: 12px 79px;
   border-radius: 12px;
   display: flex;
   align-items: center;

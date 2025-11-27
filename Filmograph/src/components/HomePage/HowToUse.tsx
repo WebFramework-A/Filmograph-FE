@@ -2,11 +2,11 @@ import ScrollReveal from "../common/ScrollReveal";
 
 const HowToUse = () => {
   return (
-    <div className="w-full h-screen snap-start bg-yellow-200 text-[#0d5a5a] flex flex-col justify-center font-serif overflow-hidden">
+    <div className="w-full h-screen snap-start bg-yellow-200 text-[#0d5a5a] flex flex-col  font-serif overflow-hidden">
       {/* How */}
       <ScrollReveal direction="left" delay="delay-200">
         <div className="w-full flex justify-start my-20 md:mb-25">
-          <div className="border-b border-[#0d5a5a] pl-40 md:pl-30 lg:pl-70 xl:pl-100 pr-2 pb-2 md:pb-4">
+          <div className="border-b border-[#0d5a5a] pl-40 pt-30 sm:pt-20 md:pl-30 md:pt-10 lg:pl-70 xl:pl-100 xl:pt-10 pr-2 ">
             <h2 className="text-7xl md:text-8xl leading-none">How</h2>
           </div>
         </div>

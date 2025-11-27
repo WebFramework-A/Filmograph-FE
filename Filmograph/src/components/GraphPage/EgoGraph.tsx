@@ -1,9 +1,8 @@
-// src/components/GraphPage/EgoGraph.tsx
 import { useEffect, useMemo, useRef, useState } from "react";
 import ForceGraph2D from "react-force-graph-2d";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../services/firebaseConfig";
-import type { LinkObject, NodeObject } from "react-force-graph-2d";
+import type { ForceGraphMethods, LinkObject, NodeObject } from "react-force-graph-2d";
 
 type NodeT = NodeObject & {
   id: string | number;
@@ -92,7 +91,7 @@ export default function EgoGraph() {
     role?: string;
   } | null>(null);
 
-  const fgRef = useRef<any>(null);
+  const fgRef = useRef<ForceGraphMethods<NodeT, LinkT> | null>(null);
 
   useEffect(() => {
     loadGraph(DEFAULT_EGO_ID);
@@ -187,15 +186,20 @@ export default function EgoGraph() {
 
   if (!filteredData || !centerPerson)
     return (
-      <div className="flex items-center justify-center w-full h-full">
+      <div
+        className="w-full flex items-center justify-center"
+        style={{ height: "550px" }}
+      >
         <div className="text-white text-xl font-semibold">
           그래프 불러오는 중 · · ·
         </div>
       </div>
     );
 
+
   return (
     <div className="w-full h-full flex flex-col items-center justify-center relative pb-24">
+
       <ForceGraph2D<NodeT, LinkT>
         ref={fgRef}
         width={window.innerWidth * 0.9}
@@ -205,6 +209,13 @@ export default function EgoGraph() {
         nodeId="id"
         enableNodeDrag={true}
         linkColor={() => "rgba(255,255,255,0.7)"}
+        
+        d3Force={(name: string, force: any) => {
+          if (name === "charge") force.strength(-120);
+          return force;
+        }}
+
+        linkStrength={() => 0.1}
 
         linkWidth={(l) => {
           const norm = normalizeWeight(l.weight ?? 1, minW, maxW);

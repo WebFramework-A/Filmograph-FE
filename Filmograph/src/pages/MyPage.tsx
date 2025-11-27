@@ -2,11 +2,12 @@ import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../features/auth/hooks/useAuth";
 import { db } from "../services/firebaseConfig";
-import { doc, getDoc, collection, getDocs, query, where, getCountFromServer } from "firebase/firestore";
+import { doc, getDoc, collection, getDocs, query, where, orderBy, limit } from "firebase/firestore";
+import { type Review } from "../features/review/types/review";
 
 // 분리한 컴포넌트들 임포트
 import Profile from "../components/MyPage/Profile";
-import Status from "../components/MyPage/Status";
+import Status from "../components/MyPage/MyReviews";
 import MyLikes from "../components/MyPage/MyLikes";
 import GenreChart from "../components/MyPage/GenreChart";
 
@@ -65,14 +66,13 @@ export default function MyPage() {
   const [userInfo, setUserInfo] = useState<any>(null);
   const [likes, setLikes] = useState<WishlistItem[]>([]);
   const [genreData, setGenreData] = useState<GenreData[]>([]);
-  const [reviewCount, setReviewCount] = useState(0);
-
-  // (임시) Status 컴포넌트용 더미 데이터 (임시)
-  const stats = {
-    reviewCount: 12,
-    ratingCount: 45,
-    avgRating: 4.2,
-  };
+  // Status 컴포넌트용 데이터
+  const [recentReviews, setRecentReviews] = useState<Review[]>([]);
+  const [stats, setStats] = useState({
+    reviewCount: 0,
+    ratingCount: 0,
+    avgRating: 0
+  });
 
   // 로그인 체크
   useEffect(() => {
@@ -97,18 +97,57 @@ export default function MyPage() {
       const wishlistSnap = await getDocs(wishlistRef);
 
       // 리뷰 개수 가져오기 
-      let myReviewCount = 0;
+      let myReviews: Review[] = [];
+      let totalRatingCount = 0;  //별점 개수
+      let totalReviewCount = 0;   //리뷰 개수
+      let totalRatingSum = 0;
       try {
-        /*
-        const reviewsQuery = query(collection(db, "reviews"), where("userId", "==", uid));
-        const reviewsSnapshot = await getCountFromServer(reviewsQuery);
-        myReviewCount = reviewsSnapshot.data().count;
-        */
+        const reviewsRef = collection(db, "reviews");
+
+        // 전체 개수 및 평점 합계 계산
+        const allMyReviewsQuery = query(reviewsRef, where("userId", "==", uid));
+        const allSnap = await getDocs(allMyReviewsQuery);
+
+        totalRatingCount = allSnap.size; // 전체 문서 개수 = 평가 횟수
+
+        allSnap.forEach(doc => {
+          const data = doc.data();
+          totalRatingSum += (data.rating || 0);
+
+          // 내용이 있고 공백이 아니면 '리뷰'로 카운트
+          if (data.content && data.content.trim().length > 0) {
+            totalReviewCount++;
+          }
+        });
+
+        // 최근 3개만 가져오기 (Status 컴포넌트 표시용)
+        // Firestore 복합 색인(Index) 에러가 뜨면 콘솔의 링크를 클릭해서 인덱스를 생성해야 합니다.
+        const recentQuery = query(
+          reviewsRef,
+          where("userId", "==", uid),
+          orderBy("createdAt", "desc"),
+          limit(3)
+        );
+        const recentSnap = await getDocs(recentQuery);
+
+        myReviews = recentSnap.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        } as Review));
+
       }
       catch (error) {
-        console.error("리뷰 카운트 로드 실패 (아직 컬렉션 없음)", error);
+        console.error("리뷰 로딩 중 에러 (인덱스 필요할 수 있음):", error);
       }
-      setReviewCount(myReviewCount);
+
+      setRecentReviews(myReviews);
+
+      // 통계 업데이트
+      setStats({
+        reviewCount: totalReviewCount,  //리뷰 개수
+        ratingCount: totalRatingCount, // 별점 개수
+        avgRating: totalReviewCount > 0 ? (totalRatingSum / totalRatingCount) : 0
+      });
 
       // 영화 상세 정보 매핑
       const promises = wishlistSnap.docs.map(async (itemDoc) => {
@@ -165,6 +204,11 @@ export default function MyPage() {
     return <div className="flex items-center justify-center h-screen bg-[#0d5a5a] text-white">로딩 중...</div>;
   }
 
+  //리뷰 삭제 시 목록 새로고침하는 함수
+  const handleReviewDeleted = () => {
+    if (user) fetchMyData(user.uid); // 데이터 다시 불러오기
+  };
+
   return (
     <div className="min-h-screen bg-[#0d5a5a] text-white p-8 pt-20">
       <div className="max-w-6xl mx-auto">
@@ -177,14 +221,19 @@ export default function MyPage() {
         <Profile
           userInfo={userInfo}
           currentUser={user}
-          reviewCount={reviewCount}
+          reviewCount={stats.reviewCount}
           likeCount={likes.length}
         />
 
         {/* 통계 & 찜 목록 레이아웃 */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          {/* Status는 더미 데이터를 사용 중 */}
-          <Status status={stats} />
+          {/* 리뷰 목록 */}
+          <Status
+            status={stats}
+            recentReviews={recentReviews}
+            onReviewDeleted={handleReviewDeleted} // 여기서 함수 전달!
+          />
+          {/*찜 목록*/}
           <MyLikes likes={likes} setLikes={setLikes} />
         </div>
 
