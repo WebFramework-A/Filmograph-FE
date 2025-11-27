@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Bookmark } from "lucide-react";
+import { Heart } from "lucide-react";   // ← Bookmark 대신 Heart 사용!
 import { motion } from "framer-motion";
 import { auth, db } from "../../../services/firebaseConfig";
 import { doc, getDoc, setDoc, deleteDoc } from "firebase/firestore";
@@ -22,7 +22,7 @@ export function FavoriteButton({ movieId, size = "md" }: FavoriteButtonProps) {
     return doc(db, "userWishlist", user.uid, "items", movieId);
   }
 
-  // 로그인 상태 + Firestore 찜 여부 불러오기
+  // Firestore 찜 여부 가져오기
   useEffect(() => {
     if (!user) {
       setFavorite(false);
@@ -40,7 +40,6 @@ export function FavoriteButton({ movieId, size = "md" }: FavoriteButtonProps) {
     fetchFavorite();
   }, [movieId, user]);
 
-  // 찜 토글
   const toggleFavorite = async () => {
     if (!user) {
       showToast("로그인 후 이용 가능합니다.", "로그인", "/login");
@@ -87,18 +86,17 @@ export function FavoriteButton({ movieId, size = "md" }: FavoriteButtonProps) {
         onClick={toggleFavorite}
         className={`${sizeClasses[size]} rounded-full flex items-center justify-center transition-all ${
           favorite
-            ? "bg-[#FFFF00] text-[#00696B]"
+            ? "bg-[#FF6B81]/90 text-white"
             : "bg-white/10 text-white hover:bg-white/20"
         }`}
       >
-        <Bookmark
+        <Heart
           className={`${iconSizes[size]} transition-all ${
-            favorite ? "fill-[#00696B]" : "fill-none"
+            favorite ? "fill-[#ffffff]" : "fill-none"
           }`}
         />
       </motion.button>
 
-      {/* Toast */}
       <Toast
         message={toast.message}
         show={toast.show}
