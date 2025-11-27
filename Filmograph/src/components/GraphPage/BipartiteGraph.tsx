@@ -90,7 +90,7 @@ export default function BipartiteGraph({ resetViewFlag, searchTerm, onNoResult }
 
     //그래프 크기 관련 함수
     const containerRef = useRef<HTMLDivElement>(null);
-    const [dimensions, setDimensions] = useState({ width: 1000, height: 550 });
+    const [dimensions, setDimensions] = useState({ width: 2000, height: 518 });
 
     // 화면 크기가 바뀔 때마다 그래프 크기 재계산
     useEffect(() => {
@@ -98,7 +98,7 @@ export default function BipartiteGraph({ resetViewFlag, searchTerm, onNoResult }
             if (containerRef.current) {
                 setDimensions({
                     width: containerRef.current.offsetWidth, // 부모 div의 너비에 맞춤
-                    height: 550 // 높이는 고정하거나 window.innerHeight 등을 이용해 조절 가능
+                    height: 518 // 높이는 고정하거나 window.innerHeight 등을 이용해 조절 가능
                 });
             }
         };
@@ -201,26 +201,28 @@ export default function BipartiteGraph({ resetViewFlag, searchTerm, onNoResult }
         graphData,
         searchKey: "name",
         onMatch: (target) => {
-        setSelectedNode(target as NodeT);
+            setSelectedNode(target as NodeT);
 
-    const related = new Set([target.id]);
-    
-    graphData.links.forEach((link: any) => {
-      const s = typeof link.source === "object" ? link.source.id : link.source;
-      const t = typeof link.target === "object" ? link.target.id : link.target;
+            const related = new Set([target.id]);
 
-      if (s === target.id) related.add(t);
-      if (t === target.id) related.add(s);
+            graphData.links.forEach((link: any) => {
+                const s = typeof link.source === "object" ? link.source.id : link.source;
+                const t = typeof link.target === "object" ? link.target.id : link.target;
+
+                if (s === target.id) related.add(t);
+                if (t === target.id) related.add(s);
+            });
+
+            fgRef.current?.zoomToFit(
+                600,
+                10,
+                (n: any) => related.has(n.id)
+            );
+        },
+        onNoResult: () => onNoResult?.()
     });
 
-    fgRef.current?.zoomToFit(
-      600,
-      10,
-      (n: any) => related.has(n.id)
-        ); },
-    onNoResult: () => onNoResult?.()});
 
-   
 
     // 하이라이팅 대상 계산
     const { highlightNodes, highlightLinks } = useMemo(() => {
@@ -273,7 +275,7 @@ export default function BipartiteGraph({ resetViewFlag, searchTerm, onNoResult }
     useEffect(() => {
         if (fgRef.current && graphData.nodes.length > 0) {
             setTimeout(() => {
-                //fgRef.current.centerAt(0, 150, 0)
+                fgRef.current.centerAt(0, 0, 0)
                 fgRef.current.zoom(0.06, 0)
             }, 200);
         }
@@ -284,7 +286,7 @@ export default function BipartiteGraph({ resetViewFlag, searchTerm, onNoResult }
         if (!fgRef.current) return;
         setSelectedNode(null);
         setHoverNode(null);
-        //fgRef.current.centerAt(0, 150, 0)
+        fgRef.current.centerAt(0, 0, 100)
         fgRef.current.zoom(0.06, 0)
     }, [resetViewFlag]);
 
@@ -371,10 +373,11 @@ export default function BipartiteGraph({ resetViewFlag, searchTerm, onNoResult }
                     lastClickTimeRef.current = now;
                 }}
 
+                //그래프 배경 클릭시
                 onBackgroundClick={() => {
                     setSelectedNode(null);
                     setHoverNode(null);
-                    /*
+                    /* 전체 그래프 보기 버튼 따로 만들었으니 삭제
                     fgRef.current.centerAt(0, 150, 0)
                     fgRef.current.zoom(0.06, 0)
                     */
