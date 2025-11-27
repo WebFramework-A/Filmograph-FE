@@ -48,6 +48,7 @@ const COLORS = [
 const GRAPH_WIDTH = 2000;
 const GRAPH_HEIGHT = 518;
 
+
 // 카메라 위치
 const INITIAL_CENTER_X = 0;
 const INITIAL_CENTER_Y = 0; 
@@ -178,7 +179,7 @@ export default function CollabNetworkGraph({
     if (linkForce) {
       linkForce.distance((link: LinkT) => {
         const w = link.weight ?? 1;
-        return 25 + w * 17;
+        return 27 + w * 25;
       });
     }
 
@@ -214,29 +215,53 @@ export default function CollabNetworkGraph({
     fg.d3ReheatSimulation();
   }, [graphData]);
 
-  //  노드 클릭 시 포커싱
-  useEffect(() => {
-    if (!selectedNode || !fgRef.current) return;
+ useEffect(() => {
+  if (!selectedNode || !fgRef.current || !data) return;
 
-    if (selectedNode.x != null && selectedNode.y != null) {
-      fgRef.current.centerAt(selectedNode.x, selectedNode.y, 600);
-      fgRef.current.zoom(1.5, 600);
-    }
-  }, [selectedNode]);
+  const allNodes = data.nodes;
+
+  const nodesToFit = allNodes.filter((n) => {
+    const isTarget = n.id === selectedNode.id;
+    const isNeighbor = selectedNode.neighbors?.has(n.id);
+    const sameCommunity = n.community === selectedNode.community;
+    return isTarget || (isNeighbor && sameCommunity);
+  });
+
+  if (!nodesToFit.length) return;
+
+  // zoomToFit 실행
+  fgRef.current.zoomToFit(
+    600,   // 애니메이션 시간
+    90,    // padding (화면 여백)
+    (n: any) => nodesToFit.includes(n)
+  );
+
+  
+}, [selectedNode, data]);
+
 
 useGraphSearch({
   searchTerm,
   graphData,
   searchKey: "label",
   onMatch: (target) => {
-    setSelectedNode(target as NodeT);
+  setSelectedNode(target as NodeT);
 
-    // 기존 Collab 확대 로직 그대로 사용
-    if (target.x != null && target.y != null && fgRef.current) {
-      fgRef.current.centerAt(target.x, target.y, 600);
-      fgRef.current.zoom(1.5, 600);
-    }
-  },
+  if (!fgRef.current || !data) return;
+
+  const neighbors = target.neighbors ?? new Set();
+
+  const nodesToFit = data.nodes.filter((n) =>
+    n.id === target.id || neighbors.has(n.id)
+  );
+
+  fgRef.current.zoomToFit(
+    600,
+    80,
+    (n: any) => nodesToFit.includes(n)
+  );
+},
+
   onNoResult,
 });
 
@@ -275,6 +300,8 @@ useGraphSearch({
     return nodes.find((n) => n.id === endpoint);
   };
 
+  
+
   // 렌더링
   return (
     <div className="w-full h-full flex justify-center mt-0">
@@ -292,6 +319,7 @@ useGraphSearch({
           nodeLabel={(node) => `${node.label} (${node.role ?? "-"})`}
           warmupTicks={70}
           cooldownTicks={300}
+          onBackgroundClick={() => setSelectedNode(null)}
           linkColor={(link: LinkT) => {
             if (!selectedNode) return "rgba(255,255,255,0.25)";
 
