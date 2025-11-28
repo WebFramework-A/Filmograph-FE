@@ -84,14 +84,16 @@ export function FavoriteButton({ movieId, size = "md" }: FavoriteButtonProps) {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={toggleFavorite}
-        className={`${sizeClasses[size]} rounded-full flex items-center justify-center transition-all ${favorite
-            ? "bg-[#FF6B81]/90 text-white"
+        className={`${sizeClasses[size]} rounded-full flex items-center justify-center transition-all ${
+          favorite
+            ? "bg-white/10 text-[#FFFF00]"
             : "bg-white/10 text-white hover:bg-white/20"
-          }`}
+        }`}
       >
         <Bookmark
-          className={`${iconSizes[size]} transition-all ${favorite ? "fill-[#00696B]" : "fill-none"
-            }`}
+          className={`${iconSizes[size]} transition-all ${
+            favorite ? "fill-[#FFFF00]" : "fill-none"
+          }`}
         />
       </motion.button>
 
