@@ -22,7 +22,7 @@ export default function DetailPage() {
   if (!movie) return <div>영화를 찾을 수 없습니다.</div>;
 
   return (
-    <div className="min-h-screen bg-[#00696B] pt-20 overflow-x-hidden">
+    <div className="min-h-screen bg-[#0d5a5a] pt-20 overflow-x-hidden">
       <MovieHeader movie={movie} />
 
       <ScrollSection>

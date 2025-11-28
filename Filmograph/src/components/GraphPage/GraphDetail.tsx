@@ -60,7 +60,7 @@ const GraphDetail = () => {
 
             <p className="text-sm text-white/70">
               {graphType === "movie" && "영화-영화인 네트워크 설명 써두기"}
-              {graphType === "ego" && "에고 네트워크 설명 써두기"}
+              {graphType === "ego" && "한 인물을 중심으로 형성된 에고 네트워크를 시각적으로 확인해보세요."}
               {graphType === "collaboration" && "노드를 탐색하여 영화인들의 협업 관계와 커뮤니티 구조를 확인해보세요."}
             </p>
           </div>
@@ -106,7 +106,13 @@ const GraphDetail = () => {
             />
           )}
 
-          {graphType === "ego" && <EgoGraph />}
+          {graphType === "ego" && (
+            <EgoGraph
+              resetViewFlag={resetViewFlag}
+              searchTerm={searchTerm}
+              onNoResult={handleNoResult}
+            />
+          )}
 
           {graphType === "collaboration" && (
             <CollabNetworkGraph
