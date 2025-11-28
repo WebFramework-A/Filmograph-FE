@@ -7,7 +7,7 @@ export default function AwardsSection({ movie }: { movie: any }) {
   if (!awards || awards.length === 0) return null;
 
   return (
-    <section className="awards-wrapper">
+    <section className="awards-wrapper overflow-hidden">
       <div className="awards-container">
         <h2 className="awards-title">수상 내역</h2>
 

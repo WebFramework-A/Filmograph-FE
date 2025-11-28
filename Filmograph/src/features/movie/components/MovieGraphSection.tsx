@@ -78,9 +78,6 @@ export default function MovieGraphSection({
   const handleZoomIn = () => applyZoom(1.2);
   const handleZoomOut = () => applyZoom(0.83);
 
-  /**
-   * 🔥 핵심: Firestore 대신 props 기반 그래프 구성
-   */
   useEffect(() => {
     if (!movie) return;
 
@@ -90,9 +87,6 @@ export default function MovieGraphSection({
     const nodeMap = new Map<string, NodeT>();
     const linkList: LinkT[] = [];
 
-    /**
-     * ⭐ 중앙 영화 노드
-     */
     nodeMap.set(movie.id, {
       id: movie.id,
       name: movie.title,
@@ -105,9 +99,6 @@ export default function MovieGraphSection({
       releaseYear: movie.releaseDate?.slice(0, 4),
     });
 
-    /**
-     * ⭐ 중앙 영화 캐스트 / 감독
-     */
     const cast = (movie.cast ?? []).slice(0, 12);
     const directors = (movie.directors ?? []).slice(0, 6);
 
@@ -131,9 +122,6 @@ export default function MovieGraphSection({
       linkList.push({ source: movie.id, target: pid });
     });
 
-    /**
-     * ⭐ 관련 영화 노드들 (DetailPage에서 미리 확장하여 전달됨)
-     */
     relatedMovies.slice(0, 8).forEach((r) => {
       nodeMap.set(r.id, {
         id: r.id,
@@ -147,7 +135,6 @@ export default function MovieGraphSection({
         releaseYear: r.releaseDate?.slice(0, 4),
       });
 
-      // 관련 영화의 출연/감독 중에서 중앙 영화와 겹치는 인물만 링크 생성
       const people = [...(r.cast ?? []), ...(r.directors ?? [])];
 
       people.forEach((p) => {
@@ -176,9 +163,6 @@ export default function MovieGraphSection({
     setLinks(linkList);
   }, [movie, relatedMovies]);
 
-  /**
-   * Force Simulation
-   */
   useEffect(() => {
     if (nodes.length === 0) return;
 
@@ -240,9 +224,6 @@ export default function MovieGraphSection({
     return () => clearInterval(interval);
   }, [nodes.length, links]);
 
-  /**
-   * Canvas 렌더링
-   */
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas || nodes.length === 0) return;
@@ -308,9 +289,6 @@ export default function MovieGraphSection({
     ctx.restore();
   }, [nodes, links, hoveredNode, selectedNode, zoom, offset]);
 
-  /**
-   * Interaction Handling
-   */
   const handleMouseMove = (e: MouseEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -348,7 +326,7 @@ export default function MovieGraphSection({
     isDragging ? "grabbing" : hoveredNode ? "pointer" : "grab";
 
   return (
-    <section className="transform scale-90">
+    <section className="transform scale-90 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Header UI — 그대로 */}
         <div className="mb-8">

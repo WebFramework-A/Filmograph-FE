@@ -6,7 +6,7 @@ const USAGE_DOC = doc(db, "system", "kobisUsage");
 
 const getToday = () => new Date().toISOString().slice(0, 10);
 
-// 🔹 오늘의 호출 수 가져오기
+// 오늘의 호출 수 가져오기
 export const getKobisCalls = async (): Promise<number> => {
   const snap = await getDoc(USAGE_DOC);
   const today = getToday();
@@ -18,7 +18,7 @@ export const getKobisCalls = async (): Promise<number> => {
   return snap.data().calls ?? 0;
 };
 
-// 🔹 호출 수 1 증가
+// 호출 수 증가
 export const countKobisCall = async (): Promise<number> => {
   const snap = await getDoc(USAGE_DOC);
   const today = getToday();
@@ -40,7 +40,6 @@ export const countKobisCall = async (): Promise<number> => {
   return current;
 };
 
-// 🔹 필요 시 수동 초기화
 export const resetKobisUsage = async () => {
   const today = getToday();
   await setDoc(USAGE_DOC, { date: today, calls: 0 });

@@ -7,7 +7,6 @@ import { countKobisCall } from "../kobisUsage";
 
 const KOBIS_KEY = import.meta.env.VITE_KOBIS_API_KEY;
 
-// 🔥 KOBIS 검색 API (카운트 포함)
 const searchKobisMovies = async (query: string, year?: string) => {
   await countKobisCall();
 
@@ -30,12 +29,10 @@ const searchKobisMovies = async (query: string, year?: string) => {
   }
 };
 
-// ⭐ TMDB ID → KOBIS movieCd 매칭 (캐시 적용)
 export const findKobisMovieCdByTmdbId = async (
   tmdbId: number
 ): Promise<string | null> => {
   
-  // 1) 🔥 캐시 먼저 확인
   const cacheRef = doc(db, "tmdbToKobis", String(tmdbId));
   const cacheSnap = await getDoc(cacheRef);
 
@@ -43,7 +40,6 @@ export const findKobisMovieCdByTmdbId = async (
     return cacheSnap.data().kobisId ?? null;
   }
 
-  // 2) 캐시에 없다면 TMDB 정보 조회
   const tmdb = await fetchTMDBById(tmdbId);
   if (!tmdb) return null;
 
@@ -53,7 +49,6 @@ export const findKobisMovieCdByTmdbId = async (
 
   let match: string | null = null;
 
-  // 3) 다양한 방식으로 매칭 시도
   const list1 = await searchKobisMovies(titleKo, year);
   if (list1.length === 1) match = list1[0].movieCd;
 
@@ -74,7 +69,6 @@ export const findKobisMovieCdByTmdbId = async (
     if (f2.length === 1) match = f2[0].movieCd;
   }
 
-  // 4) 🔥 매칭 결과 캐싱
   await setDoc(cacheRef, { kobisId: match });
 
   return match;

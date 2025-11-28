@@ -56,7 +56,7 @@ export default function ReviewsSection({ movie }: Props) {
     };
 
   return (
-        <section className="providers-wrapper">
+        <section className="providers-wrapper overflow-hidden">
             <div className="max-w-7xl mx-auto py-12">
                 <h2 className="text-2xl font-bold text-yellow-400 mb-6">
                     관람객 리뷰 <span className="text-white/60 text-lg">({reviews.length})</span>

@@ -17,7 +17,7 @@ export default function WatchProvidersSection({ movie }: { movie: any }) {
   if (!providers || providers.length === 0) return null;
 
   return (
-    <section className="providers-wrapper">
+    <section className="providers-wrapper overflow-hidden">
       <div className="providers-container">
         <div className="providers-header">
           <Tv className="providers-icon" />

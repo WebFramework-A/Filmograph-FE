@@ -59,7 +59,7 @@ export default function VideosSection({ movie }: { movie: any }) {
   };
 
   return (
-    <section className="videos-wrapper">
+    <section className="videos-wrapper overflow-hidden">
       <div className="videos-container">
         <div className="videos-header">
           <Play className="videos-icon" />

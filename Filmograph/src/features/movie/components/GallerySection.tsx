@@ -85,7 +85,7 @@ export default function GallerySection({ movie }: GalleryProps) {
 
   return (
     <>
-      <section className="gallery-wrapper">
+      <section className="gallery-wrapper overflow-hidden">
         <div className="gallery-container">
           <div className="gallery-header">
             <ImageIcon className="gallery-icon" />

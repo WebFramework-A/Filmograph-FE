@@ -50,7 +50,7 @@ export default function CastSection({ movie }: { movie: any }) {
   if (!movie) return null;
 
   return (
-    <section className="cast-wrapper">
+    <section className="cast-wrapper overflow-hidden">
       <div className="cast-container">
         
         {/* 제목 + 버튼 */}

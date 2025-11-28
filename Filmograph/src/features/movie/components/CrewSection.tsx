@@ -25,7 +25,7 @@ export default function CrewSection({ movie }: { movie: any }) {
   const producers = movie.producers ?? [];
 
   return (
-    <section className="crew-wrapper">
+    <section className="crew-wrapper overflow-hidden">
       <div className="crew-container">
         <h2 className="crew-title">제작진</h2>
 

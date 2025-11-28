@@ -134,7 +134,7 @@ export default function ReviewForm({
     }
 
     return (
-        <form onSubmit={handleSubmit} className="bg-black/30 p-6 rounded-lg border border-white/10 mb-8">
+        <form onSubmit={handleSubmit} className="bg-black/30 p-6 rounded-lg border border-white/10 mb-8 overflow-hidden">
             <div className="flex justify-between items-center mb-4">
                 <h3 className="text-lg font-bold text-white">
                     {/* initialData 유무에 따라 제목 변경 */}

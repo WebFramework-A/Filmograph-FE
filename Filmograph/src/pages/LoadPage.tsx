@@ -24,14 +24,13 @@ export default function LoadPage() {
   const [kobisCalls, setKobisCalls] = useState(0);
   const [startPage, setStartPage] = useState(1);
 
-  // 🔥 KOBIS 사용량 불러오기
+  // KOBIS 사용량 불러오기
   const refreshKobisInfo = async () => {
     const todayCalls = await getKobisCalls();
     setKobisCalls(todayCalls);
     setProgress(Math.min(100, Math.floor((todayCalls / MAX_KOBIS_DAILY_CALL) * 100)));
   };
 
-  // 🔥 초기 로드
   useEffect(() => {
     const loadProgress = async () => {
       await refreshKobisInfo();
@@ -47,20 +46,17 @@ export default function LoadPage() {
     loadProgress();
   }, []);
 
-  // 🎯 수집 중 KOBIS 호출 제한 체크
   const checkLimit = async () => {
     const calls = await getKobisCalls();
     if (calls >= MAX_KOBIS_DAILY_CALL) {
-      setStatusMsg("⚠️ KOBIS API 일일 호출 제한 도달");
+      setStatusMsg("KOBIS API 일일 호출 제한 도달");
       setIsRunning(false);
       return true;
     }
     return false;
   };
 
-  // ------------------------------------
-  // ⭐ 일반 영화 저장(startUpload)
-  // ------------------------------------
+  // 영화 저장(startUpload)
   const startUpload = async () => {
     setIsRunning(true);
     setStatusMsg("영화 수집 중...");
@@ -121,9 +117,6 @@ export default function LoadPage() {
     setIsRunning(false);
   };
 
-  // ------------------------------------
-  // ⭐ 관련영화 확장(startExpandRelated)
-  // ------------------------------------
   const startExpandRelated = async () => {
     setIsRunning(true);
     setStatusMsg("관련 영화 확장 중…");

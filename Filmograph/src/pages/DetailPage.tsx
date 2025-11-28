@@ -21,15 +21,28 @@ export default function DetailPage() {
   const { movieId } = useParams();
   const { movie, loading } = useMovie(movieId!);
 
-  // 🔥 TMDB → KOBIS 강제 매칭 + Firestore 저장 + 확장 관련영화
   const { relatedMovies, loading: loadingRelated } =
     useExpandedRelatedMovies(movie);
 
-  if (loading) return <div>불러오는 중...</div>;
-  if (!movie) return <div>영화를 찾을 수 없습니다.</div>;
+  if (loading)     
+    return (
+      <div className="w-full h-full flex items-center justify-center overflow-hidden">
+        <div className="text-white text-xl font-semibold">
+          불러오는 중 · · ·
+        </div>
+      </div>
+    );
+  if (!movie) 
+    return (
+      <div className="w-full h-full flex items-center justify-center overflow-hidden">
+        <div className="text-white text-xl font-semibold">
+          영화를 찾을 수 없습니다.
+        </div>
+      </div>
+    );
 
   return (
-    <div className="min-h-screen bg-[#0d5a5a] pt-20 overflow-x-hidden">
+    <div className="min-h-screen bg-[#0d5a5a] pt-20">
       <MovieHeader movie={movie} />
 
       <ScrollSection>
@@ -60,12 +73,10 @@ export default function DetailPage() {
         <GallerySection movie={movie} />
       </ScrollSection>
 
-      {/* 🔥 그래프는 DetailPage에서 확장된 relatedMovies만 사용 */}
       <ScrollSection>
         <MovieGraphSection movie={movie} relatedMovies={relatedMovies} />
       </ScrollSection>
 
-      {/* 🔥 관련영화 역시 확장된 relatedMovies 사용 */}
       <ScrollSection>
         <RelatedMoviesSection
           movies={relatedMovies}

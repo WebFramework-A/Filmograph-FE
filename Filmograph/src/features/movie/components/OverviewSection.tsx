@@ -18,7 +18,7 @@ export default function OverviewSection({ movie }: { movie: any }) {
   if (!shouldRender) return null;
 
   return (
-    <section className="overview-wrapper">
+    <section className="overview-wrapper overflow-hidden">
       <motion.div
         className="overview-container">
         {hasOverview && (
