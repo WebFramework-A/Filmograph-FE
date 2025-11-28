@@ -1,9 +1,9 @@
 // src/services/archetype/archetypeData.ts
-import rawCharacters from "../../mock/characters.json";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebaseConfig";
 import type { Character } from "./archetypeTypes";
-import { classifyCharacters } from "./archetypeRules";
 
-export function getArchetypedCharacters(): Character[] {
-  const characters = rawCharacters as Character[];
-  return classifyCharacters(characters);
+export async function getArchetypedCharacters(): Promise<Character[]> {
+  const snap = await getDocs(collection(db, "characters"));
+  return snap.docs.map((doc) => doc.data() as Character);
 }

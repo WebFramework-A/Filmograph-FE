@@ -48,7 +48,7 @@ const GraphDetail = () => {
         onClose={() => setShowNoResultToast(false)}
       />
 
-      <div className="min-h-screen max-w-full bg-[#0d5a5a] text-white overflow-x-hidden">
+      <div className="min-h-screen max-w-full bg-[#0b4747] text-white overflow-x-hidden">
         <div className="mx-auto max-w-6xl pt-20 px-6 relative z-10">
           {/* 제목 */}
           <div className="flex justify-between items-end border-b border-white/20 pb-4 mb-4">
