@@ -94,11 +94,16 @@ for node in G.nodes():
     
     # 역할 정보 (감독, 배우 등)
     person_role = df[df['person_name'] == node]['person_role'].iloc[0] if len(df[df['person_name'] == node]) > 0 else '기타'
+
+    # KOBIS 사람 ID    
+    person_id = df[df['person_name'] == node]['person_id'].iloc[0] if len(df[df['person_name'] == node]) > 0 else node
     
     # 속성 추가
     G.nodes[node]['movies_count'] = len(person_movies)  # 참여 영화 수
     G.nodes[node]['degree'] = G.degree(node)  # 연결된 사람 수
     G.nodes[node]['role'] = person_role  # 역할
+
+    G.nodes[node]['id'] = person_id
 
 print(f"✅ 노드 속성 추가 완료\n")
 
