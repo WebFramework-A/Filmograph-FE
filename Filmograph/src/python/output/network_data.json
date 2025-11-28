@@ -5,14 +5,14 @@
     "communities": 7,
     "total_collaborations": 618,
     "avg_collaboration_per_link": 1.37,
-    "generated_at": "2025-11-25 19:44:00",
+    "generated_at": "2025-11-29 03:45:45",
     "version": "1.0"
   },
   "nodes": [
     {
       "id": "김태성",
       "label": "김태성",
-      "community": 0,
+      "community": 4,
       "degree": 31,
       "movies_count": 93,
       "role": "음악"
@@ -20,7 +20,7 @@
     {
       "id": "유아인",
       "label": "유아인",
-      "community": 0,
+      "community": 4,
       "degree": 17,
       "movies_count": 38,
       "role": "배우"
@@ -28,7 +28,7 @@
     {
       "id": "장세진",
       "label": "장세진",
-      "community": 0,
+      "community": 4,
       "degree": 2,
       "movies_count": 8,
       "role": "배우"
@@ -36,7 +36,7 @@
     {
       "id": "고창석",
       "label": "고창석",
-      "community": 0,
+      "community": 4,
       "degree": 29,
       "movies_count": 75,
       "role": "배우"
@@ -44,7 +44,7 @@
     {
       "id": "김윤석",
       "label": "김윤석",
-      "community": 1,
+      "community": 6,
       "degree": 26,
       "movies_count": 35,
       "role": "배우"
@@ -76,7 +76,7 @@
     {
       "id": "변준석",
       "label": "변준석",
-      "community": 4,
+      "community": 1,
       "degree": 2,
       "movies_count": 5,
       "role": "감독"
@@ -84,7 +84,7 @@
     {
       "id": "전무송",
       "label": "전무송",
-      "community": 4,
+      "community": 1,
       "degree": 8,
       "movies_count": 38,
       "role": "배우"
@@ -92,7 +92,7 @@
     {
       "id": "문정희",
       "label": "문정희",
-      "community": 1,
+      "community": 6,
       "degree": 20,
       "movies_count": 28,
       "role": "배우"
@@ -100,7 +100,7 @@
     {
       "id": "유순웅",
       "label": "유순웅",
-      "community": 1,
+      "community": 6,
       "degree": 17,
       "movies_count": 25,
       "role": "배우"
@@ -124,7 +124,7 @@
     {
       "id": "이한위",
       "label": "이한위",
-      "community": 0,
+      "community": 4,
       "degree": 31,
       "movies_count": 95,
       "role": "배우"
@@ -132,7 +132,7 @@
     {
       "id": "엄혜정",
       "label": "엄혜정",
-      "community": 4,
+      "community": 1,
       "degree": 7,
       "movies_count": 12,
       "role": "촬영"
@@ -140,7 +140,7 @@
     {
       "id": "이수연",
       "label": "이수연",
-      "community": 4,
+      "community": 1,
       "degree": 2,
       "movies_count": 9,
       "role": "감독"
@@ -156,7 +156,7 @@
     {
       "id": "박성웅",
       "label": "박성웅",
-      "community": 6,
+      "community": 2,
       "degree": 28,
       "movies_count": 86,
       "role": "배우"
@@ -164,7 +164,7 @@
     {
       "id": "손지나",
       "label": "손지나",
-      "community": 4,
+      "community": 2,
       "degree": 13,
       "movies_count": 23,
       "role": "배우"
@@ -172,7 +172,7 @@
     {
       "id": "박미현",
       "label": "박미현",
-      "community": 1,
+      "community": 6,
       "degree": 13,
       "movies_count": 43,
       "role": "배우"
@@ -180,7 +180,7 @@
     {
       "id": "윤종빈",
       "label": "윤종빈",
-      "community": 4,
+      "community": 6,
       "degree": 3,
       "movies_count": 6,
       "role": "감독"
@@ -196,7 +196,7 @@
     {
       "id": "정경순",
       "label": "정경순",
-      "community": 1,
+      "community": 2,
       "degree": 8,
       "movies_count": 22,
       "role": "배우"
@@ -204,7 +204,7 @@
     {
       "id": "기주봉",
       "label": "기주봉",
-      "community": 6,
+      "community": 0,
       "degree": 30,
       "movies_count": 98,
       "role": "배우"
@@ -212,7 +212,7 @@
     {
       "id": "김준성",
       "label": "김준성",
-      "community": 6,
+      "community": 0,
       "degree": 31,
       "movies_count": 57,
       "role": "음악"
@@ -236,7 +236,7 @@
     {
       "id": "서동수",
       "label": "서동수",
-      "community": 1,
+      "community": 2,
       "degree": 11,
       "movies_count": 13,
       "role": "배우"
@@ -244,7 +244,7 @@
     {
       "id": "전수지",
       "label": "전수지",
-      "community": 5,
+      "community": 6,
       "degree": 18,
       "movies_count": 30,
       "role": "배우"
@@ -252,7 +252,7 @@
     {
       "id": "김영재",
       "label": "김영재",
-      "community": 5,
+      "community": 4,
       "degree": 21,
       "movies_count": 47,
       "role": "배우"
@@ -260,7 +260,7 @@
     {
       "id": "고은기",
       "label": "고은기",
-      "community": 0,
+      "community": 4,
       "degree": 10,
       "movies_count": 35,
       "role": "감독"
@@ -276,7 +276,7 @@
     {
       "id": "백성현",
       "label": "백성현",
-      "community": 6,
+      "community": 0,
       "degree": 9,
       "movies_count": 34,
       "role": "배우"
@@ -284,7 +284,7 @@
     {
       "id": "박기헌",
       "label": "박기헌",
-      "community": 4,
+      "community": 1,
       "degree": 16,
       "movies_count": 39,
       "role": "음악"
@@ -292,7 +292,7 @@
     {
       "id": "오태경",
       "label": "오태경",
-      "community": 4,
+      "community": 1,
       "degree": 17,
       "movies_count": 30,
       "role": "배우"
@@ -300,7 +300,7 @@
     {
       "id": "원호섭",
       "label": "원호섭",
-      "community": 1,
+      "community": 6,
       "degree": 3,
       "movies_count": 3,
       "role": "배우"
@@ -316,7 +316,7 @@
     {
       "id": "남명렬",
       "label": "남명렬",
-      "community": 5,
+      "community": 6,
       "degree": 23,
       "movies_count": 39,
       "role": "배우"
@@ -324,7 +324,7 @@
     {
       "id": "오창경",
       "label": "오창경",
-      "community": 5,
+      "community": 6,
       "degree": 12,
       "movies_count": 32,
       "role": "배우"
@@ -340,7 +340,7 @@
     {
       "id": "이정현",
       "label": "이정현",
-      "community": 6,
+      "community": 0,
       "degree": 13,
       "movies_count": 18,
       "role": "배우"
@@ -348,7 +348,7 @@
     {
       "id": "김연정",
       "label": "김연정",
-      "community": 0,
+      "community": 4,
       "degree": 3,
       "movies_count": 12,
       "role": "음악"
@@ -356,7 +356,7 @@
     {
       "id": "서영희",
       "label": "서영희",
-      "community": 6,
+      "community": 0,
       "degree": 17,
       "movies_count": 28,
       "role": "배우"
@@ -364,7 +364,7 @@
     {
       "id": "신임호",
       "label": "신임호",
-      "community": 4,
+      "community": 1,
       "degree": 1,
       "movies_count": 21,
       "role": "감독"
@@ -404,7 +404,7 @@
     {
       "id": "이마리오",
       "label": "이마리오",
-      "community": 4,
+      "community": 1,
       "degree": 1,
       "movies_count": 11,
       "role": "감독"
@@ -412,7 +412,7 @@
     {
       "id": "문제용",
       "label": "문제용",
-      "community": 1,
+      "community": 6,
       "degree": 8,
       "movies_count": 7,
       "role": "감독"
@@ -420,7 +420,7 @@
     {
       "id": "장리우",
       "label": "장리우",
-      "community": 1,
+      "community": 6,
       "degree": 9,
       "movies_count": 24,
       "role": "배우"
@@ -428,7 +428,7 @@
     {
       "id": "염혜란",
       "label": "염혜란",
-      "community": 5,
+      "community": 6,
       "degree": 2,
       "movies_count": 1,
       "role": "배우"
@@ -436,7 +436,7 @@
     {
       "id": "이종우",
       "label": "이종우",
-      "community": 5,
+      "community": 4,
       "degree": 19,
       "movies_count": 34,
       "role": "촬영"
@@ -444,7 +444,7 @@
     {
       "id": "김현철",
       "label": "김현철",
-      "community": 2,
+      "community": 0,
       "degree": 3,
       "movies_count": 6,
       "role": "음악"
@@ -452,7 +452,7 @@
     {
       "id": "권상우",
       "label": "권상우",
-      "community": 6,
+      "community": 0,
       "degree": 16,
       "movies_count": 45,
       "role": "배우"
@@ -460,7 +460,7 @@
     {
       "id": "이병헌",
       "label": "이병헌",
-      "community": 0,
+      "community": 4,
       "degree": 6,
       "movies_count": 10,
       "role": "배우"
@@ -468,7 +468,7 @@
     {
       "id": "박기덕",
       "label": "박기덕",
-      "community": 4,
+      "community": 1,
       "degree": 3,
       "movies_count": 8,
       "role": "배우"
@@ -476,7 +476,7 @@
     {
       "id": "안지혜",
       "label": "안지혜",
-      "community": 0,
+      "community": 4,
       "degree": 3,
       "movies_count": 8,
       "role": "배우"
@@ -492,7 +492,7 @@
     {
       "id": "장명갑",
       "label": "장명갑",
-      "community": 6,
+      "community": 0,
       "degree": 7,
       "movies_count": 8,
       "role": "배우"
@@ -500,7 +500,7 @@
     {
       "id": "임나무",
       "label": "임나무",
-      "community": 4,
+      "community": 1,
       "degree": 5,
       "movies_count": 11,
       "role": "감독"
@@ -508,7 +508,7 @@
     {
       "id": "김병우",
       "label": "김병우",
-      "community": 6,
+      "community": 5,
       "degree": 1,
       "movies_count": 5,
       "role": "감독"
@@ -516,7 +516,7 @@
     {
       "id": "변봉선",
       "label": "변봉선",
-      "community": 6,
+      "community": 5,
       "degree": 16,
       "movies_count": 23,
       "role": "촬영"
@@ -524,7 +524,7 @@
     {
       "id": "김민재",
       "label": "김민재",
-      "community": 6,
+      "community": 0,
       "degree": 15,
       "movies_count": 33,
       "role": "배우"
@@ -540,7 +540,7 @@
     {
       "id": "윤진서",
       "label": "윤진서",
-      "community": 4,
+      "community": 1,
       "degree": 6,
       "movies_count": 25,
       "role": "배우"
@@ -548,7 +548,7 @@
     {
       "id": "강이관",
       "label": "강이관",
-      "community": 1,
+      "community": 6,
       "degree": 9,
       "movies_count": 18,
       "role": "감독"
@@ -556,7 +556,7 @@
     {
       "id": "문영동",
       "label": "문영동",
-      "community": 0,
+      "community": 4,
       "degree": 7,
       "movies_count": 13,
       "role": "배우"
@@ -572,7 +572,7 @@
     {
       "id": "이은정",
       "label": "이은정",
-      "community": 4,
+      "community": 1,
       "degree": 2,
       "movies_count": 4,
       "role": "배우"
@@ -580,7 +580,7 @@
     {
       "id": "구태진",
       "label": "구태진",
-      "community": 6,
+      "community": 0,
       "degree": 15,
       "movies_count": 14,
       "role": "감독"
@@ -588,7 +588,7 @@
     {
       "id": "이동삼",
       "label": "이동삼",
-      "community": 4,
+      "community": 1,
       "degree": 7,
       "movies_count": 21,
       "role": "촬영"
@@ -604,7 +604,7 @@
     {
       "id": "윤희철",
       "label": "윤희철",
-      "community": 0,
+      "community": 4,
       "degree": 1,
       "movies_count": 4,
       "role": "배우"
@@ -612,7 +612,7 @@
     {
       "id": "다코타 존슨",
       "label": "다코타 존슨",
-      "community": 6,
+      "community": 0,
       "degree": 3,
       "movies_count": 55,
       "role": "배우"
@@ -620,7 +620,7 @@
     {
       "id": "이원식",
       "label": "이원식",
-      "community": 5,
+      "community": 4,
       "degree": 2,
       "movies_count": 20,
       "role": "감독"
@@ -628,7 +628,7 @@
     {
       "id": "김홍표",
       "label": "김홍표",
-      "community": 2,
+      "community": 5,
       "degree": 4,
       "movies_count": 7,
       "role": "배우"
@@ -636,7 +636,7 @@
     {
       "id": "김세연",
       "label": "김세연",
-      "community": 6,
+      "community": 0,
       "degree": 4,
       "movies_count": 14,
       "role": "감독"
@@ -644,7 +644,7 @@
     {
       "id": "윤관우",
       "label": "윤관우",
-      "community": 5,
+      "community": 6,
       "degree": 2,
       "movies_count": 6,
       "role": "배우"
@@ -652,7 +652,7 @@
     {
       "id": "김희원",
       "label": "김희원",
-      "community": 1,
+      "community": 6,
       "degree": 1,
       "movies_count": 1,
       "role": "배우"
