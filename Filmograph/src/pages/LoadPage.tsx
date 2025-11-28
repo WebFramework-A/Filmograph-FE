@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react";
 import { fetchMovieList, fetchMovieDetail } from "../services/movies/movieAPI";
 import { saveMovie } from "../services/movieService";
+import { findKobisMovieCdByTmdbId } from "../services/movies/matchTmdbToKobis";
+import { countKobisCall, getKobisCalls } from "../services/kobisUsage";
 import { db } from "../services/firebaseConfig";
 import {
   doc,
@@ -11,8 +13,8 @@ import {
   getDocs,
 } from "firebase/firestore";
 
-const MAX_WRITES_PER_DAY = 10000;       
-const MAX_KOBIS_DAILY_CALL = 3000;       
+const MAX_WRITES_PER_DAY = 10000;
+const MAX_KOBIS_DAILY_CALL = 3000;
 
 export default function LoadPage() {
   const [progress, setProgress] = useState(0);
@@ -20,83 +22,41 @@ export default function LoadPage() {
   const [statusMsg, setStatusMsg] = useState("대기 중");
   const [writesToday, setWritesToday] = useState(0);
   const [kobisCalls, setKobisCalls] = useState(0);
-
   const [startPage, setStartPage] = useState(1);
-  const [existingIds, setExistingIds] = useState<Set<string>>(new Set());
 
-  const loadExistingMovieIds = async () => {
-    const snap = await getDocs(collection(db, "movies"));
-    const idSet = new Set<string>();
-    snap.forEach((doc) => idSet.add(doc.id));
-    return idSet;
+  // KOBIS 사용량 불러오기
+  const refreshKobisInfo = async () => {
+    const todayCalls = await getKobisCalls();
+    setKobisCalls(todayCalls);
+    setProgress(Math.min(100, Math.floor((todayCalls / MAX_KOBIS_DAILY_CALL) * 100)));
   };
 
   useEffect(() => {
     const loadProgress = async () => {
-      setExistingIds(await loadExistingMovieIds());
+      await refreshKobisInfo();
 
       const ref = doc(db, "system", "lastMoviePage");
       const snap = await getDoc(ref);
       if (snap.exists()) {
         const savedPage = snap.data().page;
-        if (typeof savedPage === "number") {
-          setStartPage(savedPage + 1);
-        }
-      }
-
-      const usageRef = doc(db, "system", "kobisUsage");
-      const usageSnap = await getDoc(usageRef);
-
-      const today = new Date().toISOString().slice(0, 10);
-
-      if (usageSnap.exists() && usageSnap.data().date === today) {
-        const calls = usageSnap.data().calls ?? 0;
-        setKobisCalls(calls);
-        setProgress(
-          Math.min(100, Math.floor((calls / MAX_KOBIS_DAILY_CALL) * 100))
-        );
-      } else {
-        await setDoc(usageRef, { date: today, calls: 0 });
-        setKobisCalls(0);
-        setProgress(0);
+        if (typeof savedPage === "number") setStartPage(savedPage + 1);
       }
     };
 
     loadProgress();
   }, []);
 
-  const incrementKobisUsage = async () => {
-    const usageRef = doc(db, "system", "kobisUsage");
-    const snap = await getDoc(usageRef);
-    const today = new Date().toISOString().slice(0, 10);
-
-    let current = 0;
-
-    if (!snap.exists() || snap.data().date !== today) {
-      current = 1;
-      await setDoc(usageRef, { date: today, calls: current });
-    } else {
-      current = (snap.data().calls ?? 0) + 1;
-      await setDoc(
-        usageRef,
-        { date: today, calls: current },
-        { merge: true }
-      );
+  const checkLimit = async () => {
+    const calls = await getKobisCalls();
+    if (calls >= MAX_KOBIS_DAILY_CALL) {
+      setStatusMsg("KOBIS API 일일 호출 제한 도달");
+      setIsRunning(false);
+      return true;
     }
-
-    setKobisCalls(current);
-    setProgress(Math.floor((current / MAX_KOBIS_DAILY_CALL) * 100));
-
-    return current;
+    return false;
   };
 
-  const updateLastPage = async (page: number) => {
-    await setDoc(doc(db, "system", "lastMoviePage"), {
-      page,
-      updatedAt: new Date().toISOString(),
-    });
-  };
-
+  // 영화 저장(startUpload)
   const startUpload = async () => {
     setIsRunning(true);
     setStatusMsg("영화 수집 중...");
@@ -104,64 +64,100 @@ export default function LoadPage() {
     let saved = 0;
     let todayWrites = 0;
     const perPage = 100;
-
-    let page = startPage; 
+    let page = startPage;
 
     while (true) {
+      // 목록 호출
+      await countKobisCall();
+      if (await checkLimit()) break;
+
       const list = await fetchMovieList(page, perPage);
-
-      // KOBIS 카운트 증가
-      const listCalls = await incrementKobisUsage();
-      if (listCalls >= MAX_KOBIS_DAILY_CALL) {
-        setStatusMsg("KOBIS API 일일 호출 제한 도달");
-        break;
-      }
-
       if (!list || list.length === 0) {
         setStatusMsg("더 이상 가져올 영화 데이터가 없습니다.");
         break;
       }
 
-      // 상세 정보 + 저장
+      // 상세 정보 수집
       for (const item of list) {
         if (todayWrites >= MAX_WRITES_PER_DAY) {
-          setStatusMsg("Firestore 10,000 writes/day 도달");
+          setStatusMsg("Firestore 일일 10,000 writes 도달");
           setIsRunning(false);
           return;
         }
 
         const movieId = item.movieCd;
-        try {
-          const detail = await fetchMovieDetail(movieId);
 
-          const detailCalls = await incrementKobisUsage();
-          if (detailCalls >= MAX_KOBIS_DAILY_CALL) {
-            setStatusMsg("KOBIS API 일일 호출 제한 도달");
-            setIsRunning(false);
-            return;
-          }
+        // 상세 호출
+        await countKobisCall();
+        if (await checkLimit()) return;
 
-          if (!detail) continue;
+        const detail = await fetchMovieDetail(movieId);
+        if (!detail) continue;
 
-          const result = await saveMovie(detail);
+        const result = await saveMovie(detail);
 
-          if (result === "SAVED") {
-            todayWrites++;
-            saved++;
-            setWritesToday(todayWrites);
-          }
-
-          await new Promise((r) => setTimeout(r, 150));
-        } catch (err) {
-          console.warn("처리 실패:", err);
+        if (result === "SAVED") {
+          todayWrites++;
+          saved++;
+          setWritesToday(todayWrites);
         }
+
+        await new Promise((r) => setTimeout(r, 120));
       }
 
-      await updateLastPage(page);
-      page++;   
+      await setDoc(doc(db, "system", "lastMoviePage"), {
+        page,
+        updatedAt: new Date().toISOString(),
+      });
+
+      page++;
     }
 
     setStatusMsg(`완료! 저장 성공: ${saved}개`);
+    setIsRunning(false);
+  };
+
+  const startExpandRelated = async () => {
+    setIsRunning(true);
+    setStatusMsg("관련 영화 확장 중…");
+
+    const snap = await getDocs(collection(db, "movies"));
+    const movies = snap.docs.map((d) => ({ id: d.id, ...d.data() })) as any[];
+
+    let saved = 0;
+
+    for (const m of movies) {
+      if (!m.relatedMovies || m.relatedMovies.length === 0) continue;
+
+      for (const rid of m.relatedMovies) {
+        const tmdbId = Number(rid);
+
+        // TMDB → KOBIS 매칭
+        await countKobisCall();
+        if (await checkLimit()) return;
+
+        const kobisId = await findKobisMovieCdByTmdbId(tmdbId);
+        if (!kobisId) continue;
+
+        // Firestore 중복 금지
+        const exists = await getDoc(doc(db, "movies", kobisId));
+        if (exists.exists()) continue;
+
+        // 상세 가져오기
+        await countKobisCall();
+        if (await checkLimit()) return;
+
+        const detail = await fetchMovieDetail(kobisId);
+        if (!detail) continue;
+
+        const result = await saveMovie(detail);
+        if (result === "SAVED") saved++;
+
+        await new Promise((r) => setTimeout(r, 120));
+      }
+    }
+
+    setStatusMsg(`관련 영화 확장 완료: ${saved}개`);
     setIsRunning(false);
   };
 
@@ -170,11 +166,11 @@ export default function LoadPage() {
       <h2 className="text-xl font-bold mb-4">Firestore 영화 데이터 수집</h2>
 
       <p className="text-center text-gray-500">
-        오늘 KOBIS 호출 수: {kobisCalls} / {MAX_KOBIS_DAILY_CALL}
+        오늘 KOBIS 호출 수: {kobisCalls} / 3000
       </p>
 
       <p className="text-center text-gray-500 mb-4">
-        오늘 Firestore 저장 횟수: {writesToday} / {MAX_WRITES_PER_DAY}
+        Firestore 저장: {writesToday} / 10000
       </p>
 
       <p className="text-gray-600 mb-2">
@@ -190,13 +186,21 @@ export default function LoadPage() {
 
       <p className="text-center mb-4">{statusMsg}</p>
 
-      <div className="flex justify-center">
+      <div className="flex gap-4 justify-center">
         <button
           onClick={startUpload}
           disabled={isRunning}
-          className="px-5 py-3 bg-green-600 text-white rounded-lg shadow disabled:opacity-50 active:scale-95"
+          className="px-5 py-3 bg-green-600 text-white rounded-lg shadow"
         >
           저장 시작
+        </button>
+
+        <button
+          onClick={startExpandRelated}
+          disabled={isRunning}
+          className="px-5 py-3 bg-blue-600 text-white rounded-lg shadow"
+        >
+          관련영화 확장
         </button>
       </div>
     </div>

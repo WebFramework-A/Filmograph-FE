@@ -3,109 +3,113 @@ import { Image as ImageIcon, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { ImageWithFallback } from "./ImageWithFallback";
 
-export default function GallerySection({ movie }: { movie: any }) {
+type ImageItem = string | null;
+
+interface GalleryProps {
+  movie: {
+    images?: {
+      backdrops?: string[];
+      posters?: string[];
+    };
+  };
+}
+
+function getStablePage(arr: string[], page: number, size: number): ImageItem[] {
+  const slice = arr.slice(page * size, (page + 1) * size);
+  const diff = size - slice.length;
+  return diff > 0 ? [...slice, ...Array(diff).fill(null)] : slice;
+}
+
+export default function GallerySection({ movie }: GalleryProps) {
   const images = movie?.images ?? {};
   const backdrops = images.backdrops ?? [];
   const posters = images.posters ?? [];
 
-  const hasBackdrops = backdrops.length > 0;
-  const hasPosters = posters.length > 0;
-
   const [preview, setPreview] = useState<string | null>(null);
 
-  const [backdropPageSize, setBackdropPageSize] = useState(8);
-  const [pageBackdrop, setPageBackdrop] = useState(0);
+  // --- 스틸컷 (2줄 고정) ---
+  const [backdropCols, setBackdropCols] = useState<number>(4);
+  const [backdropSize, setBackdropSize] = useState<number>(8);
+  const [pageBackdrop, setPageBackdrop] = useState<number>(0);
 
   useEffect(() => {
-    const updateBackdropSize = () => {
+    const calc = () => {
       const w = window.innerWidth;
 
-      let perRow = 4;
-      if (w >= 1200) perRow = 4;
-      else if (w >= 900) perRow = 3;
-      else perRow = 2;
+      if (w >= 1200) setBackdropCols(4);
+      else if (w >= 900) setBackdropCols(3);
+      else setBackdropCols(2);
 
-      setBackdropPageSize(perRow * 2);
+      setBackdropSize(backdropCols * 2);
     };
 
-    updateBackdropSize();
-    window.addEventListener("resize", updateBackdropSize);
-    return () => window.removeEventListener("resize", updateBackdropSize);
-  }, []);
+    calc();
+    window.addEventListener("resize", calc);
+    return () => window.removeEventListener("resize", calc);
+  }, [backdropCols]);
 
-  const backdropMaxPage =
-    Math.floor(backdrops.length / backdropPageSize) - 1;
+  const backdropMaxPage = Math.floor((backdrops.length - 1) / backdropSize);
 
-  const getBackdropPage = () =>
-    backdrops.slice(
-      pageBackdrop * backdropPageSize,
-      pageBackdrop * backdropPageSize + backdropPageSize
-    );
-
-  const [posterPerPage, setPosterPerPage] = useState(6);
-  const [pagePoster, setPagePoster] = useState(0);
+  // --- 포스터 (1줄 고정) ---
+  const [posterCols, setPosterCols] = useState<number>(5);
+  const [posterSize, setPosterSize] = useState<number>(5);
+  const [pagePoster, setPagePoster] = useState<number>(0);
 
   useEffect(() => {
-    const updatePosterSize = () => {
+    const calc = () => {
       const w = window.innerWidth;
 
-      if (w >= 1200) setPosterPerPage(6);
-      else if (w >= 900) setPosterPerPage(4);
-      else setPosterPerPage(2);
+      if (w >= 1200) setPosterCols(5);
+      else if (w >= 900) setPosterCols(4);
+      else setPosterCols(2);
+
+      setPosterSize(posterCols);
     };
 
-    updatePosterSize();
-    window.addEventListener("resize", updatePosterSize);
-    return () => window.removeEventListener("resize", updatePosterSize);
-  }, []);
+    calc();
+    window.addEventListener("resize", calc);
+    return () => window.removeEventListener("resize", calc);
+  }, [posterCols]);
 
-  const posterMaxPage =
-    Math.floor(posters.length / posterPerPage) - 1;
+  const posterMaxPage = Math.floor((posters.length - 1) / posterSize);
 
-  const getPosterPage = () =>
-    posters.slice(
-      pagePoster * posterPerPage,
-      pagePoster * posterPerPage + posterPerPage
-    );
-    
-    useEffect(() => {
+  // preview 모달 스크롤 락
+  useEffect(() => {
     document.body.style.overflow = preview ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
   }, [preview]);
 
-  if (!hasBackdrops && !hasPosters) return null;
+  if (!backdrops.length && !posters.length) return null;
 
   return (
     <>
-      <section className="gallery-wrapper">
+      <section className="gallery-wrapper overflow-hidden">
         <div className="gallery-container">
           <div className="gallery-header">
             <ImageIcon className="gallery-icon" />
             <h2 className="gallery-title">갤러리</h2>
           </div>
 
-          {hasBackdrops && (
+          {/* --- 스틸컷 --- */}
+          {backdrops.length > 0 && (
             <div className="gallery-block">
               <div className="gallery-subtitle-row">
                 <h3 className="gallery-subtitle">스틸컷</h3>
 
-                {backdrops.length > backdropPageSize && (
+                {backdrops.length > backdropSize && (
                   <div className="gallery-pagination">
                     <button
                       disabled={pageBackdrop === 0}
-                      onClick={() => setPageBackdrop((p) => p - 1)}
+                      onClick={() => setPageBackdrop(p => p - 1)}
                     >
                       {"<"}
                     </button>
 
                     <button
-                      disabled={
-                        pageBackdrop === backdropMaxPage ||
-                        getBackdropPage().length < backdropPageSize
-                      }
-                      onClick={() => setPageBackdrop((p) => p + 1)}
+                      disabled={pageBackdrop === backdropMaxPage}
+                      onClick={() => setPageBackdrop(p => p + 1)}
                     >
                       {">"}
                     </button>
@@ -113,41 +117,49 @@ export default function GallerySection({ movie }: { movie: any }) {
                 )}
               </div>
 
-              <div className="gallery-grid">
-                {getBackdropPage().map((img: string, idx: number) => (
-                  <div
-                    key={idx}
-                    className="gallery-card"
-                    onClick={() => setPreview(img)}
-                  >
-                    <ImageWithFallback src={img} className="gallery-img" />
-                    <div className="gallery-hover" />
-                  </div>
-                ))}
+              <div
+                key={pageBackdrop}
+                className="gallery-grid"
+                style={{
+                  gridTemplateColumns: `repeat(${backdropCols}, 1fr)`,
+                }}
+              >
+                {getStablePage(backdrops, pageBackdrop, backdropSize).map(
+                  (img: ImageItem, idx: number) =>
+                    img ? (
+                      <div
+                        key={idx}
+                        className="gallery-card"
+                        onClick={() => setPreview(img)}
+                      >
+                        <ImageWithFallback src={img} className="gallery-img" />
+                      </div>
+                    ) : (
+                      <div key={idx} className="gallery-empty-slot"></div>
+                    )
+                )}
               </div>
             </div>
           )}
 
-          {hasPosters && (
+          {/* --- 포스터 --- */}
+          {posters.length > 0 && (
             <div className="gallery-block">
               <div className="gallery-subtitle-row">
                 <h3 className="gallery-subtitle">포스터</h3>
 
-                {posters.length > posterPerPage && (
+                {posters.length > posterSize && (
                   <div className="gallery-pagination">
                     <button
                       disabled={pagePoster === 0}
-                      onClick={() => setPagePoster((p) => p - 1)}
+                      onClick={() => setPagePoster(p => p - 1)}
                     >
                       {"<"}
                     </button>
 
                     <button
-                      disabled={
-                        pagePoster === posterMaxPage ||
-                        getPosterPage().length < posterPerPage
-                      }
-                      onClick={() => setPagePoster((p) => p + 1)}
+                      disabled={pagePoster === posterMaxPage}
+                      onClick={() => setPagePoster(p => p + 1)}
                     >
                       {">"}
                     </button>
@@ -155,17 +167,27 @@ export default function GallerySection({ movie }: { movie: any }) {
                 )}
               </div>
 
-              <div className="gallery-posters">
-                {getPosterPage().map((img: string, idx: number) => (
-                  <div
-                    key={idx}
-                    className="poster-card"
-                    onClick={() => setPreview(img)}
-                  >
-                    <ImageWithFallback src={img} className="poster-img" />
-                    <div className="gallery-hover" />
-                  </div>
-                ))}
+              <div
+                key={pagePoster}
+                className="gallery-posters"
+                style={{
+                  gridTemplateColumns: `repeat(${posterCols}, 1fr)`,
+                }}
+              >
+                {getStablePage(posters, pagePoster, posterSize).map(
+                  (img: ImageItem, idx: number) =>
+                    img ? (
+                      <div
+                        key={idx}
+                        className="poster-card"
+                        onClick={() => setPreview(img)}
+                      >
+                        <ImageWithFallback src={img} className="poster-img" />
+                      </div>
+                    ) : (
+                      <div key={idx} className="poster-empty-slot"></div>
+                    )
+                )}
               </div>
             </div>
           )}

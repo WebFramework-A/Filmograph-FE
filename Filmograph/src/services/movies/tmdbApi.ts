@@ -340,3 +340,14 @@ export const enrichMovieData = async (movie: MovieDetail): Promise<MovieDetail> 
     return movie;
   }
 };
+
+export const fetchTMDBById = async (tmdbId: number) => {
+  try {
+    const res = await axios.get(`${TMDB_BASE}/movie/${tmdbId}`, {
+      params: { api_key: TMDB_KEY, language: "ko-KR" },
+    });
+    return res.data;
+  } catch {
+    return null;
+  }
+};

@@ -1,6 +1,6 @@
 import "./styles/VideosSection.css";
 import { Play } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 type VideoItem = {
   key: string;
@@ -26,7 +26,6 @@ export default function VideosSection({ movie }: { movie: any }) {
       setVimeoThumbs((prev) => ({ ...prev, [key]: thumb }));
       return thumb;
     } catch (err) {
-      console.error("Vimeo thumbnail fetch failed", err);
       return "/fallback-thumb.png";
     }
   };
@@ -48,67 +47,60 @@ export default function VideosSection({ movie }: { movie: any }) {
   const [pageTrailer, setPageTrailer] = useState(0);
   const [pageClip, setPageClip] = useState(0);
 
-  if (
-    !videos ||
-    (!videos.trailers?.length &&
-      !videos.clips?.length &&
-      !videos.teasers?.length)
-  )
+  if (!videos || (!videos.trailers?.length && !videos.clips?.length))
     return null;
 
   const getEmbedUrl = (v: VideoItem) => {
     if (v.site === "YouTube")
       return `https://www.youtube.com/embed/${v.key}?autoplay=1`;
-
     if (v.site === "Vimeo")
       return `https://player.vimeo.com/video/${v.key}?autoplay=1`;
-
     return "";
   };
 
-  const pageSize = 2;
-
-  const paginate = (arr: VideoItem[], page: number) =>
-    arr.slice(page * pageSize, (page + 1) * pageSize);
-
   return (
-    <section className="videos-wrapper">
+    <section className="videos-wrapper overflow-hidden">
       <div className="videos-container">
         <div className="videos-header">
           <Play className="videos-icon" />
           <h2 className="videos-title">영상</h2>
         </div>
 
-        {videos.trailers && videos.trailers.length > 0 && (
+        {videos.trailers?.length > 0 && (
           <VideoCategory
             title="트레일러"
+            videos={videos.trailers}
             page={pageTrailer}
             setPage={setPageTrailer}
-            videos={paginate(videos.trailers, pageTrailer)}
-            totalCount={videos.trailers.length}
-            pageSize={pageSize}
-            onClick={(v: VideoItem) => setOpenVideo(v)}
+            onClick={(v) => setOpenVideo(v)}
           />
         )}
 
-        {videos.clips && videos.clips.length > 0 && (
+        {videos.clips?.length > 0 && (
           <VideoCategory
             title="클립"
+            videos={videos.clips}
             isClip
             page={pageClip}
             setPage={setPageClip}
-            videos={paginate(videos.clips, pageClip)}
-            totalCount={videos.clips.length}
-            pageSize={pageSize}
-            onClick={(v: VideoItem) => setOpenVideo(v)}
+            onClick={(v) => setOpenVideo(v)}
           />
         )}
       </div>
 
       {openVideo && (
-        <div className="video-modal-backdrop" onClick={() => setOpenVideo(null)}>
-          <div className="video-modal" onClick={(e) => e.stopPropagation()}>
-            <button className="video-modal-close" onClick={() => setOpenVideo(null)}>
+        <div
+          className="video-modal-backdrop"
+          onClick={() => setOpenVideo(null)}
+        >
+          <div
+            className="video-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="video-modal-close"
+              onClick={() => setOpenVideo(null)}
+            >
               ✕
             </button>
 
@@ -128,30 +120,51 @@ export default function VideosSection({ movie }: { movie: any }) {
 function VideoCategory({
   title,
   videos,
-  totalCount,
+  isClip,
   page,
   setPage,
-  pageSize,
-  isClip,
   onClick,
 }: {
   title: string;
   videos: VideoItem[];
-  totalCount: number;
+  isClip?: boolean;
   page: number;
   setPage: (p: number) => void;
-  pageSize: number;
-  isClip?: boolean;
   onClick: (v: VideoItem) => void;
 }) {
-  const maxPage = Math.floor((totalCount - 1) / pageSize);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [itemsPerPage, setItemsPerPage] = useState(2);
+
+  useEffect(() => {
+    const calc = () => {
+      if (!containerRef.current) return;
+
+      const width = containerRef.current.clientWidth;
+
+      if (width < 600) {
+        setItemsPerPage(1);
+      } else {
+        setItemsPerPage(2);
+      }
+    };
+
+    calc();
+    window.addEventListener("resize", calc);
+    return () => window.removeEventListener("resize", calc);
+  }, []);
+
+  const maxPage = Math.floor((videos.length - 1) / itemsPerPage);
+  const visible = videos.slice(
+    page * itemsPerPage,
+    (page + 1) * itemsPerPage
+  );
 
   return (
     <div className="videos-block">
       <div className="videos-title-row">
         <h3 className="videos-subtitle">{title}</h3>
 
-        {totalCount > pageSize && (
+        {videos.length > itemsPerPage && (
           <div className="videos-pagination">
             <button disabled={page === 0} onClick={() => setPage(page - 1)}>
               {"<"}
@@ -163,8 +176,14 @@ function VideoCategory({
         )}
       </div>
 
-      <div className="videos-grid">
-        {videos.map((v: VideoItem, idx: number) => (
+      <div
+        ref={containerRef}
+        className="videos-grid"
+        style={{
+          gridTemplateColumns: `repeat(${itemsPerPage}, 1fr)`,
+        }}
+      >
+        {visible.map((v, idx) => (
           <div
             key={idx}
             className={`video-card ${isClip ? "clip" : ""}`}

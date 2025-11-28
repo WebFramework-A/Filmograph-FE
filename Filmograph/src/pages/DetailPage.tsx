@@ -1,7 +1,8 @@
-// pages/DetailPage.tsx
+// src/pages/DetailPage.tsx
 import { useParams } from "react-router-dom";
 import MovieHeader from "../features/movie/components/MovieHeader";
 import useMovie from "../features/movie/hooks/useMovie";
+
 import ScrollSection from "../features/movie/components/ScrollSection";
 import OverviewSection from "../features/movie/components/OverviewSection";
 import CrewSection from "../features/movie/components/CrewSection";
@@ -14,15 +15,34 @@ import MovieGraphSection from "../features/movie/components/MovieGraphSection";
 import RelatedMoviesSection from "../features/movie/components/RelatedMoviesSection";
 import ReviewsSection from "../features/movie/components/ReviewsSection";
 
+import useExpandedRelatedMovies from "../hooks/useRelatedMovies";
+
 export default function DetailPage() {
   const { movieId } = useParams();
   const { movie, loading } = useMovie(movieId!);
 
-  if (loading) return <div>불러오는 중...</div>;
-  if (!movie) return <div>영화를 찾을 수 없습니다.</div>;
+  const { relatedMovies, loading: loadingRelated } =
+    useExpandedRelatedMovies(movie);
+
+  if (loading)     
+    return (
+      <div className="w-full h-full flex items-center justify-center overflow-hidden">
+        <div className="text-white text-xl font-semibold">
+          불러오는 중 · · ·
+        </div>
+      </div>
+    );
+  if (!movie) 
+    return (
+      <div className="w-full h-full flex items-center justify-center overflow-hidden">
+        <div className="text-white text-xl font-semibold">
+          영화를 찾을 수 없습니다.
+        </div>
+      </div>
+    );
 
   return (
-    <div className="min-h-screen bg-[#0b4747] pt-20 overflow-x-hidden">
+    <div className="min-h-screen bg-[#0d5a5a] pt-20">
       <MovieHeader movie={movie} />
 
       <ScrollSection>
@@ -54,18 +74,19 @@ export default function DetailPage() {
       </ScrollSection>
 
       <ScrollSection>
-        <MovieGraphSection movieId={movie.id} />
+        <MovieGraphSection movie={movie} relatedMovies={relatedMovies} />
       </ScrollSection>
 
       <ScrollSection>
-        <RelatedMoviesSection relatedIds={movie.relatedMovies ?? []} />
+        <RelatedMoviesSection
+          movies={relatedMovies}
+          loading={loadingRelated}
+        />
       </ScrollSection>
 
       <ScrollSection>
         <ReviewsSection movie={movie} />
       </ScrollSection>
-
-      <pre className="text-white p-6">{JSON.stringify(movie, null, 2)}</pre>
     </div>
   );
 }

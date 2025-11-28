@@ -18,12 +18,9 @@ export default function OverviewSection({ movie }: { movie: any }) {
   if (!shouldRender) return null;
 
   return (
-    <section className="overview-wrapper">
+    <section className="overview-wrapper overflow-hidden">
       <motion.div
-        className="overview-container"
-        whileHover={{ scale: 1.01 }}
-        transition={{ duration: 0.25, ease: "easeOut" }}
-      >
+        className="overview-container">
         {hasOverview && (
           <>
             <h2 className="overview-title">줄거리</h2>

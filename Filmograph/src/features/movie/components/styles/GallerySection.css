@@ -1,3 +1,4 @@
+/* Wrapper */
 .gallery-wrapper {
   transform: scale(0.9);
   transform-origin: top center;
@@ -13,11 +14,11 @@
   padding: 2rem;
 }
 
+/* Header */
 .gallery-header {
   display: flex;
   align-items: center;
   gap: 0.7rem;
-  margin-bottom: 1.6rem;
 }
 
 .gallery-icon {
@@ -32,93 +33,72 @@
   color: #ffff00;
 }
 
+/* Subtitle */
 .gallery-subtitle-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 20px 0 15px;
 }
 
 .gallery-subtitle {
   color: rgba(255, 255, 255, 0.85);
-  font-size: 1.2rem;
-  margin: 20px 0 10px;
+  font-size: 1.4rem;
 }
 
+/* Section */
 .gallery-block {
-  margin-bottom: 2.5rem;
+  margin-bottom: 1rem;
 }
 
-.gallery-grid {
-  display: grid;
-  gap: 1rem;
-}
-
-/* ≥1200px = 4 */
-@media (min-width: 1200px) {
-  .gallery-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-/* 900px~1199px = 3 */
-@media (min-width: 900px) and (max-width: 1199px) {
-  .gallery-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* <900px = 2 */
-@media (max-width: 899px) {
-  .gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
+.gallery-grid,
 .gallery-posters {
   display: grid;
   gap: 1rem;
   width: 100%;
 }
 
-/* ≥1200px = 6 */
-@media (min-width: 1200px) {
-  .gallery-posters {
-    grid-template-columns: repeat(6, 1fr);
-  }
-}
-
-/* 900px~1199px = 4 */
-@media (min-width: 900px) and (max-width: 1199px) {
-  .gallery-posters {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-/* <900px = 2 */
-@media (max-width: 899px) {
-  .gallery-posters {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
+/* Common Card */
 .gallery-card,
 .poster-card {
   position: relative;
   border-radius: 12px;
   overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+  transition: 0.25s ease;
+  cursor: pointer;
 }
 
-/* 스틸컷 16:9 */
+/* Aspect ratio */
 .gallery-card {
-  aspect-ratio: 16/9;
+  aspect-ratio: 16 / 9;
 }
 
-/* 포스터 2:3 */
+.gallery-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 40%;
+  background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0));
+  opacity: 0;
+  transition: 0.25s ease;
+  pointer-events: none;
+}
+
+.gallery-card:hover::after {
+  opacity: 1;
+}
+
 .poster-card {
   aspect-ratio: 2 / 3;
-  max-height: 240px;
 }
 
+.gallery-empty-slot,
+.poster-empty-slot {
+  border-radius: 12px;
+}
+
+/* Images */
 .gallery-img,
 .poster-img {
   width: 100%;
@@ -126,13 +106,12 @@
   object-fit: cover;
 }
 
-/* hover 그라데이션 */
 .gallery-hover {
   position: absolute;
   inset: 0;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.65), transparent);
   opacity: 0;
-  transition: 0.3s ease;
+  transition: 0.25s ease;
 }
 
 .gallery-card:hover .gallery-hover,
@@ -140,6 +119,28 @@
   opacity: 1;
 }
 
+.poster-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%; /* 강조 영역 */
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.75),
+    rgba(0, 0, 0, 0)
+  );
+  opacity: 0;
+  transition: 0.25s ease;
+  pointer-events: none;
+}
+
+.poster-card:hover::after {
+  opacity: 1;
+}
+
+/* Pagination */
 .gallery-pagination {
   display: flex;
   gap: 8px;
@@ -164,6 +165,7 @@
   cursor: default;
 }
 
+/* Modal */
 .preview-modal {
   position: fixed;
   inset: 0;
@@ -180,17 +182,18 @@
 }
 
 .preview-img {
-  max-width: 80vw;
-  max-height: 80vh;
+  max-width: 85vw;
+  max-height: 85vh;
   object-fit: contain;
   border-radius: 12px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55);
 }
 
+/* Close Button */
 .preview-close {
   position: absolute;
-  top: -35px;
-  right: 0px;
+  top: -40px;
+  right: 0;
   background: transparent;
   border: none;
   color: white;

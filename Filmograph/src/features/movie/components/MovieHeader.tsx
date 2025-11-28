@@ -11,7 +11,7 @@ export default function MovieHeader({ movie }: { movie: MovieDetail }) {
   };
 
   return (
-    <section className="movieHeroSection">
+    <section className="movieHeroSection overflow-hidden">
       <div className="scaleWrapper">
         <div
           className="heroBackground"
