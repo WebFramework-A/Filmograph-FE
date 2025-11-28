@@ -2,8 +2,6 @@
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { motion } from "framer-motion";
 import { Network, ZoomIn, ZoomOut } from "lucide-react";
-import { db } from "../../../services/firebaseConfig";
-import { doc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import type { MovieDetail, Person } from "../../../types/movie";
 
@@ -18,7 +16,6 @@ type NodeT = {
 
   rating?: number;
   releaseYear?: string;
-
   character?: string;
 };
 
@@ -27,7 +24,13 @@ type LinkT = { source: string; target: string };
 const CANVAS_WIDTH = 1200;
 const CANVAS_HEIGHT = 600;
 
-export default function MovieGraphSection({ movieId }: { movieId: string }) {
+export default function MovieGraphSection({
+  movie,
+  relatedMovies,
+}: {
+  movie: MovieDetail;
+  relatedMovies: MovieDetail[];
+}) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   const [nodes, setNodes] = useState<NodeT[]>([]);
@@ -41,9 +44,9 @@ export default function MovieGraphSection({ movieId }: { movieId: string }) {
 
   const navigate = useNavigate();
 
+  /** 마우스 기준 좌표 변환 */
   const getMousePos = (e: MouseEvent<HTMLCanvasElement>, canvas: HTMLCanvasElement) => {
     const rect = canvas.getBoundingClientRect();
-
     const scaleX = canvas.width / rect.width;
     const scaleY = canvas.height / rect.height;
 
@@ -56,6 +59,7 @@ export default function MovieGraphSection({ movieId }: { movieId: string }) {
     };
   };
 
+  /** 줌 기능 */
   const applyZoom = (factor: number) => {
     setZoom((prevZoom) => {
       const newZoom = Math.min(Math.max(prevZoom * factor, 0.5), 3);
@@ -74,109 +78,107 @@ export default function MovieGraphSection({ movieId }: { movieId: string }) {
   const handleZoomIn = () => applyZoom(1.2);
   const handleZoomOut = () => applyZoom(0.83);
 
+  /**
+   * 🔥 핵심: Firestore 대신 props 기반 그래프 구성
+   */
   useEffect(() => {
-    async function buildGraph() {
-      const centerRef = doc(db, "movies", movieId);
-      const centerSnap = await getDoc(centerRef);
-      if (!centerSnap.exists()) return;
+    if (!movie) return;
 
-      const centerMovie = centerSnap.data() as MovieDetail;
+    const centerX = CANVAS_WIDTH / 2;
+    const centerY = CANVAS_HEIGHT / 2;
 
-      const centerX = CANVAS_WIDTH / 2;
-      const centerY = CANVAS_HEIGHT / 2;
+    const nodeMap = new Map<string, NodeT>();
+    const linkList: LinkT[] = [];
 
-      const nodeMap = new Map<string, NodeT>();
-      const linkList: LinkT[] = [];
+    /**
+     * ⭐ 중앙 영화 노드
+     */
+    nodeMap.set(movie.id, {
+      id: movie.id,
+      name: movie.title,
+      type: "movie",
+      x: centerX,
+      y: centerY,
+      vx: 0,
+      vy: 0,
+      rating: movie.rating,
+      releaseYear: movie.releaseDate?.slice(0, 4),
+    });
 
-      nodeMap.set(movieId, {
-        id: movieId,
-        name: centerMovie.title,
-        type: "movie",
-        x: centerX,
-        y: centerY,
+    /**
+     * ⭐ 중앙 영화 캐스트 / 감독
+     */
+    const cast = (movie.cast ?? []).slice(0, 12);
+    const directors = (movie.directors ?? []).slice(0, 6);
+
+    const centerPeople: Person[] = [...cast, ...directors];
+    const centerPersonNames = new Set(centerPeople.map((p) => p.name));
+
+    centerPeople.forEach((p) => {
+      const pid = p.id ?? p.name;
+
+      nodeMap.set(pid, {
+        id: pid,
+        name: p.name,
+        type: directors.includes(p) ? "director" : "actor",
+        character: p.character,
+        x: centerX + (Math.random() - 0.5) * 200,
+        y: centerY + (Math.random() - 0.5) * 200,
         vx: 0,
         vy: 0,
-        rating: centerMovie.rating,
-        releaseYear: centerMovie.releaseDate?.slice(0, 4),
       });
 
-      const cast = (centerMovie.cast ?? []).slice(0, 12);
-      const directors = (centerMovie.directors ?? []).slice(0, 6);
+      linkList.push({ source: movie.id, target: pid });
+    });
 
-      const centerPeople: Person[] = [...cast, ...directors];
-      const centerPersonNames = new Set(centerPeople.map((p) => p.name));
+    /**
+     * ⭐ 관련 영화 노드들 (DetailPage에서 미리 확장하여 전달됨)
+     */
+    relatedMovies.slice(0, 8).forEach((r) => {
+      nodeMap.set(r.id, {
+        id: r.id,
+        name: r.title,
+        type: "movie",
+        x: centerX + (Math.random() - 0.5) * 350,
+        y: centerY + (Math.random() - 0.5) * 350,
+        vx: 0,
+        vy: 0,
+        rating: r.rating,
+        releaseYear: r.releaseDate?.slice(0, 4),
+      });
 
-      centerPeople.forEach((p) => {
+      // 관련 영화의 출연/감독 중에서 중앙 영화와 겹치는 인물만 링크 생성
+      const people = [...(r.cast ?? []), ...(r.directors ?? [])];
+
+      people.forEach((p) => {
+        if (!centerPersonNames.has(p.name)) return;
+
         const pid = p.id ?? p.name;
-        nodeMap.set(pid, {
-          id: pid,
-          name: p.name,
-          type: directors.includes(p) ? "director" : "actor",
-          character: p.character,
-          x: centerX + (Math.random() - 0.5) * 200,
-          y: centerY + (Math.random() - 0.5) * 200,
-          vx: 0,
-          vy: 0,
-        });
 
-        linkList.push({ source: movieId, target: pid });
+        // 노드 없으면 추가
+        if (!nodeMap.has(pid)) {
+          nodeMap.set(pid, {
+            id: pid,
+            name: p.name,
+            type: p.role === "감독" ? "director" : "actor",
+            x: centerX + (Math.random() - 0.5) * 220,
+            y: centerY + (Math.random() - 0.5) * 220,
+            vx: 0,
+            vy: 0,
+          });
+        }
+
+        linkList.push({ source: r.id, target: pid });
       });
+    });
 
-      const relatedIds = centerMovie.relatedMovies ?? [];
-      const relatedDocs: { id: string; data: MovieDetail }[] = [];
+    setNodes(Array.from(nodeMap.values()));
+    setLinks(linkList);
+  }, [movie, relatedMovies]);
 
-      for (const rid of relatedIds.slice(0, 8)) {
-        const rRef = doc(db, "movies", rid);
-        const rSnap = await getDoc(rRef);
-        if (!rSnap.exists()) continue;
-        relatedDocs.push({ id: rid, data: rSnap.data() as MovieDetail });
-      }
-
-      relatedDocs.forEach((rm) => {
-        const r = rm.data;
-
-        nodeMap.set(rm.id, {
-          id: rm.id,
-          name: r.title,
-          type: "movie",
-          x: centerX + (Math.random() - 0.5) * 350,
-          y: centerY + (Math.random() - 0.5) * 350,
-          vx: 0,
-          vy: 0,
-          rating: r.rating,
-          releaseYear: r.releaseDate?.slice(0, 4),
-        });
-
-        const people = [...(r.cast ?? []), ...(r.directors ?? [])];
-
-        people.forEach((p) => {
-          if (!centerPersonNames.has(p.name)) return;
-
-          const pid = p.id ?? p.name;
-
-          if (!nodeMap.has(pid)) {
-            nodeMap.set(pid, {
-              id: pid,
-              name: p.name,
-              type: p.role === "감독" ? "director" : "actor",
-              x: centerX + (Math.random() - 0.5) * 220,
-              y: centerY + (Math.random() - 0.5) * 220,
-              vx: 0,
-              vy: 0,
-            });
-          }
-
-          linkList.push({ source: rm.id, target: pid });
-        });
-      });
-
-      setNodes(Array.from(nodeMap.values()));
-      setLinks(linkList);
-    }
-
-    buildGraph();
-  }, [movieId]);
-
+  /**
+   * Force Simulation
+   */
   useEffect(() => {
     if (nodes.length === 0) return;
 
@@ -188,8 +190,10 @@ export default function MovieGraphSection({ movieId }: { movieId: string }) {
           let fx = 0;
           let fy = 0;
 
+          // repel
           for (let j = 0; j < updated.length; j++) {
             if (i === j) continue;
+
             const dx = updated[i].x - updated[j].x;
             const dy = updated[i].y - updated[j].y;
             const dist = Math.hypot(dx, dy) || 1;
@@ -201,6 +205,7 @@ export default function MovieGraphSection({ movieId }: { movieId: string }) {
             }
           }
 
+          // attract
           links.forEach((l) => {
             const a = updated.find((n) => n.id === l.source);
             const b = updated.find((n) => n.id === l.target);
@@ -218,6 +223,7 @@ export default function MovieGraphSection({ movieId }: { movieId: string }) {
             }
           });
 
+          // center gravity
           fx += (CANVAS_WIDTH / 2 - updated[i].x) * 0.004;
           fy += (CANVAS_HEIGHT / 2 - updated[i].y) * 0.004;
 
@@ -234,6 +240,9 @@ export default function MovieGraphSection({ movieId }: { movieId: string }) {
     return () => clearInterval(interval);
   }, [nodes.length, links]);
 
+  /**
+   * Canvas 렌더링
+   */
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas || nodes.length === 0) return;
@@ -246,6 +255,7 @@ export default function MovieGraphSection({ movieId }: { movieId: string }) {
     ctx.translate(offset.x, offset.y);
     ctx.scale(zoom, zoom);
 
+    // Links
     links.forEach((l) => {
       const s = nodes.find((n) => n.id === l.source);
       const t = nodes.find((n) => n.id === l.target);
@@ -259,6 +269,7 @@ export default function MovieGraphSection({ movieId }: { movieId: string }) {
       ctx.stroke();
     });
 
+    // Nodes
     nodes.forEach((n) => {
       const isHovered = hoveredNode?.id === n.id;
       const isSelected = selectedNode?.id === n.id;
@@ -280,13 +291,13 @@ export default function MovieGraphSection({ movieId }: { movieId: string }) {
         ctx.fill();
       }
 
-      // 본체
+      // main circle
       ctx.fillStyle = color;
       ctx.beginPath();
       ctx.arc(n.x, n.y, radius, 0, Math.PI * 2);
       ctx.fill();
 
-      // 라벨
+      // label
       ctx.fillStyle = "#FFFFFF";
       ctx.font = "13px sans-serif";
       ctx.textAlign = "center";
@@ -297,6 +308,9 @@ export default function MovieGraphSection({ movieId }: { movieId: string }) {
     ctx.restore();
   }, [nodes, links, hoveredNode, selectedNode, zoom, offset]);
 
+  /**
+   * Interaction Handling
+   */
   const handleMouseMove = (e: MouseEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -328,20 +342,15 @@ export default function MovieGraphSection({ movieId }: { movieId: string }) {
     }
   };
 
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
+  const handleMouseUp = () => setIsDragging(false);
 
-  const cursorStyle = isDragging
-    ? "grabbing"
-    : hoveredNode
-    ? "pointer"
-    : "grab";
+  const cursorStyle =
+    isDragging ? "grabbing" : hoveredNode ? "pointer" : "grab";
 
   return (
     <section className="transform scale-90">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
+        {/* Header UI — 그대로 */}
         <div className="mb-8">
           <motion.div
             className="inline-flex items-center gap-3 bg-[#FFE66D]/10 border border-[#FFE66D]/30 rounded-full px-6 py-2 mb-4"
@@ -372,7 +381,7 @@ export default function MovieGraphSection({ movieId }: { movieId: string }) {
           </motion.p>
         </div>
 
-        {/* 그래프 박스 */}
+        {/* 그래프 박스 UI 그대로 */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -380,7 +389,7 @@ export default function MovieGraphSection({ movieId }: { movieId: string }) {
           transition={{ duration: 0.6 }}
           className="bg-[#004D4F]/50 backdrop-blur-sm border border-white/10 rounded-xl p-4 relative overflow-hidden"
         >
-          {/* 줌 버튼 */}
+          {/* Zoom buttons */}
           <div className="absolute top-4 right-4 flex gap-2 z-20">
             <button
               onClick={handleZoomOut}
@@ -396,7 +405,7 @@ export default function MovieGraphSection({ movieId }: { movieId: string }) {
             </button>
           </div>
 
-          {/* 노드 정보 패널 */}
+          {/* Node info panel — UI 그대로 */}
           {selectedNode && (
             <div
               className="
@@ -419,7 +428,6 @@ export default function MovieGraphSection({ movieId }: { movieId: string }) {
               {selectedNode.type === "actor" && (
                 <>
                   <p className="text-white/80 text-base mb-1">type: actor</p>
-
                   {selectedNode.character && (
                     <p className="text-white/80 text-base">
                       배역명: {selectedNode.character}
@@ -449,13 +457,6 @@ export default function MovieGraphSection({ movieId }: { movieId: string }) {
                   </button>
                 </>
               )}
-
-              {selectedNode.type !== "actor" &&
-                selectedNode.type !== "movie" && (
-                  <p className="text-white/80 text-base">
-                    type: {selectedNode.type}
-                  </p>
-                )}
             </div>
           )}
 

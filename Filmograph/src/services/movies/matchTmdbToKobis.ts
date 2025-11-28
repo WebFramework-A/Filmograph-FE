@@ -1,0 +1,81 @@
+// src/services/movies/matchTmdbToKobis.ts
+import axios from "axios";
+import { fetchTMDBById } from "./tmdbApi";
+import { db } from "../firebaseConfig";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { countKobisCall } from "../kobisUsage";
+
+const KOBIS_KEY = import.meta.env.VITE_KOBIS_API_KEY;
+
+// 🔥 KOBIS 검색 API (카운트 포함)
+const searchKobisMovies = async (query: string, year?: string) => {
+  await countKobisCall();
+
+  const url =
+    "https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json";
+
+  try {
+    const res = await axios.get(url, {
+      params: {
+        key: KOBIS_KEY,
+        movieNm: query,
+        openStartDt: year,
+        openEndDt: year,
+      },
+    });
+
+    return res.data?.movieListResult?.movieList ?? [];
+  } catch {
+    return [];
+  }
+};
+
+// ⭐ TMDB ID → KOBIS movieCd 매칭 (캐시 적용)
+export const findKobisMovieCdByTmdbId = async (
+  tmdbId: number
+): Promise<string | null> => {
+  
+  // 1) 🔥 캐시 먼저 확인
+  const cacheRef = doc(db, "tmdbToKobis", String(tmdbId));
+  const cacheSnap = await getDoc(cacheRef);
+
+  if (cacheSnap.exists()) {
+    return cacheSnap.data().kobisId ?? null;
+  }
+
+  // 2) 캐시에 없다면 TMDB 정보 조회
+  const tmdb = await fetchTMDBById(tmdbId);
+  if (!tmdb) return null;
+
+  const titleKo = tmdb.title;
+  const titleEn = tmdb.original_title;
+  const year = tmdb.release_date?.slice(0, 4);
+
+  let match: string | null = null;
+
+  // 3) 다양한 방식으로 매칭 시도
+  const list1 = await searchKobisMovies(titleKo, year);
+  if (list1.length === 1) match = list1[0].movieCd;
+
+  if (!match) {
+    const list2 = await searchKobisMovies(titleEn, year);
+    if (list2.length === 1) match = list2[0].movieCd;
+  }
+
+  if (!match) {
+    const list3 = await searchKobisMovies(titleKo);
+    const f1 = list3.filter((m: any) => m.prdtYear === year);
+    if (f1.length === 1) match = f1[0].movieCd;
+  }
+
+  if (!match) {
+    const list4 = await searchKobisMovies(titleEn);
+    const f2 = list4.filter((m: any) => m.prdtYear === year);
+    if (f2.length === 1) match = f2[0].movieCd;
+  }
+
+  // 4) 🔥 매칭 결과 캐싱
+  await setDoc(cacheRef, { kobisId: match });
+
+  return match;
+};

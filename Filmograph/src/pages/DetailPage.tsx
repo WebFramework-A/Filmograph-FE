@@ -1,7 +1,8 @@
-// pages/DetailPage.tsx
+// src/pages/DetailPage.tsx
 import { useParams } from "react-router-dom";
 import MovieHeader from "../features/movie/components/MovieHeader";
 import useMovie from "../features/movie/hooks/useMovie";
+
 import ScrollSection from "../features/movie/components/ScrollSection";
 import OverviewSection from "../features/movie/components/OverviewSection";
 import CrewSection from "../features/movie/components/CrewSection";
@@ -14,9 +15,15 @@ import MovieGraphSection from "../features/movie/components/MovieGraphSection";
 import RelatedMoviesSection from "../features/movie/components/RelatedMoviesSection";
 import ReviewsSection from "../features/movie/components/ReviewsSection";
 
+import useExpandedRelatedMovies from "../hooks/useRelatedMovies";
+
 export default function DetailPage() {
   const { movieId } = useParams();
   const { movie, loading } = useMovie(movieId!);
+
+  // 🔥 TMDB → KOBIS 강제 매칭 + Firestore 저장 + 확장 관련영화
+  const { relatedMovies, loading: loadingRelated } =
+    useExpandedRelatedMovies(movie);
 
   if (loading) return <div>불러오는 중...</div>;
   if (!movie) return <div>영화를 찾을 수 없습니다.</div>;
@@ -53,19 +60,22 @@ export default function DetailPage() {
         <GallerySection movie={movie} />
       </ScrollSection>
 
+      {/* 🔥 그래프는 DetailPage에서 확장된 relatedMovies만 사용 */}
       <ScrollSection>
-        <MovieGraphSection movieId={movie.id} />
+        <MovieGraphSection movie={movie} relatedMovies={relatedMovies} />
       </ScrollSection>
 
+      {/* 🔥 관련영화 역시 확장된 relatedMovies 사용 */}
       <ScrollSection>
-        <RelatedMoviesSection relatedIds={movie.relatedMovies ?? []} />
+        <RelatedMoviesSection
+          movies={relatedMovies}
+          loading={loadingRelated}
+        />
       </ScrollSection>
 
       <ScrollSection>
         <ReviewsSection movie={movie} />
       </ScrollSection>
-
-      <pre className="text-white p-6">{JSON.stringify(movie, null, 2)}</pre>
     </div>
   );
 }
