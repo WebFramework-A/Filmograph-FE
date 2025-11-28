@@ -19,6 +19,29 @@ export default function RelatedMoviesSection({
   movies: MovieDetail[];
   loading: boolean;
 }) {
+  const [cols, setCols] = useState<number>(5);
+  const [pageSize, setPageSize] = useState<number>(5);
+  const [page, setPage] = useState<number>(0);
+  
+  useEffect(() => {
+    const calc = () => {
+      const w = window.innerWidth;
+      let newCols = 5;
+
+      if (w >= 1200) newCols = 5;
+      else if (w >= 900) newCols = 4;
+      else if (w >= 600) newCols = 3;
+      else newCols = 2;
+
+      setCols(newCols);
+      setPageSize(newCols);
+    };
+
+    calc();
+    window.addEventListener("resize", calc);
+    return () => window.removeEventListener("resize", calc);
+  }, []);
+
   if (loading) return null;
 
   if (!movies || movies.length === 0) {
@@ -32,31 +55,6 @@ export default function RelatedMoviesSection({
     );
   }
 
-  // ---- 페이징 상태 ----
-  const [cols, setCols] = useState<number>(5); // 1줄 개수
-  const [pageSize, setPageSize] = useState<number>(5);
-  const [page, setPage] = useState<number>(0);
-
-  // 반응형 컬럼 계산 — 갤러리 스타일 동일
-  useEffect(() => {
-    const calc = () => {
-      const w = window.innerWidth;
-      let newCols = 5;
-
-      if (w >= 1200) newCols = 5;
-      else if (w >= 900) newCols = 4;
-      else if (w >= 600) newCols = 3;
-      else newCols = 2;
-
-      setCols(newCols);
-      setPageSize(newCols); // 반드시 newCols 사용!
-    };
-
-    calc();
-    window.addEventListener("resize", calc);
-    return () => window.removeEventListener("resize", calc);
-  }, []);
-
   const maxPage = Math.floor((movies.length - 1) / pageSize);
 
   return (
@@ -65,7 +63,6 @@ export default function RelatedMoviesSection({
           <div className="related-header">
             <h2 className="related-title">관련 영화</h2>
 
-            {/* 🔥 페이징 UI 영역 */}
             {movies.length > pageSize && (
               <div className="related-pagination">
                 <button disabled={page === 0} onClick={() => setPage((p) => p - 1)}>

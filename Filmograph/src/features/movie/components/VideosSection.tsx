@@ -25,6 +25,7 @@ export default function VideosSection({ movie }: { movie: any }) {
 
       setVimeoThumbs((prev) => ({ ...prev, [key]: thumb }));
       return thumb;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
       return "/fallback-thumb.png";
     }
@@ -42,6 +43,7 @@ export default function VideosSection({ movie }: { movie: any }) {
         fetchVimeoThumb(v.key);
       }
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videos, vimeoThumbs]);
 
   const [pageTrailer, setPageTrailer] = useState(0);
