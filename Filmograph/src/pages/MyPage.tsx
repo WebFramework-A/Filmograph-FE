@@ -1,8 +1,17 @@
 import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../features/auth/hooks/useAuth";
+import { useAuth } from "../hooks/useAuth";
 import { db } from "../services/firebaseConfig";
-import { doc, getDoc, collection, getDocs, query, where, orderBy, limit } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  collection,
+  getDocs,
+  query,
+  where,
+  orderBy,
+  limit,
+} from "firebase/firestore";
 import { type Review } from "../features/review/types/review";
 
 // 분리한 컴포넌트들 임포트
@@ -28,7 +37,14 @@ export interface GenreData {
 }
 
 const processGenreData = (movies: WishlistItem[]) => {
-  const COLORS = ["#FF5252", "#5B8FF9", "#F6BD16", "#E040FB", "#4FC3F7", "#66BB6A"];
+  const COLORS = [
+    "#FF5252",
+    "#5B8FF9",
+    "#F6BD16",
+    "#E040FB",
+    "#4FC3F7",
+    "#66BB6A",
+  ];
   const genreCount: { [key: string]: number } = {};
   let totalGenres = 0;
 
@@ -71,7 +87,7 @@ export default function MyPage() {
   const [stats, setStats] = useState({
     reviewCount: 0,
     ratingCount: 0,
-    avgRating: 0
+    avgRating: 0,
   });
 
   // 로그인 체크
@@ -96,10 +112,10 @@ export default function MyPage() {
       const wishlistRef = collection(db, "userWishlist", uid, "items");
       const wishlistSnap = await getDocs(wishlistRef);
 
-      // 리뷰 개수 가져오기 
+      // 리뷰 개수 가져오기
       let myReviews: Review[] = [];
-      let totalRatingCount = 0;  //별점 개수
-      let totalReviewCount = 0;   //리뷰 개수
+      let totalRatingCount = 0; //별점 개수
+      let totalReviewCount = 0; //리뷰 개수
       let totalRatingSum = 0;
       try {
         const reviewsRef = collection(db, "reviews");
@@ -110,9 +126,9 @@ export default function MyPage() {
 
         totalRatingCount = allSnap.size; // 전체 문서 개수 = 평가 횟수
 
-        allSnap.forEach(doc => {
+        allSnap.forEach((doc) => {
           const data = doc.data();
-          totalRatingSum += (data.rating || 0);
+          totalRatingSum += data.rating || 0;
 
           // 내용이 있고 공백이 아니면 '리뷰'로 카운트
           if (data.content && data.content.trim().length > 0) {
@@ -130,13 +146,14 @@ export default function MyPage() {
         );
         const recentSnap = await getDocs(recentQuery);
 
-        myReviews = recentSnap.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        } as Review));
-
-      }
-      catch (error) {
+        myReviews = recentSnap.docs.map(
+          (doc) =>
+            ({
+              id: doc.id,
+              ...doc.data(),
+            } as Review)
+        );
+      } catch (error) {
         console.error("리뷰 로딩 중 에러 (인덱스 필요할 수 있음):", error);
       }
 
@@ -144,9 +161,9 @@ export default function MyPage() {
 
       // 통계 업데이트
       setStats({
-        reviewCount: totalReviewCount,  //리뷰 개수
+        reviewCount: totalReviewCount, //리뷰 개수
         ratingCount: totalRatingCount, // 별점 개수
-        avgRating: totalReviewCount > 0 ? (totalRatingSum / totalRatingCount) : 0
+        avgRating: totalReviewCount > 0 ? totalRatingSum / totalRatingCount : 0,
       });
 
       // 영화 상세 정보 매핑
@@ -161,13 +178,15 @@ export default function MyPage() {
 
         let finalGenres: string[] = [];
 
-        if (typeof rawGenre === 'string') {
-          finalGenres = rawGenre.split(',').map((g: string) => g.trim()).filter(Boolean);
-        }
-        else if (Array.isArray(rawGenre)) {
-          finalGenres = rawGenre.map((g: any) =>
-            typeof g === 'string' ? g : g.name
-          ).filter(Boolean);
+        if (typeof rawGenre === "string") {
+          finalGenres = rawGenre
+            .split(",")
+            .map((g: string) => g.trim())
+            .filter(Boolean);
+        } else if (Array.isArray(rawGenre)) {
+          finalGenres = rawGenre
+            .map((g: any) => (typeof g === "string" ? g : g.name))
+            .filter(Boolean);
         }
 
         return {
@@ -188,8 +207,7 @@ export default function MyPage() {
       });
 
       setLikes(resolvedList);
-    }
-    catch (error) {
+    } catch (error) {
       console.error("데이터 로딩 실패:", error);
     }
   }, []);
@@ -201,7 +219,11 @@ export default function MyPage() {
   }, [user, fetchMyData]);
 
   if (loading || !userInfo) {
-    return <div className="flex items-center justify-center h-screen bg-[#0b4747] text-white">로딩 중...</div>;
+    return (
+      <div className="flex items-center justify-center h-screen bg-[#0b4747] text-white">
+        로딩 중...
+      </div>
+    );
   }
 
   //리뷰 삭제 시 목록 새로고침하는 함수
@@ -215,7 +237,9 @@ export default function MyPage() {
         {/* 헤더 */}
         <div className="flex justify-between items-end border-b border-white/20 pb-4 mb-8">
           <h1 className="text-4xl font-bold text-yellow-200">My Page</h1>
-          <p className="text-sm text-white/70">나의 영화 취향과 활동을 확인하세요</p>
+          <p className="text-sm text-white/70">
+            나의 영화 취향과 활동을 확인하세요
+          </p>
         </div>
 
         <Profile
@@ -240,8 +264,6 @@ export default function MyPage() {
         {/* 차트 섹션 컴포넌트 */}
         <div className="mb-12">
           <GenreChart genreData={genreData} />
-
-
         </div>
       </div>
     </div>

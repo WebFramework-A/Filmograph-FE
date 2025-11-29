@@ -6,14 +6,14 @@ export interface Character {
   movieTitle: string;
   description: string;
   profileUrl: string;
-  archetypeId: string; 
+  archetypeId: string;
 }
 
 // 나머지 타입들
 export type ArchetypeId =
   | "hero"
   | "villain"
-  | "avenger"
+  | "revenge"
   | "outsider"
   | "brain"
   | "adventurer"

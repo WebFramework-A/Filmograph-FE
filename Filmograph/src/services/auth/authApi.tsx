@@ -1,4 +1,4 @@
-import { auth, db } from "../../../services/firebaseConfig";
+import { auth, db } from "../firebaseConfig";
 import {
   GoogleAuthProvider,
   signInWithPopup,
@@ -8,7 +8,7 @@ import {
   type User,
 } from "firebase/auth";
 import { doc, setDoc, getDoc } from "firebase/firestore"; // Firestore 함수 임포트
-import type { LoginCredentials, SignUpCredentials } from "../types/authType";
+import type { LoginCredentials, SignUpCredentials } from "../../types/authType";
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -30,7 +30,7 @@ export const loginWithGoogle = async (): Promise<User | null> => {
         nickname: user.displayName || "익명 사용자",
         photoURL: user.photoURL,
         createdAt: new Date().toISOString(),
-        likedMovies: [] // 빈 배열로 초기화
+        likedMovies: [], // 빈 배열로 초기화
       });
     }
 
@@ -42,7 +42,11 @@ export const loginWithGoogle = async (): Promise<User | null> => {
 };
 
 //이메일 회원가입
-export const signUpWithEmail = async ({ email, password, nickname }: SignUpCredentials): Promise<User> => {
+export const signUpWithEmail = async ({
+  email,
+  password,
+  nickname,
+}: SignUpCredentials): Promise<User> => {
   try {
     //Authentication에 유저 생성
     const result = await createUserWithEmailAndPassword(auth, email, password);
@@ -56,7 +60,7 @@ export const signUpWithEmail = async ({ email, password, nickname }: SignUpCrede
       nickname: nickname, // 입력받은 닉네임 저장
       photoURL: null,
       createdAt: new Date().toISOString(),
-      likedMovies: [] // 찜 목록 빈 배열로 초기화
+      likedMovies: [], // 찜 목록 빈 배열로 초기화
     });
 
     return user;
@@ -66,9 +70,11 @@ export const signUpWithEmail = async ({ email, password, nickname }: SignUpCrede
   }
 };
 
-
 // 이메일 로그인
-export const loginWithEmail = async ({ email, password }: LoginCredentials): Promise<User> => {
+export const loginWithEmail = async ({
+  email,
+  password,
+}: LoginCredentials): Promise<User> => {
   try {
     const result = await signInWithEmailAndPassword(auth, email, password);
     return result.user;
