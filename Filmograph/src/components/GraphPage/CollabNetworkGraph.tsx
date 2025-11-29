@@ -416,11 +416,11 @@ export default function CollabNetworkGraph({
 
               if (showLabel) {
                 const fontSize = 12 / (globalScale * 0.9);
-                drawLabel(ctx, node.label, node.x, node.y - 10, fontSize);
+                drawLabel(ctx, node.label, node.x, node.y, fontSize);
               }
             } else if (globalScale > 1.8) {
               const fontSize = 12 / globalScale;
-              drawLabel(ctx, node.label, node.x, node.y - 10, fontSize);
+              drawLabel(ctx, node.label, node.x, node.y, fontSize);
             }
           }}
           onNodeClick={(node) => focusNode(node as NodeT)}
