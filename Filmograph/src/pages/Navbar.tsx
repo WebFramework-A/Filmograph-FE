@@ -23,10 +23,6 @@ const Navbar = () => {
       </NavLink>
 
       <div className="flex items-center gap-6">
-        <NavLink to="/map" className={navLinkClasses} end>
-          Map
-        </NavLink>
-
         {/* Graph 메뉴 */}
         <div className="relative group h-full flex items-center ">
           <NavLink to="/graph" className={navLinkClasses}>
@@ -64,17 +60,46 @@ const Navbar = () => {
           </div>
         </div>
 
-        <NavLink to="/boxOfficeTrend" className={navLinkClasses} end>
-          Trend
-        </NavLink>
-
         <NavLink to="/archetype" className={navLinkClasses}>
           Archetype
         </NavLink>
 
-        <NavLink to="/BoxOffice" className={navLinkClasses}>
-          BoxOffice
-        </NavLink>
+        {/* BoxOffice 메뉴 */}
+        <div className="relative group h-full flex items-center ">
+          <NavLink to="/BoxOffice" className={navLinkClasses}>
+            BoxOffice
+          </NavLink>
+
+          {/* 드롭다운 메뉴 컨테이너 */}
+          <div
+            className="absolute left-1/2 -translate-x-1/2 top-full pt-4 w-35
+            opacity-0 invisible -translate-y-2.5
+            group-hover:opacity-100 group-hover:visible group-hover:translate-y-0
+            transition-all duration-300 ease-out"
+          >
+            {/* 드롭다운 메뉴 3개 */}
+            <div className="bg-black/80 backdrop-blur-md rounded-md shadow-lg py-2 flex flex-col gap-1 border border-white/10 overflow-hidden">
+              <Link
+                to="/BoxOffice"
+                className="px-4 py-2 hover:bg-white/10 hover:text-yellow-300 text-sm text-center transition-colors "
+              >
+                주간 박스오피스
+              </Link>
+              <Link
+                to="/boxOfficeTrend"
+                className="px-4 py-2 hover:bg-white/10 hover:text-yellow-300 text-sm text-center transition-colors"
+              >
+                일간 관람자수
+              </Link>
+              <Link
+                to="/map"
+                className="px-4 py-2 hover:bg-white/10 hover:text-yellow-300 text-sm text-center transition-colors"
+              >
+                전세계 트랜드
+              </Link>
+            </div>
+          </div>
+        </div>
 
         <NavLink to="/allmovie" className={navLinkClasses} end>
           Movies
