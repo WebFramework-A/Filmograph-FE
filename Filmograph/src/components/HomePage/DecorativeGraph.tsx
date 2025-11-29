@@ -85,7 +85,7 @@ const sampleGraphData = {
 export default function DecorativeGraph() {
   const fgRef = useRef<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
+  const [dimensions, setDimensions] = useState({ width: 900, height: 600 });
 
   useEffect(() => {
     const updateDimensions = () => {
@@ -106,19 +106,10 @@ export default function DecorativeGraph() {
 
   useEffect(() => {
     if (fgRef.current) {
-      setTimeout(() => {
-        // 그래프가 넓게 퍼지므로 줌 아웃을 살짝 더 해서 전체가 보이게 조정
-        //fgRef.current.zoomToFit(0, 0);
-      }, 100);
-    }
-  }, [dimensions]);
-
-  useEffect(() => {
-    if (fgRef.current) {
-      // charge: 노드끼리 밀어내는 힘 (절댓값이 클수록 멀리 밀어냄)
+      // 노드끼리 밀어내는 힘 (절댓값이 클수록 멀리 밀어냄)
       fgRef.current.d3Force("charge").strength(-150);
 
-      // link: 연결된 노드 사이의 거리
+      // 연결된 노드 사이의 거리
       fgRef.current.d3Force("link").distance(100);
     }
   }, [dimensions]);

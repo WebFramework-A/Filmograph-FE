@@ -19,6 +19,9 @@ const GraphHome = () => {
             <b>'영화'</b> 와 <b>'영화인'</b>을 두 개의 그룹으로 명확히 나누고,
             오직 <b>참여 관계</b>만을 선으로 연결하여 데이터를 직관적으로
             보여줍니다.
+            <br></br>
+            영화 노드를 2번 클릭하면 상세페이지로 이동하여, 해당 영화에 대한
+            정보를 습득 가능합니다.
           </div>
           <div className="flex flex-col items-start mb-4">
             <div className="flex justify-center items-center gap-1 font-semibold">
@@ -26,12 +29,14 @@ const GraphHome = () => {
             </div>
             영화의 전체 출연진, 특정 인물의 필모그래피를 한 눈에 파악하고 싶을때
           </div>
-          <Arrow
-            title="보러가기"
-            color="green"
-            size="sm"
-            onClick={() => navigate("/graph/movie")}
-          />
+          <div className="self-end">
+            <Arrow
+              title="보러가기"
+              color="green"
+              size="sm"
+              onClick={() => navigate("/graph/movie")}
+            />
+          </div>
         </div>
       ),
     },
@@ -51,12 +56,14 @@ const GraphHome = () => {
             </div>
             특정 인물의 협업 친밀도나 작업 스타일을 파악하고 싶을 때
           </div>
-          <Arrow
-            title="보러가기"
-            color="green"
-            size="sm"
-            onClick={() => navigate("/graph/ego")}
-          />
+          <div className="self-end">
+            <Arrow
+              title="보러가기"
+              color="green"
+              size="sm"
+              onClick={() => navigate("/graph/ego")}
+            />
+          </div>
         </div>
       ),
     },
@@ -76,12 +83,14 @@ const GraphHome = () => {
             '특정 감독 사단'이나 '마블 유니버스'처럼 영화계의 거시적인 형태와
             생태계 구조를 발견하고 싶을 때
           </div>
-          <Arrow
-            title="보러가기"
-            color="green"
-            size="sm"
-            onClick={() => navigate("/graph/collaboration")}
-          />
+          <div className="self-end">
+            <Arrow
+              title="보러가기"
+              color="green"
+              size="sm"
+              onClick={() => navigate("/graph/collaboration")}
+            />
+          </div>
         </div>
       ),
     },
@@ -91,7 +100,7 @@ const GraphHome = () => {
     <div className="min-h-screen pt-30 bg-[#0b4747]">
       {/* 헤더 */}
       <div className="pb-4 px-8">
-        <h1 className="text-6xl font-normal text-center mb-4 text-yellow-300">
+        <h1 className="text-6xl font-normal text-center mb-4 text-yellow-200">
           영화 관계망
         </h1>
 
@@ -121,7 +130,7 @@ const GraphHome = () => {
 
       {/* 그래프별 설명 */}
       <ScrollReveal>
-        <div className="max-w-6xl w-xl md:w-2xl lg:w-3xl xl:w-4xl mx-auto border border-yellow-100/50 shadow-xl rounded-md py-6 px-10 bg-yellow-100/70  text-[#0d5a5a]">
+        <div className="max-w-6xl w-xl md:w-2xl lg:w-3xl xl:w-4xl mx-auto border border-yellow-100/50 shadow-xl rounded-md py-6 px-10 bg-yellow-100/90  text-[#0d5a5a]">
           {description[graphType].description}
         </div>
       </ScrollReveal>
@@ -129,7 +138,7 @@ const GraphHome = () => {
       {/* 가이드 */}
       <div className=" px-8 py-12 max-w-6xl mx-auto">
         <ScrollReveal>
-          <div className="text-xl text-yellow-300 mb-3">그래프 사용방법</div>
+          <div className="text-xl text-yellow-200 mb-3">그래프 사용방법</div>
         </ScrollReveal>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <ScrollReveal>

@@ -40,7 +40,7 @@ const GraphDetail = () => {
   }, []);
 
   return (
-    <>
+    <div className="bg-[#0b4747]">
       {/* 토스트 메시지 */}
       <Toast
         message="검색 결과가 없습니다."
@@ -48,9 +48,9 @@ const GraphDetail = () => {
         onClose={() => setShowNoResultToast(false)}
       />
 
-      <div className="h-screen w-full pt-20 bg-[#0d5a5a] text-white flex flex-col overflow-hidden relative">
+      <div className="h-screen w-full pt-20 text-white flex flex-col overflow-hidden relative">
         {/* 상단 고정 영역 (제목, 설명, 검색바) */}
-        <div className="flex-shrink-0 px-8 pb-4 z-10 bg-[#0d5a5a]">
+        <div className="shrink-0 px-8 pb-4 z-10 ">
           {/* 제목 및 설명 */}
           <div className="flex justify-between items-end border-b border-white/20 pb-4 mb-4">
             <h1 className="text-4xl font-bold text-yellow-200">
@@ -60,15 +60,17 @@ const GraphDetail = () => {
             </h1>
 
             <p className="text-sm text-white/70">
-              {graphType === "movie" && "여러 영화와 영화인들 사이의 유기적인 관계를 한눈에 파악해보세요."}
-              {graphType === "ego" && "한 인물을 중심으로 형성된 에고 네트워크를 시각적으로 확인해보세요."}
-              {graphType === "collaboration" && "노드를 탐색하며, 같은 색으로 표시된 커뮤니티 그룹과 영화인들의 협업 관계를 확인해보세요."}
+              {graphType === "movie" &&
+                "여러 영화와 영화인들 사이의 유기적인 관계를 한눈에 파악해보세요."}
+              {graphType === "ego" &&
+                "한 인물을 중심으로 형성된 에고 네트워크를 시각적으로 확인해보세요."}
+              {graphType === "collaboration" &&
+                "노드를 탐색하며, 같은 색으로 표시된 커뮤니티 그룹과 영화인들의 협업 관계를 확인해보세요."}
             </p>
           </div>
 
           {/* 검색바 + 전체보기 버튼 영역 */}
           <div className="relative w-full mt-2 flex justify-center items-center">
-
             {/* 범례 - 검색바 왼쪽에 배치 */}
             {/* 영화 네트워크일 때만 표시 */}
             {graphType === "movie" && (
@@ -81,19 +83,31 @@ const GraphDetail = () => {
                 "
               >
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full" style={{ background: "#FF5252" }} />
+                  <div
+                    className="w-3 h-3 rounded-full"
+                    style={{ background: "#FF5252" }}
+                  />
                   <span className="text-sm">영화</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full" style={{ background: "#5B8FF9" }} />
+                  <div
+                    className="w-3 h-3 rounded-full"
+                    style={{ background: "#5B8FF9" }}
+                  />
                   <span className="text-sm">배우</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full" style={{ background: "#F6BD16" }} />
+                  <div
+                    className="w-3 h-3 rounded-full"
+                    style={{ background: "#F6BD16" }}
+                  />
                   <span className="text-sm">감독</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full" style={{ background: "#E040FB" }} />
+                  <div
+                    className="w-3 h-3 rounded-full"
+                    style={{ background: "#E040FB" }}
+                  />
                   <span className="text-sm">감독 겸 배우</span>
                 </div>
               </div>
@@ -109,8 +123,8 @@ const GraphDetail = () => {
                   graphType === "movie"
                     ? "영화 제목이나 영화인을 검색해보세요."
                     : graphType === "ego"
-                      ? "에고 네트워크에서 영화인을 검색해보세요."
-                      : "협업 네트워크에서 영화인을 검색해보세요."
+                    ? "에고 네트워크에서 영화인을 검색해보세요."
+                    : "협업 네트워크에서 영화인을 검색해보세요."
                 }
               />
             </div>
@@ -130,7 +144,7 @@ const GraphDetail = () => {
           </div>
         </div>
 
-        {/* 그래프 영역 (Flex-1로 남은 공간 채움) */}
+        {/* 그래프 영역 */}
         <div className="flex-1 w-full min-h-0 relative overflow-hidden px-6 pb-3">
           {graphType === "movie" && (
             <div className="w-full h-full">
@@ -164,7 +178,7 @@ const GraphDetail = () => {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
