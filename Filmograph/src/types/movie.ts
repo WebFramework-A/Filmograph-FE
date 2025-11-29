@@ -90,6 +90,8 @@ export interface MovieDetail
   MovieCredits,
   MovieStats,
   MovieAwards {
+  poster: null;
+  openDt: any;
 
   tmdbId?: number;
   watchProviders?: WatchProvider[];     // OTT 제공처

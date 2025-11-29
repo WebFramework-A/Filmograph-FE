@@ -16,6 +16,7 @@ import WishlistPage from "./components/MyPage/MyLikesPage";
 import MyReviewsPage from "./components/MyPage/MyReviewsPage";
 import GraphHome from "./pages/GraphHome";
 import GraphDetail from "./components/GraphPage/GraphDetail";
+import BoxOffice from "./pages/BoxOfficePage";
 import MapPage from "./pages/MapPage";
 import AllMoviesPage from "./pages/AllMoviesPage";
 
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: "/review",
         element: <MyReviewsPage />,
+      },
+      {
+        path: "/BoxOffice",
+        element: <BoxOffice />,
       },
       {
         path: "/map",
