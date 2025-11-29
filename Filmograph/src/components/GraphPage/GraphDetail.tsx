@@ -116,6 +116,23 @@ const GraphDetail = () => {
                   }
                 />
               </div>
+            )}
+
+            {/* 중앙 검색바 */}
+            <div className="w-full max-w-sm">
+              <Searcrbar
+                inputValue={inputValue}
+                setInputValue={setInputValue}
+                onSearch={handleSearch}
+                placeholder={
+                  graphType === "movie"
+                    ? "영화 제목이나 영화인을 검색해보세요."
+                    : graphType === "ego"
+                      ? "에고 네트워크에서 영화인을 검색해보세요."
+                      : "협업 네트워크에서 영화인을 검색해보세요."
+                }
+              />
+            </div>
 
               {/* 전체보기 버튼 */}
               {(graphType === "movie" || graphType === "collaboration") && (
