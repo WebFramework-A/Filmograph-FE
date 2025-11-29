@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Star, Calendar, Users, Clock, Film } from "lucide-react";
+import { Star, Calendar, Clock, Film } from "lucide-react";
 import { type MovieDetail } from "../../../types/movie";
 import { FavoriteButton } from "./FavoriteButton";
 import "./styles/MovieHeader.css";
@@ -89,14 +89,6 @@ export default function MovieHeader({ movie }: { movie: MovieDetail }) {
                 <div>
                   <span>상영시간</span>
                   <strong>{movie.runtime ? `${movie.runtime}분` : "-"}</strong>
-                </div>
-              </div>
-
-              <div className="statItem">
-                <Users className="statIconPurple" />
-                <div>
-                  <span>관객수</span>
-                  <strong>{movie.audienceCount?.toLocaleString() ?? "-"}</strong>
                 </div>
               </div>
             </div>

@@ -235,7 +235,7 @@ export default function BoxOfficePage() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.45, delay: index * 0.05 }}
                     onClick={() => {
-                      if (canNavigate) navigate(`/detail/${movie.tmdbId}`);
+                      if (canNavigate) navigate(`/detail/${movie.movieCd}`);
                     }}
                     className={`related-card group ${
                       canNavigate ? "cursor-pointer" : "cursor-default opacity-50"
