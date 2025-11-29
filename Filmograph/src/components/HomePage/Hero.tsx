@@ -8,9 +8,9 @@ const Hero = () => {
     <>
       <div className="w-full min-h-screen snap-start bg-[#0b4747] flex items-center justify-center px-8 relative overflow-hidden">
         <div className="w-full h-screen max-w-7xl relative flex items-center">
-          {/* 왼쪽: 대표 문구 및 버튼 */}
+          {/* 좌측 (랜딩문구, 시작버튼) */}
           <div className="flex flex-col justify-center space-y-8 relative z-20 w-1/2">
-            <h1 className="text-5xl xl:text-7xl font-bold text-[#FFD700] tracking-wider">
+            <h1 className="text-5xl xl:text-7xl font-bold text-yellow-300 tracking-wider">
               Connect Movies,
               <br />
               Explore Worlds
@@ -19,15 +19,14 @@ const Hero = () => {
               당신이 몰랐던 영화의 연결고리
             </p>
 
-            {/* 시작하기 */}
             <Arrow title="시작하기" onClick={() => navigate("/graph")} />
           </div>
 
-          {/* 오른쪽: 그래프 */}
+          {/* 우측 (그래프) */}
           <div className="absolute right-0 top-0 h-full w-full md:w-[65%] flex items-center justify-center z-10 pointer-events-none">
             {/* 노드 움직이게끔 pointer-events-auto 추가함ㅜㅜ */}
             <div className="w-full h-full flex items-center justify-center relative pointer-events-auto">
-              {/* 왼쪽 & 오른쪽 겹치는 부분에 블러처리용 오버레이 */}
+              {/* 왼쪽 & 오른쪽 겹치는 부분에 블러처리용 오버레이 (나중에 손보기. 이거 왜 안되는거지;;) */}
               <div
                 className="absolute inset-0 pointer-events-none z-20"
                 style={{
