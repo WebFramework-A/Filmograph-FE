@@ -7,9 +7,10 @@ const Navbar = () => {
   const { user, loading } = useAuth();
 
   const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
-    `transition-colors duration-200 ${isActive
-      ? "text-yellow-300 "
-      : "text-white hover:text-yellow-300 duration-400"
+    `transition-colors duration-200 ${
+      isActive
+        ? "text-yellow-300 "
+        : "text-white hover:text-yellow-300 duration-400"
     }`;
 
   return (
@@ -63,6 +64,10 @@ const Navbar = () => {
           </div>
         </div>
 
+        <NavLink to="/boxOfficeTrend" className={navLinkClasses} end>
+          Trend
+        </NavLink>
+
         <NavLink to="/archetype" className={navLinkClasses}>
           Archetype
         </NavLink>
@@ -84,7 +89,8 @@ const Navbar = () => {
                 to="/my"
                 title="마이페이지"
                 className={({ isActive }) =>
-                  `block rounded-full p-0.5 transition-all ${isActive ? "ring-2 ring-yellow-200 duration-500" : ""
+                  `block rounded-full p-0.5 transition-all ${
+                    isActive ? "ring-2 ring-yellow-200 duration-500" : ""
                   }`
                 }
               >

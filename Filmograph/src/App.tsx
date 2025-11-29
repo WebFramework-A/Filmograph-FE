@@ -19,6 +19,7 @@ import GraphDetail from "./components/GraphPage/GraphDetail";
 import BoxOffice from "./pages/BoxOfficePage";
 import MapPage from "./pages/MapPage";
 import AllMoviesPage from "./pages/AllMoviesPage";
+import BoxOfficeTrend from "./pages/BoxOfficeTrend";
 
 const router = createBrowserRouter([
   {
@@ -78,7 +79,11 @@ const router = createBrowserRouter([
       {
         path: "/allmovie",
         element: <AllMoviesPage />,
-      }
+      },
+      {
+        path: "/boxOfficeTrend",
+        element: <BoxOfficeTrend />,
+      },
     ],
   },
 ]);
