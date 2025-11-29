@@ -46,6 +46,8 @@ export default function BoxOfficePage() {
               poster: movie.posterUrl || movie.poster || "/default-poster.png",
               posterUrl: movie.posterUrl || movie.poster,
               backdrop: movie.backdropUrl || movie.backdrop,
+              tmdbId: movie.tmdbId ?? null,
+              rating: movie.rating ?? null,
             };
           }
 
@@ -56,7 +58,8 @@ export default function BoxOfficePage() {
             posterUrl: "/default-poster.png",
             salesAcc: 0,
             openDt: "미상",
-            rating: 0,
+            rating: null,
+            tmdbId: null,
           };
         })
       );
@@ -99,10 +102,10 @@ export default function BoxOfficePage() {
         <header className="mb-10 md:mb-14">
           <div className="flex justify-between items-end border-b border-white/20 pb-4 mb-8">
             <h1 className="text-4xl font-bold text-yellow-200">
-              Box Office - Top10
+              Box Office - Top5
             </h1>
             <p className="text-sm text-white/70">
-              주간 박스오피스 데이터 확인해보세요.
+              주간 박스오피스 데이터를 확인해보세요.
             </p>
           </div>
         </header>
@@ -111,7 +114,7 @@ export default function BoxOfficePage() {
         <section className="px-6 mb-12">
           <div className="max-w-7xl mx-auto">
             <div className="flex items-center justify-between mb-8">
-              <h2 className="text-3xl text-white">TOP 10 랭킹</h2>
+              <h2 className="text-3xl text-white">TOP 5 랭킹</h2>
 
               <div className="flex gap-2">
                 <button
@@ -152,26 +155,10 @@ export default function BoxOfficePage() {
               ) : (
                 <ResponsiveContainer width="100%" height={500}>
                   <>
-                    {/* 차트 outline 제거 */}
                     <style>
                       {`
                         .recharts-surface,
                         .recharts-surface * {
-                          outline: none !important;
-                          stroke: none !important;
-                        }
-                        .recharts-bar-rectangle,
-                        .recharts-rectangle {
-                          outline: none !important;
-                          stroke: none !important;
-                        }
-                        .recharts-bar-rectangle:focus,
-                        .recharts-rectangle:focus {
-                          outline: none !important;
-                          stroke: none !important;
-                        }
-                        svg:focus,
-                        svg *:focus {
                           outline: none !important;
                           stroke: none !important;
                         }
@@ -201,7 +188,7 @@ export default function BoxOfficePage() {
                       />
 
                       <Tooltip
-                        position={{y: 299 }}
+                        position={{ y: 299 }}
                         offset={20}
                         contentStyle={{
                           backgroundColor: "rgba(0, 0, 0, 0.8)",
@@ -210,14 +197,15 @@ export default function BoxOfficePage() {
                           color: "#FFFFFF",
                           backdropFilter: "blur(4px)",
                         }}
-                        itemStyle={{ color: "#FFFFFF" }}      
-                        labelStyle={{ color: "#FDE047" }}       
+                        itemStyle={{ color: "#FFFFFF" }}
+                        labelStyle={{ color: "#FDE047" }}
                         formatter={(value: any) =>
                           sortBy === "boxOffice"
                             ? [`$${(value / 1000000).toFixed(2)}M`, "흥행 수익"]
                             : [(value / 10000000).toFixed(1), "평점"]
                         }
                       />
+
                       <Bar dataKey="value" radius={[8, 8, 0, 0]} stroke="none">
                         {chartData.map((_, index) => (
                           <Cell key={index} fill="#2BEDF0" opacity={0.9} stroke="none" />
@@ -237,46 +225,51 @@ export default function BoxOfficePage() {
             <h2 className="text-3xl mb-8 text-yellow-300">전체 목록</h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-              {topMovies.map((movie, index) => (
-                <motion.div
-                  key={movie.movieCd}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.45, delay: index * 0.05 }}
-                  className="related-card group cursor-pointer"
-                  onClick={() => navigate(`/detail/${movie.movieCd}`)}
-                >
-                  {/* 포스터 */}
-                  <div className="related-poster">
-                    <ImageWithFallback
-                      src={movie.posterUrl || movie.poster}
-                      alt={movie.movieNm}
-                      className="related-img"
-                    />
-                    <div className="related-hover"></div>
-                    <div className="related-go">상세페이지 →</div>
-                  </div>
+              {topMovies.slice(0, 5).map((movie, index) => {
+                const canNavigate = movie.tmdbId && movie.rating;
 
-                  <h3 className="related-name">{movie.movieNm}</h3>
+                return (
+                  <motion.div
+                    key={movie.movieCd}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.45, delay: index * 0.05 }}
+                    onClick={() => {
+                      if (canNavigate) navigate(`/detail/${movie.tmdbId}`);
+                    }}
+                    className={`related-card group ${
+                      canNavigate ? "cursor-pointer" : "cursor-default opacity-50"
+                    }`}
+                  >
+                    <div className="related-poster relative">
+                      <ImageWithFallback
+                        src={movie.posterUrl || movie.poster}
+                        alt={movie.movieNm}
+                        className="related-img"
+                      />
 
-                  <div className="related-info">
-                    <div className="related-rating">
-                      <Star className="star-icon" />
-                      <span>{movie.rating ? movie.rating.toFixed(1) : "N/A"}</span>
+                      {canNavigate && <div className="related-hover"></div>}
+                      {canNavigate && <div className="related-go">상세페이지 →</div>}
                     </div>
-
-                    <span className="related-separator">·</span>
-
-                    <span className="related-year">
-                      {movie.openDt?.slice(0, 4) ?? "?"}
-                    </span>
-                  </div>
-                </motion.div>
-              ))}
+                    <h3 className="related-name">{movie.movieNm}</h3>
+                    <div className="related-info">
+                      <div className="related-rating">
+                        <Star className="star-icon" />
+                        <span>
+                          {movie.rating ? movie.rating.toFixed(1) : "N/A"}
+                        </span>
+                      </div>
+                      <span className="related-separator">·</span>
+                      <span className="related-year">
+                        {movie.openDt?.slice(0, 4) ?? "?"}
+                      </span>
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </section>
-
       </div>
     </div>
   );
