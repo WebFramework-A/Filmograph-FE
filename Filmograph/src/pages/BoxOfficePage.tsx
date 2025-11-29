@@ -95,9 +95,9 @@ export default function BoxOfficePage() {
   }));
 
   return (
-    <div className="min-h-screen bg-[#073d3d] text-white p-8 pt-20">
+    <div className="min-h-screen bg-[#0b4747] text-white p-8 pt-20">
       <div className="max-w-6xl mx-auto">
-        
+
         {/* Header */}
         <header className="mb-10 md:mb-14">
           <div className="flex justify-between items-end border-b border-white/20 pb-4 mb-8">
@@ -119,11 +119,10 @@ export default function BoxOfficePage() {
               <div className="flex gap-2">
                 <button
                   onClick={() => setSortBy("boxOffice")}
-                  className={`px-6 py-2 rounded transition-all ${
-                    sortBy === "boxOffice"
-                      ? "bg-yellow-300 text-[#064c4d]"
-                      : "bg-white/10 text-white hover:bg-white/20"
-                  }`}
+                  className={`px-6 py-2 rounded transition-all ${sortBy === "boxOffice"
+                    ? "bg-yellow-300 text-[#064c4d]"
+                    : "bg-white/10 text-white hover:bg-white/20"
+                    }`}
                 >
                   <DollarSign className="w-4 h-4 inline mr-2" />
                   흥행 수익
@@ -131,11 +130,10 @@ export default function BoxOfficePage() {
 
                 <button
                   onClick={() => setSortBy("rating")}
-                  className={`px-6 py-2 rounded transition-all ${
-                    sortBy === "rating"
-                      ? "bg-yellow-300 text-[#064c4d]"
-                      : "bg-white/10 text-white hover:bg-white/20"
-                  }`}
+                  className={`px-6 py-2 rounded transition-all ${sortBy === "rating"
+                    ? "bg-yellow-300 text-[#064c4d]"
+                    : "bg-white/10 text-white hover:bg-white/20"
+                    }`}
                 >
                   <Star className="w-4 h-4 inline mr-2" />
                   평점
@@ -237,9 +235,8 @@ export default function BoxOfficePage() {
                     onClick={() => {
                       if (canNavigate) navigate(`/detail/${movie.movieCd}`);
                     }}
-                    className={`related-card group ${
-                      canNavigate ? "cursor-pointer" : "cursor-default opacity-50"
-                    }`}
+                    className={`related-card group ${canNavigate ? "cursor-pointer" : "cursor-default opacity-50"
+                      }`}
                   >
                     <div className="related-poster relative">
                       <ImageWithFallback

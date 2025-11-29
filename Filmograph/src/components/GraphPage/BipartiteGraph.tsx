@@ -292,11 +292,11 @@ export default function BipartiteGraph({
     }, [resetViewFlag]);
 
     return (
-        <div ref={containerRef} className="w-full h-full relative flex flex-col items-center justify-center bg-[#0d5a5a]">
+        <div ref={containerRef} className="w-full h-full relative flex flex-col items-center justify-center bg-[#0b4747]">
 
             {/* 로딩 오버레이 */}
             {(!data || !isGraphReady) && (
-                <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#0d5a5a] z-50">
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#0b4747] z-50">
                     <div className="text-white text-xl font-semibold animate-pulse">
                         그래프 불러오는 중...
                     </div>
