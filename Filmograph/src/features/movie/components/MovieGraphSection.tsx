@@ -1,4 +1,3 @@
-// src/features/movie/components/MovieGraphSection.tsx
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { motion } from "framer-motion";
 import { Network, ZoomIn, ZoomOut } from "lucide-react";
@@ -11,9 +10,6 @@ type NodeT = {
   type: "movie" | "actor" | "director";
   x: number;
   y: number;
-  vx: number;
-  vy: number;
-
   rating?: number;
   releaseYear?: string;
   character?: string;
@@ -23,6 +19,14 @@ type LinkT = { source: string; target: string };
 
 const CANVAS_WIDTH = 1200;
 const CANVAS_HEIGHT = 600;
+
+const R_CENTER = 0;        
+const R_PEOPLE = 160;      
+const R_RELATED = 250;     
+
+// 소숫점 반올림
+const round1 = (v?: number | null) =>
+  typeof v === "number" ? Math.round(v * 10) / 10 : undefined;
 
 export default function MovieGraphSection({
   movie,
@@ -44,7 +48,6 @@ export default function MovieGraphSection({
 
   const navigate = useNavigate();
 
-  /** 마우스 기준 좌표 변환 */
   const getMousePos = (e: MouseEvent<HTMLCanvasElement>, canvas: HTMLCanvasElement) => {
     const rect = canvas.getBoundingClientRect();
     const scaleX = canvas.width / rect.width;
@@ -59,7 +62,6 @@ export default function MovieGraphSection({
     };
   };
 
-  /** 줌 기능 */
   const applyZoom = (factor: number) => {
     setZoom((prevZoom) => {
       const newZoom = Math.min(Math.max(prevZoom * factor, 0.5), 3);
@@ -87,73 +89,57 @@ export default function MovieGraphSection({
     const nodeMap = new Map<string, NodeT>();
     const linkList: LinkT[] = [];
 
+    // 중심 영화
     nodeMap.set(movie.id, {
       id: movie.id,
       name: movie.title,
       type: "movie",
       x: centerX,
       y: centerY,
-      vx: 0,
-      vy: 0,
-      rating: movie.rating,
+      rating: round1(movie.rating),         
       releaseYear: movie.releaseDate?.slice(0, 4),
     });
 
+    // 배우/감독 레이어
     const cast = (movie.cast ?? []).slice(0, 12);
     const directors = (movie.directors ?? []).slice(0, 6);
-
     const centerPeople: Person[] = [...cast, ...directors];
-    const centerPersonNames = new Set(centerPeople.map((p) => p.name));
 
-    centerPeople.forEach((p) => {
+    centerPeople.forEach((p, idx) => {
       const pid = p.id ?? p.name;
+      const angle = (Math.PI * 2 * idx) / centerPeople.length;
 
       nodeMap.set(pid, {
         id: pid,
         name: p.name,
         type: directors.includes(p) ? "director" : "actor",
         character: p.character,
-        x: centerX + (Math.random() - 0.5) * 200,
-        y: centerY + (Math.random() - 0.5) * 200,
-        vx: 0,
-        vy: 0,
+        x: centerX + Math.cos(angle) * R_PEOPLE,
+        y: centerY + Math.sin(angle) * R_PEOPLE,
       });
 
       linkList.push({ source: movie.id, target: pid });
     });
 
-    relatedMovies.slice(0, 8).forEach((r) => {
+    // 관련 영화 레이어
+    relatedMovies.slice(0, 8).forEach((r, idx) => {
+      const angle = (Math.PI * 2 * idx) / 8;
+
       nodeMap.set(r.id, {
         id: r.id,
         name: r.title,
         type: "movie",
-        x: centerX + (Math.random() - 0.5) * 350,
-        y: centerY + (Math.random() - 0.5) * 350,
-        vx: 0,
-        vy: 0,
-        rating: r.rating,
+        x: centerX + Math.cos(angle) * R_RELATED,
+        y: centerY + Math.sin(angle) * R_RELATED,
+        rating: round1(r.rating),     
         releaseYear: r.releaseDate?.slice(0, 4),
       });
 
       const people = [...(r.cast ?? []), ...(r.directors ?? [])];
 
       people.forEach((p) => {
-        if (!centerPersonNames.has(p.name)) return;
-
         const pid = p.id ?? p.name;
-
-        // 노드 없으면 추가
-        if (!nodeMap.has(pid)) {
-          nodeMap.set(pid, {
-            id: pid,
-            name: p.name,
-            type: p.role === "감독" ? "director" : "actor",
-            x: centerX + (Math.random() - 0.5) * 220,
-            y: centerY + (Math.random() - 0.5) * 220,
-            vx: 0,
-            vy: 0,
-          });
-        }
+        if (!nodeMap.has(pid)) return;
 
         linkList.push({ source: r.id, target: pid });
       });
@@ -162,67 +148,6 @@ export default function MovieGraphSection({
     setNodes(Array.from(nodeMap.values()));
     setLinks(linkList);
   }, [movie, relatedMovies]);
-
-  useEffect(() => {
-    if (nodes.length === 0) return;
-
-    const interval = setInterval(() => {
-      setNodes((prev) => {
-        const updated = prev.map((n) => ({ ...n }));
-
-        for (let i = 0; i < updated.length; i++) {
-          let fx = 0;
-          let fy = 0;
-
-          // repel
-          for (let j = 0; j < updated.length; j++) {
-            if (i === j) continue;
-
-            const dx = updated[i].x - updated[j].x;
-            const dy = updated[i].y - updated[j].y;
-            const dist = Math.hypot(dx, dy) || 1;
-
-            if (dist < 130) {
-              const repulsion = 2600 / (dist * dist);
-              fx += (dx / dist) * repulsion;
-              fy += (dy / dist) * repulsion;
-            }
-          }
-
-          // attract
-          links.forEach((l) => {
-            const a = updated.find((n) => n.id === l.source);
-            const b = updated.find((n) => n.id === l.target);
-            if (!a || !b) return;
-
-            if (updated[i].id === a.id || updated[i].id === b.id) {
-              const other = updated[i].id === a.id ? b : a;
-              const dx = other.x - updated[i].x;
-              const dy = other.y - updated[i].y;
-              const dist = Math.hypot(dx, dy) || 1;
-
-              const attraction = (dist - 120) * 0.03;
-              fx += (dx / dist) * attraction;
-              fy += (dy / dist) * attraction;
-            }
-          });
-
-          // center gravity
-          fx += (CANVAS_WIDTH / 2 - updated[i].x) * 0.004;
-          fy += (CANVAS_HEIGHT / 2 - updated[i].y) * 0.004;
-
-          updated[i].vx = (updated[i].vx + fx) * 0.9;
-          updated[i].vy = (updated[i].vy + fy) * 0.9;
-          updated[i].x += updated[i].vx;
-          updated[i].y += updated[i].vy;
-        }
-
-        return updated;
-      });
-    }, 30);
-
-    return () => clearInterval(interval);
-  }, [nodes.length, links]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -236,7 +161,7 @@ export default function MovieGraphSection({
     ctx.translate(offset.x, offset.y);
     ctx.scale(zoom, zoom);
 
-    // Links
+    // LINKS
     links.forEach((l) => {
       const s = nodes.find((n) => n.id === l.source);
       const t = nodes.find((n) => n.id === l.target);
@@ -250,7 +175,7 @@ export default function MovieGraphSection({
       ctx.stroke();
     });
 
-    // Nodes
+    // NODES
     nodes.forEach((n) => {
       const isHovered = hoveredNode?.id === n.id;
       const isSelected = selectedNode?.id === n.id;
@@ -264,7 +189,6 @@ export default function MovieGraphSection({
 
       const radius = isHovered || isSelected ? 14 : 10;
 
-      // glow
       if (isHovered || isSelected) {
         ctx.fillStyle = color + "33";
         ctx.beginPath();
@@ -272,13 +196,11 @@ export default function MovieGraphSection({
         ctx.fill();
       }
 
-      // main circle
       ctx.fillStyle = color;
       ctx.beginPath();
       ctx.arc(n.x, n.y, radius, 0, Math.PI * 2);
       ctx.fill();
 
-      // label
       ctx.fillStyle = "#FFFFFF";
       ctx.font = "13px sans-serif";
       ctx.textAlign = "center";
@@ -328,7 +250,8 @@ export default function MovieGraphSection({
   return (
     <section className="transform scale-90 overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        {/* Header UI — 그대로 */}
+
+        {/* Header */}
         <div className="mb-8">
           <motion.div
             className="inline-flex items-center gap-3 bg-[#FFE66D]/10 border border-[#FFE66D]/30 rounded-full px-6 py-2 mb-4"
@@ -359,7 +282,7 @@ export default function MovieGraphSection({
           </motion.p>
         </div>
 
-        {/* 그래프 박스 UI 그대로 */}
+        {/* Graph Box */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -367,36 +290,30 @@ export default function MovieGraphSection({
           transition={{ duration: 0.6 }}
           className="bg-[#004D4F]/50 backdrop-blur-sm border border-white/10 rounded-xl p-4 relative overflow-hidden"
         >
-          {/* Zoom buttons */}
+          {/* Zoom */}
           <div className="absolute top-4 right-4 flex gap-2 z-20">
             <button
               onClick={handleZoomOut}
-              className="w-9 h-9 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center text-white text-sm"
+              className="w-9 h-9 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center text-white"
             >
               <ZoomOut className="w-4 h-4" />
             </button>
             <button
               onClick={handleZoomIn}
-              className="w-9 h-9 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center text-white text-sm"
+              className="w-9 h-9 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center text-white"
             >
               <ZoomIn className="w-4 h-4" />
             </button>
           </div>
 
-          {/* Node info panel — UI 그대로 */}
+          {/* Info */}
           {selectedNode && (
             <div
               className="
                 absolute bottom-4 right-4
-                w-96 
-                bg-[#00393B]/80
-                backdrop-blur-lg
-                border border-white/10
-                shadow-xl
-                rounded-xl 
-                p-6
-                text-white
-                z-30
+                w-96 bg-[#00393B]/80 backdrop-blur-lg
+                border border-white/10 shadow-xl
+                rounded-xl p-6 text-white z-30
               "
             >
               <h3 className="text-2xl text-[#FFFF00] mb-3 font-bold">
@@ -428,10 +345,10 @@ export default function MovieGraphSection({
                       navigate(`/detail/${selectedNode.id}`);
                       window.location.reload();
                     }}
-                    className="w-full py-2 bg-[#FFE66D] hover:bg-[#FFF176] 
+                    className="w-full py-2 bg-[#FFE66D] hover:bg-[#FFF176]
                               text-black rounded-lg font-medium mt-1"
                   >
-                    ➜ 상세페이지로 이동
+                    상세페이지 →
                   </button>
                 </>
               )}
