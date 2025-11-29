@@ -4,7 +4,6 @@ import { db } from "../../services/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import useGraphSearch from "../../hooks/useGraphSearch";
-
 import type { Node as CommonNode, Link as CommonLink } from "../../types/data";
 
 type NodeT = CommonNode & {
@@ -99,6 +98,7 @@ export default function BipartiteGraph({
         height: window.innerHeight * 0.8,
     });
 
+    // 크기 조절 로직
     useEffect(() => {
         const updateDimensions = () => {
             // 상단 헤더 + 검색바의 대략적인 높이 (스크린샷 기준 약 250px ~ 300px 예상)
@@ -121,7 +121,7 @@ export default function BipartiteGraph({
         return () => window.removeEventListener("resize", updateDimensions);
     }, []);
 
-    // 데이터 로딩
+    // 데이터 로딩 로직
     useEffect(() => {
         async function fetchBipartiteData() {
             try {
@@ -195,6 +195,7 @@ export default function BipartiteGraph({
         fetchBipartiteData();
     }, []);
 
+    //노드 크기 적용
     const { minVal, maxVal } = useMemo(() => {
         if (!data) return { minVal: 1, maxVal: 1 };
         const vals = data.nodes.map((n) => n.val ?? 1);
@@ -206,6 +207,7 @@ export default function BipartiteGraph({
 
     const graphData = useMemo(() => data ?? { nodes: [], links: [] }, [data]);
 
+    //검색 로직
     useGraphSearch({
         searchTerm: searchTerm ?? "",
         graphData,
@@ -297,39 +299,61 @@ export default function BipartiteGraph({
         fgRef.current.zoom(0.06, 0);
     }, [resetViewFlag]);
 
-    if (!data) {
-        return (
-            <div
-                className="w-full flex items-center justify-center"
-                style={{ height: "550px" }}
-            >
-                <div className="text-white text-xl font-semibold">
-                    그래프 불러오는 중 · · ·
+    //그래프 렌더링 상태 관리 (로딩 화면용)
+    const [isGraphReady, setIsGraphReady] = useState(false);
+    /*
+        // 그래프 대기 메세지 출력
+        if (!data || !isGraphReady) {
+            return (
+                <div
+                    className="w-full flex items-center justify-center"
+                    style={{ height: "550px" }}
+                >
+                    <div className="text-white text-xl font-semibold">
+                        그래프 불러오는 중 · · ·
+                    </div>
                 </div>
-            </div>
-        );
-    }
-
+            );
+        }
+    */
+    //====================================================================
+    //return
+    //====================================================================
     return (
         <div
             ref={containerRef}
             className="w-full h-full flex flex-col items-center"
         >
+
+            {/* 그래프 대기 메세지 출력*/}
+            {(!data || !isGraphReady) && (
+                <div
+                    className="w-full flex items-center justify-center"
+                    style={{ height: "550px" }}
+                >
+                    <div className="text-white text-xl font-semibold">
+                        그래프 불러오는 중 · · ·
+                    </div>
+                </div>
+            )}
+
             <ForceGraph2D
                 ref={fgRef}
                 /* 
-                        width={GRAPH_WIDTH}
-                        height={GRAPH_HEIGHT}
-                        */
+                width={GRAPH_WIDTH}
+                height={GRAPH_HEIGHT}
+                */
                 width={dimensions.width}
                 height={dimensions.height}
                 backgroundColor="transparent"
                 graphData={graphData}
                 nodeId="id"
                 nodeLabel="name"
-                enableNodeDrag={true}
-                warmupTicks={100}
-                cooldownTicks={200}
+                enableNodeDrag={false}  //그래프 노드 드래그 인터렉션
+                warmupTicks={0}
+                cooldownTicks={100}
+                onEngineStop={() => setIsGraphReady(true)} // 계산 끝나면 로딩 화면 제거
+
                 // 링크 설정
                 linkColor={(link: any) => {
                     if (highlightNodes.size > 0) {
@@ -352,7 +376,8 @@ export default function BipartiteGraph({
                         if (node.type === "movie") {
                             navigate(`/detail/${node.id}`);
                         }
-                    } else {
+                    }
+                    else {
                         setSelectedNode(node);
                         // 클릭한 노드와 연결된 이웃 노드들의 ID 찾기
                         const relatedNodeIds = new Set([node.id]);
@@ -384,9 +409,9 @@ export default function BipartiteGraph({
                     setSelectedNode(null);
                     setHoverNode(null);
                     /* 전체 그래프 보기 버튼 따로 만들었으니 삭제
-                              fgRef.current.centerAt(0, 150, 0)
-                              fgRef.current.zoom(0.06, 0)
-                              */
+                    fgRef.current.centerAt(0, 150, 0)
+                    fgRef.current.zoom(0.06, 0)
+                    */
                 }}
                 nodeCanvasObject={(rawNode, ctx, globalScale) => {
                     const node = rawNode as NodeT;
