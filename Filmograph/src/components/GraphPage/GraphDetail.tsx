@@ -26,7 +26,7 @@ const GraphDetail = () => {
 
   // 검색 실행
   const handleSearch = () => {
-    setSearchTerm(""); 
+    setSearchTerm("");
     setTimeout(() => setSearchTerm(inputValue), 10);
   };
 
@@ -59,7 +59,7 @@ const GraphDetail = () => {
             </h1>
 
             <p className="text-sm text-white/70">
-              {graphType === "movie" && "영화-영화인 네트워크 설명 써두기"}
+              {graphType === "movie" && "여러 영화와 영화인들 사이의 유기적인 관계를 한눈에 파악해보세요."}
               {graphType === "ego" && "한 인물을 중심으로 형성된 에고 네트워크를 시각적으로 확인해보세요."}
               {graphType === "collaboration" && "노드를 탐색하며, 같은 색으로 표시된 커뮤니티 그룹과 영화인들의 협업 관계를 확인해보세요."}
             </p>
@@ -76,8 +76,8 @@ const GraphDetail = () => {
                   graphType === "movie"
                     ? "영화 제목이나 영화인을 검색해보세요."
                     : graphType === "ego"
-                    ? "에고 네트워크에서 영화인을 검색해보세요."
-                    : "협업 네트워크에서 영화인을 검색해보세요."
+                      ? "에고 네트워크에서 영화인을 검색해보세요."
+                      : "협업 네트워크에서 영화인을 검색해보세요."
                 }
               />
             </div>
