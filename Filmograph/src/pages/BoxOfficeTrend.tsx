@@ -9,7 +9,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { Calendar, RefreshCw, TrendingUp, AlertCircle } from "lucide-react";
+import { Calendar, RefreshCw, AlertCircle } from "lucide-react";
 import type { ChartDataPoint, DailyData } from "../types/boxOfficeTrend";
 import { getPastDate } from "../utils/getPastDate";
 
@@ -51,8 +51,9 @@ export default function BoxOfficeTrend() {
       for (let i = 7; i >= 1; i--) {
         const dateObj = getPastDate(i);
         dateMap.push(dateObj);
-        const url = `${KOBIS_BASE_URL}?key=${import.meta.env.VITE_KOBIS_API_KEY
-          }&targetDt=${dateObj.apiFmt}`;
+        const url = `${KOBIS_BASE_URL}?key=${
+          import.meta.env.VITE_KOBIS_API_KEY
+        }&targetDt=${dateObj.apiFmt}`;
         requests.push(fetch(url));
       }
 
@@ -137,7 +138,6 @@ export default function BoxOfficeTrend() {
         <header>
           <div className="flex justify-between items-end border-b border-white/20 pb-4 mb-8">
             <h1 className="text-4xl font-bold text-yellow-200 flex items-center gap-3">
-              <TrendingUp className="text-yellow-200" size={36} />
               Weekly Box Office Flow
             </h1>
 
@@ -250,8 +250,8 @@ export default function BoxOfficeTrend() {
             <p className="text-2xl font-bold text-yellow-300 truncate">
               {data.length > 0
                 ? Object.keys(data[data.length - 1]).find(
-                  (key) => data[data.length - 1][key] === 1
-                ) || "-"
+                    (key) => data[data.length - 1][key] === 1
+                  ) || "-"
                 : "-"}
             </p>
           </div>
