@@ -42,7 +42,7 @@ export default function DetailPage() {
     );
 
   return (
-    <div className="min-h-screen bg-[#0d5a5a] pt-20">
+    <div className="min-h-screen bg-[#0b4747] pt-20">
       <MovieHeader movie={movie} />
 
       <ScrollSection>

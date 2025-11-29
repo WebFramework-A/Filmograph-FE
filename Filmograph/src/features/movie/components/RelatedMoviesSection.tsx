@@ -5,7 +5,9 @@ import { ImageWithFallback } from "./ImageWithFallback";
 import { useState, useEffect } from "react";
 import type { MovieDetail } from "../../../types/movie";
 
-// 빈 칸 채우기 함수
+const round1 = (v?: number | null) =>
+  typeof v === "number" ? Math.round(v * 10) / 10 : undefined;
+
 function getStablePage<T>(arr: T[], page: number, size: number): (T | null)[] {
   const slice = arr.slice(page * size, (page + 1) * size);
   const diff = size - slice.length;
@@ -22,7 +24,7 @@ export default function RelatedMoviesSection({
   const [cols, setCols] = useState<number>(5);
   const [pageSize, setPageSize] = useState<number>(5);
   const [page, setPage] = useState<number>(0);
-  
+
   useEffect(() => {
     const calc = () => {
       const w = window.innerWidth;
@@ -60,23 +62,24 @@ export default function RelatedMoviesSection({
   return (
     <section className="related-wrapper overflow-hidden">
       <div className="related-container">
-          <div className="related-header">
-            <h2 className="related-title">관련 영화</h2>
+        <div className="related-header">
+          <h2 className="related-title">관련 영화</h2>
 
-            {movies.length > pageSize && (
-              <div className="related-pagination">
-                <button disabled={page === 0} onClick={() => setPage((p) => p - 1)}>
-                  {"<"}
-                </button>
-                <button
-                  disabled={page === maxPage}
-                  onClick={() => setPage((p) => p + 1)}
-                >
-                  {">"}
-                </button>
-              </div>
-            )}
-          </div>
+          {movies.length > pageSize && (
+            <div className="related-pagination">
+              <button disabled={page === 0} onClick={() => setPage((p) => p - 1)}>
+                {"<"}
+              </button>
+              <button
+                disabled={page === maxPage}
+                onClick={() => setPage((p) => p + 1)}
+              >
+                {">"}
+              </button>
+            </div>
+          )}
+        </div>
+
         <div
           key={page}
           className="related-grid"
@@ -93,7 +96,9 @@ export default function RelatedMoviesSection({
                     alt={m.title}
                     className="related-img"
                   />
+
                   <div className="related-hover" />
+                  <div className="related-go">상세페이지 →</div>
                 </div>
 
                 <h3 className="related-name">{m.title}</h3>
@@ -101,7 +106,7 @@ export default function RelatedMoviesSection({
                 <div className="related-info">
                   <div className="related-rating">
                     <Star className="star-icon" />
-                    <span>{m.rating ?? "N/A"}</span>
+                    <span>{round1(m.rating) ?? "N/A"}</span>
                   </div>
                   <span className="related-separator">·</span>
                   <span className="related-year">

@@ -68,6 +68,10 @@ const Navbar = () => {
           Archetype
         </NavLink>
 
+        <NavLink to="/BoxOffice" className={navLinkClasses}>
+          BoxOffice
+        </NavLink>
+
         {loading ? (
           <div className="w-8 h-8 rounded-full bg-gray-700 animate-pulse" />
         ) : user ? (

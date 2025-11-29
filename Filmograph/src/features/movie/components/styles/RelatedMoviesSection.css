@@ -153,6 +153,26 @@
   font-weight: bold;
 }
 
+  .related-go {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  background: rgba(255, 230, 109, 0.9);
+  color: black;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: bold;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+}
+
+.related-card:hover .related-go {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 @keyframes fadeUp {
   to {
@@ -160,3 +180,4 @@
     transform: translateY(0);
   }
 }
+
