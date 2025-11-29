@@ -250,7 +250,7 @@ export default function EgoGraph({
     fgRef.current.d3Force("charge")?.strength(-150);
 
     const timer = setTimeout(() => {
-      fgRef.current?.zoomToFit(600, 80);
+      fgRef.current?.zoomToFit(600, 150);
     }, 400);
 
     return () => clearTimeout(timer);
