@@ -30,7 +30,7 @@ const ArchetypePage = () => {
     <div className="min-h-screen bg-[#0b4747] text-white p-8 pt-20">
       <div className="max-w-6xl mx-auto">
         {/* 잡지 헤더 */}
-        <header className="mb-10 md:mb-14">
+        <header className="mb-2 md:mb-3">
           <div className="flex justify-between items-end border-b border-white/20 pb-4 mb-8">
             <h1 className="text-4xl font-bold text-yellow-200">
               Character Archetype
@@ -44,7 +44,7 @@ const ArchetypePage = () => {
 
         {/* 아키타입 선택 화면 */}
         {!selectedArchetype && (
-          <section>
+          <section className="mb-10">
             <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
               <div>
                 <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-emerald-50/70">
@@ -100,7 +100,7 @@ const ArchetypePage = () => {
 
         {/* 아키타입 상세 화면 */}
         {selectedArchetype && selectedRule && (
-          <section className="mt-4">
+          <section className="mt-4 mb-10">
             <div className="rounded-4xl bg-slate-50 text-slate-900 px-6 py-8 shadow-[0_26px_70px_rgba(0,0,0,0.6)] md:px-10 md:py-10">
               <div className="mb-10 flex flex-col gap-8 border-b border-slate-200 pb-8 md:flex-row md:items-start md:justify-between">
                 <div className="max-w-2xl">
@@ -189,7 +189,7 @@ const ArchetypePage = () => {
                     {/* 위에 덮는 그라데이션 */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/25 to-transparent" /></div>
 
-                    <div className="flex flex-1 flex-col gap-1 px-4 py-4">
+                    <div className="flex flex-1 flex-col gap-1 px-2 py-1">
                     <p className="text-[13px] font-semibold text-slate-800">
                       {ch.name}
                     </p>

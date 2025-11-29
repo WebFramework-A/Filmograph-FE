@@ -33,7 +33,6 @@ type CollabNetworkGraphProps = {
   onNoResult: () => void;
 };
 
-
 // 색상 정의
 const COLORS = [
   "#5B8FF9",
@@ -45,16 +44,12 @@ const COLORS = [
   "#EB2F96",
 ];
 
-const GRAPH_WIDTH = 2000;
-const GRAPH_HEIGHT = 518;
-
-
 // 카메라 위치
 const INITIAL_CENTER_X = 0;
 const INITIAL_CENTER_Y = 0; 
 const INITIAL_ZOOM = 0.94;
 
-// 함수
+// 링크 관계 계산
 const getLinkRelation = (
   link: LinkT,
   selectedNode: NodeT | null,
@@ -93,7 +88,7 @@ const getLinkRelation = (
   };
 };
 
-// 라벨 그리기
+// 라벨 그리기 (원본 그대로)
 const drawLabel = (
   ctx: CanvasRenderingContext2D,
   text: string,
@@ -115,14 +110,37 @@ export default function CollabNetworkGraph({
   const [data, setData] = useState<GraphT | null>(null);
   const [selectedNode, setSelectedNode] = useState<NodeT | null>(null);
   const focusNode = (node: NodeT | null) => {
-  setSelectedNode(node);
-};
+    setSelectedNode(node);
+  };
 
   const fgRef = useRef<ForceGraphMethods<NodeT, LinkT> | null>(null);
 
+  // 화면 크기 기반으로 크기 조절
+  const [dimensions, setDimensions] = useState({
+  width: window.innerWidth * 0.9,
+  height: Math.max(window.innerHeight * 0.7, 400),
+  });
 
 
-  // JSON 로드
+  useEffect(() => {
+    const updateSize = () => {
+      // 상단 타이틀/검색바 정도 여백
+      const TOP_OFFSET = 250;
+      const availableHeight = window.innerHeight - TOP_OFFSET;
+
+      setDimensions({
+      width: window.innerWidth * 0.9,
+      height: Math.max(availableHeight * 0.97, 400),
+      });
+    };
+
+    window.addEventListener("resize", updateSize);
+    updateSize();
+
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
+  // JSON 로드 (원본 그대로)
   useEffect(() => {
     fetch("/graph/network_data.json")
       .then((res) => res.json())
@@ -169,7 +187,7 @@ export default function CollabNetworkGraph({
     [data]
   );
 
-  // Force 설정
+  // Force 설정 (원본 그대로)
   useEffect(() => {
     if (!fgRef.current || !graphData.nodes.length) return;
 
@@ -215,58 +233,54 @@ export default function CollabNetworkGraph({
     fg.d3ReheatSimulation();
   }, [graphData]);
 
- useEffect(() => {
-  if (!selectedNode || !fgRef.current || !data) return;
+  // 선택 노드 zoom (원본 그대로)
+  useEffect(() => {
+    if (!selectedNode || !fgRef.current || !data) return;
 
-  const allNodes = data.nodes;
+    const allNodes = data.nodes;
 
-  const nodesToFit = allNodes.filter((n) => {
-    const isTarget = n.id === selectedNode.id;
-    const isNeighbor = selectedNode.neighbors?.has(n.id);
-    const sameCommunity = n.community === selectedNode.community;
-    return isTarget || (isNeighbor && sameCommunity);
+    const nodesToFit = allNodes.filter((n) => {
+      const isTarget = n.id === selectedNode.id;
+      const isNeighbor = selectedNode.neighbors?.has(n.id);
+      const sameCommunity = n.community === selectedNode.community;
+      return isTarget || (isNeighbor && sameCommunity);
+    });
+
+    if (!nodesToFit.length) return;
+
+    fgRef.current.zoomToFit(
+      600,
+      90,
+      (n: any) => nodesToFit.includes(n)
+    );
+  }, [selectedNode, data]);
+
+  // 검색 기능 (원본 그대로)
+  useGraphSearch({
+    searchTerm,
+    graphData,
+    searchKey: "label",
+    onMatch: (target) => {
+      setSelectedNode(target as NodeT);
+
+      if (!fgRef.current || !data) return;
+
+      const neighbors = target.neighbors ?? new Set();
+
+      const nodesToFit = data.nodes.filter((n) =>
+        n.id === target.id || neighbors.has(n.id)
+      );
+
+      fgRef.current.zoomToFit(
+        600,
+        80,
+        (n: any) => nodesToFit.includes(n)
+      );
+    },
+    onNoResult,
   });
 
-  if (!nodesToFit.length) return;
-
-  // zoomToFit 실행
-  fgRef.current.zoomToFit(
-    600,   // 애니메이션 시간
-    90,    // padding (화면 여백)
-    (n: any) => nodesToFit.includes(n)
-  );
-
-  
-}, [selectedNode, data]);
-
-
-useGraphSearch({
-  searchTerm,
-  graphData,
-  searchKey: "label",
-  onMatch: (target) => {
-  setSelectedNode(target as NodeT);
-
-  if (!fgRef.current || !data) return;
-
-  const neighbors = target.neighbors ?? new Set();
-
-  const nodesToFit = data.nodes.filter((n) =>
-    n.id === target.id || neighbors.has(n.id)
-  );
-
-  fgRef.current.zoomToFit(
-    600,
-    80,
-    (n: any) => nodesToFit.includes(n)
-  );
-},
-
-  onNoResult,
-});
-
-
-  // 전체 그래프 보기
+  // 전체 그래프 보기 (원본 그대로)
   useEffect(() => {
     if (!fgRef.current) return;
 
@@ -277,12 +291,12 @@ useGraphSearch({
     fg.zoom(INITIAL_ZOOM, 600);
   }, [resetViewFlag]);
 
-  // 로딩 상태
+  // 로딩 상태 (height만 dimensions 사용)
   if (!data) {
     return (
       <div
         className="w-full flex items-center justify-center"
-        style={{ height: GRAPH_HEIGHT }}
+        style={{ height: dimensions.height }}
       >
         <div className="text-white text-xl font-semibold">
           그래프 불러오는 중 · · ·
@@ -300,19 +314,17 @@ useGraphSearch({
     return nodes.find((n) => n.id === endpoint);
   };
 
-  
-
-  // 렌더링
+  // 렌더링 (딱 여기 width/height만 dimensions로 변경)
   return (
     <div className="w-full h-full flex justify-center mt-0">
       <div
         className="relative"
-        style={{ width: GRAPH_WIDTH, height: GRAPH_HEIGHT }}
+        style={{ width: dimensions.width, height: dimensions.height }}
       >
         <ForceGraph2D<NodeT, LinkT>
           ref={fgRef}
-          width={GRAPH_WIDTH}
-          height={GRAPH_HEIGHT}
+          width={dimensions.width}
+          height={dimensions.height}
           graphData={graphData}
           backgroundColor="transparent"
           nodeId="id"
@@ -398,7 +410,7 @@ useGraphSearch({
             ctx.fill();
             ctx.globalAlpha = 1;
 
-            // 이름 표시
+            // 이름 표시 (원본 로직 그대로)
             if (selectedNode) {
               const showLabel = isMain || (isNeighbor && sameCommunity);
 
@@ -412,7 +424,6 @@ useGraphSearch({
             }
           }}
           onNodeClick={(node) => focusNode(node as NodeT)}
-
           enableNodeDrag
         />
       </div>

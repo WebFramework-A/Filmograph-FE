@@ -4,12 +4,7 @@ import { db } from "../../services/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import useGraphSearch from "../../hooks/useGraphSearch";
-
-
-import type {
-    Node as CommonNode,
-    Link as CommonLink,
-} from "../../types/data";
+import type { Node as CommonNode, Link as CommonLink } from "../../types/data";
 
 type NodeT = CommonNode & {
     role?: string;
@@ -27,7 +22,7 @@ type GraphT = {
 // Props 타입 정의
 type BipartiteGraphProps = {
     resetViewFlag: boolean;
-    searchTerm?: string;      // 🔥 추가
+    searchTerm?: string; // 🔥 추가
     onNoResult?: () => void;
 };
 
@@ -52,10 +47,14 @@ function normalizeWeight(w: number, minW: number, maxW: number): number {
 const getNodeBaseSize = (node: NodeT, minVal: number, maxVal: number) => {
     const norm = normalizeWeight(node.val ?? 1, minVal, maxVal);
     return 10 + norm * 10;
-}
+};
 
 // 캔버스 텍스트 줄바꿈 계산 함수
-function getWrappedLines(ctx: CanvasRenderingContext2D, text: string, maxWidth: number): string[] {
+function getWrappedLines(
+    ctx: CanvasRenderingContext2D,
+    text: string,
+    maxWidth: number
+): string[] {
     const words = text.split(" ");
     const lines: string[] = [];
     let currentLine = words[0];
@@ -74,7 +73,11 @@ function getWrappedLines(ctx: CanvasRenderingContext2D, text: string, maxWidth: 
     return lines;
 }
 
-export default function BipartiteGraph({ resetViewFlag, searchTerm, onNoResult }: BipartiteGraphProps) {
+export default function BipartiteGraph({
+    resetViewFlag,
+    searchTerm,
+    onNoResult,
+}: BipartiteGraphProps) {
     const [data, setData] = useState<GraphT | null>(null);
 
     // 하이라이팅을 위한 State
@@ -90,26 +93,35 @@ export default function BipartiteGraph({ resetViewFlag, searchTerm, onNoResult }
 
     //그래프 크기 관련 함수
     const containerRef = useRef<HTMLDivElement>(null);
-    const [dimensions, setDimensions] = useState({ width: 2000, height: 518 });
+    const [dimensions, setDimensions] = useState({
+        width: window.innerWidth * 0.8,
+        height: window.innerHeight * 0.8,
+    });
 
-    // 화면 크기가 바뀔 때마다 그래프 크기 재계산
+    // 크기 조절 로직
     useEffect(() => {
         const updateDimensions = () => {
-            if (containerRef.current) {
-                setDimensions({
-                    width: containerRef.current.offsetWidth, // 부모 div의 너비에 맞춤
-                    height: 518 // 높이는 고정하거나 window.innerHeight 등을 이용해 조절 가능
-                });
-            }
+            // 상단 헤더 + 검색바의 대략적인 높이 (스크린샷 기준 약 250px ~ 300px 예상)
+            // 이 값을 조절하여 시작 위치를 맞출 수 있습니다.
+            const TOP_OFFSET = 250;
+
+            // 전체 높이에서 상단 영역을 뺀 '남은 공간'을 계산
+            const availableHeight = window.innerHeight - TOP_OFFSET;
+
+            setDimensions({
+                width: window.innerWidth * 0.9,
+                // 남은 공간의 97%만 차지하도록 설정 (음수 방지해주려고 Math.max()씀, 하단에 마진 조금 주려고 97%로 함)
+                height: Math.max(availableHeight * 0.97, 400),
+            });
         };
 
-        window.addEventListener('resize', updateDimensions);
+        window.addEventListener("resize", updateDimensions);
         updateDimensions(); // 초기 실행
 
-        return () => window.removeEventListener('resize', updateDimensions);
+        return () => window.removeEventListener("resize", updateDimensions);
     }, []);
 
-    // 데이터 로딩
+    // 데이터 로딩 로직
     useEffect(() => {
         async function fetchBipartiteData() {
             try {
@@ -145,7 +157,7 @@ export default function BipartiteGraph({ resetViewFlag, searchTerm, onNoResult }
                             } else {
                                 const node = nodesMap.get(personId)!;
                                 node.val = (node.val || 1) + 0.5;
-                                if (node.role === 'director') node.role = 'actor/director';
+                                if (node.role === "director") node.role = "actor/director";
                             }
                             links.push({ source: movieId, target: personId });
                         });
@@ -162,11 +174,10 @@ export default function BipartiteGraph({ resetViewFlag, searchTerm, onNoResult }
                                     role: "director",
                                     val: 1,
                                 });
-                            }
-                            else {
+                            } else {
                                 const node = nodesMap.get(personId)!;
                                 node.val = (node.val || 1) + 0.5;
-                                if (node.role === 'actor') node.role = 'actor/director';
+                                if (node.role === "actor") node.role = "actor/director";
                             }
                             links.push({ source: movieId, target: personId });
                         });
@@ -175,16 +186,16 @@ export default function BipartiteGraph({ resetViewFlag, searchTerm, onNoResult }
 
                 setData({
                     nodes: Array.from(nodesMap.values()),
-                    links
+                    links,
                 });
-            }
-            catch (error) {
+            } catch (error) {
                 console.error("데이터 로딩 실패:", error);
             }
         }
         fetchBipartiteData();
     }, []);
 
+    //노드 크기 적용
     const { minVal, maxVal } = useMemo(() => {
         if (!data) return { minVal: 1, maxVal: 1 };
         const vals = data.nodes.map((n) => n.val ?? 1);
@@ -196,6 +207,7 @@ export default function BipartiteGraph({ resetViewFlag, searchTerm, onNoResult }
 
     const graphData = useMemo(() => data ?? { nodes: [], links: [] }, [data]);
 
+    //검색 로직
     useGraphSearch({
         searchTerm: searchTerm ?? "",
         graphData,
@@ -206,23 +218,19 @@ export default function BipartiteGraph({ resetViewFlag, searchTerm, onNoResult }
             const related = new Set([target.id]);
 
             graphData.links.forEach((link: any) => {
-                const s = typeof link.source === "object" ? link.source.id : link.source;
-                const t = typeof link.target === "object" ? link.target.id : link.target;
+                const s =
+                    typeof link.source === "object" ? link.source.id : link.source;
+                const t =
+                    typeof link.target === "object" ? link.target.id : link.target;
 
                 if (s === target.id) related.add(t);
                 if (t === target.id) related.add(s);
             });
 
-            fgRef.current?.zoomToFit(
-                600,
-                10,
-                (n: any) => related.has(n.id)
-            );
+            fgRef.current?.zoomToFit(600, 10, (n: any) => related.has(n.id));
         },
-        onNoResult: () => onNoResult?.()
+        onNoResult: () => onNoResult?.(),
     });
-
-
 
     // 하이라이팅 대상 계산
     const { highlightNodes, highlightLinks } = useMemo(() => {
@@ -233,14 +241,15 @@ export default function BipartiteGraph({ resetViewFlag, searchTerm, onNoResult }
         if (targetNode) {
             hNodes.add(targetNode.id);
             graphData.links.forEach((link: any) => {
-                const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
-                const targetId = typeof link.target === 'object' ? link.target.id : link.target;
+                const sourceId =
+                    typeof link.source === "object" ? link.source.id : link.source;
+                const targetId =
+                    typeof link.target === "object" ? link.target.id : link.target;
 
                 if (sourceId === targetNode.id) {
                     hNodes.add(targetId);
                     hLinks.add(link);
-                }
-                else if (targetId === targetNode.id) {
+                } else if (targetId === targetNode.id) {
                     hNodes.add(sourceId);
                     hLinks.add(link);
                 }
@@ -253,16 +262,16 @@ export default function BipartiteGraph({ resetViewFlag, searchTerm, onNoResult }
         if (!fgRef.current) return;
 
         // Charge (전하량)
-        fgRef.current.d3Force('charge')?.strength(-500).distanceMax(500);
+        fgRef.current.d3Force('charge')?.strength(-500).distanceMax(700);
 
         // Link (링크 장력)
-        fgRef.current.d3Force('link')?.distance(40).strength(1).iterations(5);
+        fgRef.current.d3Force('link')?.distance(50).strength(1).iterations(5);
 
         // Collide (충돌 방지)
         const collideForce = fgRef.current.d3Force('collide');
         if (collideForce) {
             collideForce.strength(1);
-            collideForce.iterations(2); //반복 횟수 - 정확도 향상
+            collideForce.iterations(3); //반복 횟수 - 정확도 향상
             collideForce.radius((node: any) => {
                 const baseSize = getNodeBaseSize(node, minVal, maxVal);
                 const buffer = node.type === 'movie' ? baseSize * 1.5 : baseSize;
@@ -275,8 +284,8 @@ export default function BipartiteGraph({ resetViewFlag, searchTerm, onNoResult }
     useEffect(() => {
         if (fgRef.current && graphData.nodes.length > 0) {
             setTimeout(() => {
-                fgRef.current.centerAt(0, 0, 0)
-                fgRef.current.zoom(0.06, 0)
+                fgRef.current.centerAt(0, 0, 0);
+                fgRef.current.zoom(0.06, 0);
             }, 200);
         }
     }, [graphData]);
@@ -286,25 +295,48 @@ export default function BipartiteGraph({ resetViewFlag, searchTerm, onNoResult }
         if (!fgRef.current) return;
         setSelectedNode(null);
         setHoverNode(null);
-        fgRef.current.centerAt(0, 0, 100)
-        fgRef.current.zoom(0.06, 0)
+        fgRef.current.centerAt(0, 0, 100);
+        fgRef.current.zoom(0.06, 0);
     }, [resetViewFlag]);
 
-    if (!data) {
-        return (
-            <div
-                className="w-full flex items-center justify-center"
-                style={{ height: '550px' }} >
-                <div className="text-white text-xl font-semibold">
-                    그래프 불러오는 중 · · ·
+    //그래프 렌더링 상태 관리 (로딩 화면용)
+    const [isGraphReady, setIsGraphReady] = useState(false);
+    /*
+        // 그래프 대기 메세지 출력
+        if (!data || !isGraphReady) {
+            return (
+                <div
+                    className="w-full flex items-center justify-center"
+                    style={{ height: "550px" }}
+                >
+                    <div className="text-white text-xl font-semibold">
+                        그래프 불러오는 중 · · ·
+                    </div>
                 </div>
-            </div>
-        );
-    }
-
-
+            );
+        }
+    */
+    //====================================================================
+    //return
+    //====================================================================
     return (
-        <div ref={containerRef} className="w-full h-full flex flex-col items-center">
+        <div
+            ref={containerRef}
+            className="w-full h-full flex flex-col items-center"
+        >
+
+            {/* 그래프 대기 메세지 출력*/}
+            {(!data || !isGraphReady) && (
+                <div
+                    className="w-full flex items-center justify-center"
+                    style={{ height: "550px" }}
+                >
+                    <div className="text-white text-xl font-semibold">
+                        그래프 불러오는 중 · · ·
+                    </div>
+                </div>
+            )}
+
             <ForceGraph2D
                 ref={fgRef}
                 /* 
@@ -317,9 +349,10 @@ export default function BipartiteGraph({ resetViewFlag, searchTerm, onNoResult }
                 graphData={graphData}
                 nodeId="id"
                 nodeLabel="name"
-                enableNodeDrag={true}
-                warmupTicks={100}
-                cooldownTicks={200}
+                enableNodeDrag={false}  //그래프 노드 드래그 인터렉션
+                warmupTicks={0}
+                cooldownTicks={100}
+                onEngineStop={() => setIsGraphReady(true)} // 계산 끝나면 로딩 화면 제거
 
                 // 링크 설정
                 linkColor={(link: any) => {
@@ -330,14 +363,11 @@ export default function BipartiteGraph({ resetViewFlag, searchTerm, onNoResult }
                     }
                     return "rgba(255,255,255,0.3)"; // 기본 상태
                 }}
-
-                linkWidth={(link: any) => highlightLinks.has(link) ? 2 : 0.5}
-
+                linkWidth={(link: any) => (highlightLinks.has(link) ? 2 : 0.5)}
                 // 노드 호버 이벤트
                 onNodeHover={(node: any) => {
                     setHoverNode(node || null);
                 }}
-
                 onNodeClick={(node: any) => {
                     const now = Date.now();
 
@@ -354,8 +384,10 @@ export default function BipartiteGraph({ resetViewFlag, searchTerm, onNoResult }
 
                         graphData.links.forEach((link: any) => {
                             // link.source/target이 객체일 수도, ID일 수도 있어서 안전하게 처리
-                            const sId = typeof link.source === 'object' ? link.source.id : link.source;
-                            const tId = typeof link.target === 'object' ? link.target.id : link.target;
+                            const sId =
+                                typeof link.source === "object" ? link.source.id : link.source;
+                            const tId =
+                                typeof link.target === "object" ? link.target.id : link.target;
 
                             if (sId === node.id) relatedNodeIds.add(tId);
                             if (tId === node.id) relatedNodeIds.add(sId);
@@ -364,15 +396,14 @@ export default function BipartiteGraph({ resetViewFlag, searchTerm, onNoResult }
                         // 해당 노드들의 범위에 맞춰서 줌 (zoomToFit)
                         // zoomToFit(duration, padding, filterFunction)
                         fgRef.current?.zoomToFit(
-                            500,  // 애니메이션 시간
-                            10,  // 화면 가장자리 여백 px
+                            500, // 애니메이션 시간
+                            10, // 화면 가장자리 여백 px
                             (n: any) => relatedNodeIds.has(n.id) // 이 함수가 true인 노드들만 화면에 담음
                         );
                     }
                     // 마지막 클릭 시간 갱신
                     lastClickTimeRef.current = now;
                 }}
-
                 //그래프 배경 클릭시
                 onBackgroundClick={() => {
                     setSelectedNode(null);
@@ -382,7 +413,6 @@ export default function BipartiteGraph({ resetViewFlag, searchTerm, onNoResult }
                     fgRef.current.zoom(0.06, 0)
                     */
                 }}
-
                 nodeCanvasObject={(rawNode, ctx, globalScale) => {
                     const node = rawNode as NodeT;
                     if (node.x === undefined || node.y === undefined) return;
@@ -397,9 +427,8 @@ export default function BipartiteGraph({ resetViewFlag, searchTerm, onNoResult }
 
                     if (hasActiveHighlight && !isHighlighted) {
                         ctx.globalAlpha = 0.1; // 흐리게 처리
-                    }
-                    else {
-                        ctx.globalAlpha = 1;   // 정상 출력
+                    } else {
+                        ctx.globalAlpha = 1; // 정상 출력
                     }
 
                     let color = ACTOR_DIRECTOR_COLOR;

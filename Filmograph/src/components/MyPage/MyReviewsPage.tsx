@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react"; // [수정] useCallback 추가
+import { useEffect, useState, useCallback } from "react";
 import { collection, query, where, orderBy, getDocs } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../features/auth/hooks/useAuth";

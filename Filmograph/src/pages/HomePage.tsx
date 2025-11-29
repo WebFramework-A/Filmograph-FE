@@ -5,7 +5,7 @@ import HowToUse from "../components/HomePage/HowToUse";
 
 const HomePage = () => {
   return (
-    <div className="h-screen w-full overflow-x-hidden overflow-y-scroll snap-y snap-mandatory scroll-smooth">
+    <div className="w-full">
       <Hero />
       <About />
       <HowToUse />

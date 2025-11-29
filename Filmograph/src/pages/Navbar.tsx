@@ -14,21 +14,21 @@ const Navbar = () => {
     }`;
 
   return (
-    <nav className="fixed top-0 left-0 z-50 w-full flex items-center justify-between px-8 py-4 bg-black/10 backdrop-blur-lg text-white tracking-wider transition-all duration-400">
+    <nav className="fixed top-0 left-0 z-50 w-full flex items-center justify-between px-8 py-4 backdrop-blur-lg text-white tracking-wider transition-all duration-400">
       <NavLink
         to="/"
-        className="text-xl font-bold mr-auto hover:text-yellow-300 duration-300"
+        className="text-xl font-bold mr-auto hover:text-yellow-300 duration-300 cursor-pointer"
       >
         Filmograph
       </NavLink>
 
       <div className="flex items-center gap-6">
-        <NavLink to="/" className={navLinkClasses} end>
-          Home
+        <NavLink to="/map" className={navLinkClasses} end>
+          Map
         </NavLink>
 
         {/* Graph 메뉴 */}
-        <div className="relative group h-full flex items-center">
+        <div className="relative group h-full flex items-center ">
           <NavLink to="/graph" className={navLinkClasses}>
             Graph
           </NavLink>
@@ -44,7 +44,7 @@ const Navbar = () => {
             <div className="bg-black/80 backdrop-blur-md rounded-md shadow-lg py-2 flex flex-col gap-1 border border-white/10 overflow-hidden">
               <Link
                 to="/graph/movie"
-                className="px-4 py-2 hover:bg-white/10 hover:text-yellow-300 text-sm text-center transition-colors"
+                className="px-4 py-2 hover:bg-white/10 hover:text-yellow-300 text-sm text-center transition-colors "
               >
                 영화 & 영화인
               </Link>
@@ -58,7 +58,7 @@ const Navbar = () => {
                 to="/graph/collaboration"
                 className="px-4 py-2 hover:bg-white/10 hover:text-yellow-300 text-sm text-center transition-colors"
               >
-                협업 네트워킹
+                협업 네트워크
               </Link>
             </div>
           </div>

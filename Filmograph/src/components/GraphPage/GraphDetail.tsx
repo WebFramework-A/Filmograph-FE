@@ -1,4 +1,3 @@
-// src/components/GraphPage/GraphDetail.tsx
 import { useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import BipartiteGraph from "./BipartiteGraph";
@@ -12,11 +11,12 @@ const GraphDetail = () => {
 
   const [resetViewFlag, setResetViewFlag] = useState(false);
 
+  // 검색 관련 상태
   const [inputValue, setInputValue] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [showNoResultToast, setShowNoResultToast] = useState(false);
 
-  // 전체 그래프 초기화
+  // 전체 그래프 초기화 핸들러
   const handleResetView = () => {
     setResetViewFlag((prev) => !prev);
     setSearchTerm("");
@@ -24,33 +24,34 @@ const GraphDetail = () => {
     setShowNoResultToast(false);
   };
 
-  // 검색 실행
+  // 검색 실행 핸들러
   const handleSearch = () => {
-    setSearchTerm(""); 
+    setSearchTerm("");
+    // 검색어가 상태에 반영되도록 잠시 대기 후 설정 (그래프 컴포넌트 감지용)
     setTimeout(() => setSearchTerm(inputValue), 10);
   };
 
-  // 검색 실패 시 토스트 띄우기 
+  // 검색 결과 없음 토스트 핸들러
   const handleNoResult = useCallback(() => {
     setShowNoResultToast(true);
-
     setTimeout(() => {
       setShowNoResultToast(false);
     }, 1500);
   }, []);
 
   return (
-    <>
-      {/* 토스트 */}
+    <div className="bg-[#0b4747]">
+      {/* 토스트 메시지 */}
       <Toast
         message="검색 결과가 없습니다."
         show={showNoResultToast}
         onClose={() => setShowNoResultToast(false)}
       />
 
-      <div className="min-h-screen max-w-full bg-[#0b4747] text-white overflow-x-hidden">
-        <div className="mx-auto max-w-6xl pt-20 px-6 relative z-10">
-          {/* 제목 */}
+      <div className="h-screen w-full pt-20 text-white flex flex-col overflow-hidden relative">
+        {/* 상단 고정 영역 (제목, 설명, 검색바) */}
+        <div className="shrink-0 px-8 pb-4 z-10 ">
+          {/* 제목 및 설명 */}
           <div className="flex justify-between items-end border-b border-white/20 pb-4 mb-4">
             <h1 className="text-4xl font-bold text-yellow-200">
               {graphType === "movie" && "Movie Network"}
@@ -59,14 +60,60 @@ const GraphDetail = () => {
             </h1>
 
             <p className="text-sm text-white/70">
-              {graphType === "movie" && "영화-영화인 네트워크 설명 써두기"}
-              {graphType === "ego" && "한 인물을 중심으로 형성된 에고 네트워크를 시각적으로 확인해보세요."}
-              {graphType === "collaboration" && "노드를 탐색하여 영화인들의 협업 관계와 커뮤니티 구조를 확인해보세요."}
+              {graphType === "movie" &&
+                "여러 영화와 영화인들 사이의 유기적인 관계를 한눈에 파악해보세요."}
+              {graphType === "ego" &&
+                "한 인물을 중심으로 형성된 에고 네트워크를 시각적으로 확인해보세요."}
+              {graphType === "collaboration" &&
+                "노드를 탐색하며, 같은 색으로 표시된 커뮤니티 그룹과 영화인들의 협업 관계를 확인해보세요."}
             </p>
           </div>
 
-          {/* 검색바 + 전체보기 버튼 */}
+          {/* 검색바 + 전체보기 버튼 영역 */}
           <div className="relative w-full mt-2 flex justify-center items-center">
+            {/* 범례 - 검색바 왼쪽에 배치 */}
+            {/* 영화 네트워크일 때만 표시 */}
+            {graphType === "movie" && (
+              <div
+                className="
+                  absolute left-0 top-1/2 -translate-y-1/2 
+                  flex items-center gap-6 
+                  bg-black/40 backdrop-blur-md px-6 py-3 
+                  rounded-full text-white shadow-md
+                "
+              >
+                <div className="flex items-center gap-2">
+                  <div
+                    className="w-3 h-3 rounded-full"
+                    style={{ background: "#FF5252" }}
+                  />
+                  <span className="text-sm">영화</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div
+                    className="w-3 h-3 rounded-full"
+                    style={{ background: "#5B8FF9" }}
+                  />
+                  <span className="text-sm">배우</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div
+                    className="w-3 h-3 rounded-full"
+                    style={{ background: "#F6BD16" }}
+                  />
+                  <span className="text-sm">감독</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div
+                    className="w-3 h-3 rounded-full"
+                    style={{ background: "#E040FB" }}
+                  />
+                  <span className="text-sm">감독 겸 배우</span>
+                </div>
+              </div>
+            )}
+
+            {/* 중앙 검색바 */}
             <div className="w-full max-w-sm">
               <Searcrbar
                 inputValue={inputValue}
@@ -82,6 +129,7 @@ const GraphDetail = () => {
               />
             </div>
 
+            {/* 오른쪽 전체보기 버튼 */}
             {(graphType === "movie" || graphType === "collaboration") && (
               <button
                 onClick={handleResetView}
@@ -97,33 +145,40 @@ const GraphDetail = () => {
         </div>
 
         {/* 그래프 영역 */}
-        <div className="mx-auto max-w-6xl pt-3 px-6">
+        <div className="flex-1 w-full min-h-0 relative overflow-hidden px-6 pb-3">
           {graphType === "movie" && (
-            <BipartiteGraph
-              resetViewFlag={resetViewFlag}
-              searchTerm={searchTerm}
-              onNoResult={handleNoResult}
-            />
+            <div className="w-full h-full">
+              <BipartiteGraph
+                resetViewFlag={resetViewFlag}
+                searchTerm={searchTerm}
+                onNoResult={handleNoResult}
+              />
+            </div>
           )}
 
           {graphType === "ego" && (
-            <EgoGraph
-              resetViewFlag={resetViewFlag}
-              searchTerm={searchTerm}
-              onNoResult={handleNoResult}
-            />
+            <div className="w-full h-full">
+              {/* EgoGraph에도 props 전달 유지 */}
+              <EgoGraph
+                resetViewFlag={resetViewFlag}
+                searchTerm={searchTerm}
+                onNoResult={handleNoResult}
+              />
+            </div>
           )}
 
           {graphType === "collaboration" && (
-            <CollabNetworkGraph
-              resetViewFlag={resetViewFlag}
-              searchTerm={searchTerm}
-              onNoResult={handleNoResult}
-            />
+            <div className="w-full h-full">
+              <CollabNetworkGraph
+                resetViewFlag={resetViewFlag}
+                searchTerm={searchTerm}
+                onNoResult={handleNoResult}
+              />
+            </div>
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

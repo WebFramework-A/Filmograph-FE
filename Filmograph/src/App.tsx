@@ -17,7 +17,7 @@ import MyReviewsPage from "./components/MyPage/MyReviewsPage";
 import GraphHome from "./pages/GraphHome";
 import GraphDetail from "./components/GraphPage/GraphDetail";
 import BoxOffice from "./pages/BoxOfficePage";
-
+import MapPage from "./pages/MapPage";
 
 const router = createBrowserRouter([
   {
@@ -69,6 +69,10 @@ const router = createBrowserRouter([
       {
         path: "/BoxOffice",
         element: <BoxOffice />,
+      },
+      {
+        path: "/map",
+        element: <MapPage />,
       },
     ],
   },
