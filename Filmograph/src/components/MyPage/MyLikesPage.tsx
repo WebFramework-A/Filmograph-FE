@@ -83,7 +83,7 @@ export default function WishlistPage() {
           >
             ←
           </button>
-          <h1 className="text-4xl font-bold text-[#FFD700]">
+          <h1 className="text-4xl font-bold text-yellow-200">
             찜한 영화 전체 목록
           </h1>
           <span className="text-xl text-white/60">({likes.length})</span>

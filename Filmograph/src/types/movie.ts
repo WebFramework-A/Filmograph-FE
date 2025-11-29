@@ -41,7 +41,6 @@ export interface MovieStats {
   audienceCount?: number;     // 누적 관객 수 (KOBIS)
   revenue?: number;           // 수익 (TMDB)
   achievements?: string;      // 한 줄 요약 성과
-  avgRating?: number;         // 사이트 내 평균 평점
 }
 
 /** 수상 내역 */

@@ -148,10 +148,10 @@ export default function MyPage() {
 
         myReviews = recentSnap.docs.map(
           (doc) =>
-            ({
-              id: doc.id,
-              ...doc.data(),
-            } as Review)
+          ({
+            id: doc.id,
+            ...doc.data(),
+          } as Review)
         );
       } catch (error) {
         console.error("리뷰 로딩 중 에러 (인덱스 필요할 수 있음):", error);
@@ -238,7 +238,7 @@ export default function MyPage() {
         <div className="flex justify-between items-end border-b border-white/20 pb-4 mb-8">
           <h1 className="text-4xl font-bold text-yellow-200">My Page</h1>
           <p className="text-sm text-white/70">
-            나의 영화 취향과 활동을 확인하세요
+            나의 영화 취향과 활동을 확인하세요.
           </p>
         </div>
 
