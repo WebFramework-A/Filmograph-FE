@@ -4,12 +4,19 @@ import { db } from "../../services/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import useGraphSearch from "../../hooks/useGraphSearch";
-import type { Node as CommonNode, Link as CommonLink } from "../../types/data";
 
+import type {
+    Node as CommonNode,
+    Link as CommonLink,
+} from "../../types/data";
+
+// 상세 정보
 type NodeT = CommonNode & {
     role?: string;
     x?: number;
     y?: number;
+    releaseYear?: string;
+    rating?: number;
 };
 
 type LinkT = CommonLink;
@@ -22,7 +29,7 @@ type GraphT = {
 // Props 타입 정의
 type BipartiteGraphProps = {
     resetViewFlag: boolean;
-    searchTerm?: string; // 🔥 추가
+    searchTerm?: string;
     onNoResult?: () => void;
 };
 
@@ -31,11 +38,6 @@ const MOVIE_COLOR = "#FF5252";
 const ACTOR_COLOR = "#5B8FF9";
 const DIRECTOR_COLOR = "#F6BD16";
 const ACTOR_DIRECTOR_COLOR = "#E040FB";
-
-/*
-const GRAPH_WIDTH = 2000;
-const GRAPH_HEIGHT = 550;
-*/
 
 // 가중치 정규화
 function normalizeWeight(w: number, minW: number, maxW: number): number {
@@ -84,44 +86,44 @@ export default function BipartiteGraph({
     const [hoverNode, setHoverNode] = useState<NodeT | null>(null);
     const [selectedNode, setSelectedNode] = useState<NodeT | null>(null);
 
+    // 그래프 렌더링 상태 관리 (로딩 화면용)
+    const [isGraphReady, setIsGraphReady] = useState(false);
+
     const fgRef = useRef<any>(null);
 
-    // 더블 클릭 감지를 위한 마지막 클릭 시간 저장소
-    const lastClickTimeRef = useRef<number>(0);
     // 페이지 이동 함수
     const navigate = useNavigate();
 
-    //그래프 크기 관련 함수
+    // 그래프 크기 관련 함수
     const containerRef = useRef<HTMLDivElement>(null);
-    const [dimensions, setDimensions] = useState({
-        width: window.innerWidth * 0.8,
-        height: window.innerHeight * 0.8,
-    });
+    const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
-    // 크기 조절 로직
+    // 화면 크기 감지 (불필요한 updateDimensions 함수 제거)
     useEffect(() => {
-        const updateDimensions = () => {
-            // 상단 헤더 + 검색바의 대략적인 높이 (스크린샷 기준 약 250px ~ 300px 예상)
-            // 이 값을 조절하여 시작 위치를 맞출 수 있습니다.
-            const TOP_OFFSET = 250;
+        if (!containerRef.current) return;
 
-            // 전체 높이에서 상단 영역을 뺀 '남은 공간'을 계산
-            const availableHeight = window.innerHeight - TOP_OFFSET;
+        const resizeObserver = new ResizeObserver((entries) => {
+            for (const entry of entries) {
+                const { width, height } = entry.contentRect;
+                if (width > 0 && height > 0) {
+                    setDimensions({ width, height });
+                }
+            }
+        });
 
-            setDimensions({
-                width: window.innerWidth * 0.9,
-                // 남은 공간의 97%만 차지하도록 설정 (음수 방지해주려고 Math.max()씀, 하단에 마진 조금 주려고 97%로 함)
-                height: Math.max(availableHeight * 0.97, 400),
-            });
-        };
-
-        window.addEventListener("resize", updateDimensions);
-        updateDimensions(); // 초기 실행
-
-        return () => window.removeEventListener("resize", updateDimensions);
+        resizeObserver.observe(containerRef.current);
+        return () => resizeObserver.disconnect();
     }, []);
 
-    // 데이터 로딩 로직
+    // 안전장치: 데이터 로드 후 5초가 지나도 그래프가 준비 안 되면 강제로 보여줌
+    useEffect(() => {
+        if (data && !isGraphReady) {
+            const timer = setTimeout(() => setIsGraphReady(true), 5000);
+            return () => clearTimeout(timer);
+        }
+    }, [data, isGraphReady]);
+
+    // 데이터 로딩
     useEffect(() => {
         async function fetchBipartiteData() {
             try {
@@ -140,6 +142,9 @@ export default function BipartiteGraph({
                             name: movieTitle,
                             type: "movie",
                             val: 3,
+                            // [추가] 상세 정보 매핑 (DB 필드명에 맞춰주세요)
+                            releaseYear: data.releaseDate ? data.releaseDate.substring(0, 4) : "?",
+                            rating: data.rating || 0,
                         });
                     }
 
@@ -157,7 +162,7 @@ export default function BipartiteGraph({
                             } else {
                                 const node = nodesMap.get(personId)!;
                                 node.val = (node.val || 1) + 0.5;
-                                if (node.role === "director") node.role = "actor/director";
+                                if (node.role === 'director') node.role = 'actor/director';
                             }
                             links.push({ source: movieId, target: personId });
                         });
@@ -177,7 +182,7 @@ export default function BipartiteGraph({
                             } else {
                                 const node = nodesMap.get(personId)!;
                                 node.val = (node.val || 1) + 0.5;
-                                if (node.role === "actor") node.role = "actor/director";
+                                if (node.role === 'actor') node.role = 'actor/director';
                             }
                             links.push({ source: movieId, target: personId });
                         });
@@ -186,7 +191,7 @@ export default function BipartiteGraph({
 
                 setData({
                     nodes: Array.from(nodesMap.values()),
-                    links,
+                    links
                 });
             } catch (error) {
                 console.error("데이터 로딩 실패:", error);
@@ -195,7 +200,6 @@ export default function BipartiteGraph({
         fetchBipartiteData();
     }, []);
 
-    //노드 크기 적용
     const { minVal, maxVal } = useMemo(() => {
         if (!data) return { minVal: 1, maxVal: 1 };
         const vals = data.nodes.map((n) => n.val ?? 1);
@@ -207,29 +211,23 @@ export default function BipartiteGraph({
 
     const graphData = useMemo(() => data ?? { nodes: [], links: [] }, [data]);
 
-    //검색 로직
+    // 검색 로직
     useGraphSearch({
         searchTerm: searchTerm ?? "",
         graphData,
         searchKey: "name",
         onMatch: (target) => {
             setSelectedNode(target as NodeT);
-
             const related = new Set([target.id]);
-
             graphData.links.forEach((link: any) => {
-                const s =
-                    typeof link.source === "object" ? link.source.id : link.source;
-                const t =
-                    typeof link.target === "object" ? link.target.id : link.target;
-
+                const s = typeof link.source === "object" ? link.source.id : link.source;
+                const t = typeof link.target === "object" ? link.target.id : link.target;
                 if (s === target.id) related.add(t);
                 if (t === target.id) related.add(s);
             });
-
             fgRef.current?.zoomToFit(600, 10, (n: any) => related.has(n.id));
         },
-        onNoResult: () => onNoResult?.(),
+        onNoResult: () => onNoResult?.()
     });
 
     // 하이라이팅 대상 계산
@@ -241,10 +239,8 @@ export default function BipartiteGraph({
         if (targetNode) {
             hNodes.add(targetNode.id);
             graphData.links.forEach((link: any) => {
-                const sourceId =
-                    typeof link.source === "object" ? link.source.id : link.source;
-                const targetId =
-                    typeof link.target === "object" ? link.target.id : link.target;
+                const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+                const targetId = typeof link.target === 'object' ? link.target.id : link.target;
 
                 if (sourceId === targetNode.id) {
                     hNodes.add(targetId);
@@ -258,27 +254,23 @@ export default function BipartiteGraph({
         return { highlightNodes: hNodes, highlightLinks: hLinks };
     }, [hoverNode, selectedNode, graphData]);
 
+    // 물리 엔진 설정
     useEffect(() => {
         if (!fgRef.current) return;
-
-        // Charge (전하량)
         fgRef.current.d3Force('charge')?.strength(-500).distanceMax(700);
-
-        // Link (링크 장력)
         fgRef.current.d3Force('link')?.distance(50).strength(1).iterations(5);
 
-        // Collide (충돌 방지)
         const collideForce = fgRef.current.d3Force('collide');
         if (collideForce) {
             collideForce.strength(1);
-            collideForce.iterations(3); //반복 횟수 - 정확도 향상
+            collideForce.iterations(3);
             collideForce.radius((node: any) => {
                 const baseSize = getNodeBaseSize(node, minVal, maxVal);
                 const buffer = node.type === 'movie' ? baseSize * 1.5 : baseSize;
                 return buffer + 10;
             });
         }
-    }, [graphData, minVal, maxVal]); // 데이터나 범위가 바뀔 때 물리 엔진 재설정
+    }, [graphData, minVal, maxVal]);
 
     // 그래프 초기 로드 시 줌 맞춤
     useEffect(() => {
@@ -295,199 +287,190 @@ export default function BipartiteGraph({
         if (!fgRef.current) return;
         setSelectedNode(null);
         setHoverNode(null);
-        fgRef.current.centerAt(0, 0, 100);
-        fgRef.current.zoom(0.06, 0);
+        fgRef.current.centerAt(0, 0, 500);
+        fgRef.current.zoom(0.06, 500);
     }, [resetViewFlag]);
 
-    //그래프 렌더링 상태 관리 (로딩 화면용)
-    const [isGraphReady, setIsGraphReady] = useState(false);
-    /*
-        // 그래프 대기 메세지 출력
-        if (!data || !isGraphReady) {
-            return (
-                <div
-                    className="w-full flex items-center justify-center"
-                    style={{ height: "550px" }}
-                >
-                    <div className="text-white text-xl font-semibold">
-                        그래프 불러오는 중 · · ·
-                    </div>
-                </div>
-            );
-        }
-    */
-    //====================================================================
-    //return
-    //====================================================================
     return (
-        <div
-            ref={containerRef}
-            className="w-full h-full flex flex-col items-center"
-        >
+        <div ref={containerRef} className="w-full h-full relative flex flex-col items-center justify-center bg-[#0d5a5a]">
 
-            {/* 그래프 대기 메세지 출력*/}
+            {/* 로딩 오버레이 */}
             {(!data || !isGraphReady) && (
-                <div
-                    className="w-full flex items-center justify-center"
-                    style={{ height: "550px" }}
-                >
-                    <div className="text-white text-xl font-semibold">
-                        그래프 불러오는 중 · · ·
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#0d5a5a] z-50">
+                    <div className="text-white text-xl font-semibold animate-pulse">
+                        그래프 불러오는 중...
                     </div>
                 </div>
             )}
 
-            <ForceGraph2D
-                ref={fgRef}
-                /* 
-                width={GRAPH_WIDTH}
-                height={GRAPH_HEIGHT}
-                */
-                width={dimensions.width}
-                height={dimensions.height}
-                backgroundColor="transparent"
-                graphData={graphData}
-                nodeId="id"
-                nodeLabel="name"
-                enableNodeDrag={false}  //그래프 노드 드래그 인터렉션
-                warmupTicks={0}
-                cooldownTicks={100}
-                onEngineStop={() => setIsGraphReady(true)} // 계산 끝나면 로딩 화면 제거
+            {/* 그래프 컴포넌트 */}
+            {data && dimensions.width > 0 && (
+                <ForceGraph2D
+                    ref={fgRef}
+                    width={dimensions.width}
+                    height={dimensions.height}
+                    backgroundColor="transparent"
+                    graphData={graphData}
+                    nodeId="id"
+                    nodeLabel="name"
+                    enableNodeDrag={false}
+                    warmupTicks={100}
+                    cooldownTicks={50}
 
-                // 링크 설정
-                linkColor={(link: any) => {
-                    if (highlightNodes.size > 0) {
-                        return highlightLinks.has(link)
-                            ? "rgba(255,255,255,0.9)" // 하이라이트된 링크
-                            : "rgba(255,255,255,0.05)"; // 그 외 링크는 아주 흐리게
-                    }
-                    return "rgba(255,255,255,0.3)"; // 기본 상태
-                }}
-                linkWidth={(link: any) => (highlightLinks.has(link) ? 2 : 0.5)}
-                // 노드 호버 이벤트
-                onNodeHover={(node: any) => {
-                    setHoverNode(node || null);
-                }}
-                onNodeClick={(node: any) => {
-                    const now = Date.now();
+                    // d3AlphaDecay를 Prop으로 전달
+                    d3AlphaDecay={0.05}
 
-                    //더블 클릭 감지
-                    if (now - lastClickTimeRef.current < 300) {
-                        if (node.type === "movie") {
-                            navigate(`/detail/${node.id}`);
+                    onEngineStop={() => setIsGraphReady(true)}
+
+                    // 링크 설정
+                    linkColor={(link: any) => {
+                        if (highlightNodes.size > 0) {
+                            return highlightLinks.has(link)
+                                ? "rgba(255,255,255,0.9)"
+                                : "rgba(255,255,255,0.05)";
                         }
-                    }
-                    else {
+                        return "rgba(255,255,255,0.3)";
+                    }}
+
+                    linkWidth={(link: any) => highlightLinks.has(link) ? 2 : 0.5}
+
+                    onNodeHover={(node: any) => {
+                        const currentZoom = fgRef.current?.zoom();
+                        const HOVER_THRESHOLD = 0.5;
+                        if (currentZoom !== undefined && currentZoom < HOVER_THRESHOLD) {
+                            setHoverNode(null);
+                            return;
+                        }
+                        setHoverNode(node || null);
+                    }}
+
+                    // 클릭 시 노드 선택
+                    onNodeClick={(node: any) => {
                         setSelectedNode(node);
-                        // 클릭한 노드와 연결된 이웃 노드들의 ID 찾기
+
                         const relatedNodeIds = new Set([node.id]);
-
                         graphData.links.forEach((link: any) => {
-                            // link.source/target이 객체일 수도, ID일 수도 있어서 안전하게 처리
-                            const sId =
-                                typeof link.source === "object" ? link.source.id : link.source;
-                            const tId =
-                                typeof link.target === "object" ? link.target.id : link.target;
-
+                            const sId = typeof link.source === 'object' ? link.source.id : link.source;
+                            const tId = typeof link.target === 'object' ? link.target.id : link.target;
                             if (sId === node.id) relatedNodeIds.add(tId);
                             if (tId === node.id) relatedNodeIds.add(sId);
                         });
 
-                        // 해당 노드들의 범위에 맞춰서 줌 (zoomToFit)
-                        // zoomToFit(duration, padding, filterFunction)
                         fgRef.current?.zoomToFit(
-                            500, // 애니메이션 시간
-                            10, // 화면 가장자리 여백 px
-                            (n: any) => relatedNodeIds.has(n.id) // 이 함수가 true인 노드들만 화면에 담음
+                            500, 100, (n: any) => relatedNodeIds.has(n.id)
                         );
-                    }
-                    // 마지막 클릭 시간 갱신
-                    lastClickTimeRef.current = now;
-                }}
-                //그래프 배경 클릭시
-                onBackgroundClick={() => {
-                    setSelectedNode(null);
-                    setHoverNode(null);
-                    /* 전체 그래프 보기 버튼 따로 만들었으니 삭제
-                    fgRef.current.centerAt(0, 150, 0)
-                    fgRef.current.zoom(0.06, 0)
-                    */
-                }}
-                nodeCanvasObject={(rawNode, ctx, globalScale) => {
-                    const node = rawNode as NodeT;
-                    if (node.x === undefined || node.y === undefined) return;
+                    }}
 
-                    const baseSize = getNodeBaseSize(node, minVal, maxVal);
-                    const scaleAdjustment = globalScale > 1 ? Math.sqrt(globalScale) : 1;
-                    const size = baseSize / scaleAdjustment;
+                    onBackgroundClick={() => {
+                        setSelectedNode(null);
+                        setHoverNode(null);
+                    }}
 
-                    // 하이라이팅: 활성화된 하이라이트가 있는데, 현재 노드가 거기에 포함 안되면 투명도 낮춤
-                    const isHighlighted = highlightNodes.has(node.id);
-                    const hasActiveHighlight = highlightNodes.size > 0;
+                    nodeCanvasObject={(rawNode, ctx, globalScale) => {
+                        const node = rawNode as NodeT;
+                        if (node.x === undefined || node.y === undefined) return;
 
-                    if (hasActiveHighlight && !isHighlighted) {
-                        ctx.globalAlpha = 0.1; // 흐리게 처리
-                    } else {
-                        ctx.globalAlpha = 1; // 정상 출력
-                    }
+                        const baseSize = getNodeBaseSize(node, minVal, maxVal);
+                        const scaleAdjustment = globalScale > 1 ? Math.sqrt(globalScale) : 1;
+                        const size = baseSize / scaleAdjustment;
 
-                    let color = ACTOR_DIRECTOR_COLOR;
+                        // 하이라이팅 로직
+                        const isHighlighted = highlightNodes.has(node.id);
+                        const hasActiveHighlight = highlightNodes.size > 0;
 
-                    // 영화 노드 설정
-                    if (node.type === "movie") {
-                        color = MOVIE_COLOR;
-                        ctx.fillStyle = color;
-                        ctx.beginPath();
-                        ctx.arc(node.x, node.y, size, 0, 2 * Math.PI, false);
-                        ctx.fill();
-                    }
-                    // 영화인 노드 설정
-                    else {
-                        if (node.role === "director") color = DIRECTOR_COLOR;
-                        else if (node.role === "actor") color = ACTOR_COLOR;
+                        if (hasActiveHighlight && !isHighlighted) {
+                            ctx.globalAlpha = 0.1; // 흐리게 처리
+                        } else {
+                            ctx.globalAlpha = 1;   // 정상 출력
+                        }
 
-                        ctx.fillStyle = color;
-                        ctx.beginPath();
-                        ctx.arc(node.x, node.y, size, 0, 2 * Math.PI, false);
-                        ctx.fill();
-                    }
+                        let color = ACTOR_DIRECTOR_COLOR;
 
-                    // 하이라이트 상태면 텍스트도 보여주거나, 일정 이상 확대되었을 때 보여줌
-                    const showLabel = globalScale > 1.0 || isHighlighted;
+                        // 영화 노드 설정
+                        if (node.type === "movie") {
+                            color = MOVIE_COLOR;
+                            ctx.fillStyle = color;
+                            ctx.beginPath();
+                            ctx.arc(node.x, node.y, size, 0, 2 * Math.PI, false);
+                            ctx.fill();
+                        }
+                        // 영화인 노드 설정
+                        else {
+                            if (node.role === "director") color = DIRECTOR_COLOR;
+                            else if (node.role === "actor") color = ACTOR_COLOR;
 
-                    if (showLabel) {
-                        const fontSize = 12 / globalScale;
-                        ctx.font = `${fontSize}px Sans-Serif`;
-                        ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
-                        ctx.textAlign = "center";
-                        ctx.textBaseline = "middle";
-                        // 줄바꿈 로직 적용
-                        // 화면 확대/축소 비율에 맞춰 폭 조절
-                        const maxWidth = 120 / globalScale;
+                            ctx.fillStyle = color;
+                            ctx.beginPath();
+                            ctx.arc(node.x, node.y, size, 0, 2 * Math.PI, false);
+                            ctx.fill();
+                        }
 
-                        // 헬퍼 함수로 줄바꿈된 텍스트 배열 가져오기
-                        const lines = getWrappedLines(ctx, node.name, maxWidth);
+                        const showLabel = globalScale > 1.0 || isHighlighted;
 
-                        // 줄 간격 (폰트 크기의 1.2배)
-                        const lineHeight = fontSize * 1.2;
+                        if (showLabel) {
+                            const fontSize = 12 / globalScale;
+                            ctx.font = `${fontSize}px Sans-Serif`;
+                            ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
+                            ctx.textAlign = "center";
+                            ctx.textBaseline = "middle";
+                            const maxWidth = 120 / globalScale;
+                            const lines = getWrappedLines(ctx, node.name, maxWidth);
+                            const lineHeight = fontSize * 1.2;
 
-                        // 여러 줄 그리기
-                        lines.forEach((line, i) => {
-                            // 텍스트 블록 전체를 수직 중앙 정렬하기 위한 Y 좌표 계산
-                            // (i - (전체줄수 - 1) / 2) 공식을 사용하여 중앙 기준 위아래로 펼침
-                            const dy = (i - (lines.length - 1) / 2) * lineHeight;
+                            lines.forEach((line, i) => {
+                                const dy = (i - (lines.length - 1) / 2) * lineHeight;
+                                if (node.x !== undefined && node.y !== undefined) {
+                                    ctx.fillText(line, node.x, node.y + dy);
+                                }
+                            });
+                        }
 
-                            // node.y 위치를 기준으로 dy만큼 이동하여 그리기
-                            if (node.x !== undefined && node.y !== undefined) {
-                                ctx.fillText(line, node.x, node.y + dy);
-                            }
-                        });
-                    }
+                        // 캔버스 설정 복구
+                        ctx.globalAlpha = 1;
+                    }}
+                />
+            )}
 
-                    // 캔버스 설정 복구
-                    ctx.globalAlpha = 1;
-                }}
-            />
+            {/* 노드 상세 정보 모달 (영화 노드일 때만 표시) */}
+            {selectedNode && selectedNode.type === "movie" && (
+                <div className="absolute top-4 right-4 w-72 bg-black/80 text-white p-5 rounded-xl border border-white/20 shadow-2xl backdrop-blur-md z-50 animate-fade-in">
+
+                    {/* 닫기 버튼 */}
+                    <button
+                        onClick={() => setSelectedNode(null)}
+                        className="absolute top-2 right-2 text-white/50 hover:text-white transition-colors"
+                    >
+                        ✕
+                    </button>
+
+                    {/* 제목 */}
+                    <h3 className="text-xl font-bold mb-1 text-[#FFE66D]">
+                        {selectedNode.name}
+                    </h3>
+
+                    {/* 타입 표시 */}
+                    <p className="text-sm text-white/60 mb-4 capitalize">
+                        영화 (Movie)
+                    </p>
+
+                    {/* 영화 상세 정보 */}
+                    <div className="space-y-1 mb-4 text-sm text-white/80">
+                        {/* 타입 단언을 사용하여 추가 필드 접근 */}
+                        <p>개봉: {(selectedNode as any).releaseYear ?? "?"}</p>
+                        <p>평점: {(selectedNode as any).rating.toFixed(1) ?? "N/A"}</p>
+                    </div>
+
+                    {/* 상세페이지 이동 버튼 */}
+                    <button
+                        onClick={() => {
+                            navigate(`/detail/${selectedNode.id}`);
+                        }}
+                        className="w-full py-2 bg-[#FFE66D] hover:bg-[#FFF176] text-black rounded-lg font-bold transition-colors shadow-md"
+                    >
+                        상세페이지 보러가기 →
+                    </button>
+                </div>
+            )}
         </div>
     );
 }
