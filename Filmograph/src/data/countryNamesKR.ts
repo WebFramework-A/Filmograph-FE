@@ -242,5 +242,9 @@ export const COUNTRY_NAMES_KR: Record<string, string> = {
   "Syria": "시리아",
   "Russia": "러시아",
   "Democratic Republic of Congo": "콩고 민주 공화국",
-  "Kosovo": "코소보"
+  "Kosovo": "코소보",
+  "North Macedonia": "북마케도니아",
+  "Svalbard and Jan Mayen": "스발바르 얀마옌 제도",
+  "Vietnam": "베트남",
+  "Eswatini": "에스와티니"
 };
