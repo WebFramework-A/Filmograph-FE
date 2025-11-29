@@ -238,7 +238,11 @@ export default function MyPage() {
         </div>
 
         {/* 차트 섹션 컴포넌트 */}
-        <GenreChart genreData={genreData} />
+        <div className="mb-12">
+          <GenreChart genreData={genreData} />
+
+
+        </div>
       </div>
     </div>
   );
