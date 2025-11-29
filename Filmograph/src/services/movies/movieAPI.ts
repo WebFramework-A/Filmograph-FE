@@ -70,15 +70,15 @@ export const fetchMovieDetail = async (
 
   const data: MovieDetail = {
     // MovieBase
-    id: info.movieCd,         // Firestore 문서 ID로 사용
-    movieCd: info.movieCd,    // 영화코드
-    title: info.movieNm,      // 한글제목
-    titleEn: info.movieNmEn,  // 영문제목
+    id: info.movieCd, // Firestore 문서 ID로 사용
+    movieCd: info.movieCd, // 영화코드
+    title: info.movieNm, // 한글제목
+    titleEn: info.movieNmEn, // 영문제목
     releaseDate: info.openDt, // 개봉일 (YYYYMMDD)
-    genre: genres,            // 장르명 배열
+    genre: genres, // 장르명 배열
     nation: info.nations
       ?.map((n: KobisNation) => n.nationNm)
-      .join(", "),            // 제작국가
+      .join(", "), // 제작국가
     runtime: info.showTm ? parseInt(info.showTm, 10) : undefined,
 
     // Credits (감독/배우)
@@ -98,6 +98,8 @@ export const fetchMovieDetail = async (
     audienceCount,
 
     createdAt: new Date().toISOString(),
+    poster: null,
+    openDt: undefined
   };
 
   return data;
