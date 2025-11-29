@@ -30,7 +30,9 @@ type GraphT = {
   links: LinkT[];
 };
 
-// ---- props ----
+// 기본 중심 인물 ID
+const DEFAULT_EGO_ID = "10001779";
+
 export default function EgoGraph({
   resetViewFlag,
   searchTerm,
@@ -52,15 +54,37 @@ export default function EgoGraph({
 
   const [data, setData] = useState<GraphT | null>(null);
   const [filteredData, setFilteredData] = useState<GraphT | null>(null);
+
   const [centerPerson, setCenterPerson] = useState<{
     id: string;
     label: string;
     role?: string;
   } | null>(null);
 
+  const [size, setSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
   const fgRef = useRef<
     ForceGraphMethods<NodeObject<NodeT>, LinkObject<NodeT, LinkT>> | undefined
   >(undefined);
+
+  // 화면 리사이즈 감지
+  useEffect(() => {
+    const handleResize = () =>
+      setSize({ width: window.innerWidth, height: window.innerHeight });
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const graphHeight = useMemo(() => {
+    const isMobile = size.width < 768;
+    return isMobile
+      ? Math.floor(size.height * 0.68)
+      : Math.floor(size.height * 0.82);
+  }, [size]);
 
   // Firestore 전체 egoGraphs 목록 불러오기
   async function loadAllEgoGraphs() {
@@ -69,10 +93,7 @@ export default function EgoGraph({
 
     return snap.docs.map((d) => {
       const raw = d.data() as any;
-      return {
-        id: d.id,
-        label: raw.label ?? "",
-      };
+      return { id: d.id, label: raw.label ?? "" };
     });
   }
 
@@ -84,7 +105,7 @@ export default function EgoGraph({
     init();
   }, []);
 
-  // 특정 id의 에고그래프 데이터 fetch
+  // 특정 인물 그래프 가져오기
   async function fetchEgoGraph(id: string): Promise<GraphT | null> {
     try {
       const ref = doc(db, "egoGraphs", id);
@@ -99,7 +120,6 @@ export default function EgoGraph({
     }
   }
 
-  // 에고그래프 로드
   const loadGraph = useCallback(async (id: string) => {
     const d = await fetchEgoGraph(id);
     if (!d) return;
@@ -116,7 +136,14 @@ export default function EgoGraph({
     }
   }, []);
 
-  // 역할 → 색상 매핑
+  useEffect(() => {
+    if (allPersons.length === 0) return;
+
+    const exists = allPersons.some((p) => p.id === DEFAULT_EGO_ID);
+    if (exists) loadGraph(DEFAULT_EGO_ID);
+  }, [allPersons]);
+
+  // role 색상 매핑
   const mapRole = (role?: string): "actor" | "director" | "staff" => {
     if (!role) return "actor";
     if (role.includes("배우") || role.includes("출연") || role.includes("단역"))
@@ -129,6 +156,7 @@ export default function EgoGraph({
   const getNodeId = (x: any): string =>
     typeof x === "object" ? String(x.id) : String(x);
 
+  // 중심 + 1-step 이웃만 필터링
   useEffect(() => {
     if (!data || !centerPerson) return;
 
@@ -158,6 +186,7 @@ export default function EgoGraph({
     setFilteredData({ nodes: filteredNodes, links: filteredLinks });
   }, [data, centerPerson]);
 
+  // weight 계산
   const egoId = centerPerson?.id ?? null;
 
   const { minW, maxW } = useMemo(() => {
@@ -182,6 +211,7 @@ export default function EgoGraph({
     [filteredData]
   );
 
+  // 검색 → 자동 로드
   useEffect(() => {
     if (!searchTerm.trim() || allPersons.length === 0) return;
 
@@ -197,31 +227,27 @@ export default function EgoGraph({
     }
 
     loadGraph(found.id);
-
   }, [searchTerm, allPersons]);
 
   useEffect(() => {
     if (!fgRef.current) return;
 
-    // 초기화
     setCenterPerson(null);
     setData(null);
     setFilteredData(null);
 
-    // force 초기화
-    fgRef.current.d3Force("charge")?.strength(-120);
+    fgRef.current.d3Force("charge")?.strength(-200);
     fgRef.current.d3Force("link")?.strength(0.1);
   }, [resetViewFlag]);
 
-  // zoomToFit
+  // zoomToFit 자동
   useEffect(() => {
     if (!fgRef.current) return;
-
     if (!graphData.nodes.length) return;
 
-    fgRef.current.d3Force("link")?.distance(50);
-    fgRef.current.d3Force("link")?.strength(0.6);
-    fgRef.current.d3Force("charge")?.strength(-60);
+    fgRef.current.d3Force("link")?.distance(40);
+    fgRef.current.d3Force("link")?.strength(0.4);
+    fgRef.current.d3Force("charge")?.strength(-150);
 
     const timer = setTimeout(() => {
       fgRef.current?.zoomToFit(600, 80);
@@ -232,10 +258,7 @@ export default function EgoGraph({
 
   if (!data || !filteredData || !centerPerson) {
     return (
-      <div
-        className="w-full flex items-center justify-center"
-        style={{ height: "550px" }}
-      >
+      <div className="w-full flex items-center justify-center" style={{ height: "550px" }}>
         <div className="text-white text-xl font-semibold opacity-80">
           검색할 인물을 입력해주세요.
         </div>
@@ -243,89 +266,89 @@ export default function EgoGraph({
     );
   }
 
-  // 렌더링
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center relative pb-15">
-      <ForceGraph2D<NodeT, LinkT>
-        ref={fgRef}
-        width={window.innerWidth * 0.9}
-        height={430}
-        graphData={graphData}
-        backgroundColor="transparent"
-        nodeId="id"
-        enableNodeDrag={true}
-        linkColor={() => "rgba(255,255,255,0.7)"}
-        linkWidth={(l) => {
-          const w = l.weight ?? 1;
-          const norm = (w - minW) / (maxW - minW || 1);
-          return 2 + Math.sqrt(norm) * 10;
-        }}
-        nodeCanvasObject={(raw, ctx) => {
-          const node = raw as NodeT & { x: number; y: number };
-          const isCenter = String(node.id) === egoId;
+    <div className="w-full h-full flex flex-col">
 
-          const w = filteredData.links.find(
-            (l) =>
-              getNodeId(l.source) === String(node.id) ||
-              getNodeId(l.target) === String(node.id)
-          )?.weight ?? 1;
-
-          const norm = (w - minW) / (maxW - minW || 1);
-          const eased = Math.sqrt(norm);
-
-          let size = 6 + eased * 4;
-          if (isCenter) size = 12;
-
-          const fontSize = Math.min(14, size * 0.8);
-
-          const category = mapRole(node.role);
-          const color = ROLE_COLORS[category];
-
-          ctx.beginPath();
-          ctx.arc(node.x, node.y, size, 0, 2 * Math.PI);
-          ctx.fillStyle = color;
-          ctx.fill();
-
-          ctx.font = `${fontSize}px sans-serif`;
-          ctx.textAlign = "center";
-          ctx.textBaseline = "middle";
-
-          ctx.lineWidth = 1;
-          ctx.strokeStyle = color;
-          ctx.strokeText(node.label, node.x, node.y);
-
-          ctx.fillStyle = "black";
-          ctx.fillText(node.label, node.x, node.y);
-        }}
-        onNodeClick={(node) => loadGraph(String(node.id))}
-      />
-
-      {/* 범례 */}
+      {/* 설명바*/}
       <div
-        className="
-          absolute bottom-4 left-1/2 -translate-x-1/2 
-          flex items-center gap-6 
-          bg-black/40 backdrop-blur-md px-6 py-3 
-          rounded-full text-white
-        "
+        className="w-full flex items-center justify-center gap-6 py-3 text-white text-sm"
       >
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 rounded-full" style={{ background: ROLE_COLORS.actor }} />
-          <span className="text-sm">배우</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full" style={{ background: ROLE_COLORS.director }} />
-          <span className="text-sm">감독</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full" style={{ background: ROLE_COLORS.staff }} />
-          <span className="text-sm">스태프</span>
+          배우
         </div>
 
-        <div className="ml-4 flex items-center gap-2 text-white/80 text-sm">
-          <span className="w-10 h-1 bg-white inline-block" />
-          <span>링크 두께 = 협업 횟수</span>
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 rounded-full" style={{ background: ROLE_COLORS.director }} />
+          감독
         </div>
+
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 rounded-full" style={{ background: ROLE_COLORS.staff }} />
+          스태프
+        </div>
+
+        <div className="ml-4 flex items-center gap-2 opacity-80">
+          <span className="w-10 h-1 bg-white inline-block" />
+          링크 두께 = 협업 횟수
+        </div>
+      </div>
+
+      {/* 그래프 */}
+      <div className="w-full h-full relative flex items-center justify-center">
+        <ForceGraph2D<NodeT, LinkT>
+              ref={fgRef}
+              width={size.width}
+              height={graphHeight}
+              graphData={graphData}
+              backgroundColor="transparent"
+              nodeId="id"
+              enableNodeDrag={true}
+              minZoom={0.45}
+              maxZoom={2.4}
+              linkColor={() => "rgba(255,255,255,0.75)"}
+              linkWidth={(l) => {
+                const w = l.weight ?? 1;
+                const norm = (w - minW) / (maxW - minW || 1);
+                return 2 + Math.sqrt(norm) * 10;
+              }}
+              nodeCanvasObject={(raw, ctx) => {
+                const node = raw as NodeT & { x: number; y: number };
+                const isCenter = String(node.id) === egoId;
+
+                const w = filteredData.links.find(
+                  (l) =>
+                    getNodeId(l.source) === String(node.id) ||
+                    getNodeId(l.target) === String(node.id)
+                )?.weight ?? 1;
+
+                const norm = (w - minW) / (maxW - minW || 1);
+                const eased = Math.sqrt(norm);
+
+                let size = 8 + eased * 4;
+                if (isCenter) size = 12;
+
+                const category = mapRole(node.role);
+                const color = ROLE_COLORS[category];
+
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, size, 0, 2 * Math.PI);
+                ctx.fillStyle = color;
+                ctx.fill();
+
+                ctx.font = `12px sans-serif`;
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+
+                ctx.lineWidth = 1;
+                ctx.strokeStyle = color;
+                ctx.strokeText(node.label, node.x, node.y);
+
+                ctx.fillStyle = "black";
+                ctx.fillText(node.label, node.x, node.y);
+              }}
+              onNodeClick={(node) => loadGraph(String(node.id))}
+            />
       </div>
     </div>
   );
