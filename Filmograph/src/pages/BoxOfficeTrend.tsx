@@ -17,16 +17,24 @@ const KOBIS_BASE_URL =
   "https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json";
 
 const COLORS = [
-  "#1DB954",
-  "#FF4444",
-  "#33C9FF",
-  "#FFC400",
-  "#FF66C4",
-  "#9D4EDD",
-  "#FF9F1C",
-  "#2EC4B6",
-  "#F15BB5",
-  "#FEE440",
+  "#1DB954", // 남색
+  "#FF4444", // 주황(다홍에 가까운 주황)
+  "#33C9FF", // 하늘
+  "#FFC400", // 노랑
+  "#84f781", // 연두
+  "#FF66C4", // 분홍
+  "#9D4EDD", // 보라
+  "#FF9F1C", // 주황
+  "#2EC4B6", // 어두운 민트
+  "#FEE440", // 밝은 노랑
+  "#f4b973", // 주황
+  "#5fbed4", // 하늘
+  "#775e57", // 갈색
+  "#f1f1f1", // 거의 흰색
+  "#c0e1e8", // 옅은 하늘색
+  "#0e335f", // 진한 남색
+  "#656e65", // 녹색
+  "#000000", // 흰색
 ];
 
 export default function BoxOfficeTrend() {
