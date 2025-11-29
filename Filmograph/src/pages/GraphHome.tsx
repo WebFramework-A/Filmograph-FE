@@ -105,23 +105,23 @@ const GraphHome = () => {
         </h1>
 
         <p className="text-center text-white/80 mb-8">
-          배우, 감독, 영화를 연결하는 복잡한 관계를 네트워크로 시각화합니다
+          배우, 감독, 영화를 연결하는 복잡한 관계를 네트워크로 시각화합니다.
         </p>
 
         {/* 카테고리 버튼 */}
         <div className="flex justify-center gap-3 max-w-3xl mx-auto mb-6">
           <Button
-            text="영화-영화인 그래프"
+            text="영화-영화인 네트워크"
             onClick={() => setGraphType(0)}
             isOpen={graphType === 0}
           />
           <Button
-            text="에고 그래프"
+            text="에고 네트워크"
             onClick={() => setGraphType(1)}
             isOpen={graphType === 1}
           />
           <Button
-            text="협업 네트워킹 그래프"
+            text="협업 네트워크"
             onClick={() => setGraphType(2)}
             isOpen={graphType === 2}
           />
