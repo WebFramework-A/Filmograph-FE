@@ -132,20 +132,23 @@ export default function BoxOfficeTrend() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b4747] text-white p-6 font-sans pt-30 py-30">
+    <div className="min-h-screen bg-[#0b4747] text-white p-6 font-sans pt-20">
       {/* Header */}
-      <div className="max-w-7xl mx-auto mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        <div>
-          <h1 className="text-3xl font-bold flex items-center gap-2 text-yellow-300 ">
-            <TrendingUp className="text-yellow-300" />
-            Weekly Box Office Flow
-          </h1>
-          <p className="text-slate-400 mt-1 text-sm">
-            최근 7일간의 일별 박스오피스 순위 변동 추이입니다.
-          </p>
-        </div>
+      <div className="max-w-6xl mx-auto mb-10">
+        <header>
+          <div className="flex justify-between items-end border-b border-white/20 pb-4 mb-8">
+            <h1 className="text-4xl font-bold text-yellow-200 flex items-center gap-3">
+              <TrendingUp className="text-yellow-200" size={36} />
+              Weekly Box Office Flow
+            </h1>
 
-        <div className="flex items-center gap-3">
+            <p className="text-sm text-white/70 whitespace-nowrap text-right pl-4">
+              지난 7일간의 박스오피스 순위 변동을 한눈에 확인해보세요.
+            </p>
+          </div>
+        </header>
+
+        <div className="w-full flex justify-end mt-2">
           <button
             onClick={fetchBoxOfficeData}
             disabled={loading}
@@ -158,7 +161,7 @@ export default function BoxOfficeTrend() {
       </div>
 
       {/* 그래프 메인영역 */}
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-6xl mx-auto px-2">
         {/* 현황 */}
         <div className="flex justify-between items-center mb-4 px-2">
           <span className="text-xs text-slate-500 flex items-center gap-1">
@@ -239,7 +242,7 @@ export default function BoxOfficeTrend() {
         </div>
 
         {/* 하단에 요약카드들 */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 mb-10">
           {/* 오늘 1등 */}
           <div className="bg-[#181818] p-6 rounded-lg border border-slate-800">
             <h3 className="text-slate-400 text-sm font-medium mb-2">
