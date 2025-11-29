@@ -12,8 +12,8 @@ export default function MapTestPage() {
             <h1 className="text-4xl font-bold text-yellow-200">
               World Cinema Map
             </h1>
-            <p className="text-sm text-white/70">
-              각 나라의 현재 인기 있는 영화를 확인해보세요.
+            <p className="text-sm text-white/70 text-right leading-relaxed">
+              각 나라의 현재 가장 인기 있는 영화를 확인해보세요. <br />   영화 포스터를 클릭 시 상세페이지로 이동합니다.
             </p>
           </div>
         </header>
