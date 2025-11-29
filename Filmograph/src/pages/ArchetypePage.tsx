@@ -44,7 +44,7 @@ const ArchetypePage = () => {
 
         {/* 아키타입 선택 화면 */}
         {!selectedArchetype && (
-          <section>
+          <section className="mb-10">
             <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
               <div>
                 <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-emerald-50/70">
