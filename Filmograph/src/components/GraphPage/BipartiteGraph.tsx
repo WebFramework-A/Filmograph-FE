@@ -253,16 +253,16 @@ export default function BipartiteGraph({ resetViewFlag, searchTerm, onNoResult }
         if (!fgRef.current) return;
 
         // Charge (전하량)
-        fgRef.current.d3Force('charge')?.strength(-500).distanceMax(500);
+        fgRef.current.d3Force('charge')?.strength(-500).distanceMax(700);
 
         // Link (링크 장력)
-        fgRef.current.d3Force('link')?.distance(40).strength(1).iterations(5);
+        fgRef.current.d3Force('link')?.distance(50).strength(1).iterations(5);
 
         // Collide (충돌 방지)
         const collideForce = fgRef.current.d3Force('collide');
         if (collideForce) {
             collideForce.strength(1);
-            collideForce.iterations(2); //반복 횟수 - 정확도 향상
+            collideForce.iterations(3); //반복 횟수 - 정확도 향상
             collideForce.radius((node: any) => {
                 const baseSize = getNodeBaseSize(node, minVal, maxVal);
                 const buffer = node.type === 'movie' ? baseSize * 1.5 : baseSize;
