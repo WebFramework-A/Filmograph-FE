@@ -1,7 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../pages/Navbar";
 import Footer from "../pages/Footer";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 
 const HomeLayout = () => {
   const location = useLocation();
@@ -10,33 +10,50 @@ const HomeLayout = () => {
   const isHomePage = location.pathname === "/";
   const [isFooterVisible, setIsFooterVisible] = useState(false);
 
-  // 경로가 바뀔 때마다 스크롤을 맨 위로 초기화하고 푸터 숨김
+  // 스크롤 및 화면 크기 상태 체크 함수
+  const checkScrollPosition = useCallback(() => {
+    const scrollContainer = mainRef.current;
+    if (!scrollContainer) return;
+
+    const { scrollTop, scrollHeight, clientHeight } = scrollContainer;
+
+    // 내용이 화면보다 짧거나 같으면 무조건 보여줌
+    if (scrollHeight <= clientHeight) {
+      setIsFooterVisible(true);
+      return;
+    }
+
+    const isBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight - 20;
+
+    setIsFooterVisible(isBottom);
+  }, []);
+
+  // 스크롤 초기화 및 즉시 상태 체크
   useEffect(() => {
     if (mainRef.current) {
       mainRef.current.scrollTop = 0;
     }
-    setIsFooterVisible(false);
-  }, [location.pathname]);
+    setTimeout(checkScrollPosition, 0);
+  }, [location.pathname, checkScrollPosition]); // 경로 바뀔때마다
 
-  // 스크롤 이벤트 감지 (모든 페이지 공통 적용)
+  // 스크롤 이벤트 & 리사이즈 이벤트 감지
   useEffect(() => {
     const scrollContainer = mainRef.current;
     if (!scrollContainer) return;
 
-    const handleScroll = () => {
-      const { scrollTop, scrollHeight, clientHeight } = scrollContainer;
+    scrollContainer.addEventListener("scroll", checkScrollPosition);
 
-      // 바닥 감지
-      const isBottom = scrollTop + clientHeight >= scrollHeight - 5;
+    // 화면 크기가 변하거나/그래프가 로딩되어 길이가 변할 때 감지
+    const resizeObserver = new ResizeObserver(() => {
+      checkScrollPosition();
+    });
+    resizeObserver.observe(scrollContainer);
 
-      setIsFooterVisible(isBottom);
+    return () => {
+      scrollContainer.removeEventListener("scroll", checkScrollPosition);
+      resizeObserver.disconnect();
     };
-
-    handleScroll();
-
-    scrollContainer.addEventListener("scroll", handleScroll);
-    return () => scrollContainer.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [checkScrollPosition]);
 
   const footerBgColor = "backdrop-blur-md";
   const footerTextColor = isHomePage ? "text-[#0d5a5a]" : "text-yellow-100";
@@ -55,7 +72,9 @@ const HomeLayout = () => {
           [scrollbar-width:none]
           `}
       >
-        <Outlet />
+        <div className="w-full min-h-full">
+          <Outlet />
+        </div>
       </main>
 
       {/* 푸터 */}

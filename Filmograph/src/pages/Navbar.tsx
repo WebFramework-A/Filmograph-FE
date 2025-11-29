@@ -23,8 +23,8 @@ const Navbar = () => {
       </NavLink>
 
       <div className="flex items-center gap-6">
-        <NavLink to="/" className={navLinkClasses} end>
-          Home
+        <NavLink to="/map" className={navLinkClasses} end>
+          Map
         </NavLink>
 
         {/* Graph 메뉴 */}
@@ -58,7 +58,7 @@ const Navbar = () => {
                 to="/graph/collaboration"
                 className="px-4 py-2 hover:bg-white/10 hover:text-yellow-300 text-sm text-center transition-colors"
               >
-                협업 네트워킹
+                협업 네트워크
               </Link>
             </div>
           </div>

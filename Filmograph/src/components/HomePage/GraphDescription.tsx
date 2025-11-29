@@ -1,15 +1,14 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import ForceGraph2D from "react-force-graph-2d";
+import ForceGraph2D, { type ForceGraphMethods } from "react-force-graph-2d";
 
-// 더미 데이터 타입 정의
 type NodeType = {
   id: string;
   label: string;
-  type?: "movie" | "person"; // Bipartite용
-  role?: "director" | "actor" | "staff"; // Ego용
-  group?: number; // Collab용
-  val?: number; // 크기용
+  type?: "movie" | "person";
+  role?: "director" | "actor" | "staff";
+  group?: number;
+  val?: number;
 };
 
 type LinkType = {
@@ -23,7 +22,6 @@ type GraphDataType = {
   links: LinkType[];
 };
 
-// 더미 데이터
 const DUMMY_DATA: Record<string, GraphDataType> = {
   "001": {
     nodes: [
@@ -115,10 +113,11 @@ const GraphDescription = () => {
   const [currentId, setCurrentId] = useState("001");
   const [isAnimating, setIsAnimating] = useState(false);
 
+  // 그래프 제어를 위한 ref
+  const fgRef = useRef<ForceGraphMethods>();
   const graphContainerRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 600, height: 500 });
 
-  // 화면 크기 변경 감지 및 Promise 에러 방지
   useEffect(() => {
     const container = graphContainerRef.current;
     if (!container) return;
@@ -126,8 +125,6 @@ const GraphDescription = () => {
     const resizeObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
         const { width, height } = entry.contentRect;
-
-        // 너비나 높이가 0이면(페이지 이동 등) 업데이트 하지 않음 (Promise 에러 방지)
         if (width === 0 || height === 0) return;
 
         requestAnimationFrame(() => {
@@ -135,10 +132,28 @@ const GraphDescription = () => {
         });
       }
     });
-
     resizeObserver.observe(container);
     return () => resizeObserver.disconnect();
   }, []);
+
+  // 데이터 변경 시 물리 엔진 설정+그래프 확대하기 위해 둠
+  useEffect(() => {
+    if (fgRef.current) {
+      // 물리 엔진 힘 설정
+      fgRef.current.d3Force("charge")?.strength(-100);
+      fgRef.current.d3Force("link")?.distance(0);
+
+      // 렌더링 직후 즉시 확대 (setTimeout 0을 주어 사이클 충돌 방지)
+      setTimeout(() => {
+        if (fgRef.current) {
+          fgRef.current.zoom(4);
+          fgRef.current.centerAt(0, 0);
+        }
+      }, 0);
+
+      fgRef.current.d3ReheatSimulation();
+    }
+  }, [currentId]);
 
   const handleMouseEnter = (id: string) => {
     if (currentId === id) return;
@@ -149,15 +164,13 @@ const GraphDescription = () => {
     }, 200);
   };
 
-  // 노드 그리기 함수
   const drawNode = useCallback(
     (node: any, ctx: CanvasRenderingContext2D) => {
       const currentItem = items.find((i) => i.id === currentId);
       const type = currentItem?.type || "bipartite";
       const label = node.label;
-      const size = node.val ?? 5; // 노드 반지름 (노드 크기조절용)
+      const size = (node.val ?? 5) * 0.7;
 
-      // 노드 원 그리기
       ctx.beginPath();
       ctx.arc(node.x, node.y, size, 0, 2 * Math.PI, false);
 
@@ -176,14 +189,12 @@ const GraphDescription = () => {
       }
       ctx.fill();
 
-      // 텍스트 그리기 (노드 내부)
+      // 텍스트 그리기
       const fontSize = Math.max(size * 0.9, 2);
-
       ctx.font = `${fontSize}px Sans-Serif`;
-      ctx.fillStyle = "#0b4747";
+      ctx.fillStyle = "black";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-
       ctx.fillText(label, node.x, node.y);
     },
     [currentId]
@@ -194,17 +205,16 @@ const GraphDescription = () => {
       <div className="text-5xl mb-5 text-[#0b4747]">그래프 종류</div>
 
       <button
-        className="border border-[#0b4747]/50 rounded-4xl hover:bg-[#0b4747] hover:text-white duration-400 px-4 py-2 mb-10 cursor-pointer transition-colors"
+        className="border border-[#0b4747]/50 rounded-4xl hover:bg-[#0b4747] hover:text-white duration-400 px-4 py-2 cursor-pointer transition-colors"
         onClick={() => navigate("/graph")}
       >
         전체 그래프 보러가기
       </button>
 
-      <div className="grid grid-cols-5 w-full max-w-7xl px-10 py-5 gap-10 items-start h-[500px]">
-        {/* 좌측 (리스트 부분) */}
-        <div className="col-span-3 flex flex-col text-[#0b4747]">
+      <div className="flex justify-center items-center w-full max-w-7xl px-10 py-5 gap-10  h-[500px]">
+        {/* 좌측 (리스트) */}
+        <div className="w-[60%] flex flex-col text-[#0b4747]">
           <div className="w-full border-t border-[#0b4747]/50"></div>
-
           {items.map((item) => (
             <div
               key={item.id}
@@ -242,10 +252,10 @@ const GraphDescription = () => {
           ))}
         </div>
 
-        {/* 우측 (그래프 프리뷰 영역) */}
+        {/* 우측 (그래프)*/}
         <div
           ref={graphContainerRef}
-          className="col-span-2 h-[80%] flex items-center justify-center relative  rounded-3xl overflow-hidden"
+          className="w-[50%] h-full flex items-center justify-center relative  rounded-3xl overflow-hidden "
         >
           <div
             className={`
@@ -258,13 +268,14 @@ const GraphDescription = () => {
               }
             `}
           >
-            {/* dimensions가 유효할 때만 렌더링 */}
             {dimensions.width > 0 && dimensions.height > 0 && (
               <ForceGraph2D
+                ref={fgRef}
                 width={dimensions.width}
                 height={dimensions.height}
                 graphData={DUMMY_DATA[currentId]}
                 backgroundColor="transparent"
+                nodeLabel=""
                 linkColor={() => "#0b4747"}
                 linkWidth={(link: any) => (link.weight ? link.weight : 1)}
                 nodeCanvasObject={drawNode}
@@ -273,9 +284,8 @@ const GraphDescription = () => {
               />
             )}
           </div>
-
           <div className="absolute bottom-4 right-6 text-gray-800 text-sm italic">
-            *봉준호 감독 관련 예시 데이터
+            ※ 봉준호 감독 관련 예시 데이터입니다.
           </div>
         </div>
       </div>
