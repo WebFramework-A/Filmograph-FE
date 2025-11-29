@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useAllMovies from "../features/movie/hooks/useAllMovies";
 import Searcrbar from "../components/common/Searcrbar";
 import { ImageWithFallback } from "../features/movie/components/ImageWithFallback";
+import DailyBoxOffice from "../features/movie/components/DailyBoxOffice";
 
 const GENRES = ["전체", "액션", "가족", "멜로/로맨스", "코미디", "스릴러", "범죄", "미스터리", "SF", "판타지", "공포(호러)", "애니메이션", "뮤지컬", "공연", "다큐멘터리"];
 
@@ -54,19 +55,20 @@ export default function AllMoviesPage() {
     }
 
     return (
-        <div className="min-h-screen bg-[#0d5a5a] text-white pt-24 pb-12 px-8">
-            <div className="max-w-7xl mx-auto">
+        <div className="min-h-screen bg-[#0b4747] text-white p-8 pt-20">
+            <div className="max-w-6xl mx-auto">
+                {/*헤더*/}
+                <div className="flex justify-between items-end border-b border-white/20 pb-4 mb-12">
+                    <h1 className="text-4xl font-bold text-yellow-200">Movies</h1>
+                    <p className="text-sm text-white/70">Filmograph의 모든 영화를 탐색해보세요</p>
+                </div>
 
                 {/* 1. 오늘의 추천 영화 */}
-                <section className="mb-12">
-                    <h2 className="text-2xl font-bold text-yellow-200 mb-4">
-                        🍿 오늘의 추천 영화 (Daily BoxOffice)
+                <section className="mb-16">
+                    <h2 className="text-2xl font-bold text-yellow-200 mb-6 flex items-center gap-2">
+                        <span>🍿</span> 오늘의 추천 영화 (Daily BoxOffice)
                     </h2>
-                    <div className="bg-black/20 rounded-xl p-8 border border-white/10 flex items-center justify-center min-h-[200px]">
-                        <p className="text-white/50 text-lg">
-                            (여기에 일간 박스오피스 API를 연동한 추천 영화 컴포넌트가 들어갈 예정입니다)
-                        </p>
-                    </div>
+                    <DailyBoxOffice />
                 </section>
 
                 <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-8 border-b border-white/10 pb-6">
@@ -160,6 +162,6 @@ export default function AllMoviesPage() {
                 )}
 
             </div>
-        </div>
+        </div >
     );
 }

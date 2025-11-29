@@ -2,6 +2,13 @@
 
 @import "tailwindcss";
 
+/* 마우스 호버 시 애니메이션 멈춤 유틸리티 추가 */
+@layer utilities {
+  .pause {
+    animation-play-state: paused;
+  }
+}
+
 /* 전체 기본 폰트 설정 */
 @theme {
   /* 
@@ -14,5 +21,5 @@
 body {
   font-family: var(--font-sans);
   font-weight: 100;
-  
+
 }
