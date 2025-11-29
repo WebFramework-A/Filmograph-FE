@@ -89,7 +89,7 @@ const ArchetypePage = () => {
                       </span>
                     ))}
                     {rule.keywords.length > 3 && (
-                      <span className="inline-block transform -translate-y-[1px] text-[11px] leading-none text-emerald-50/70">
+                      <span className="inline-block transform -translate-y-px text-[11px] leading-none text-emerald-50/70">
                         + more
                       </span>
                     )}
