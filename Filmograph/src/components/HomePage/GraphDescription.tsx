@@ -201,7 +201,7 @@ const GraphDescription = () => {
   );
 
   return (
-    <div className="min-h-screen snap-start flex flex-col items-center pt-50 bg-yellow-200">
+    <div className="min-h-screen snap-start flex flex-col items-center p-50 bg-yellow-200">
       <div className="text-5xl mb-5 text-[#0b4747]">그래프 종류</div>
 
       <button
@@ -284,7 +284,7 @@ const GraphDescription = () => {
               />
             )}
           </div>
-          <div className="absolute bottom-4 right-6 text-gray-800 text-sm italic">
+          <div className="absolute bottom-0 right-3 text-gray-800 text-sm italic">
             ※ 봉준호 감독 관련 예시 데이터입니다.
           </div>
         </div>
