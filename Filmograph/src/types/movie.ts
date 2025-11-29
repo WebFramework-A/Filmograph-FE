@@ -41,6 +41,7 @@ export interface MovieStats {
   audienceCount?: number;     // 누적 관객 수 (KOBIS)
   revenue?: number;           // 수익 (TMDB)
   achievements?: string;      // 한 줄 요약 성과
+  avgRating?: number;         // 사이트 내 평균 평점
 }
 
 /** 수상 내역 */
@@ -86,13 +87,13 @@ export interface MovieImages {
 /** 최종 통합 타입 */
 export interface MovieDetail
   extends MovieBase,
-    MovieCredits,
-    MovieStats,
-    MovieAwards {
+  MovieCredits,
+  MovieStats,
+  MovieAwards {
   poster: null;
   openDt: any;
-  
-  tmdbId?: number; 
+
+  tmdbId?: number;
   watchProviders?: WatchProvider[];     // OTT 제공처
   videos?: MovieVideos;                 // 트레일러/영상
   images?: MovieImages;                 // 스틸컷/포스터 갤러리

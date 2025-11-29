@@ -7,10 +7,9 @@ const Navbar = () => {
   const { user, loading } = useAuth();
 
   const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
-    `transition-colors duration-200 ${
-      isActive
-        ? "text-yellow-300 "
-        : "text-white hover:text-yellow-300 duration-400"
+    `transition-colors duration-200 ${isActive
+      ? "text-yellow-300 "
+      : "text-white hover:text-yellow-300 duration-400"
     }`;
 
   return (
@@ -72,6 +71,10 @@ const Navbar = () => {
           BoxOffice
         </NavLink>
 
+        <NavLink to="/allmovie" className={navLinkClasses} end>
+          Movies
+        </NavLink>
+
         {loading ? (
           <div className="w-8 h-8 rounded-full bg-gray-700 animate-pulse" />
         ) : user ? (
@@ -81,8 +84,7 @@ const Navbar = () => {
                 to="/my"
                 title="마이페이지"
                 className={({ isActive }) =>
-                  `block rounded-full p-0.5 transition-all ${
-                    isActive ? "ring-2 ring-yellow-200 duration-500" : ""
+                  `block rounded-full p-0.5 transition-all ${isActive ? "ring-2 ring-yellow-200 duration-500" : ""
                   }`
                 }
               >
