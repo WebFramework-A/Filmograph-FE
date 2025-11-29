@@ -181,7 +181,7 @@ export default function BoxOfficeTrend() {
         )}
 
         {/* 그래프 */}
-        <div className="bg-black/30 rounded-xl p-6 shadow-2xl relative overflow-hidden">
+        <div className="bg-black/20 rounded-xl p-6 shadow-2xl relative overflow-hidden">
           {loading && (
             <div className="absolute inset-0 bg-black/10 z-10 flex items-center justify-center">
               <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>
@@ -243,7 +243,7 @@ export default function BoxOfficeTrend() {
         {/* 하단에 요약카드들 */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 mb-10">
           {/* 오늘 1등 */}
-          <div className="bg-black/30 p-6 rounded-lg border border-slate-800">
+          <div className="bg-black/20 p-6 rounded-lg border border-slate-800">
             <h3 className="text-slate-400 text-sm font-medium mb-2">
               최신 1위 영화
             </h3>
@@ -257,7 +257,7 @@ export default function BoxOfficeTrend() {
           </div>
 
           {/* Entry Count */}
-          <div className="bg-black/30 p-6 rounded-lg border border-slate-800">
+          <div className="bg-black/20 p-6 rounded-lg border border-slate-800">
             <h3 className="text-slate-400 text-sm font-medium mb-2">
               랭킹 진입 영화 수
             </h3>
