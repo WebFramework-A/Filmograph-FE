@@ -60,7 +60,7 @@ export default function AllMoviesPage() {
                 {/*헤더*/}
                 <div className="flex justify-between items-end border-b border-white/20 pb-4 mb-12">
                     <h1 className="text-4xl font-bold text-yellow-200">Movies</h1>
-                    <p className="text-sm text-white/70">Filmograph의 모든 영화를 탐색해보세요</p>
+                    <p className="text-sm text-white/70">Filmograph의 모든 영화를 탐색해보세요.</p>
                 </div>
 
                 {/* 1. 오늘의 추천 영화 */}
@@ -115,7 +115,7 @@ export default function AllMoviesPage() {
                 </div>
 
                 {filteredMovies.length > 0 ? (
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 mb-12">
                         {filteredMovies.map((movie) => (
                             <div
                                 key={movie.id}
@@ -130,12 +130,12 @@ export default function AllMoviesPage() {
                                     />
                                 </div>
 
-                                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 backdrop-blur-sm">
                                     <h4 className="text-white font-bold text-lg leading-tight mb-1">
                                         {movie.title}
                                     </h4>
                                     <p className="text-yellow-400 text-sm font-medium">
-                                        ★ {movie.avgRating ? movie.avgRating.toFixed(1) : "0.0"}
+                                        ★ {movie.rating?.toFixed(1)}
                                     </p>
                                     <p className="text-white/60 text-xs mt-2 line-clamp-2">
                                         {Array.isArray(movie.genre)
