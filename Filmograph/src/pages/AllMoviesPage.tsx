@@ -65,8 +65,8 @@ export default function AllMoviesPage() {
 
                 {/* 1. 오늘의 추천 영화 */}
                 <section className="mb-16">
-                    <h2 className="text-2xl font-bold text-yellow-200 mb-6 flex items-center gap-2">
-                        <span>🍿</span> 오늘의 추천 영화 (Daily BoxOffice)
+                    <h2 className="mt-1 text-xl font-semibold text-emerald-50">
+                        오늘의 추천 영화
                     </h2>
                     <DailyBoxOffice />
                 </section>
@@ -75,7 +75,9 @@ export default function AllMoviesPage() {
 
                     {/* 2. 장르 카테고리 */}
                     <div className="flex-1">
-                        <h3 className="text-lg font-bold text-white mb-3">장르별 모아보기</h3>
+                        <h2 className="mt-1 text-xl font-semibold text-emerald-50 mb-5">
+                            장르별 모아보기
+                        </h2>
                         <div className="flex flex-wrap gap-2">
                             {GENRES.map((genre) => (
                                 <button

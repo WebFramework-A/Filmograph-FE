@@ -48,17 +48,16 @@ export const getDailyBoxOffice = async (): Promise<BoxOfficeMovie[]> => {
     const docRef = doc(db, "dailyBoxOffice", targetDate);
 
     try {
-        // 1. 파이어베이스 확인
+        // 파이어베이스 확인
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-            console.log("✅ [캐싱됨] Firestore에서 데이터 로드");
+            console.log("[캐싱됨] Firestore에서 데이터 로드");
             return docSnap.data().movies as BoxOfficeMovie[];
         }
 
-        // 2. API 호출 (프록시 사용)
-        console.log("🚀 [API 호출] KOBIS에서 새로 가져옵니다...");
+        // API 호출 (프록시 사용)
+        console.log("[API 호출] KOBIS에서 새로 가져옵니다...");
 
-        // [중요] http://www.kobis.or.kr 도메인을 빼고 '/kobis'로 시작해야 함!
         const kobisUrl = `/kobis/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=${KOBIS_API_KEY}&targetDt=${targetDate}`;
 
         const res = await fetch(kobisUrl);
@@ -67,7 +66,7 @@ export const getDailyBoxOffice = async (): Promise<BoxOfficeMovie[]> => {
         const data = await res.json();
         const list = data.boxOfficeResult?.dailyBoxOfficeList || [];
 
-        // 3. 포스터 추가
+        // 포스터 추가
         const moviesWithPosters = await Promise.all(
             list.map(async (item: any) => {
                 const { posterUrl, tmdbId } = await fetchPoster(item.movieNm);
@@ -82,20 +81,20 @@ export const getDailyBoxOffice = async (): Promise<BoxOfficeMovie[]> => {
             })
         );
 
-        // 4. 파이어베이스 저장 (이게 성공해야 컬렉션이 생깁니다)
+        // 파이어베이스 저장
         if (moviesWithPosters.length > 0) {
             await setDoc(docRef, {
                 date: targetDate,
                 movies: moviesWithPosters,
                 createdAt: serverTimestamp()
             });
-            console.log("💾 [저장 완료] Firestore에 저장됨");
+            console.log("[저장 완료] Firestore에 저장됨");
         }
 
         return moviesWithPosters;
 
     } catch (error) {
-        console.error("❌ 박스오피스 에러:", error);
+        console.error("박스오피스 에러:", error);
         return [];
     }
 };
