@@ -1,7 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { getArchetypedCharacters } from "../services/archetype/archetypeData";
 import { ARCHETYPE_RULES } from "../services/archetype/archetypeRules";
-import type { ArchetypeId, Character } from "../services/archetype/archetypeTypes";
+import type {
+  ArchetypeId,
+  Character,
+} from "../services/archetype/archetypeTypes";
 
 const ArchetypePage = () => {
   const [characters, setCharacters] = useState<Character[]>([]);
@@ -41,7 +44,6 @@ const ArchetypePage = () => {
           </div>
         </header>
 
-
         {/* 아키타입 선택 화면 */}
         {!selectedArchetype && (
           <section className="mb-10">
@@ -62,7 +64,7 @@ const ArchetypePage = () => {
                   key={rule.id}
                   type="button"
                   onClick={() => setSelectedArchetype(rule.id)}
-                  className="group flex h-full flex-col justify-between rounded-3xl border border-white/18 bg-emerald-950/35 px-4 py-5 text-left shadow-[0_10px_30px_rgba(0,0,0,0.45)] transition hover:-translate-y-1 hover:border-white/45 hover:bg-emerald-950/60"
+                  className="group flex h-full flex-col justify-between rounded-3xl border border-white/18 bg-emerald-950/35 px-4 py-5 text-left shadow-[0_10px_30px_rgba(0,0,0,0.45)] transition hover:-translate-y-1 hover:border-white/45 hover:bg-emerald-950/60 cursor-pointer"
                 >
                   <div className="flex items-center justify-between text-[11px] font-medium uppercase tracking-[0.22em] text-emerald-100/80">
                     <span>type</span>
@@ -135,14 +137,13 @@ const ArchetypePage = () => {
                   <p className="mt-2 text-lg font-semibold text-slate-900">
                     {selectedRule.name}
                   </p>
-                  <p className="mt-3 text-[13px] leading-relaxed text-slate-600">
-                  </p>
+                  <p className="mt-3 text-[13px] leading-relaxed text-slate-600"></p>
 
                   <div className="mt-4 flex flex-wrap gap-1.5">
                     {selectedRule.keywords.slice(0, 6).map((kw) => (
                       <span
                         key={kw}
-                        className="rounded-full bg-slate-900/5 px-3 py-0.5 text-[11px] text-slate-700"
+                        className="rounded-full bg-slate-900/5 px-3 py-0.5 text-xs text-slate-700"
                       >
                         {kw}
                       </span>
@@ -171,44 +172,43 @@ const ArchetypePage = () => {
                     아직 이 아키타입에 등록된 캐릭터가 없어요.
                   </div>
                 ) : (
-                  <div className="grid gap-6 md:grid-cols-3">
+                  <div className="grid gap-6 grid-cols-6">
                     {filteredCharacters.map((ch) => (
                       <article
                         key={ch.id}
                         className="group flex flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white transition hover:-translate-y-1 hover:border-slate-900/70 hover:shadow-[0_22px_55px_rgba(0,0,0,0.25)]"
                       >
                         <div className="relative aspect-4/5 overflow-hidden bg-slate-900">
-  
-                    {/* 캐릭터 이미지 */}
-                    <img
-                      src={ch.profileUrl}
-                      alt={ch.name}
-                      className="w-full h-full object-cover"
-                    />
+                          {/* 캐릭터 이미지 */}
+                          <img
+                            src={ch.profileUrl}
+                            alt={ch.name}
+                            className="w-full h-full object-cover"
+                          />
 
-                    {/* 위에 덮는 그라데이션 */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/25 to-transparent" /></div>
-
-                    <div className="flex flex-1 flex-col gap-1 px-2 py-1">
-                    <p className="text-[13px] font-semibold text-slate-800">
-                      {ch.name}
-                    </p>
-                    <p className="text-[12px] text-slate-500">
-                      {ch.movieTitle}
-                    </p>
-                  </div>
-
-                        </article>
-                               ))}
+                          {/* 위에 덮는 그라데이션 */}
+                          <div className="absolute inset-0 bg-liner-to-t from-black/25 to-transparent" />
                         </div>
-                      )}
-                    </div>
+
+                        <div className="flex flex-1 flex-col gap-1 px-2 py-1">
+                          <p className="text-[13px] font-semibold text-slate-800">
+                            {ch.name}
+                          </p>
+                          <p className="text-[12px] text-slate-500">
+                            {ch.movieTitle}
+                          </p>
+                        </div>
+                      </article>
+                    ))}
                   </div>
-                 </section>
                 )}
-               </div>
+              </div>
             </div>
-           );
-          };
+          </section>
+        )}
+      </div>
+    </div>
+  );
+};
 
 export default ArchetypePage;
