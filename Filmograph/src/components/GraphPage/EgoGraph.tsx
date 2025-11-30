@@ -31,7 +31,7 @@ type GraphT = {
 };
 
 // 기본 중심 인물 ID
-const DEFAULT_EGO_ID = "10001779";
+const DEFAULT_EGO_ID = "10047370";
 
 export default function EgoGraph({
   resetViewFlag,
@@ -121,6 +121,8 @@ export default function EgoGraph({
   }
 
   const loadGraph = useCallback(async (id: string) => {
+    const fg = fgRef.current;
+
     const d = await fetchEgoGraph(id);
     if (!d) return;
 
@@ -134,14 +136,21 @@ export default function EgoGraph({
         role: center.role,
       });
     }
+
+    setTimeout(() => {
+      if (fg) {
+        fgRef.current?.zoomToFit(600, 160);
+      }
+    }, 600);
   }, []);
+
 
   useEffect(() => {
     if (allPersons.length === 0) return;
 
     const exists = allPersons.some((p) => p.id === DEFAULT_EGO_ID);
     if (exists) loadGraph(DEFAULT_EGO_ID);
-  }, [allPersons]);
+  }, [allPersons, loadGraph]);
 
   // role 색상 매핑
   const mapRole = (role?: string): "actor" | "director" | "staff" => {
@@ -180,7 +189,10 @@ export default function EgoGraph({
 
     // 위치 초기화
     filteredNodes.forEach((n) => {
-      n.x = n.y = n.vx = n.vy = n.fx = n.fy = undefined;
+        n.x = undefined;
+        n.y = 80;
+        n.vx = n.vy = undefined;
+        n.fx = n.fy = undefined;
     });
 
     setFilteredData({ nodes: filteredNodes, links: filteredLinks });
@@ -227,7 +239,7 @@ export default function EgoGraph({
     }
 
     loadGraph(found.id);
-  }, [searchTerm, allPersons]);
+  }, [searchTerm, allPersons, loadGraph, onNoResult]);
 
   useEffect(() => {
     if (!fgRef.current) return;
@@ -240,7 +252,6 @@ export default function EgoGraph({
     fgRef.current.d3Force("link")?.strength(0.1);
   }, [resetViewFlag]);
 
-  // zoomToFit 자동
   useEffect(() => {
     if (!fgRef.current) return;
     if (!graphData.nodes.length) return;
@@ -249,11 +260,6 @@ export default function EgoGraph({
     fgRef.current.d3Force("link")?.strength(0.4);
     fgRef.current.d3Force("charge")?.strength(-150);
 
-    const timer = setTimeout(() => {
-      fgRef.current?.zoomToFit(600, 150);
-    }, 400);
-
-    return () => clearTimeout(timer);
   }, [graphData]);
 
   if (!data || !filteredData || !centerPerson) {

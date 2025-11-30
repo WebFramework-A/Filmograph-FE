@@ -171,7 +171,7 @@ export default function BoxOfficePage() {
             <h1 className="text-4xl font-bold text-yellow-200">
               Daily Box Office
             </h1>
-            <p className="text-sm text-white/70">어제 기준 일간 박스오피스</p>
+            <p className="text-sm text-white/70">일간 박스오피스 데이터를 확인해보세요.</p>
           </div>
         </header>
 
