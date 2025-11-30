@@ -11,6 +11,7 @@ export default function DailyBoxOffice() {
             .finally(() => setLoading(false));
     }, []);
 
+
     if (loading) return <div className="text-white text-xl font-semibold animate-pulse">오늘의 박스오피스 불러오는 중 · · ·</div>;
     if (movies.length === 0) return null;
 
