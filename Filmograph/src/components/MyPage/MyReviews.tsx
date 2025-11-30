@@ -114,7 +114,7 @@ export default function Status(props: StatusProps) {
 
                 {/* 별점 및 삭제 버튼 */}
                 <div className="flex items-center gap-3">
-                  <div className="flex items-center gap-1 text-[#FFD700] font-bold flex-shrink-0">
+                  <div className="flex items-center gap-1 text-[#FFD700] font-bold shrink-0">
                     <span>★</span>
                     <span>{review.rating}</span>
                   </div>

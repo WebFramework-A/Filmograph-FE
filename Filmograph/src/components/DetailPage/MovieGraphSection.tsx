@@ -20,7 +20,6 @@ type LinkT = { source: string; target: string };
 const CANVAS_WIDTH = 1200;
 const CANVAS_HEIGHT = 600;
 
-const R_CENTER = 0;        
 const R_PEOPLE = 160;      
 const R_RELATED = 250;     
 

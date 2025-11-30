@@ -135,7 +135,7 @@ export default function AllMoviesPage() {
                             <option value="rating">별점순</option>
                             <option value="title">제목순</option>
                         </select>
-                        <div className="w-[1px] h-4 bg-white/20"></div>
+                        <div className="w-px h-4 bg-white/20"></div>
                         <button
                             onClick={() => setSortOrder(prev => prev === "asc" ? "desc" : "asc")}
                             className="text-white/70 hover:text-white px-2 text-sm font-bold transition-colors"
@@ -175,7 +175,7 @@ export default function AllMoviesPage() {
                                 onClick={() => navigate(`/detail/${movie.id}`)}
                                 className="group cursor-pointer relative bg-black/20 rounded-lg overflow-hidden border border-white/10 hover:border-yellow-400 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
                             >
-                                <div className="aspect-[2/3] w-full overflow-hidden bg-gray-800">
+                                <div className="aspect-2/3 w-full overflow-hidden bg-gray-800">
                                     <ImageWithFallback
                                         src={movie.posterUrl}
                                         alt={movie.title}
