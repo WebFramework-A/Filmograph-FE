@@ -1,13 +1,11 @@
 // src/hooks/useGraphSearch.ts
 import { useEffect } from "react";
 
-// 공통 노드 타입
 export interface SearchNode {
   id: string | number;
-  [key: string]: any;  // name, label 등 어떤 속성이든 허용
+  [key: string]: any;
 }
 
-// 공통 그래프 타입
 export interface SearchGraphData {
   nodes: SearchNode[];
   links: any[];
@@ -16,37 +14,42 @@ export interface SearchGraphData {
 interface UseGraphSearchProps {
   searchTerm: string;
   graphData: SearchGraphData;
-  searchKey: string;               // 검색할 노드 속성 키
+  searchKey: string;
   onMatch: (node: SearchNode) => void;
-  onNoResult: () => void;
+  onNoResult?: () => void;   // optional
 }
 
-// 공통 검색 
 export default function useGraphSearch({
   searchTerm,
   graphData,
   searchKey,
   onMatch,
-  onNoResult,
+  onNoResult
 }: UseGraphSearchProps) {
+
   useEffect(() => {
     const keyword = searchTerm.trim();
+
+    // 검색어 없으면 실행 금지  
     if (!keyword) return;
+
+    // 그래프 데이터가 아직 로드 안됐으면 금지
+    if (!graphData.nodes.length) return;
 
     const lower = keyword.toLowerCase();
 
-    // 공통 검색 로직
     const target = graphData.nodes.find((n: SearchNode) =>
       ((n[searchKey] ?? "") as string).toLowerCase().includes(lower)
     );
 
-    if (!target) {
-      onNoResult();
-      return;
-    }
+  if (!target) {
+    if (onNoResult) {
+      onNoResult(); }
+    return;
+  }
 
-    onMatch(target);
-    
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  onMatch(target);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTerm, graphData]);
 }
