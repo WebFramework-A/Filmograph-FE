@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Star } from "lucide-react";
 import { ImageWithFallback } from "./ImageWithFallback";
 import { useState, useEffect } from "react";
-import type { MovieDetail } from "../../../types/movie";
+import type { MovieDetail } from "../../types/movie";
 
 const round1 = (v?: number | null) =>
   typeof v === "number" ? Math.round(v * 10) / 10 : undefined;

@@ -1,9 +1,9 @@
 // src/services/movies/matchTmdbToKobis.ts
 import axios from "axios";
 import { fetchTMDBById } from "./tmdbApi";
-import { db } from "../firebaseConfig";
+import { db } from "../data/firebaseConfig";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { countKobisCall } from "../kobisUsage";
+import { countKobisCall } from "../data/kobisUsage";
 
 const KOBIS_KEY = import.meta.env.VITE_KOBIS_API_KEY;
 

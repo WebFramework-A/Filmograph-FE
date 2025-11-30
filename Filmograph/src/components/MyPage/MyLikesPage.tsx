@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
-import { db } from "../../services/firebaseConfig";
+import { db } from "../../services/data/firebaseConfig";
 import {
   doc,
   getDoc,
@@ -97,7 +97,7 @@ export default function WishlistPage() {
               className="relative group cursor-pointer"
               onClick={() => navigate(`/detail/${movie.id}`)}
             >
-              <div className="aspect-[2/3] rounded-lg overflow-hidden bg-gray-800 shadow-lg border border-white/10 group-hover:border-[#FFD700] transition-all relative">
+              <div className="aspect-2/3 rounded-lg overflow-hidden bg-gray-800 shadow-lg border border-white/10 group-hover:border-[#FFD700] transition-all relative">
                 {movie.posterUrl ? (
                   <img
                     src={movie.posterUrl}

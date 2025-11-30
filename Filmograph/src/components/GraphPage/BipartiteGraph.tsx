@@ -1,7 +1,7 @@
 // src/components/GraphPage/BipartiteGraph.tsx
 import { useEffect, useMemo, useRef, useState } from "react";
 import ForceGraph2D from "react-force-graph-2d";
-import { db } from "../../services/firebaseConfig";
+import { db } from "../../services/data/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import useGraphSearch from "../../hooks/useGraphSearch";

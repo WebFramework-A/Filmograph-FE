@@ -10,12 +10,12 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { Calendar, RefreshCw, AlertCircle } from "lucide-react";
-import type { ChartDataPoint, DailyData } from "../types/boxOfficeTrend";
-import { getPastDate } from "../utils/getPastDate";
 
-const KOBIS_BASE_URL =
-  "https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json";
+import type { ChartDataPoint } from "../types/boxOfficeTrend";
+import { save7DaysTrend } from "../services/movies/boxOfficeTrendSaver";
 
+import { db } from "../services/data/firebaseConfig";
+import { doc, collection, getDocs, getDoc } from "firebase/firestore";
 const COLORS = [
   "#1DB954", // 남색
   "#FF4444", // 주황(다홍에 가까운 주황)
@@ -32,7 +32,7 @@ const COLORS = [
   "#775e57", // 갈색
   "#f1f1f1", // 거의 흰색
   "#c0e1e8", // 옅은 하늘색
-  "#0e335f", // 진한 남색
+  "#0A55AF", // 진한 남색
   "#656e65", // 녹색
   "#000000", // 흰색
 ];
@@ -40,96 +40,89 @@ const COLORS = [
 export default function BoxOfficeTrend() {
   const [data, setData] = useState<ChartDataPoint[]>([]);
   const [allMovies, setAllMovies] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); 
   const [error, setError] = useState<string | null>(null);
-  const [lastUpdated, setLastUpdated] = useState<string>("-");
+  const [lastUpdated, setLastUpdated] = useState("-");
 
-  // 데이터 가져오기
-  const fetchBoxOfficeData = async () => {
-    setLoading(true);
-    setError(null);
+  const fetchFromFirestore = async () => {
     try {
-      // 지난 7일간의 데이터 요청 (어제~7일전)
-      const requests = [];
-      const dateMap: {
-        displayFmt: string;
-        apiFmt: any;
-      }[] = [];
+      const snap = await getDocs(collection(db, "boxOfficeTrend"));
+      if (snap.empty) return;
 
-      for (let i = 7; i >= 1; i--) {
-        const dateObj = getPastDate(i);
-        dateMap.push(dateObj);
-        const url = `${KOBIS_BASE_URL}?key=${
-          import.meta.env.VITE_KOBIS_API_KEY
-        }&targetDt=${dateObj.apiFmt}`;
-        requests.push(fetch(url));
-      }
+      const sorted = snap.docs
+        .map((d) => d.data())
+        .sort((a: any, b: any) => Number(a.date) - Number(b.date));
 
-      const responses = await Promise.all(requests);
-      const jsonResults = await Promise.all(responses.map((res) => res.json()));
-
-      // 데이터 가공
       const chartData: ChartDataPoint[] = [];
       const movieSet = new Set<string>();
 
-      jsonResults.forEach((json: DailyData, index) => {
-        if (!json.boxOfficeResult) return;
-
-        const dailyList = json.boxOfficeResult.dailyBoxOfficeList;
-        const dataPoint: ChartDataPoint = {
-          date: dateMap[index].displayFmt,
-          fullDate: dateMap[index].apiFmt,
+      sorted.forEach((day) => {
+        const point: ChartDataPoint = {
+          date: `${day.date.slice(4, 6)}/${day.date.slice(6, 8)}`,
+          fullDate: day.date,
         };
 
-        dailyList.forEach((movie) => {
-          const rank = parseInt(movie.rank, 10);
-          // 1위부터 10위까지만 추적
-          if (rank <= 10) {
-            dataPoint[movie.movieNm] = rank;
-            movieSet.add(movie.movieNm);
-          }
+        day.top10.forEach((m: any) => {
+          point[m.movieNm] = m.rank;
+          movieSet.add(m.movieNm);
         });
 
-        chartData.push(dataPoint);
+        chartData.push(point);
       });
 
       setData(chartData);
       setAllMovies(Array.from(movieSet));
-      setLastUpdated(new Date().toLocaleTimeString());
     } catch (err) {
       console.error(err);
-      setError(
-        "데이터를 불러오는 중 오류가 발생했습니다. (API 키 확인 또는 CORS 문제일 수 있습니다)"
-      );
-    } finally {
-      setLoading(false);
+      setError("데이터 로드 중 오류가 발생했습니다.");
+    }
+  };
+
+  const fetchLastSavedTime = async () => {
+    try {
+      const metaRef = doc(db, "system", "boxOfficeTrendMeta");
+      const metaSnap = await getDoc(metaRef);
+
+      if (metaSnap.exists()) {
+        const isoTime = metaSnap.data().lastSavedAt;
+        setLastUpdated(
+          new Date(isoTime).toLocaleString("ko-KR", { hour12: false })
+        );
+      }
+    } catch (err) {
+      console.error("meta 로드 오류", err);
     }
   };
 
   useEffect(() => {
-    fetchBoxOfficeData();
+    (async () => {
+      setLoading(true);
+      await fetchFromFirestore();
+      await fetchLastSavedTime();
+      setLoading(false);
+    })();
   }, []);
 
   const CustomTooltip = ({ active, payload, label }: any) => {
-    if (active && payload && payload.length) {
-      const sortedPayload = [...payload].sort((a, b) => a.value - b.value);
-
+    if (active && payload?.length) {
+      const ordered = [...payload].sort((a, b) => a.value - b.value);
       return (
-        <div className="bg-slate-800 border border-slate-700 p-4 rounded-lg shadow-xl text-white">
-          <p className="font-bold mb-2 text-slate-300 border-b border-slate-600 pb-1">
+        <div className="bg-slate-800 border border-slate-700 p-4 rounded-lg text-white">
+          <p className="font-bold mb-2 border-b border-slate-600 pb-1">
             {label} 순위
           </p>
-          <ul className="text-sm space-y-1">
-            {sortedPayload.map((entry: any, index: number) => (
+
+          <ul className="space-y-1 text-sm">
+            {ordered.map((item, index) => (
               <li key={index} className="flex items-center gap-2">
                 <span
                   className="inline-block w-3 h-3 rounded-full"
-                  style={{ backgroundColor: entry.color }}
-                ></span>
-                <span className="font-mono font-bold w-8 text-right">
-                  {entry.value}위
+                  style={{ backgroundColor: item.color }}
+                />
+                <span className="font-mono w-8 text-right font-bold">
+                  {item.value}위
                 </span>
-                <span className="text-slate-200">{entry.name}</span>
+                <span>{item.name}</span>
               </li>
             ))}
           </ul>
@@ -140,8 +133,8 @@ export default function BoxOfficeTrend() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b4747] text-white p-6 font-sans pt-20">
-      {/* Header */}
+    <div className="min-h-screen bg-[#0b4747] text-white p-6 pt-20">
+      {/* Header 영역 */}
       <div className="max-w-6xl mx-auto mb-10">
         <header>
           <div className="flex justify-between items-end border-b border-white/20 pb-4 mb-8">
@@ -149,18 +142,25 @@ export default function BoxOfficeTrend() {
               Weekly Box Office Flow
             </h1>
 
-            <p className="text-sm text-white/70 whitespace-nowrap text-right pl-4">
-              지난 7일간의 박스오피스 순위 변동을 한눈에 확인해보세요.
+            <p className="text-sm text-white/70 whitespace-nowrap">
+              Firestore에 저장된 박스오피스 7일 기록을 보여줍니다.
             </p>
           </div>
         </header>
 
-        <div className="w-full flex justify-end mt-2">
+        {/* 🔄 새로고침 버튼 */}
+        <div className="flex justify-end mt-2">
           <button
-            onClick={fetchBoxOfficeData}
             disabled={loading}
-            className="flex items-center gap-2 px-4 py-2 bg-yellow-300 text-[#0b4747] hover:bg-yellow-400 cursor-pointer rounded-md transition-colors text-sm font-medium border border-slate-700"
-          >
+            className="flex items-center gap-2 px-4 py-2 bg-yellow-300 text-[#0b4747] hover:bg-yellow-400 rounded-md transition-colors border border-slate-700"
+            onClick={async () => {
+              setLoading(true);
+              await save7DaysTrend();
+              await fetchFromFirestore();
+              await fetchLastSavedTime();
+              setLoading(false);
+            }}
+            >
             <RefreshCw size={16} className={loading ? "animate-spin" : ""} />
             {loading ? "로딩 중..." : "새로고침"}
           </button>
@@ -207,15 +207,17 @@ export default function BoxOfficeTrend() {
                   stroke="#333"
                   vertical={false}
                 />
+
                 <XAxis
                   dataKey="date"
                   stroke="#666"
                   tick={{ fill: "#888" }}
                   axisLine={{ stroke: "#444" }}
                 />
+
                 <YAxis
-                  reversed={true} // 순위 그래프이므로 1위가 위로 가도록 반전준거임
-                  domain={[1, 10]} // 1위 ~ 10위
+                  reversed={true}
+                  domain={[1, 10]}
                   tickCount={10}
                   stroke="#666"
                   tick={{ fill: "#888" }}
@@ -227,22 +229,25 @@ export default function BoxOfficeTrend() {
                     fill: "#666",
                   }}
                 />
+
                 <Tooltip content={<CustomTooltip />} />
                 <Legend wrapperStyle={{ paddingTop: "20px" }} />
 
-                {allMovies.map((movieName, index) => (
-                  <Line
-                    key={movieName}
-                    type="monotone"
-                    dataKey={movieName}
-                    stroke={COLORS[index % COLORS.length]}
-                    strokeWidth={3}
-                    dot={{ r: 4, strokeWidth: 2, fill: "#181818" }}
-                    activeDot={{ r: 7, strokeWidth: 0 }}
-                    connectNulls={true} // 순위권 밖으로 나갔다 들어와도 선 연결
-                    animationDuration={1500}
-                  />
-                ))}
+                {!loading &&
+                  allMovies.map((movieName, index) => (
+                    <Line
+                      key={movieName}
+                      type="monotone"
+                      dataKey={movieName}
+                      stroke={COLORS[index % COLORS.length]}
+                      strokeWidth={3}
+                      dot={{ r: 4, strokeWidth: 2, fill: "#181818" }}
+                      activeDot={{ r: 7, strokeWidth: 0 }}
+                      connectNulls={true}
+                      animationDuration={1500}
+                    />
+                  ))
+                }
               </LineChart>
             </ResponsiveContainer>
           </div>

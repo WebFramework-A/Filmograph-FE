@@ -1,5 +1,5 @@
 import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "../../../services/firebaseConfig";
+import { db } from "../data/firebaseConfig";
 
 // 데이터 타입 정의
 export interface BoxOfficeMovie {

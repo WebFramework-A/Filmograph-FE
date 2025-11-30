@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import type { WishlistItem } from "../../pages/MyPage";
-import { db } from "../../services/firebaseConfig";
+import { db } from "../../services/data/firebaseConfig";
 import { doc, deleteDoc } from "firebase/firestore";
 import { useAuth } from "../../hooks/useAuth";
 

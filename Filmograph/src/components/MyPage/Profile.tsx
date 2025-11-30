@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../../services/firebaseConfig";
+import { db } from "../../services/data/firebaseConfig";
 import { calculateUserLevel, getNextLevelProgress } from "../../utils/levelUtils";
 
 interface Props {
@@ -121,7 +121,7 @@ export default function Profile({ userInfo, currentUser, reviewCount, likeCount 
                                 </h2>
                                 <button
                                     onClick={() => setIsEditing(true)}
-                                    className="text-xs text-white/50 hover:text-[#FFD700] border border-white/20 px-2 py-1 rounded transition-colors whitespace-nowrap flex-shrink-0"
+                                    className="text-xs text-white/50 hover:text-[#FFD700] border border-white/20 px-2 py-1 rounded transition-colors whitespace-nowrap shrink-0"
                                     title="닉네임 수정"
                                 >
                                     수정

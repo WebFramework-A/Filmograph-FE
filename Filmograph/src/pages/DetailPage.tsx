@@ -1,19 +1,19 @@
 // src/pages/DetailPage.tsx
 import { useParams } from "react-router-dom";
-import MovieHeader from "../features/movie/components/MovieHeader";
-import useMovie from "../features/movie/hooks/useMovie";
+import MovieHeader from "../components/DetailPage/MovieHeader";
+import useMovie from "../hooks/useMovie";
 
-import ScrollSection from "../features/movie/components/ScrollSection";
-import OverviewSection from "../features/movie/components/OverviewSection";
-import CrewSection from "../features/movie/components/CrewSection";
-import CastSection from "../features/movie/components/CastSection";
-import AwardsSection from "../features/movie/components/AwardsSection";
-import VideosSection from "../features/movie/components/VideosSection";
-import WatchProvidersSection from "../features/movie/components/WatchProvidersSection";
-import GallerySection from "../features/movie/components/GallerySection";
-import MovieGraphSection from "../features/movie/components/MovieGraphSection";
-import RelatedMoviesSection from "../features/movie/components/RelatedMoviesSection";
-import ReviewsSection from "../features/movie/components/ReviewsSection";
+import ScrollSection from "../components/DetailPage/ScrollSection";
+import OverviewSection from "../components/DetailPage/OverviewSection";
+import CrewSection from "../components/DetailPage/CrewSection";
+import CastSection from "../components/DetailPage/CastSection";
+import AwardsSection from "../components/DetailPage/AwardsSection";
+import VideosSection from "../components/DetailPage/VideosSection";
+import WatchProvidersSection from "../components/DetailPage/WatchProvidersSection";
+import GallerySection from "../components/DetailPage/GallerySection";
+import MovieGraphSection from "../components/DetailPage/MovieGraphSection";
+import RelatedMoviesSection from "../components/DetailPage/RelatedMoviesSection";
+import ReviewsSection from "../components/DetailPage/ReviewsSection";
 
 import useExpandedRelatedMovies from "../hooks/useRelatedMovies";
 
