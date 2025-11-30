@@ -260,7 +260,7 @@ export default function EgoGraph({
     return (
       <div className="w-full flex items-center justify-center" style={{ height: "550px" }}>
         <div className="text-white text-xl font-semibold opacity-80">
-          검색할 인물을 입력해주세요.
+          그래프 불러오는 중· · ·
         </div>
       </div>
     );
