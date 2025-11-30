@@ -102,7 +102,7 @@ export default function BoxOfficePage() {
         <header className="mb-10 md:mb-14">
           <div className="flex justify-between items-end border-b border-white/20 pb-4 mb-8">
             <h1 className="text-4xl font-bold text-yellow-200">
-              Box Office - Top5
+              Weekly Box Office
             </h1>
             <p className="text-sm text-white/70">
               주간 박스오피스 데이터를 확인해보세요.

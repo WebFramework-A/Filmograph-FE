@@ -90,7 +90,7 @@ export default function AllMoviesPage() {
                 {/* 헤더 */}
                 <div className="flex justify-between items-end border-b border-white/20 pb-4 mb-12">
                     <h1 className="text-4xl font-bold text-yellow-200">Movies</h1>
-                    <p className="text-sm text-white/70">Filmograph의 모든 영화를 탐색해보세요</p>
+                    <p className="text-sm text-white/70">Filmograph의 모든 영화를 탐색해보세요.</p>
                 </div>
 
                 {/* 오늘의 추천 영화 */}
