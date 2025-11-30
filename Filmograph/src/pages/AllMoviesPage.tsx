@@ -77,8 +77,8 @@ export default function AllMoviesPage() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-[#0b4747] flex items-center justify-center text-white">
-                영화 목록을 불러오는 중...
+            <div className="text-white text-xl font-semibold animate-pulse">
+                영화 목록 불러오는 중 · · ·
             </div>
         );
     }
