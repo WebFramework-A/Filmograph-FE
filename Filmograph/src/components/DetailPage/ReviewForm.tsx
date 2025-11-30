@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { useAuth } from "../../../hooks/useAuth";
-import { addReview, updateReview } from "../../review/services/reviewService";
+import { useAuth } from "../../hooks/useAuth";
+import { addReview, updateReview } from "../../services/review/reviewService";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../../services/firebaseConfig";
-import { type Review } from "../../review/types/review";
+import { db } from "../../services/data/firebaseConfig";
+import { type Review } from "../../types/review";
 
 interface Props {
   movieId: string;

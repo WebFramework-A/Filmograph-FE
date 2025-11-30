@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getDailyBoxOffice, type BoxOfficeMovie } from "../services/boxOfficeService";
+import { getDailyBoxOffice, type BoxOfficeMovie } from "../../services/movies/boxOfficeService";
 
 export default function DailyBoxOffice() {
     const [movies, setMovies] = useState<BoxOfficeMovie[]>([]);

@@ -12,7 +12,7 @@ import { Toast } from "../components/common/Toast";
 
 // Firestore
 import { collection, query, where, getDocs } from "firebase/firestore";
-import { db } from "../services/firebaseConfig";
+import { db } from "../services/data/firebaseConfig";
 
 // Firestore: 제목으로 kobisId 찾기
 async function findKobisIdByTitle(title: string) {

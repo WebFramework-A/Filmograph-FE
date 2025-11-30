@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useToast } from "../../hooks/useToast";
 import { Toast } from "../../components/common/Toast";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import { db } from "../../services/firebaseConfig";
+import { db } from "../../services/data/firebaseConfig";
 
 type HoverMovieCore = {
   country: string;

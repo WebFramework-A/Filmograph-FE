@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../../services/firebaseConfig";
+import { db } from "../../services/data/firebaseConfig";
 import { calculateUserLevel, getNextLevelProgress } from "../../utils/levelUtils";
 
 interface Props {

@@ -1,9 +1,9 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import { collection, query, where, orderBy, getDocs } from "firebase/firestore";
-import { db } from "../../../services/firebaseConfig";
-import { type Review } from "../../review/types/review";
-import { deleteReview } from "../../review/services/reviewService"; // 삭제 서비스
-import { useAuth } from "../../../hooks/useAuth"; // 내 정보 확인용
+import { db } from "../../services/data/firebaseConfig";
+import { type Review } from "../../types/review";
+import { deleteReview } from "../../services/review/reviewService"; // 삭제 서비스
+import { useAuth } from "../../hooks/useAuth"; // 내 정보 확인용
 import ReviewForm from "./ReviewForm";
 import "./styles/WatchProvidersSection.css";
 

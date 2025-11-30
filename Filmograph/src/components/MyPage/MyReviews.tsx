@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { type Review } from "../../features/review/types/review";
-import { deleteReview } from "../../features/review/services/reviewService";
+import { type Review } from "../../types/review";
+import { deleteReview } from "../../services/review/reviewService";
 import { useAuth } from "../../hooks/useAuth";
 
 interface StatusProps {

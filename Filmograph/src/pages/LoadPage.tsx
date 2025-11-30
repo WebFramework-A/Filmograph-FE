@@ -4,15 +4,15 @@ import {
   fetchMovieDetail,
 } from "../services/movies/movieAPI";
 
-import { saveMovie } from "../services/movieService";
+import { saveMovie } from "../services/data/movieService";
 import {
   countKobisCall,
   getKobisCalls,
-} from "../services/kobisUsage";
+} from "../services/data/kobisUsage";
 
 import { findKobisMovieCdByTmdbId } from "../services/movies/matchTmdbToKobis";
 
-import { db } from "../services/firebaseConfig";
+import { db } from "../services/data/firebaseConfig";
 import {
   doc,
   getDoc,

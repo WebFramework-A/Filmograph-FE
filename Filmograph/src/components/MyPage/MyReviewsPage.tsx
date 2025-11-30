@@ -2,9 +2,9 @@ import { useEffect, useState, useCallback } from "react";
 import { collection, query, where, orderBy, getDocs } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
-import { db } from "../../services/firebaseConfig";
-import { type Review } from "../../features/review/types/review";
-import { deleteReview } from "../../features/review/services/reviewService";
+import { db } from "../../services/data/firebaseConfig";
+import { type Review } from "../../types/review";
+import { deleteReview } from "../../services/review/reviewService";
 
 export default function MyReviewsPage() {
   const { user } = useAuth();

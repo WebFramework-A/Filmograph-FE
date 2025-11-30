@@ -1,6 +1,6 @@
 import { doc, runTransaction, collection, serverTimestamp } from "firebase/firestore";
-import { db } from "../../../services/firebaseConfig"; // 경로 확인 필요
-import type { CreateReviewDTO, UpdateReviewDTO } from "../types/review"; // 위에서 만든 타입 임포트
+import { db } from "../data/firebaseConfig"; // 경로 확인 필요
+import type { CreateReviewDTO, UpdateReviewDTO } from "../../types/review"; // 위에서 만든 타입 임포트
 
 // 리뷰 작성 및 데이터 동기화 함수
 export const addReview = async ({

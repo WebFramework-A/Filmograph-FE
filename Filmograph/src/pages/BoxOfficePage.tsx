@@ -13,9 +13,9 @@ import {
 } from "recharts";
 
 import { DollarSign, Star } from "lucide-react";
-import { ImageWithFallback } from "../features/movie/components/ImageWithFallback";
+import { ImageWithFallback } from "../components/DetailPage/ImageWithFallback";
 
-import { db } from "../services/firebaseConfig";
+import { db } from "../services/data/firebaseConfig";
 import { collection, getDocs, query, orderBy, doc, getDoc } from "firebase/firestore";
 
 export default function BoxOfficePage() {

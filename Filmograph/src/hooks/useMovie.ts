@@ -1,7 +1,7 @@
 // Firestore에서 movies/{id} 가져오는 훅
 import { useEffect, useState } from "react";
-import { type MovieDetail } from "../../../types/movie";
-import { getMovie } from "../services/getMovie";
+import { type MovieDetail } from "../types/movie";
+import { getMovie } from "../services/movies/getMovie";
 
 export default function useMovie(movieId: string) {
   const [movie, setMovie] = useState<MovieDetail | null>(null);

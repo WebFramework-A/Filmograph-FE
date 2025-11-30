@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { db } from "../services/firebaseConfig";
+import { db } from "../services/data/firebaseConfig";
 import {
   doc,
   getDoc,
@@ -12,7 +12,7 @@ import {
   orderBy,
   limit,
 } from "firebase/firestore";
-import { type Review } from "../features/review/types/review";
+import { type Review } from "../types/review";
 
 // 분리한 컴포넌트들 임포트
 import Profile from "../components/MyPage/Profile";
