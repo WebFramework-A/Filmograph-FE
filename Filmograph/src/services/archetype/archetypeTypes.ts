@@ -3,6 +3,7 @@
 export interface Character {
   id: string;
   name: string;
+  movieCd: string;
   movieTitle: string;
   description: string;
   profileUrl: string;

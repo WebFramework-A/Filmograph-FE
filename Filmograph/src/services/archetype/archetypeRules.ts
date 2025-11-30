@@ -55,7 +55,7 @@ export const ARCHETYPE_RULES: ArchetypeRule[] = [
     ]
   },
   {
-    id: "avenger",
+    id: "revenge",
     name: "복수귀",
     description:
       "상처와 트라우마를 안고, 잃어버린 것에 대한 복수를 목표로 움직이는 인물. 분노와 원한이 행동의 동력이 되는 타입.",
