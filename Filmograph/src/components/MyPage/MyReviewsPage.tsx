@@ -58,18 +58,18 @@ export default function MyReviewsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b4747] text-white pt-24 px-8">
-      <div className="max-w-4xl mx-auto">
-        <div className="flex items-center gap-4 mb-8">
+    <div className="min-h-screen bg-[#0b4747] text-white p-8 pt-20">
+      <div className="max-w-6xl mx-auto">
+        <div className="flex border-b border-white/20 pb-4 mb-8">
           <button
             onClick={() => navigate(-1)}
             className="text-2xl hover:text-yellow-400 transition"
           >
             ←
           </button>
-          <h1 className="text-3xl font-bold text-yellow-200">
+          <h2 className="text-4xl font-bold text-yellow-200">
             내가 쓴 리뷰 목록
-          </h1>
+          </h2>
         </div>
 
         {loading ? (
@@ -98,8 +98,8 @@ export default function MyReviewsPage() {
                       <span>
                         {review.createdAt?.seconds
                           ? new Date(
-                              review.createdAt.seconds * 1000
-                            ).toLocaleDateString() + " 작성"
+                            review.createdAt.seconds * 1000
+                          ).toLocaleDateString() + " 작성"
                           : ""}
                       </span>
                       {review.isAnonymous && (
