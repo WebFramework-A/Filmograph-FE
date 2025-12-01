@@ -5,7 +5,7 @@ import matplotlib
 matplotlib.use('Agg')
 from collections import Counter
 import os
-import pickle  # ⬅️ 추가!
+import pickle
 
 print("="*60)
 print("🎨 Step 3: 커뮤니티 탐지")
@@ -13,13 +13,10 @@ print("="*60)
 print()
 
 # ===========================
-# 네트워크 로드 (수정!)
+# 네트워크 로드
 # ===========================
 
 print("=== 네트워크 로딩 중... ===\n")
-
-# ❌ 기존 코드 (작동 안 함)
-# G = nx.read_gpickle('../output/network.gpickle')
 
 # ✅ 새로운 코드
 with open('../output/network.gpickle', 'rb') as f:
@@ -177,10 +174,9 @@ print("✅ 시각화 저장: output/community_visualization.png")
 plt.close()
 
 # ===========================
-# 네트워크 저장 (수정!)
+# 네트워크 저장
 # ===========================
 
-# ✅ 새로운 저장 방식
 with open('../output/network_with_community.gpickle', 'wb') as f:
     pickle.dump(G, f)
 

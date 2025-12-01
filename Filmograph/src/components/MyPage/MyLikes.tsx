@@ -72,7 +72,7 @@ export default function MyLikes({ likes, setLikes }: Props) {
                 className="relative group cursor-pointer"
                 onClick={() => navigate(`/detail/${movie.id}`)} // 상세 페이지 이동
               >
-                <div className="aspect-[2/3] rounded-md overflow-hidden bg-gray-800 shadow-lg border border-white/10 group-hover:border-[#FFD700] transition-all relative">
+                <div className="aspect-2/3 rounded-md overflow-hidden bg-gray-800 shadow-lg border border-white/10 group-hover:border-[#FFD700] transition-all relative">
                   {movie.posterUrl ? (
                     <img
                       src={movie.posterUrl}

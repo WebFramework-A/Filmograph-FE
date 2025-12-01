@@ -1,7 +1,6 @@
 import { NavLink, Link } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { logout } from "../services/auth/authApi";
-// useState는 더 이상 필요하지 않습니다 (CSS group-hover 사용)
 
 const Navbar = () => {
   const { user, loading } = useAuth();

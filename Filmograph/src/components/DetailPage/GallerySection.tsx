@@ -27,7 +27,7 @@ export default function GallerySection({ movie }: GalleryProps) {
 
   const [preview, setPreview] = useState<string | null>(null);
 
-  // --- 스틸컷 (2줄 고정) ---
+  // 스틸컷 (2줄 고정)
   const [backdropCols, setBackdropCols] = useState<number>(4);
   const [backdropSize, setBackdropSize] = useState<number>(8);
   const [pageBackdrop, setPageBackdrop] = useState<number>(0);
@@ -50,7 +50,7 @@ export default function GallerySection({ movie }: GalleryProps) {
 
   const backdropMaxPage = Math.floor((backdrops.length - 1) / backdropSize);
 
-  // --- 포스터 (1줄 고정) ---
+  // 포스터 (1줄 고정)
   const [posterCols, setPosterCols] = useState<number>(5);
   const [posterSize, setPosterSize] = useState<number>(5);
   const [pagePoster, setPagePoster] = useState<number>(0);
@@ -92,7 +92,7 @@ export default function GallerySection({ movie }: GalleryProps) {
             <h2 className="gallery-title">갤러리</h2>
           </div>
 
-          {/* --- 스틸컷 --- */}
+          {/* 스틸컷 */}
           {backdrops.length > 0 && (
             <div className="gallery-block">
               <div className="gallery-subtitle-row">
@@ -142,7 +142,7 @@ export default function GallerySection({ movie }: GalleryProps) {
             </div>
           )}
 
-          {/* --- 포스터 --- */}
+          {/* 포스터 */}
           {posters.length > 0 && (
             <div className="gallery-block">
               <div className="gallery-subtitle-row">

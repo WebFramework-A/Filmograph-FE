@@ -17,7 +17,7 @@ firebase_config = {
     "storageBucket": os.getenv("VITE_FIREBASE_STORAGE_BUCKET"),
     "messagingSenderId": os.getenv("VITE_FIREBASE_MESSAGING_SENDER_ID"),
     "appId": os.getenv("VITE_FIREBASE_APP_ID"),
-    "databaseURL": ""  # Firestore는 비워둡니다
+    "databaseURL": ""
 }
 
 # 설정 확인
@@ -33,8 +33,7 @@ db = firebase.database()
 print("✅ Firebase 연결 성공!\n")
 
 # ===========================
-# ⚠️ 중요: pyrebase는 Realtime Database용입니다
-# Firestore 접근을 위해서는 REST API를 사용해야 합니다
+# Firestore 접근을 위해서는 REST API를 사용
 # ===========================
 
 print("=== Firestore REST API로 데이터 가져오기 ===\n")

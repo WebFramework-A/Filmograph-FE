@@ -2,7 +2,7 @@ import networkx as nx
 import json
 from datetime import datetime
 import os
-import pickle  # ⬅️ 이 줄 추가!
+import pickle 
 
 print("="*60)
 print("📦 Step 4: JSON 생성")

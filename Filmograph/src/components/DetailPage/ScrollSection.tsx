@@ -1,4 +1,3 @@
-// src/features/movie/components/ScrollSection.tsx
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 

@@ -1,4 +1,3 @@
-// src/services/movies/matchTmdbToKobis.ts
 import axios from "axios";
 import { fetchTMDBById } from "./tmdbApi";
 import { db } from "../data/firebaseConfig";

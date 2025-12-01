@@ -148,7 +148,7 @@ export default function BoxOfficeTrend() {
           </div>
         </header>
 
-        {/* 🔄 새로고침 버튼 */}
+        {/* 새로고침 버튼 */}
         <div className="flex justify-end mt-2">
           <button
             disabled={loading}

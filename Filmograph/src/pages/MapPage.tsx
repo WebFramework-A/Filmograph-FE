@@ -1,6 +1,5 @@
 import WorldMap from "../components/WorldMap/WorldMap";
 
-
 export default function MapTestPage() {
   return (
     <div className="min-h-screen bg-[#0b4747] text-white p-8 pt-20">
