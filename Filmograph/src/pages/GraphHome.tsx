@@ -20,12 +20,12 @@ const GraphHome = () => {
             오직 <b>참여 관계</b>만을 선으로 연결하여 데이터를 직관적으로
             보여줍니다.
             <br></br>
-            영화 노드를 2번 클릭하면 상세페이지로 이동하여, 해당 영화에 대한
+            노드를 클릭하면 관련 노드들이 하이라이팅되며, 영화 노드 클릭시 상세페이지로 이동 가능한 모달창이 떠, 해당 영화에 대한
             정보를 습득 가능합니다.
           </div>
           <div className="flex flex-col items-start mb-4">
             <div className="flex justify-center items-center gap-1 font-semibold">
-              <Check size={15} /> 이럴때 보면 좋아요
+              <Check size={15} /> 이럴 때 보면 좋아요
             </div>
             영화의 전체 출연진, 특정 인물의 필모그래피를 한 눈에 파악하고 싶을때
           </div>
@@ -52,7 +52,7 @@ const GraphHome = () => {
           </div>
           <div className="flex flex-col items-start mb-4">
             <div className="flex justify-center items-center gap-1 font-semibold">
-              <Check size={15} /> 이럴때 보면 좋아요
+              <Check size={15} /> 이럴 때 보면 좋아요
             </div>
             특정 인물의 협업 친밀도나 작업 스타일을 파악하고 싶을 때
           </div>
@@ -78,7 +78,7 @@ const GraphHome = () => {
           </div>
           <div className="flex flex-col items-start mb-4">
             <div className="flex justify-center items-center gap-1 font-semibold">
-              <Check size={15} /> 이럴때 보면 좋아요
+              <Check size={15} /> 이럴 때 보면 좋아요
             </div>
             '특정 감독 사단'이나 '마블 유니버스'처럼 영화계의 거시적인 형태와
             생태계 구조를 발견하고 싶을 때
