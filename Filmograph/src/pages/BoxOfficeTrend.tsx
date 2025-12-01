@@ -81,12 +81,12 @@ export default function BoxOfficeTrend() {
             </h1>
 
             <p className="text-sm text-white/70 whitespace-nowrap">
-              Firestore에 저장된 박스오피스 7일 기록을 보여줍니다.
+              지난 7일간의 일별 관람객 추이를 보여줍니다.
             </p>
           </div>
         </header>
 
-        {/* 🔄 새로고침 버튼 */}
+        {/* 새로고침 버튼 */}
         <div className="flex justify-end mt-2">
           <button
             onClick={() => refetch()}
@@ -199,7 +199,7 @@ export default function BoxOfficeTrend() {
             </p>
           </div>
 
-          {/* Entry Count */}
+          {/* 랭킹들어간 영화 */}
           <div className="bg-black/20 p-6 rounded-lg border border-slate-800">
             <h3 className="text-slate-400 text-sm font-medium mb-2">
               랭킹 진입 영화 수

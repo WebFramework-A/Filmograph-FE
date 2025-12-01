@@ -67,6 +67,5 @@ def main():
 
     print("\n모든 Ego Graph Firestore 업로드 완료!")
 
-# ------------------------------
 if __name__ == "__main__":
     main()

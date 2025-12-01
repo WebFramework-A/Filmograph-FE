@@ -1,4 +1,3 @@
-// src/services/kobisUsage.ts
 import { db } from "./firebaseConfig";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 

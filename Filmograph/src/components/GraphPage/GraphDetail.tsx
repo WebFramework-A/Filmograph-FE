@@ -3,25 +3,25 @@ import { useParams } from "react-router-dom";
 import BipartiteGraph from "./BipartiteGraph";
 import CollabNetworkGraph from "./CollabNetworkGraph";
 import EgoGraph from "./EgoGraph";
-import Searcrbar from "../common/Searcrbar";
+import Searcrbar from "../common/Searchbar";
 
-// 🔥 토스트 관련 import
+// 토스트 관련 import
 import { Toast } from "../common/Toast";
 import { useToast } from "../../hooks/useToast";
 
 const GraphDetail = () => {
   const { graphType } = useParams();
 
-  // 🔍 검색 상태
+  // 검색 상태
   const [inputValue, setInputValue] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
 
   const [resetViewFlag, setResetViewFlag] = useState(false);
 
-  // 🔥 토스트 훅 (검색 결과 없음에서 사용)
+  // 토스트 훅 (검색 결과 없음에서 사용)
   const { toast, showToast } = useToast();
 
-  // 🔥 페이지(graphType) 바뀌면 검색창 초기화
+  // 페이지(graphType) 바뀌면 검색창 초기화
   useEffect(() => {
     setInputValue("");
     setSearchTerm("");
@@ -40,7 +40,7 @@ const GraphDetail = () => {
     setTimeout(() => setSearchTerm(inputValue), 10);
   };
 
-  // ❗ 검색 결과 없음 → 토스트 실행
+  // 검색 결과 없음 → 토스트 실행
   const handleNoResult = useCallback(() => {
     showToast("검색 결과가 없습니다.");
   }, [showToast]);
@@ -48,7 +48,7 @@ const GraphDetail = () => {
   return (
     <div className="bg-[#0b4747] min-h-screen">
 
-      {/* 🔥 토스트 표시 */}
+      {/* 토스트 표시 */}
       <Toast
         message={toast.message}
         show={toast.show}

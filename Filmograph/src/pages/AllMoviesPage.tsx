@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import useAllMovies from "../hooks/useAllMovies";
-import Searcrbar from "../components/common/Searcrbar";
+import Searcrbar from "../components/common/Searchbar";
 import { ImageWithFallback } from "../components/DetailPage/ImageWithFallback";
 import DailyBoxOffice from "../components/DetailPage/DailyBoxOffice";
 

@@ -6,7 +6,7 @@ import type { GraphData, Node, Link } from "../../types/data";
   @returns {Promise<GraphData>} 그래프 데이터
 */
 const getMovieData = async (): Promise<GraphData> => {
-  // (지금은 DB가 비어있지만) 나중에 채워질 데이터를 불러오는 함수
+  // 데이터를 불러오는 함수
   const moviesSnap = await getDocs(collection(db, "movies"));
   const personsSnap = await getDocs(collection(db, "persons"));
   const rolesSnap = await getDocs(collection(db, "roles"));

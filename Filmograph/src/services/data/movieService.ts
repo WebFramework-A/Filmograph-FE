@@ -1,4 +1,3 @@
-// src/services/movieService.ts
 import { db } from "./firebaseConfig";
 import { doc, setDoc } from "firebase/firestore";
 import type { MovieDetail } from "../../types/movie";

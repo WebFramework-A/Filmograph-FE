@@ -1,7 +1,6 @@
 import { NavLink, Link } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { logout } from "../services/auth/authApi";
-// useState는 더 이상 필요하지 않습니다 (CSS group-hover 사용)
 
 const Navbar = () => {
   const { user, loading } = useAuth();
@@ -83,13 +82,13 @@ const Navbar = () => {
                 to="/BoxOffice"
                 className="px-4 py-2 hover:bg-white/10 hover:text-yellow-300 text-sm text-center transition-colors "
               >
-                일간 박스오피스
+                일간 Top 5
               </Link>
               <Link
                 to="/boxOfficeTrend"
                 className="px-4 py-2 hover:bg-white/10 hover:text-yellow-300 text-sm text-center transition-colors"
               >
-                주간 트렌드
+                주간 관람객 추이
               </Link>
               <Link
                 to="/map"
