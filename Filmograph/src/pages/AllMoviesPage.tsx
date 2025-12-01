@@ -77,7 +77,7 @@ export default function AllMoviesPage() {
 
     if (loading) {
         return (
-            <div className="text-white text-xl font-semibold animate-pulse">
+            <div className="text-center text-white text-xl font-semibold animate-pulse">
                 영화 목록 불러오는 중 · · ·
             </div>
         );
