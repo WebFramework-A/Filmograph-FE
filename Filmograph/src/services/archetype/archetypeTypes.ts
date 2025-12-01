@@ -8,6 +8,7 @@ export interface Character {
   description: string;
   profileUrl: string;
   archetypeId: string;
+  archetypeScore?: number;
 }
 
 // 나머지 타입들
