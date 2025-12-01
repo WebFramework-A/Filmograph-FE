@@ -8,6 +8,8 @@ import {
   collection,
   getDocs,
   deleteDoc,
+  query,
+  orderBy
 } from "firebase/firestore";
 import type { WishlistItem } from "../../pages/MyPage";
 
@@ -28,7 +30,9 @@ export default function WishlistPage() {
   const fetchLikes = async (uid: string) => {
     try {
       const wishlistRef = collection(db, "userWishlist", uid, "items");
-      const wishlistSnap = await getDocs(wishlistRef);
+      const q = query(wishlistRef, orderBy("createdAt", "desc"));
+
+      const wishlistSnap = await getDocs(q);
 
       const promises = wishlistSnap.docs.map(async (itemDoc) => {
         const movieId = itemDoc.data().movieId || itemDoc.id;
@@ -43,13 +47,11 @@ export default function WishlistPage() {
         } as WishlistItem;
       });
 
-      const list = await Promise.all(promises);
-      // 최신순 정렬
-      list.sort(
-        (a, b) => (b.addedAt?.seconds || 0) - (a.addedAt?.seconds || 0)
-      );
+      const likesData = (await Promise.all(promises)).filter(
+        (item) => item !== null
+      ) as WishlistItem[];
 
-      setLikes(list);
+      setLikes(likesData);
     } catch (error) {
       console.error("찜 목록 로딩 실패:", error);
     } finally {

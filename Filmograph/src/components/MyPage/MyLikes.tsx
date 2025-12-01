@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import type { WishlistItem } from "../../pages/MyPage";
 import { db } from "../../services/data/firebaseConfig";
-import { doc, deleteDoc } from "firebase/firestore";
+import { doc, deleteDoc, getDoc, updateDoc } from "firebase/firestore";
 import { useAuth } from "../../hooks/useAuth";
+import { calculateUserLevel } from "../../utils/levelUtils";
 
 interface Props {
   likes: WishlistItem[];
@@ -21,6 +22,30 @@ export default function MyLikes({ likes, setLikes }: Props) {
     try {
       const docRef = doc(db, "userWishlist", user.uid, "items", movieId);
       await deleteDoc(docRef);
+
+      //유저 정보 업데이트
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+
+      if (userSnap.exists()) {
+        const userData = userSnap.data();
+        const currentReviewCount = userData.reviewCount || 0;
+        // 현재 화면에 보이는 개수에서 1개를 뺌 (가장 정확함)
+        const newLikeCount = Math.max(0, likes.length - 1);
+
+        const newLevel = calculateUserLevel(currentReviewCount, newLikeCount);
+
+        await updateDoc(userRef, {
+          likeCount: newLikeCount,
+          level: {
+            level: newLevel.level,
+            name: newLevel.name,
+            color: newLevel.color
+          }
+        });
+      }
+
+      //상태 업데이트
       setLikes((prev) => prev.filter((item) => item.id !== movieId));
     } catch (error) {
       console.error("찜 삭제 실패:", error);
@@ -54,7 +79,7 @@ export default function MyLikes({ likes, setLikes }: Props) {
         {/* 3개 이상일 때 '모두 보기' 버튼 표시 -> 클릭 시 페이지 이동 */}
         {likes.length > 2 && (
           <button
-            onClick={() => navigate("/wishlist")} // 찜 목록 페이지로 이동
+            onClick={() => navigate("/my-likes")} // 찜 목록 페이지로 이동
             className="text-xs text-white/70 hover:text-white bg-white/10 px-2 py-1 rounded transition-colors"
           >
             모두 보기 ▶
@@ -66,6 +91,7 @@ export default function MyLikes({ likes, setLikes }: Props) {
         <div className="flex-1">
           {/* 항상 최신 2개만 미리보기로 표시 */}
           <div className="grid grid-cols-2 gap-4">
+            {/* [수정] 여기서 최신 2개만 잘라서 출력 */}
             {likes.slice(0, 2).map((movie) => (
               <div
                 key={movie.id}
