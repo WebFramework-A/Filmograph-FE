@@ -85,14 +85,14 @@ export default function MyPage() {
       const userData = userDoc.data();
       setUserInfo(userData);
 
-      // 2. 내 리뷰 가져오기 (평점만 남긴 것 포함)
-      // [수정] q 변수를 정의하고 아래 getDocs(q)에서 사용해야 정렬이 됩니다.
+      // 내 리뷰 가져오기 (평점만 남긴 것 포함)
+      // q 변수를 정의하고 아래 getDocs(q)에서 사용해야 정렬이 됩니다.
       const reviewsQ = query(
         collection(db, "reviews"),
         where("userId", "==", uid),
         orderBy("createdAt", "desc")
       );
-      const reviewsSnapshot = await getDocs(reviewsQ); // 수정: reviewsQ 사용
+      const reviewsSnapshot = await getDocs(reviewsQ);
 
       const reviewsData = reviewsSnapshot.docs.map(
         (doc) => ({ id: doc.id, ...doc.data() } as Review)
@@ -115,12 +115,12 @@ export default function MyPage() {
         avgRating: parseFloat(avg.toFixed(1)),
       });
 
-      // 3. 찜 목록 가져오기 (최신순 정렬)
+      // 찜 목록 가져오기 (최신순 정렬)
       const wishlistRef = collection(db, "userWishlist", uid, "items");
-      // [수정] 정렬 쿼리 생성
+      // 정렬 쿼리 생성
       const wishlistQuery = query(wishlistRef, orderBy("createdAt", "desc"));
 
-      // [수정] wishlistQuery 사용
+      // wishlistQuery 사용
       const wishlistSnap = await getDocs(wishlistQuery);
 
       const promises = wishlistSnap.docs.map(async (itemDoc) => {
@@ -135,8 +135,7 @@ export default function MyPage() {
           title: movieData.title,
           posterUrl: movieData.posterUrl,
           addedAt: itemDoc.data().createdAt,
-          // [수정] genres가 없으면 genre도 확인
-          genres: movieData.genres || movieData.genre || [],
+          genres: movieData.genre || [],
         } as WishlistItem;
       });
 

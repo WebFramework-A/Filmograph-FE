@@ -79,7 +79,7 @@ export default function MyLikes({ likes, setLikes }: Props) {
         {/* 3개 이상일 때 '모두 보기' 버튼 표시 -> 클릭 시 페이지 이동 */}
         {likes.length > 2 && (
           <button
-            onClick={() => navigate("/my-likes")} // 찜 목록 페이지로 이동
+            onClick={() => navigate("/wishlist")} // 찜 목록 페이지로 이동
             className="text-xs text-white/70 hover:text-white bg-white/10 px-2 py-1 rounded transition-colors"
           >
             모두 보기 ▶
@@ -91,7 +91,7 @@ export default function MyLikes({ likes, setLikes }: Props) {
         <div className="flex-1">
           {/* 항상 최신 2개만 미리보기로 표시 */}
           <div className="grid grid-cols-2 gap-4">
-            {/* [수정] 여기서 최신 2개만 잘라서 출력 */}
+            {/* 여기서 최신 2개만 잘라서 출력 */}
             {likes.slice(0, 2).map((movie) => (
               <div
                 key={movie.id}

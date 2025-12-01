@@ -78,7 +78,7 @@ export default function Status(props: StatusProps) {
           {/* 리뷰가 3개 이상이면 모두 보기 버튼 표시 */}
           {status.reviewCount > 3 && (
             <button
-              onClick={() => navigate("/my-reviews")}
+              onClick={() => navigate("/review")}
               className="text-xs text-white/50 hover:text-[#FFD700] transition-colors"
             >
               모두 보기 ▶
