@@ -132,7 +132,7 @@ export default function Profile({ userInfo, currentUser, reviewCount, likeCount 
                                 @{currentUser?.email?.split("@")[0]}
                             </p>
 
-                            {/* [수정] 동적 레벨 배지 표시 */}
+                            {/* 동적 레벨 배지 표시 */}
                             <span
                                 className="px-3 py-1 rounded-full text-sm font-bold shadow-sm inline-block"
                                 style={{
