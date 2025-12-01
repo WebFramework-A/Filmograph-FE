@@ -1,4 +1,3 @@
-// src/services/boxOfficeTrendSaver.ts
 import { db } from "../data/firebaseConfig";
 import { collection, doc, setDoc, getDocs, deleteDoc } from "firebase/firestore";
 

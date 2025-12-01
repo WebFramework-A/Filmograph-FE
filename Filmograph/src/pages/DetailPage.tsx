@@ -1,8 +1,8 @@
-// src/pages/DetailPage.tsx
 import { useParams } from "react-router-dom";
 import MovieHeader from "../components/DetailPage/MovieHeader";
 import useMovie from "../hooks/useMovie";
 
+import NotFoundPage from "./NotFoundPage";
 import ScrollSection from "../components/DetailPage/ScrollSection";
 import OverviewSection from "../components/DetailPage/OverviewSection";
 import CrewSection from "../components/DetailPage/CrewSection";
@@ -32,14 +32,7 @@ export default function DetailPage() {
         </div>
       </div>
     );
-  if (!movie) 
-    return (
-      <div className="w-full h-full flex items-center justify-center overflow-hidden">
-        <div className="text-white text-xl font-semibold">
-          영화를 찾을 수 없습니다.
-        </div>
-      </div>
-    );
+    if (!movie) return <NotFoundPage />;
 
   return (
     <div className="min-h-screen bg-[#0b4747] pt-20">

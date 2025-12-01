@@ -5,7 +5,6 @@ export interface LoginCredentials {
 }
 
 // 회원가입 시 필요한 데이터 타입
-// (로그인 정보에 'nickname'이 추가됨)
 export interface SignUpCredentials extends LoginCredentials {
   nickname: string;
 }

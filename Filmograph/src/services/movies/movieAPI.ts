@@ -1,4 +1,3 @@
-// src/services/movies/movie.ts
 import axios from "axios";
 import type { MovieDetail } from "../../types/movie";
 

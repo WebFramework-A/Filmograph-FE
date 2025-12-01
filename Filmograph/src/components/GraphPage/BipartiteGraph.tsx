@@ -239,7 +239,7 @@ useEffect(() => {
             fgRef.current?.zoomToFit(600, 10, (n: any) => related.has(n.id));
         },
 
-        // ⭐ 검색 실패 처리 — onNoResult 호출
+        // 검색 실패 처리 — onNoResult 호출
         onNoResult: () => {
             onNoResult();
         },

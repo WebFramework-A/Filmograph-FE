@@ -53,7 +53,7 @@ export const signUpWithEmail = async ({
     const user = result.user;
 
     // Firestore 'users' 컬렉션에 문서 생성
-    // 문서 ID를 user.uid와 똑같이 설정합니다.
+    // 문서 ID를 user.uid와 똑같이 설정
     await setDoc(doc(db, "users", user.uid), {
       uid: user.uid,
       email: user.email,

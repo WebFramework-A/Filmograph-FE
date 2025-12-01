@@ -1,4 +1,3 @@
-// src/services/movies/tmdbApi.ts
 import axios from "axios";
 import type {
   MovieDetail,

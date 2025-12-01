@@ -1,5 +1,3 @@
-// src/services/peopleService.ts
-
 import { db } from "./firebaseConfig";
 import { collection, doc, setDoc, getDoc } from "firebase/firestore";
 import { fetchPeopleList, fetchPeopleDetail } from "../people/peopleAPI";
@@ -37,7 +35,7 @@ export async function collectPeopleData() {
       if (added >= TARGET_COUNT) break;
 
       try {
-        // 1) KOBIS 상세 정보
+        // KOBIS 상세 정보
         const detail = await fetchPeopleDetail(item.peopleCd);
         if (!detail) continue;
 
@@ -50,7 +48,7 @@ export async function collectPeopleData() {
           continue;
         }
 
-        // 2) TMDB 검색 (영문 이름 우선, 없으면 한글 이름으로 검색)
+        // TMDB 검색 (영문 이름 우선, 없으면 한글 이름으로 검색)
         const tmdbPerson =
           (detail.nameEn && (await searchPersonSimple(detail.nameEn))) ||
           (await searchPersonSimple(detail.name));
@@ -60,10 +58,10 @@ export async function collectPeopleData() {
           continue;
         }
 
-        // 3) TMDB에서 캐릭터(배역) 목록 가져오기
+        // TMDB에서 캐릭터(배역) 목록 가져오기
         const characters = await fetchCharacterRoles(tmdbPerson.id);
 
-        // 4) Firestore "persons" 컬렉션에 신규 저장
+        // Firestore "persons" 컬렉션에 신규 저장
         await setDoc(
           personRef,
           {
