@@ -1,14 +1,7 @@
 // src/services/archetype/archetypeRules.ts
 import type { ArchetypeId, Character } from "./archetypeTypes";
 
-export type ArchetypeRule = {
-  id: ArchetypeId;
-  name: string;        // 한글 이름
-  description: string;
-  keywords: string[];  // 분류용 키워드
-};
-
-export const ARCHETYPE_RULES: ArchetypeRule[] = [
+export const ARCHETYPE_RULES: any[] = [
   {
     id: "hero",
     name: "히어로",
@@ -210,37 +203,3 @@ export const ARCHETYPE_RULES: ArchetypeRule[] = [
     ]
   }
 ];
-
-// 단일 캐릭터 분류
-export function classifyCharacterByRules(character: Character) {
-  const text = (character.description || "").toLowerCase();
-
-  let bestId: ArchetypeId = "hero";
-  let bestScore = -1;
-
-  for (const rule of ARCHETYPE_RULES) {
-    let score = 0;
-    for (const keyword of rule.keywords) {
-      if (text.includes(keyword.toLowerCase())) {
-        score += 1;
-      }
-    }
-    if (score > bestScore) {
-      bestScore = score;
-      bestId = rule.id;
-    }
-  }
-
-  return {
-    archetypeId: bestId,
-    archetypeScore: bestScore
-  };
-}
-
-// 여러 캐릭터 한 번에 분류
-export function classifyCharacters(characters: Character[]): Character[] {
-  return characters.map((c) => {
-    const result = classifyCharacterByRules(c);
-    return { ...c, ...result };
-  });
-}

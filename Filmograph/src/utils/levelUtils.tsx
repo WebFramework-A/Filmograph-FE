@@ -1,9 +1,9 @@
-export interface LevelCriteria {
+interface LevelCriteria {
     minReviews: number;
     minLikes: number;
 }
 
-export interface LevelDefinition {
+interface LevelDefinition {
     level: number;
     name: string;
     color: string; // 배지 색상 등
@@ -11,7 +11,7 @@ export interface LevelDefinition {
 }
 
 // 레벨 정의 (5단계) 조건 설정
-export const LEVEL_SYSTEM: LevelDefinition[] = [
+const LEVEL_SYSTEM: LevelDefinition[] = [
     {
         level: 1,
         name: "비기너",

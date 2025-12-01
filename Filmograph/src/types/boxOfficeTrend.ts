@@ -1,4 +1,4 @@
-export interface BoxOfficeItem {
+interface BoxOfficeItem {
   rnum: string;
   rank: string;
   rankInten: string;

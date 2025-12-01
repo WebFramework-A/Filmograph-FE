@@ -1,5 +1,5 @@
 /** 영화 기본 정보 */
-export interface MovieBase {
+interface MovieBase {
   id: string;                 // Firestore 문서 ID (movieCd 동일)
   movieCd: string;            // KOBIS 영화 코드
   title: string;              // 한국어 제목
@@ -26,7 +26,7 @@ export interface Person {
 }
 
 /** 영화 제작진 정보 */
-export interface MovieCredits {
+interface MovieCredits {
   directors?: Person[];       // 감독
   writers?: Person[];         // 각본가
   producers?: Person[];       // 제작자
@@ -34,7 +34,7 @@ export interface MovieCredits {
 }
 
 /** 영화 통계 */
-export interface MovieStats {
+interface MovieStats {
   rating?: number;            // 평균 평점 (0~10)
   voteCount?: number;         // 투표 수
   popularity?: number;        // TMDB 인기 지수
@@ -51,7 +51,7 @@ export interface Award {
   result?: "Winner" | "Nominee";
 }
 
-export interface MovieAwards {
+interface MovieAwards {
   awards?: Award[];
   relatedMovies?: string[];   // 관련 영화 IDs
 }
@@ -64,7 +64,7 @@ export interface WatchProvider {
 }
 
 /** 영상(트레일러, 티저 등) */
-export interface MovieVideo {
+interface MovieVideo {
   key: string;                // YouTube key
   site: string;               // YouTube, Vimeo
   name: string;               // 영상 제목

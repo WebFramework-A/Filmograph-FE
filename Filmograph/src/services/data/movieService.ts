@@ -4,7 +4,7 @@ import type { MovieDetail } from "../../types/movie";
 import { enrichMovieData } from "./../movies/tmdbApi";
 import { cleanObject } from "../../utils/cleanObject";
 
-export type SaveMovieResult =
+type SaveMovieResult =
   | "SAVED"
   | "SKIPPED_KOBIS"
   | "SKIPPED_19"
