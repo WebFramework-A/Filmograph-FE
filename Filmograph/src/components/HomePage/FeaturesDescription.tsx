@@ -29,66 +29,61 @@ const featuresData = [
     category: "BoxOffice",
     title: (
       <>
-        “Daily
+        "Daily
         <br />
         BoxOffice"
         <br />
-        설명을 뭔가 더 써주는게
+        - 일간
         <br />
-        좋지 않을까하는..
-        <br />
-        그런생각..
+        랭킹 Top 5
       </>
     ),
     description:
-      "한국 영화진흥위원회 (Kobis) Api를 기반으로 한 일간 박스오피스 순위를 확인해보세요. 국내 영화데이터를 기반으로 합니다.",
-    themeColor: "text-orange-400",
-    bgColor: "bg-orange-400",
-    imageUrl: "/home/DailyTrend.png",
-    url: "/boxOfficeTrend",
-  },
-  {
-    id: 2,
-    category: "BoxOffice",
-    title: (
-      <>
-        "Weekly
-        <br />
-        BoxOffice"
-        <br />
-        <span className="italic">e gun box office im</span>” <br />
-        - yeeee
-        <br />
-        뭐라쓰지..
-      </>
-    ),
-    description:
-      "한국 영화진흥위원회 (Kobis) Api를 기반으로 한 주간 박스오피스 순위를 확인해보세요. 국내 영화데이터를 기반으로 합니다.",
+      "한국 영화진흥위원회(Kobis)와 TMDB api를 기반으로 한 일간 박스오피스 순위를 확인해보세요. 오늘의 Top 5 영화를 보여줍니다.",
     themeColor: "text-blue-400",
     bgColor: "bg-blue-400",
     imageUrl: "/home/WeeklyTrend.png",
     url: "/BoxOffice",
   },
   {
+    id: 2,
+    category: "BoxOffice",
+    title: (
+      <>
+        “Daily
+        <br />
+        BoxOffice"
+        <br />
+        - 주간
+        <br />
+        관람객 추이
+        <br />
+      </>
+    ),
+    description:
+      "한국 영화진흥위원회(Kobis) Api를 기반으로 한 주간 박스오피스 순위를 확인해보세요. 지난 7일간의 관람객 추이를 보여줍니다.",
+    themeColor: "text-orange-400",
+    bgColor: "bg-orange-400",
+    imageUrl: "/home/DailyTrend.png",
+    url: "/boxOfficeTrend",
+  },
+
+  {
     id: 3,
     category: "BoxOffice",
     title: (
       <>
-        World Map
+        "World Map
         <br />
-        Trending Movies:
+        Trending Movies"
         <br />
-        <span className="italic">여기도</span>” <br />
-        – 설명을
+        – 국가별
         <br />
-        뭐라쓰지
+        상영 1위
       </>
     ),
     description: (
-      <>
-        세계지도에 마우스를 올려보세요. <br />
-        국가별 현재 인기 1위 영화를 알아볼 수 있습니다.
-      </>
+      <>TMDB api를 기반으로 한 국가별 현재 인기 1위 영화를 알아보세요.</>
     ),
     themeColor: "text-purple-400",
     bgColor: "bg-purple-400",
@@ -114,7 +109,7 @@ const FeatureSlide: React.FC<FeatureSlideProps> = ({
         </h1>
       </ScrollReveal>
       {/* 공통 헤더 */}
-      <header className="pt-[5%] w-full z-20 flex justify-between items-center px-4 md:px-6 lg:px-8 py-4 md:py-6 text-xs md:text-sm font-medium backdrop-blur-sm">
+      <header className="pt-[5%] w-full z-20 flex justify-between items-center px-4 md:px-6 lg:px-8 md:pt-6 text-xs md:text-sm font-medium backdrop-blur-sm">
         <div className={`flex items-center space-x-2 ${data.themeColor}`}>
           <span className={`w-2 h-2 rounded-full ${data.bgColor}`}></span>
           <span className="hidden sm:inline">Discover # {data.category}</span>
@@ -122,7 +117,7 @@ const FeatureSlide: React.FC<FeatureSlideProps> = ({
         </div>
 
         {/* 공통 헤더 (오른쪽 넘기는거) */}
-        <div className="flex items-center space-x-3 md:space-x-6">
+        <div className="flex items-center space-x-3 md:space-x-6 mb-2">
           <span className="tabular-nums text-xs md:text-sm">
             {String(currentIndex + 1).padStart(3, "0")} /{" "}
             {String(total).padStart(3, "0")}
@@ -130,13 +125,13 @@ const FeatureSlide: React.FC<FeatureSlideProps> = ({
           <div className="flex space-x-2">
             <button
               onClick={onPrev}
-              className="p-1.5 md:pt-2 border border-white/20 rounded-full hover:bg-white hover:text-black transition-colors active:scale-95 cursor-pointer"
+              className="px-2 py-1.5 md:pt-2 border border-white/20 rounded-full bg-yellow-300 text-black hover:bg-yellow-100 transition-colors active:scale-95 cursor-pointer"
             >
               <ArrowLeft size={14} className="md:w-4 md:h-4" />
             </button>
             <button
               onClick={onNext}
-              className="p-1.5 md:p-2 border border-white/20 rounded-full hover:bg-white hover:text-black transition-colors active:scale-95 cursor-pointer"
+              className="p-1.5 md:p-2 border border-white/20 rounded-full bg-yellow-300 text-black hover:bg-yellow-100 transition-colors active:scale-95 cursor-pointer"
             >
               <ArrowRight size={14} className="md:w-4 md:h-4" />
             </button>
@@ -156,10 +151,7 @@ const FeatureSlide: React.FC<FeatureSlideProps> = ({
             transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
             className="mt-4 lg:mt-10 flex flex-col justify-center h-full max-h-[60vh]"
           >
-            <span className="block text-xs md:text-sm text-gray-500 mb-3 md:mb-4 tracking-wider uppercase border-l-2 border-gray-700 pl-2 md:pl-3">
-              {data.category} Highlight
-            </span>
-            <h1 className="text-3xl md:text-4xl lg:text-6xl xl:text-7xl font-serif leading-[1.1] tracking-tight">
+            <h1 className="text-3xl md:text-4xl lg:text-6xl font-serif leading-[1.1] tracking-tight">
               {data.title}
             </h1>
           </motion.div>
@@ -170,7 +162,7 @@ const FeatureSlide: React.FC<FeatureSlideProps> = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="pb-6 md:pb-10 lg:pb-16 max-w-md text-xs md:text-sm lg:text-base text-gray-400 leading-relaxed"
+            className="py-3 md:pb-10 lg:pb-16 max-w-md text-xs md:text-sm lg:text-base text-gray-400 leading-relaxed"
           >
             <p>{data.description}</p>
           </motion.div>
@@ -186,9 +178,9 @@ const FeatureSlide: React.FC<FeatureSlideProps> = ({
               exit={{ x: "-20%", opacity: 0 }}
               transition={{
                 type: "spring",
-                stiffness: 80,
-                damping: 20,
-                duration: 0.4,
+                stiffness: 30,
+                damping: 8,
+                duration: 0.1,
               }}
               className="absolute inset-0"
             >
