@@ -145,7 +145,7 @@ export default function BoxOfficePage() {
         ? b.salesAcc - a.salesAcc
         : (b.rating || 0) - (a.rating || 0)
     )
-    .slice(0, 10);
+    .slice(0, 5);
 
   const chartData = topMovies.map((movie) => ({
     name: movie.movieNm,
