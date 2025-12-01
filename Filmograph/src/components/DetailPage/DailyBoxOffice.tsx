@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getDailyBoxOffice, type BoxOfficeMovie } from "../services/boxOfficeService";
+import { getDailyBoxOffice, type BoxOfficeMovie } from "../../services/movies/boxOfficeService";
 
 export default function DailyBoxOffice() {
     const [movies, setMovies] = useState<BoxOfficeMovie[]>([]);
@@ -11,7 +11,8 @@ export default function DailyBoxOffice() {
             .finally(() => setLoading(false));
     }, []);
 
-    if (loading) return <div className="text-white/50 text-center py-10">오늘의 박스오피스 로딩 중...</div>;
+
+    if (loading) return <div className="text-white text-xl font-semibold animate-pulse">오늘의 박스오피스 불러오는 중 · · ·</div>;
     if (movies.length === 0) return null;
 
     return (
@@ -26,7 +27,7 @@ export default function DailyBoxOffice() {
                 {[...movies, ...movies].map((movie, index) => (
                     <div
                         key={`${movie.rank}-${index}`}
-                        className="relative w-[160px] flex-shrink-0 cursor-pointer transition-transform hover:scale-105"
+                        className="relative w-40 shrink-0 cursor-pointer transition-transform hover:scale-105"
                     >
                         {/* 순위 */}
                         <div className="absolute -top-2 -left-2 z-10 w-8 h-8 bg-black/80 border border-[#FFD700] rounded-full flex items-center justify-center text-[#FFD700] font-bold shadow-lg">
@@ -34,7 +35,7 @@ export default function DailyBoxOffice() {
                         </div>
 
                         {/* 포스터 */}
-                        <div className="aspect-[2/3] rounded-lg overflow-hidden bg-gray-800 border border-white/10">
+                        <div className="aspect-2/3 rounded-lg overflow-hidden bg-gray-800 border border-white/10">
                             {movie.posterUrl ? (
                                 <img src={movie.posterUrl} alt={movie.movieNm} className="w-full h-full object-cover" />
                             ) : (

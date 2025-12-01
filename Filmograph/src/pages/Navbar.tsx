@@ -83,19 +83,19 @@ const Navbar = () => {
                 to="/BoxOffice"
                 className="px-4 py-2 hover:bg-white/10 hover:text-yellow-300 text-sm text-center transition-colors "
               >
-                주간 박스오피스
+                일간 박스오피스
               </Link>
               <Link
                 to="/boxOfficeTrend"
                 className="px-4 py-2 hover:bg-white/10 hover:text-yellow-300 text-sm text-center transition-colors"
               >
-                일간 관람자수
+                주간 트렌드
               </Link>
               <Link
                 to="/map"
                 className="px-4 py-2 hover:bg-white/10 hover:text-yellow-300 text-sm text-center transition-colors"
               >
-                전세계 트랜드
+                전세계 트렌드
               </Link>
             </div>
           </div>

@@ -2,8 +2,8 @@
 
 import { db } from "./firebaseConfig";
 import { collection, doc, setDoc, getDoc } from "firebase/firestore";
-import { fetchPeopleList, fetchPeopleDetail } from "./people/peopleAPI";
-import { searchPersonSimple, fetchCharacterRoles } from "./people/characterAPI";
+import { fetchPeopleList, fetchPeopleDetail } from "../people/peopleAPI";
+import { searchPersonSimple, fetchCharacterRoles } from "../people/characterAPI";
 
 /*
   Firestore에 영화인(배우/감독 등) 데이터를 저장

@@ -1,50 +1,58 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import BipartiteGraph from "./BipartiteGraph";
 import CollabNetworkGraph from "./CollabNetworkGraph";
 import EgoGraph from "./EgoGraph";
 import Searcrbar from "../common/Searcrbar";
+
+// 🔥 토스트 관련 import
 import { Toast } from "../common/Toast";
+import { useToast } from "../../hooks/useToast";
 
 const GraphDetail = () => {
   const { graphType } = useParams();
 
-  const [resetViewFlag, setResetViewFlag] = useState(false);
-
-  // 검색 관련 상태
+  // 🔍 검색 상태
   const [inputValue, setInputValue] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
-  const [showNoResultToast, setShowNoResultToast] = useState(false);
 
-  // 전체 그래프 초기화 핸들러
+  const [resetViewFlag, setResetViewFlag] = useState(false);
+
+  // 🔥 토스트 훅 (검색 결과 없음에서 사용)
+  const { toast, showToast } = useToast();
+
+  // 🔥 페이지(graphType) 바뀌면 검색창 초기화
+  useEffect(() => {
+    setInputValue("");
+    setSearchTerm("");
+  }, [graphType]);
+
+  // 전체보기 버튼
   const handleResetView = () => {
     setResetViewFlag((prev) => !prev);
-    setSearchTerm("");
     setInputValue("");
-    setShowNoResultToast(false);
+    setSearchTerm("");
   };
 
-  // 검색 실행 핸들러
+  // 검색 실행
   const handleSearch = () => {
     setSearchTerm("");
     setTimeout(() => setSearchTerm(inputValue), 10);
   };
 
-  // 검색 결과 없음 토스트 핸들러
+  // ❗ 검색 결과 없음 → 토스트 실행
   const handleNoResult = useCallback(() => {
-    setShowNoResultToast(true);
-    setTimeout(() => {
-      setShowNoResultToast(false);
-    }, 1500);
-  }, []);
+    showToast("검색 결과가 없습니다.");
+  }, [showToast]);
 
   return (
     <div className="bg-[#0b4747] min-h-screen">
-      {/* 토스트 */}
+
+      {/* 🔥 토스트 표시 */}
       <Toast
-        message="검색 결과가 없습니다."
-        show={showNoResultToast}
-        onClose={() => setShowNoResultToast(false)}
+        message={toast.message}
+        show={toast.show}
+        onClose={() => {}}
       />
 
       <div className="h-screen w-full pt-20 text-white flex flex-col overflow-hidden relative">
@@ -59,6 +67,7 @@ const GraphDetail = () => {
                   {graphType === "ego" && "Ego Network"}
                   {graphType === "collaboration" && "Collaboration Network"}
                 </h1>
+
                 <p className="text-sm text-white/70 whitespace-nowrap text-right pl-4">
                   {graphType === "movie" &&
                     "여러 영화와 영화인들 사이의 유기적인 관계를 한눈에 파악해보세요."}
@@ -70,9 +79,10 @@ const GraphDetail = () => {
               </div>
             </header>
 
-            {/* 검색 영역 */}
+            {/* 검색영역 */}
             <div className="relative w-full mt-2 flex justify-center items-center">
-              {/* 범례 (movie 그래프일 때만) */}
+
+              {/* movie 범례 */}
               {graphType === "movie" && (
                 <div
                   className="
@@ -101,7 +111,7 @@ const GraphDetail = () => {
                 </div>
               )}
 
-              {/* 중앙 검색바 */}
+              {/* 검색바 */}
               <div className="w-full max-w-sm">
                 <Searcrbar
                   inputValue={inputValue}
@@ -135,6 +145,7 @@ const GraphDetail = () => {
 
         {/* 그래프 영역 */}
         <div className="flex-1 w-full min-h-0 relative overflow-hidden px-6 pb-3">
+
           {graphType === "movie" && (
             <BipartiteGraph
               resetViewFlag={resetViewFlag}
@@ -158,6 +169,7 @@ const GraphDetail = () => {
               onNoResult={handleNoResult}
             />
           )}
+
         </div>
       </div>
     </div>

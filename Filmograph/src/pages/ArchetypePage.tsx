@@ -6,10 +6,30 @@ import type {
   Character,
 } from "../services/archetype/archetypeTypes";
 
+import { useNavigate } from "react-router-dom";
+import { useToast } from "../hooks/useToast";
+import { Toast } from "../components/common/Toast";
+
+// Firestore
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db } from "../services/data/firebaseConfig";
+
+// Firestore: 제목으로 kobisId 찾기
+async function findKobisIdByTitle(title: string) {
+  const q = query(collection(db, "movies"), where("title", "==", title));
+  const snap = await getDocs(q);
+
+  if (snap.empty) return null;
+  return snap.docs[0].id;
+}
+
 const ArchetypePage = () => {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [selectedArchetype, setSelectedArchetype] =
     useState<ArchetypeId | null>(null);
+
+  const navigate = useNavigate();
+  const { toast, showToast } = useToast();
 
   // Firestore에서 캐릭터 불러오기
   useEffect(() => {
@@ -28,6 +48,23 @@ const ArchetypePage = () => {
   const selectedRule = selectedArchetype
     ? ARCHETYPE_RULES.find((r) => r.id === selectedArchetype)
     : null;
+
+  // 영화 상세 페이지 이동 (movieCd 또는 title fallback)
+  const goToDetail = async (movieCd: string | null, movieTitle: string) => {
+    if (movieCd) {
+      navigate(`/detail/${movieCd}`);
+      return;
+    }
+
+    // movieCd 없으면 title로 Firestore 검색
+    const kobisId = await findKobisIdByTitle(movieTitle);
+
+    if (kobisId) {
+      navigate(`/detail/${kobisId}`);
+    } else {
+      showToast("상세 정보가 아직 준비되지 않았습니다.");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#0b4747] text-white p-8 pt-20">
@@ -176,7 +213,12 @@ const ArchetypePage = () => {
                     {filteredCharacters.map((ch) => (
                       <article
                         key={ch.id}
-                        className="group flex flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white transition hover:-translate-y-1 hover:border-slate-900/70 hover:shadow-[0_22px_55px_rgba(0,0,0,0.25)]"
+                        onClick={() => goToDetail(ch.movieCd ?? null, ch.movieTitle)}
+                        className={`
+                          group flex flex-col overflow-hidden rounded-3xl border bg-white transition
+                          cursor-pointer
+                          hover:-translate-y-1 hover:border-slate-900/70 hover:shadow-[0_22px_55px_rgba(0,0,0,0.25)]
+                        `}
                       >
                         <div className="relative aspect-4/5 overflow-hidden bg-slate-900">
                           {/* 캐릭터 이미지 */}
@@ -207,6 +249,15 @@ const ArchetypePage = () => {
           </section>
         )}
       </div>
+
+      {/* 토스트 */}
+      <Toast
+        message={toast.message}
+        show={toast.show}
+        onClose={() => {}}
+        actionLabel={toast.actionLabel}
+        actionUrl={toast.actionUrl}
+      />
     </div>
   );
 };

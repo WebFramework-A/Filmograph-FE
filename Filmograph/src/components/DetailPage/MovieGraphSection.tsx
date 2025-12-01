@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { motion } from "framer-motion";
 import { Network, ZoomIn, ZoomOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import type { MovieDetail, Person } from "../../../types/movie";
+import type { MovieDetail, Person } from "../../types/movie";
 
 type NodeT = {
   id: string;
@@ -20,7 +20,6 @@ type LinkT = { source: string; target: string };
 const CANVAS_WIDTH = 1200;
 const CANVAS_HEIGHT = 600;
 
-const R_CENTER = 0;        
 const R_PEOPLE = 160;      
 const R_RELATED = 250;     
 

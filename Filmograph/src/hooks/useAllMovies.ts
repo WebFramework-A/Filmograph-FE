@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../../services/firebaseConfig";
-import { type MovieDetail } from "../../../types/movie";
+import { db } from "../services/data/firebaseConfig";
+import { type MovieDetail } from "../types/movie";
 
 export default function useAllMovies() {
     // [수정] state 타입을 MovieDetail[]로 변경
@@ -20,7 +20,7 @@ export default function useAllMovies() {
                         ...data,
                         avgRating: data.avgRating || data.rating,
                     };
-                }) as MovieDetail[];
+                }) as unknown as MovieDetail[];
 
                 setMovies(movieList);
             } catch (error) {

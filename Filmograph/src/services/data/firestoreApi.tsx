@@ -1,6 +1,6 @@
 import { db } from "./firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
-import type { GraphData, Node, Link } from "../types/data";
+import type { GraphData, Node, Link } from "../../types/data";
 
 /* 메인 그래프에 필요한 노드 & 링크 데이터 가져옴
   @returns {Promise<GraphData>} 그래프 데이터

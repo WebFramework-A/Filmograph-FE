@@ -47,7 +47,7 @@ const GraphHome = () => {
           <div className="mb-6">
             선택한 <b>특정 인물</b>을 중심에 두고, 그와 직접{" "}
             <b>협업한 동료들</b>을 주변에 배치하여 개인의 <b>인맥 지도</b>를
-            집중적으로 분석합니다. 함께 작업한 횟수가 많을수록 연결선을 두껍게
+            집중적으로 분석합니다.<br /> 함께 작업한 횟수가 많을수록 연결선을 두껍게
             표현하였습니다.
           </div>
           <div className="flex flex-col items-start mb-4">
@@ -73,7 +73,7 @@ const GraphHome = () => {
         <div className="flex flex-col ">
           <div className="mb-6">
             전체 영화인 데이터를 분석하여 <b>자주 협업하는 그룹</b>을 Louvain
-            알고리즘이 자동으로 찾아내어 시각화해 줍니다. 같은 집단을 동일한
+            알고리즘이 자동으로 찾아내어 시각화해 줍니다. <br />같은 집단을 동일한
             색상으로 묶어 표현하였습니다.
           </div>
           <div className="flex flex-col items-start mb-4">

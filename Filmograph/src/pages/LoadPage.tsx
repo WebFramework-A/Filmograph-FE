@@ -4,15 +4,15 @@ import {
   fetchMovieDetail,
 } from "../services/movies/movieAPI";
 
-import { saveMovie } from "../services/movieService";
+import { saveMovie } from "../services/data/movieService";
 import {
   countKobisCall,
   getKobisCalls,
-} from "../services/kobisUsage";
+} from "../services/data/kobisUsage";
 
 import { findKobisMovieCdByTmdbId } from "../services/movies/matchTmdbToKobis";
 
-import { db } from "../services/firebaseConfig";
+import { db } from "../services/data/firebaseConfig";
 import {
   doc,
   getDoc,
@@ -33,7 +33,9 @@ export default function LoadPage() {
   const [writesToday, setWritesToday] = useState(0);
   const [kobisCalls, setKobisCalls] = useState(0);
   const [startPage, setStartPage] = useState(1);
+  const [singleKobisId, setSingleKobisId] = useState("");
 
+  // KOBIS 호출 카운트 / 초기 페이지 설정
   const refreshKobisInfo = async () => {
     const todayCalls = await getKobisCalls();
     setKobisCalls(todayCalls);
@@ -54,6 +56,7 @@ export default function LoadPage() {
     load();
   }, []);
 
+  // KOBIS 호출 제한 체크
   const checkLimit = async () => {
     const calls = await getKobisCalls();
     if (calls >= MAX_KOBIS_DAILY_CALL) {
@@ -62,6 +65,55 @@ export default function LoadPage() {
       return true;
     }
     return false;
+  };
+
+  const startSaveSingleMovie = async () => {
+    if (!singleKobisId.trim()) {
+      setStatusMsg("KOBIS movieCd를 입력하세요");
+      return;
+    }
+
+    setIsRunning(true);
+    setStatusMsg(`영화(${singleKobisId}) 정보 조회 중…`);
+
+    await countKobisCall();
+    if (await checkLimit()) {
+      setIsRunning(false);
+      return;
+    }
+
+    const detail = await fetchMovieDetail(singleKobisId);
+
+    if (!detail) {
+      setStatusMsg(
+        "영화 정보를 가져오지 못했습니다 (movieCd 오류 가능)"
+      );
+      setIsRunning(false);
+      return;
+    }
+
+    setStatusMsg(`영화(${detail.movieCd}) Firestore 저장 중…`);
+
+    const result = await saveMovie(detail);
+
+    if (result === "SAVED") {
+      setWritesToday((prev) => prev + 1);
+      setStatusMsg(`저장 완료! (${detail.movieCd})`);
+    } else if (result === "SKIPPED_KOBIS") {
+      setStatusMsg(`저장 불가 - KOBIS 필수 정보 미흡: ${detail.movieCd}`);
+    } else if (result === "SKIPPED_19") {
+      setStatusMsg(`청소년관람불가 제외됨: ${detail.movieCd}`);
+    } else if (result === "SKIPPED_TMDB") {
+      setStatusMsg(
+        `저장 불가 - TMDB 필수 데이터 없음: ${detail.movieCd}`
+      );
+    } else {
+      setStatusMsg("저장 중 오류 발생 (콘솔 확인)");
+    }
+
+    await new Promise((r) => setTimeout(r, 120));
+
+    setIsRunning(false);
   };
 
   const startUpload = async () => {
@@ -129,7 +181,6 @@ export default function LoadPage() {
     yesterday.setDate(yesterday.getDate() - 1);
     const ymd = yesterday.toISOString().slice(0, 10).replace(/-/g, "");
 
-    // KOBIS: 박스오피스 TOP10
     await countKobisCall();
     if (await checkLimit()) return;
 
@@ -169,7 +220,6 @@ export default function LoadPage() {
     setStatusMsg(`박스오피스 저장 완료: ${saved}개`);
     setIsRunning(false);
   };
-
 
   const startExpandRelated = async () => {
     setIsRunning(true);
@@ -215,9 +265,11 @@ export default function LoadPage() {
     setIsRunning(false);
   };
 
+  // UI
   return (
     <div className="min-h-screen pt-30 pb-10 bg-[#004f51] text-white">
       <div className="max-w-5xl mx-auto">
+        
         {/* Header */}
         <div className="text-center mb-10">
           <h1 className="text-4xl font-bold text-yellow-200">🎬 영화 데이터 수집기</h1>
@@ -232,12 +284,6 @@ export default function LoadPage() {
             오늘 KOBIS 호출:{" "}
             <span className="text-yellow-200">{kobisCalls}</span> / 3000
           </p>
-          <p className="text-center">
-            Firestore writes:{" "}
-            <span className="text-yellow-200">{writesToday}</span> / 10000
-          </p>
-
-          {/* Progress bar */}
           <div className="w-full h-3 bg-white/10 rounded mt-4 overflow-hidden">
             <div
               className="h-full bg-yellow-200 transition-all"
@@ -248,9 +294,25 @@ export default function LoadPage() {
           <p className="text-center mt-3">{statusMsg}</p>
         </div>
 
+        <div className="flex flex-col md:flex-row gap-4 mt-6 bg-black/20 p-6 rounded-xl border border-white/10">
+          <input
+            type="text"
+            value={singleKobisId}
+            onChange={(e) => setSingleKobisId(e.target.value)}
+            placeholder="KOBIS movieCd 입력 (예: 20080396)"
+            className="flex-1 px-4 py-3 rounded-lg text-white"
+          />
+
+          <button
+            onClick={startSaveSingleMovie}
+            disabled={isRunning}
+            className="px-6 py-3 rounded-xl bg-yellow-200 text-black font-bold hover:bg-yellow-300 disabled:opacity-50"
+          >
+            영화 저장
+          </button>
+        </div>
         {/* Buttons */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-          {/* 전체 저장 */}
+        <div className="grid grid-cols-1 mt-8 md:grid-cols-3 gap-6 mb-10">
           <button
             onClick={startUpload}
             disabled={isRunning}
@@ -259,7 +321,6 @@ export default function LoadPage() {
             전체 영화 저장
           </button>
 
-          {/* 박스오피스 */}
           <button
             onClick={startBoxOffice}
             disabled={isRunning}
@@ -268,7 +329,6 @@ export default function LoadPage() {
             박스오피스 TOP10
           </button>
 
-          {/* 관련 확장 */}
           <button
             onClick={startExpandRelated}
             disabled={isRunning}

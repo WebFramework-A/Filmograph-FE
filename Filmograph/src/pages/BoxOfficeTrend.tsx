@@ -27,7 +27,7 @@ const COLORS = [
   "#775e57", // 갈색
   "#f1f1f1", // 거의 흰색
   "#c0e1e8", // 옅은 하늘색
-  "#0e335f", // 진한 남색
+  "#0A55AF", // 진한 남색
   "#656e65", // 녹색
   "#000000", // 흰색
 ];
@@ -42,25 +42,25 @@ export default function BoxOfficeTrend() {
   const lastUpdated = data?.lastUpdated || "-";
 
   const CustomTooltip = ({ active, payload, label }: any) => {
-    if (active && payload && payload.length) {
-      const sortedPayload = [...payload].sort((a, b) => a.value - b.value);
-
+    if (active && payload?.length) {
+      const ordered = [...payload].sort((a, b) => a.value - b.value);
       return (
-        <div className="bg-slate-800 border border-slate-700 p-4 rounded-lg shadow-xl text-white">
-          <p className="font-bold mb-2 text-slate-300 border-b border-slate-600 pb-1">
+        <div className="bg-slate-800 border border-slate-700 p-4 rounded-lg text-white">
+          <p className="font-bold mb-2 border-b border-slate-600 pb-1">
             {label} 순위
           </p>
-          <ul className="text-sm space-y-1">
-            {sortedPayload.map((entry: any, index: number) => (
+
+          <ul className="space-y-1 text-sm">
+            {ordered.map((item, index) => (
               <li key={index} className="flex items-center gap-2">
                 <span
                   className="inline-block w-3 h-3 rounded-full"
-                  style={{ backgroundColor: entry.color }}
-                ></span>
-                <span className="font-mono font-bold w-8 text-right">
-                  {entry.value}위
+                  style={{ backgroundColor: item.color }}
+                />
+                <span className="font-mono w-8 text-right font-bold">
+                  {item.value}위
                 </span>
-                <span className="text-slate-200">{entry.name}</span>
+                <span>{item.name}</span>
               </li>
             ))}
           </ul>
@@ -71,8 +71,8 @@ export default function BoxOfficeTrend() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b4747] text-white p-6 font-sans pt-20">
-      {/* Header */}
+    <div className="min-h-screen bg-[#0b4747] text-white p-6 pt-20">
+      {/* Header 영역 */}
       <div className="max-w-6xl mx-auto mb-10">
         <header>
           <div className="flex justify-between items-end border-b border-white/20 pb-4 mb-8">
@@ -80,13 +80,14 @@ export default function BoxOfficeTrend() {
               Weekly Box Office Flow
             </h1>
 
-            <p className="text-sm text-white/70 whitespace-nowrap text-right pl-4">
-              지난 7일간의 박스오피스 순위 변동을 한눈에 확인해보세요.
+            <p className="text-sm text-white/70 whitespace-nowrap">
+              Firestore에 저장된 박스오피스 7일 기록을 보여줍니다.
             </p>
           </div>
         </header>
 
-        <div className="w-full flex justify-end mt-2">
+        {/* 🔄 새로고침 버튼 */}
+        <div className="flex justify-end mt-2">
           <button
             onClick={() => refetch()}
             disabled={isLoading}
@@ -138,15 +139,17 @@ export default function BoxOfficeTrend() {
                   stroke="#333"
                   vertical={false}
                 />
+
                 <XAxis
                   dataKey="date"
                   stroke="#666"
                   tick={{ fill: "#888" }}
                   axisLine={{ stroke: "#444" }}
                 />
+
                 <YAxis
-                  reversed={true} // 순위 그래프이므로 1위가 위로 가도록 반전준거임
-                  domain={[1, 10]} // 1위 ~ 10위
+                  reversed={true}
+                  domain={[1, 10]}
                   tickCount={10}
                   stroke="#666"
                   tick={{ fill: "#888" }}
@@ -158,6 +161,7 @@ export default function BoxOfficeTrend() {
                     fill: "#666",
                   }}
                 />
+
                 <Tooltip content={<CustomTooltip />} />
                 <Legend wrapperStyle={{ paddingTop: "20px" }} />
 
@@ -182,7 +186,7 @@ export default function BoxOfficeTrend() {
         {/* 하단에 요약카드들 */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 mb-10">
           {/* 오늘 1등 */}
-          <div className="bg-black/30 p-6 rounded-lg border border-slate-800">
+          <div className="bg-black/20 p-6 rounded-lg border border-slate-800">
             <h3 className="text-slate-400 text-sm font-medium mb-2">
               최신 1위 영화
             </h3>
@@ -196,7 +200,7 @@ export default function BoxOfficeTrend() {
           </div>
 
           {/* Entry Count */}
-          <div className="bg-black/30 p-6 rounded-lg border border-slate-800">
+          <div className="bg-black/20 p-6 rounded-lg border border-slate-800">
             <h3 className="text-slate-400 text-sm font-medium mb-2">
               랭킹 진입 영화 수
             </h3>

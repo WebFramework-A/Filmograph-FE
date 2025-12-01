@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Star, Calendar, Clock, Film } from "lucide-react";
-import { type MovieDetail } from "../../../types/movie";
+import { type MovieDetail } from "../../types/movie";
 import { FavoriteButton } from "./FavoriteButton";
 import "./styles/MovieHeader.css";
 

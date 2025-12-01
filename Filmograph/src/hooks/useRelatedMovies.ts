@@ -1,10 +1,10 @@
 // src/hooks/useExpandedRelatedMovies.ts
 import { useEffect, useState } from "react";
-import { db } from "../services/firebaseConfig";
+import { db } from "../services/data/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 import { findKobisMovieCdByTmdbId } from "../services/movies/matchTmdbToKobis";
 import { fetchMovieDetail } from "../services/movies/movieAPI";
-import { saveMovie } from "../services/movieService";
+import { saveMovie } from "../services/data/movieService";
 import type { MovieDetail } from "../types/movie";
 
 export default function useExpandedRelatedMovies(movie: MovieDetail | null) {

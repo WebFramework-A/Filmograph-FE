@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { Bookmark } from "lucide-react";
 import { motion } from "framer-motion";
-import { auth, db } from "../../../services/firebaseConfig";
+import { auth, db } from "../../services/data/firebaseConfig";
 import { doc, getDoc, setDoc, deleteDoc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useToast } from "../../../hooks/useToast";
-import { Toast } from "../../../components/common/Toast";
+import { useToast } from "../../hooks/useToast";
+import { Toast } from "../common/Toast";
 
 interface FavoriteButtonProps {
   movieId: string;

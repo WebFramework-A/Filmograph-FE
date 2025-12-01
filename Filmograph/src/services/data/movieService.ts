@@ -1,9 +1,9 @@
 // src/services/movieService.ts
 import { db } from "./firebaseConfig";
 import { doc, setDoc } from "firebase/firestore";
-import type { MovieDetail } from "../types/movie";
-import { enrichMovieData } from "./movies/tmdbApi";
-import { cleanObject } from "../utils/cleanObject";
+import type { MovieDetail } from "../../types/movie";
+import { enrichMovieData } from "./../movies/tmdbApi";
+import { cleanObject } from "../../utils/cleanObject";
 
 export type SaveMovieResult =
   | "SAVED"
