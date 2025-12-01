@@ -201,19 +201,19 @@ const GraphDescription = () => {
   );
 
   return (
-    <div className="min-h-screen snap-start flex flex-col items-center p-50 bg-yellow-200">
-      <div className="text-5xl mb-5 text-[#0b4747]">그래프 종류</div>
+    <div className="min-h-screen snap-start flex flex-col items-center p-4 md:p-8 lg:p-12 xl:p-16 bg-yellow-200">
+      <div className="text-3xl md:text-4xl lg:text-5xl mb-4 md:mb-6 lg:mb-8 text-[#0b4747]">그래프 종류</div>
 
       <button
-        className="border border-[#0b4747]/50 rounded-4xl hover:bg-[#0b4747] hover:text-white duration-400 px-4 py-2 cursor-pointer transition-colors"
+        className="border border-[#0b4747]/50 rounded-4xl hover:bg-[#0b4747] hover:text-white duration-400 px-3 py-1.5 md:px-4 md:py-2 cursor-pointer transition-colors text-sm md:text-base mb-4 md:mb-0"
         onClick={() => navigate("/graph")}
       >
         전체 그래프 보러가기
       </button>
 
-      <div className="flex justify-center items-center w-full max-w-7xl px-10 py-5 gap-10  h-[500px]">
+      <div className="flex flex-col lg:flex-row justify-center items-center w-full max-w-7xl px-4 md:px-8 lg:px-10 py-5 gap-6 lg:gap-10 min-h-[500px] lg:h-[500px]">
         {/* 좌측 (리스트) */}
-        <div className="w-[60%] flex flex-col text-[#0b4747]">
+        <div className="w-full lg:w-[60%] flex flex-col text-[#0b4747]">
           <div className="w-full border-t border-[#0b4747]/50"></div>
           {items.map((item) => (
             <div
@@ -222,14 +222,14 @@ const GraphDescription = () => {
               onMouseEnter={() => handleMouseEnter(item.id)}
               onClick={() => navigate(item.url)}
             >
-              <div className="flex items-center py-6 px-2 transition-colors duration-300 relative z-10">
-                <div className="absolute left-35 right-0 h-px bg-[#0b4747] opacity-0 -translate-x-10 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 ease-out flex items-center">
-                  <span className="absolute right-0 text-2xl text-[#0b4747] -mt-1">
+              <div className="flex items-center py-4 md:py-5 lg:py-6 px-2 transition-colors duration-300 relative z-10">
+                <div className="absolute left-20 sm:left-24 md:left-28 lg:left-35 right-0 h-px bg-[#0b4747] opacity-0 -translate-x-10 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 ease-out flex items-center">
+                  <span className="absolute right-0 text-lg md:text-xl lg:text-2xl text-[#0b4747] -mt-1">
                     &gt;
                   </span>
                 </div>
                 <span
-                  className={`text-5xl font-serif italic tracking-tighter mr-8 transition-colors duration-200 ${
+                  className={`text-3xl sm:text-4xl lg:text-5xl font-serif italic tracking-tighter mr-4 md:mr-6 lg:mr-8 transition-colors duration-200 ${
                     currentId === item.id
                       ? "text-[#0b4747]"
                       : "text-[#0b4747]/50"
@@ -238,7 +238,7 @@ const GraphDescription = () => {
                   {item.id}
                 </span>
                 <span
-                  className={`text-2xl md:text-3xl transition-colors duration-200 bg-yellow-200 pr-4 z-20 ${
+                  className={`text-lg sm:text-xl md:text-2xl lg:text-3xl transition-colors duration-200 bg-yellow-200 pr-4 z-20 ${
                     currentId === item.id
                       ? "text-[#0b4747]"
                       : "text-[#0b4747]/50"
@@ -255,7 +255,7 @@ const GraphDescription = () => {
         {/* 우측 (그래프)*/}
         <div
           ref={graphContainerRef}
-          className="w-[50%] h-full flex items-center justify-center relative  rounded-3xl overflow-hidden "
+          className="w-full lg:w-[50%] h-[400px] md:h-[500px] lg:h-full flex items-center justify-center relative"
         >
           <div
             className={`
@@ -284,7 +284,7 @@ const GraphDescription = () => {
               />
             )}
           </div>
-          <div className="absolute bottom-0 right-3 text-gray-800 text-sm italic">
+          <div className="absolute bottom-2 right-2 md:bottom-3 md:right-3 text-gray-800 text-xs md:text-sm italic">
             ※ 봉준호 감독 관련 예시 데이터입니다.
           </div>
         </div>

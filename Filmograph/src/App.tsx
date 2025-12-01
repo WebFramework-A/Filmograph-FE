@@ -20,6 +20,7 @@ import BoxOffice from "./pages/BoxOfficePage";
 import MapPage from "./pages/MapPage";
 import AllMoviesPage from "./pages/AllMoviesPage";
 import BoxOfficeTrend from "./pages/BoxOfficeTrend";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const router = createBrowserRouter([
   {
@@ -88,8 +89,15 @@ const router = createBrowserRouter([
   },
 ]);
 
+// 일간 박스오피스(BoxOfficeTrend)에서 useQuery쓰려고 넣어놨어요~
+const queryClient = new QueryClient();
+
 function App() {
-  return <RouterProvider router={router}></RouterProvider>;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router}></RouterProvider>
+    </QueryClientProvider>
+  );
 }
 
 export default App;

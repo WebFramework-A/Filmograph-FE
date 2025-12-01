@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import {
   LineChart,
   Line,
@@ -10,12 +9,8 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { Calendar, RefreshCw, AlertCircle } from "lucide-react";
+import { useFetchBoxOfficeDate } from "../services/queries/useFetchBoxOfficeDate";
 
-import type { ChartDataPoint } from "../types/boxOfficeTrend";
-import { save7DaysTrend } from "../services/movies/boxOfficeTrendSaver";
-
-import { db } from "../services/data/firebaseConfig";
-import { doc, collection, getDocs, getDoc } from "firebase/firestore";
 const COLORS = [
   "#1DB954", // 남색
   "#FF4444", // 주황(다홍에 가까운 주황)
@@ -38,70 +33,13 @@ const COLORS = [
 ];
 
 export default function BoxOfficeTrend() {
-  const [data, setData] = useState<ChartDataPoint[]>([]);
-  const [allMovies, setAllMovies] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false); 
-  const [error, setError] = useState<string | null>(null);
-  const [lastUpdated, setLastUpdated] = useState("-");
+  // useQuery로 만들어둔 훅으로 데이터+서버상태 가져오기
+  const { data, isLoading, isError, refetch } = useFetchBoxOfficeDate();
 
-  const fetchFromFirestore = async () => {
-    try {
-      const snap = await getDocs(collection(db, "boxOfficeTrend"));
-      if (snap.empty) return;
-
-      const sorted = snap.docs
-        .map((d) => d.data())
-        .sort((a: any, b: any) => Number(a.date) - Number(b.date));
-
-      const chartData: ChartDataPoint[] = [];
-      const movieSet = new Set<string>();
-
-      sorted.forEach((day) => {
-        const point: ChartDataPoint = {
-          date: `${day.date.slice(4, 6)}/${day.date.slice(6, 8)}`,
-          fullDate: day.date,
-        };
-
-        day.top10.forEach((m: any) => {
-          point[m.movieNm] = m.rank;
-          movieSet.add(m.movieNm);
-        });
-
-        chartData.push(point);
-      });
-
-      setData(chartData);
-      setAllMovies(Array.from(movieSet));
-    } catch (err) {
-      console.error(err);
-      setError("데이터 로드 중 오류가 발생했습니다.");
-    }
-  };
-
-  const fetchLastSavedTime = async () => {
-    try {
-      const metaRef = doc(db, "system", "boxOfficeTrendMeta");
-      const metaSnap = await getDoc(metaRef);
-
-      if (metaSnap.exists()) {
-        const isoTime = metaSnap.data().lastSavedAt;
-        setLastUpdated(
-          new Date(isoTime).toLocaleString("ko-KR", { hour12: false })
-        );
-      }
-    } catch (err) {
-      console.error("meta 로드 오류", err);
-    }
-  };
-
-  useEffect(() => {
-    (async () => {
-      setLoading(true);
-      await fetchFromFirestore();
-      await fetchLastSavedTime();
-      setLoading(false);
-    })();
-  }, []);
+  // 훅에서 받은 데이터 구조분해
+  const chartData = data?.chartData || [];
+  const allMovies = data?.allMovies || [];
+  const lastUpdated = data?.lastUpdated || "-";
 
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload?.length) {
@@ -151,18 +89,12 @@ export default function BoxOfficeTrend() {
         {/* 🔄 새로고침 버튼 */}
         <div className="flex justify-end mt-2">
           <button
-            disabled={loading}
-            className="flex items-center gap-2 px-4 py-2 bg-yellow-300 text-[#0b4747] hover:bg-yellow-400 rounded-md transition-colors border border-slate-700"
-            onClick={async () => {
-              setLoading(true);
-              await save7DaysTrend();
-              await fetchFromFirestore();
-              await fetchLastSavedTime();
-              setLoading(false);
-            }}
-            >
-            <RefreshCw size={16} className={loading ? "animate-spin" : ""} />
-            {loading ? "로딩 중..." : "새로고침"}
+            onClick={() => refetch()}
+            disabled={isLoading}
+            className="flex items-center gap-2 px-4 py-2 bg-yellow-300 text-[#0b4747] hover:bg-yellow-400 cursor-pointer rounded-md transition-colors text-sm font-medium border border-slate-700"
+          >
+            <RefreshCw size={16} className={isLoading ? "animate-spin" : ""} />
+            {isLoading ? "로딩 중..." : "새로고침"}
           </button>
         </div>
       </div>
@@ -172,8 +104,8 @@ export default function BoxOfficeTrend() {
         {/* 현황 */}
         <div className="flex justify-between items-center mb-4 px-2">
           <span className="text-xs text-slate-500 flex items-center gap-1">
-            <Calendar size={12} /> {data[0]?.date} ~
-            {data[data.length - 1]?.date} 까지의 일별 랭킹
+            <Calendar size={12} /> {chartData[0]?.date} ~
+            {chartData[chartData.length - 1]?.date} 까지의 일별 랭킹
           </span>
           <span className="text-sm text-slate-500">
             마지막 업데이트: {lastUpdated}
@@ -181,16 +113,16 @@ export default function BoxOfficeTrend() {
         </div>
 
         {/* 에러처리 */}
-        {error && (
+        {isError && (
           <div className="bg-red-900/30 border border-red-800 text-red-200 p-4 rounded-lg mb-6 flex items-center gap-3">
             <AlertCircle />
-            {error}
+            {isError}
           </div>
         )}
 
         {/* 그래프 */}
-        <div className="bg-black/20 rounded-xl p-6 shadow-2xl relative overflow-hidden">
-          {loading && (
+        <div className="bg-black/30 rounded-xl p-6 shadow-2xl relative overflow-hidden">
+          {isLoading && (
             <div className="absolute inset-0 bg-black/10 z-10 flex items-center justify-center">
               <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>
             </div>
@@ -199,7 +131,7 @@ export default function BoxOfficeTrend() {
           <div className="h-[500px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart
-                data={data}
+                data={chartData}
                 margin={{ top: 20, right: 30, left: 20, bottom: 10 }}
               >
                 <CartesianGrid
@@ -233,21 +165,19 @@ export default function BoxOfficeTrend() {
                 <Tooltip content={<CustomTooltip />} />
                 <Legend wrapperStyle={{ paddingTop: "20px" }} />
 
-                {!loading &&
-                  allMovies.map((movieName, index) => (
-                    <Line
-                      key={movieName}
-                      type="monotone"
-                      dataKey={movieName}
-                      stroke={COLORS[index % COLORS.length]}
-                      strokeWidth={3}
-                      dot={{ r: 4, strokeWidth: 2, fill: "#181818" }}
-                      activeDot={{ r: 7, strokeWidth: 0 }}
-                      connectNulls={true}
-                      animationDuration={1500}
-                    />
-                  ))
-                }
+                {allMovies.map((movieName: string, index: number) => (
+                  <Line
+                    key={movieName}
+                    type="monotone"
+                    dataKey={movieName}
+                    stroke={COLORS[index % COLORS.length]}
+                    strokeWidth={3}
+                    dot={{ r: 4, strokeWidth: 2, fill: "#181818" }}
+                    activeDot={{ r: 7, strokeWidth: 0 }}
+                    connectNulls={true} // 순위권 밖으로 나갔다 들어와도 선 연결
+                    animationDuration={1500}
+                  />
+                ))}
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -261,9 +191,9 @@ export default function BoxOfficeTrend() {
               최신 1위 영화
             </h3>
             <p className="text-2xl font-bold text-yellow-300 truncate">
-              {data.length > 0
-                ? Object.keys(data[data.length - 1]).find(
-                    (key) => data[data.length - 1][key] === 1
+              {chartData.length > 0
+                ? Object.keys(chartData[chartData.length - 1]).find(
+                    (key) => chartData[chartData.length - 1][key] === 1
                   ) || "-"
                 : "-"}
             </p>
