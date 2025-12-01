@@ -31,7 +31,7 @@ type GraphT = {
 type BipartiteGraphProps = {
     resetViewFlag: boolean;
     searchTerm?: string;
-    onNoResult: () => void; 
+    onNoResult: () => void;
 };
 
 // 노드 색깔 설정
@@ -116,7 +116,7 @@ export default function BipartiteGraph({
         return () => resizeObserver.disconnect();
     }, []);
 
-    
+
 
     // 안전장치: 데이터 로드 후 5초가 지나도 그래프가 준비 안 되면 강제로 보여줌
     useEffect(() => {
@@ -145,7 +145,7 @@ export default function BipartiteGraph({
                             name: movieTitle,
                             type: "movie",
                             val: 3,
-                            // [추가] 상세 정보 매핑 (DB 필드명에 맞춰주세요)
+                            // 상세 정보 매핑 (DB 필드명에 맞춰주세요)
                             releaseYear: data.releaseDate ? data.releaseDate.substring(0, 4) : "?",
                             rating: data.rating || 0,
                         });
@@ -215,9 +215,9 @@ export default function BipartiteGraph({
     const graphData = useMemo(() => data ?? { nodes: [], links: [] }, [data]);
     const [mounted, setMounted] = useState(false);
 
-useEffect(() => {
-  setMounted(true);
-}, []);
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     // 검색 로직
     useGraphSearch({
@@ -236,7 +236,7 @@ useEffect(() => {
                 if (t === target.id) related.add(s);
             });
 
-            fgRef.current?.zoomToFit(600, 10, (n: any) => related.has(n.id));
+            fgRef.current?.zoomToFit(500, 50, (n: any) => related.has(n.id));
         },
 
         // 검색 실패 처리 — onNoResult 호출
@@ -273,8 +273,8 @@ useEffect(() => {
     // 물리 엔진 설정
     useEffect(() => {
         if (!fgRef.current) return;
-        fgRef.current.d3Force('charge')?.strength(-500).distanceMax(700);
-        fgRef.current.d3Force('link')?.distance(50).strength(1).iterations(5);
+        fgRef.current.d3Force('charge')?.strength(-500).distanceMax(800);
+        fgRef.current.d3Force('link')?.distance(60).strength(1).iterations(5);
 
         const collideForce = fgRef.current.d3Force('collide');
         if (collideForce) {
@@ -373,7 +373,7 @@ useEffect(() => {
                         });
 
                         fgRef.current?.zoomToFit(
-                            500, 100, (n: any) => relatedNodeIds.has(n.id)
+                            500, 50, (n: any) => relatedNodeIds.has(n.id)
                         );
                     }}
 
@@ -409,8 +409,8 @@ useEffect(() => {
                             ctx.beginPath();
                             ctx.arc(node.x, node.y, size, 0, 2 * Math.PI, false);
                             ctx.fill();
-                        
-                        } 
+
+                        }
                         // 영화인 노드 설정
                         else {
                             if (node.role === "director") color = DIRECTOR_COLOR;
@@ -425,7 +425,7 @@ useEffect(() => {
                         const showLabel = globalScale > 1.0 || isHighlighted;
 
                         if (showLabel) {
-                            const fontSize = 12 / globalScale;
+                            const fontSize = 11 / globalScale;
                             ctx.font = `${fontSize}px Sans-Serif`;
                             ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
                             ctx.textAlign = "center";
@@ -438,8 +438,8 @@ useEffect(() => {
                             lines.forEach((line, i) => {
                                 const dy = (i - (lines.length - 1) / 2) * lineHeight;
                                 if (node.x !== undefined && node.y !== undefined) {
-                                ctx.fillText(line, node.x, node.y + dy);
-                            }
+                                    ctx.fillText(line, node.x, node.y + dy);
+                                }
                             });
                         }
 
@@ -452,7 +452,7 @@ useEffect(() => {
             {/* 노드 상세 정보 모달 (영화 노드일 때만 표시) */}
             {selectedNode && selectedNode.type === "movie" && (
                 <div className="absolute top-4 right-4 w-72 bg-black/80 text-white p-5 rounded-xl border border-white/20 shadow-2xl backdrop-blur-md z-50 animate-fade-in">
-                    
+
                     {/* 닫기 버튼 */}
                     <button
                         onClick={() => setSelectedNode(null)}
