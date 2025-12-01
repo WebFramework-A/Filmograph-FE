@@ -37,7 +37,10 @@ export const fetchBoxOfficeData = async (): Promise<BoxOfficeDataResult> => {
   const movieSet = new Set<string>();
 
   jsonResults.forEach((json: DailyData, index) => {
-    if (!json.boxOfficeResult) return;
+    if (!json.boxOfficeResult) {
+      console.error(`[API Error] 날짜: ${dateMap[index].displayFmt}`, json);  //키 문제 or 할당량 초과
+      return;
+    }
 
     const dailyList = json.boxOfficeResult.dailyBoxOfficeList;
     const dataPoint: ChartDataPoint = {
