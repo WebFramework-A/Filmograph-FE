@@ -1,10 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
-import { getArchetypedCharacters } from "../services/archetype/archetypeData";
+//import { getArchetypedCharacters } from "../services/archetype/archetypeData";
+import { getCharacters } from "../services/archetype/getCharacters";
+
 import { ARCHETYPE_RULES } from "../services/archetype/archetypeRules";
-import type {
-  ArchetypeId,
-  Character,
-} from "../services/archetype/archetypeTypes";
+import type { ArchetypeId,Character } from "../services/archetype/archetypeTypes";
 
 import { useNavigate } from "react-router-dom";
 import { useToast } from "../hooks/useToast";
@@ -31,14 +30,14 @@ const ArchetypePage = () => {
   const navigate = useNavigate();
   const { toast, showToast } = useToast();
 
-  // Firestore에서 캐릭터 불러오기
   useEffect(() => {
-    async function load() {
-      const data = await getArchetypedCharacters();
-      setCharacters(data);
-    }
-    load();
-  }, []);
+  async function load() {
+    const data = await getCharacters(); 
+    setCharacters(data);
+  }
+  load();
+}, []);
+
 
   const filteredCharacters = useMemo(() => {
     if (!selectedArchetype) return [];
@@ -69,14 +68,14 @@ const ArchetypePage = () => {
   return (
     <div className="min-h-screen bg-[#0b4747] text-white p-8 pt-20">
       <div className="max-w-6xl mx-auto">
-        {/* 잡지 헤더 */}
+        {/* 헤더 */}
         <header className="mb-2 md:mb-3">
           <div className="flex justify-between items-end border-b border-white/20 pb-4 mb-8">
             <h1 className="text-4xl font-bold text-yellow-200">
               Character Archetype
             </h1>
-            <p className="text-sm text-white/70">
-              다양한 캐릭터 아키타입의 세계를 탐험해보세요.
+            <p className="text-sm text-right text-white/70">
+              다양한 캐릭터 아키타입의 세계를 탐험해보세요.<br/>캐릭터 클릭 시 해당 영화 상세페이지로 이동합니다.
             </p>
           </div>
         </header>
@@ -111,13 +110,16 @@ const ArchetypePage = () => {
                     <h3 className="text-lg font-semibold leading-snug text-emerald-50">
                       {rule.name}
                     </h3>
-                    <p className="mt-2 line-clamp-3 text-[11px] leading-relaxed text-emerald-50/85">
-                      {rule.description}
+                    <p
+                      className="mt-2 line-clamp-3 text-[11px] leading-relaxed text-emerald-50/85">
+                      <span
+                        className="whitespace-pre-line"
+                        dangerouslySetInnerHTML={{ __html: rule.description }}/>
                     </p>
                   </div>
 
                   <div className="mt-4 flex flex-wrap gap-1 items-baseline">
-                    {rule.keywords.slice(0, 3).map((kw) => (
+                    {rule.keywords.slice(0, 3).map((kw: string) => (
                       <span
                         key={kw}
                         className="rounded-full bg-emerald-900/70 px-2 py-0.5 text-[10px] text-emerald-50/95"
@@ -148,12 +150,12 @@ const ArchetypePage = () => {
                     className="
                       mb-8 cursor-pointer select-none
                       border-b border-dashed border-slate-200
-                      pb-2 text-[12px] font-semibold uppercase tracking-[0.25em]
+                      pb-2 text-[14px] font-semibold uppercase tracking-[0.25em]
                       text-slate-500
                       transition-colors
-                      hover:text-yellow-400"
-                  >
-                    ← back to index
+                      hover:text-yellow-300"
+                    >                 
+                      ← back to index
                   </div>
 
                   <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-slate-500">
@@ -162,14 +164,14 @@ const ArchetypePage = () => {
                   <h2 className="mt-3 text-3xl font-semibold italic tracking-tight md:text-4xl">
                     {selectedRule.name}
                   </h2>
-                  <p className="mt-4 text-base text-slate-700">
-                    {selectedRule.description}
-                  </p>
-                </div>
+                  <p
+                    className="mt-4 text-base text-slate-700"
+                    dangerouslySetInnerHTML={{ __html: selectedRule.description }} />
+                  </div>
 
                 <div className="w-full max-w-xs border-l border-slate-200 pl-6 text-sm text-slate-700 md:pl-8">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-500">
-                    archetype
+                    archetype keyword
                   </p>
                   <p className="mt-2 text-lg font-semibold text-slate-900">
                     {selectedRule.name}
@@ -177,7 +179,7 @@ const ArchetypePage = () => {
                   <p className="mt-3 text-[13px] leading-relaxed text-slate-600"></p>
 
                   <div className="mt-4 flex flex-wrap gap-1.5">
-                    {selectedRule.keywords.slice(0, 6).map((kw) => (
+                    {selectedRule.keywords.slice(0, 5).map((kw: string) => (
                       <span
                         key={kw}
                         className="rounded-full bg-slate-900/5 px-3 py-0.5 text-xs text-slate-700"
@@ -195,7 +197,7 @@ const ArchetypePage = () => {
                     <div className="h-6 w-1 bg-slate-900" />
                     <div>
                       <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-500">
-                        iconic portrayals
+                        Iconic Characters
                       </p>
                       <h3 className="text-xl font-semibold text-slate-900">
                         이 아키타입을 대표하는 캐릭터들
@@ -209,24 +211,30 @@ const ArchetypePage = () => {
                     아직 이 아키타입에 등록된 캐릭터가 없어요.
                   </div>
                 ) : (
-                  <div className="grid gap-6 grid-cols-6">
+                  <div className="grid gap-5 grid-cols-5">
                     {filteredCharacters.map((ch) => (
                       <article
                         key={ch.id}
                         onClick={() => goToDetail(ch.movieCd ?? null, ch.movieTitle)}
                         className={`
-                          group flex flex-col overflow-hidden rounded-3xl border bg-white transition
+                          group flex flex-col overflow-hidden rounded-3xl border-slate-500 bg-white transition
                           cursor-pointer
                           hover:-translate-y-1 hover:border-slate-900/70 hover:shadow-[0_22px_55px_rgba(0,0,0,0.25)]
                         `}
                       >
                         <div className="relative aspect-4/5 overflow-hidden bg-slate-900">
                           {/* 캐릭터 이미지 */}
-                          <img
-                            src={ch.profileUrl}
-                            alt={ch.name}
-                            className="w-full h-full object-cover"
-                          />
+                          {ch.profileUrl ? (
+                            <img
+                              src={ch.profileUrl}
+                              alt={ch.name}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <div className="w-full h-full bg-gray-700 text-center flex items-center justify-center">
+                              No Image
+                            </div>
+                          )}
 
                           {/* 위에 덮는 그라데이션 */}
                           <div className="absolute inset-0 bg-liner-to-t from-black/25 to-transparent" />

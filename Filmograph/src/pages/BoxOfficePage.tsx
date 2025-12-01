@@ -177,8 +177,8 @@ export default function BoxOfficePage() {
 
         {/* 정렬 버튼 */}
         <section className="px-6 mb-12">
-          <div className="max-w-7xl mx-auto flex justify-between items-center">
-            <h2 className="text-3xl text-white">TOP 5 랭킹</h2>
+          <div className="max-w-7xl mx-auto flex font-semibold justify-between items-center">
+            <h2 className="text-3xl text-white">TOP 5 Movie</h2>
 
             <div className="flex gap-2">
               <button
@@ -280,7 +280,7 @@ export default function BoxOfficePage() {
         {/* 카드 리스트 */}
         <section className="px-6 pb-20">
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-3xl mb-8 text-yellow-300">전체 목록</h2>
+            <h2 className="text-3xl mb-8 font-semibold text-yellow-300">전체 목록</h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
               {topMovies.slice(0, 5).map((movie, index) => {

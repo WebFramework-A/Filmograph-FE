@@ -189,11 +189,11 @@ export default function WorldMap() {
       });
     });
 
-    // hover out 0.7초 후 사라지게
+    // hover out 0.5초 후 사라지게
     polygonTemplate.events.on("out", () => {
       hideTimeout = window.setTimeout(() => {
         setHoverMovie(null);
-      }, 700);
+      }, 500);
     });
 
     return () => {
