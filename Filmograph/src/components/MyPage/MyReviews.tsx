@@ -78,7 +78,7 @@ export default function Status(props: StatusProps) {
           {/* 리뷰가 3개 이상이면 모두 보기 버튼 표시 */}
           {status.reviewCount > 3 && (
             <button
-              onClick={() => navigate("/review")}
+              onClick={() => navigate("/my-reviews")}
               className="text-xs text-white/50 hover:text-[#FFD700] transition-colors"
             >
               모두 보기 ▶
@@ -89,7 +89,8 @@ export default function Status(props: StatusProps) {
         {/* 실제 리뷰 데이터 매핑 */}
         {recentReviews.length > 0 ? (
           <div className="space-y-3">
-            {recentReviews.map((review) => (
+            {/* [수정] 여기서 최신 4개만 잘라서 출력 */}
+            {recentReviews.slice(0, 4).map((review) => (
               <div
                 key={review.id}
                 className="flex justify-between items-center bg-white/5 p-3 rounded text-sm hover:bg-white/10 transition cursor-pointer group relative"
@@ -105,8 +106,8 @@ export default function Status(props: StatusProps) {
                     <p className="text-white/40 text-xs">
                       {review.createdAt?.seconds
                         ? new Date(
-                            review.createdAt.seconds * 1000
-                          ).toLocaleDateString()
+                          review.createdAt.seconds * 1000
+                        ).toLocaleDateString()
                         : "-"}
                     </p>
                   </div>

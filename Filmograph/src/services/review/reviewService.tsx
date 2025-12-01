@@ -1,6 +1,7 @@
 import { doc, runTransaction, collection, serverTimestamp } from "firebase/firestore";
-import { db } from "../data/firebaseConfig"; // 경로 확인 필요
-import type { CreateReviewDTO, UpdateReviewDTO } from "../../types/review"; // 위에서 만든 타입 임포트
+import { db } from "../data/firebaseConfig";
+import type { CreateReviewDTO, UpdateReviewDTO } from "../../types/review";
+import { calculateUserLevel } from "../../utils/levelUtils";
 
 // 리뷰 작성 및 데이터 동기화 함수
 export const addReview = async ({
@@ -35,13 +36,17 @@ export const addReview = async ({
             const newRatingCount = currentRatingCount + 1;
             const newAvgRating = ((currentAvgRating * currentRatingCount) + rating) / newRatingCount;
 
-            // 유저 리뷰 수 확인
+            // 등급을 위해 가져오기
             const userData = userDoc.exists() ? userDoc.data() : {};
-            const currentUserReviewCount = userData.reviewCount || 0;
+            const currentReviewCount = userData.reviewCount || 0;   //리뷰
+            const currentLikeCount = userData.likeCount || 0;       //찜
+
+            const newReviewCount = currentReviewCount + 1;
+
+            // 새 레벨 계산
+            const newLevel = calculateUserLevel(newReviewCount, currentLikeCount);
 
             // --- [쓰기 작업] ---
-
-            //  리뷰 문서 생성
             transaction.set(newReviewRef, {
                 id: newReviewRef.id,
                 userId,
@@ -61,9 +66,14 @@ export const addReview = async ({
                 ratingCount: newRatingCount,
             });
 
-            // 유저 리뷰 수 증가 (레벨업 조건)
+            // 유저 리뷰 수 및 레벨 업데이트
             transaction.update(userRef, {
-                reviewCount: currentUserReviewCount + 1,
+                reviewCount: newReviewCount,
+                level: { // 레벨 객체 통째로 저장 (또는 필요한 필드만)
+                    level: newLevel.level,
+                    name: newLevel.name,
+                    color: newLevel.color
+                }
             });
         });
 
@@ -156,18 +166,30 @@ export const deleteReview = async (reviewId: string, movieId: string, userId: st
             }
 
             // 유저 리뷰 수 감소
+            // 레벨 재계산 로직 추가
             if (userDoc.exists()) {
                 const userData = userDoc.data();
-                const currentCount = userData.reviewCount || 0;
+                const currentReviewCount = userData.reviewCount || 0;
+                const currentLikeCount = userData.likeCount || 0;
+
+                const newReviewCount = Math.max(0, currentReviewCount - 1);
+                const newLevel = calculateUserLevel(newReviewCount, currentLikeCount);
+
                 transaction.update(userRef, {
-                    reviewCount: Math.max(0, currentCount - 1)
+                    reviewCount: newReviewCount,
+                    level: {
+                        level: newLevel.level,
+                        name: newLevel.name,
+                        color: newLevel.color
+                    }
                 });
             }
 
             // 리뷰 문서 삭제
             transaction.delete(reviewRef);
         });
-    } catch (error) {
+    }
+    catch (error) {
         console.error("리뷰 삭제 실패:", error);
         throw error;
     }
