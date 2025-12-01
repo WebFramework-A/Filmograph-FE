@@ -51,6 +51,27 @@ const Hero = () => {
               <DecorativeGraph />
             </div>
           </div>
+
+          {/* 스크롤 표시 아이콘 (아래로 스크롤하라고 유도하는 용도) */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 flex flex-col items-center gap-2">
+            <p className="text-white/60 text-sm">Scroll Down</p>
+            <div className="animate-bounce">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-8 w-8 text-yellow-300"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </div>
+          </div>
         </div>
       </div>
     </>

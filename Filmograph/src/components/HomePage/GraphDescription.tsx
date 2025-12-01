@@ -202,7 +202,9 @@ const GraphDescription = () => {
 
   return (
     <div className="min-h-screen snap-start flex flex-col items-center p-4 md:p-8 lg:p-12 xl:p-16 bg-yellow-200">
-      <div className="text-3xl md:text-4xl lg:text-5xl mb-4 md:mb-6 lg:mb-8 text-[#0b4747]">그래프 종류</div>
+      <div className="text-3xl md:text-4xl lg:text-5xl mb-4 md:mb-6 lg:mb-8 text-[#0b4747]">
+        그래프 종류
+      </div>
 
       <button
         className="border border-[#0b4747]/50 rounded-4xl hover:bg-[#0b4747] hover:text-white duration-400 px-3 py-1.5 md:px-4 md:py-2 cursor-pointer transition-colors text-sm md:text-base mb-4 md:mb-0"
@@ -214,6 +216,11 @@ const GraphDescription = () => {
       <div className="flex flex-col lg:flex-row justify-center items-center w-full max-w-7xl px-4 md:px-8 lg:px-10 py-5 gap-6 lg:gap-10 min-h-[500px] lg:h-[500px]">
         {/* 좌측 (리스트) */}
         <div className="w-full lg:w-[60%] flex flex-col text-[#0b4747]">
+          <div className="italic mb-2">
+            ※ 그래프 이름에 마우스를 올려보세요 (클릭하면 해당 그래프로
+            넘어갑니다)
+          </div>
+
           <div className="w-full border-t border-[#0b4747]/50"></div>
           {items.map((item) => (
             <div
