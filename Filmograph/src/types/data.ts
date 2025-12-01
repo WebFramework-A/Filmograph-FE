@@ -10,7 +10,3 @@ export type Link = {
   target: string;
 };
 
-export type GraphData = {
-  nodes: Node[];
-  links: Link[];
-};

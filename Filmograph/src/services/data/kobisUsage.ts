@@ -38,8 +38,3 @@ export const countKobisCall = async (): Promise<number> => {
 
   return current;
 };
-
-export const resetKobisUsage = async () => {
-  const today = getToday();
-  await setDoc(USAGE_DOC, { date: today, calls: 0 });
-};

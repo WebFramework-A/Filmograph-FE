@@ -75,23 +75,6 @@ const CREW_CATEGORY_RULES: Record<string, string> = {
 const mapJobToCategory = (job: string): string | null =>
   CREW_CATEGORY_RULES[job] ?? null;
 
-export const fetchMovieFromTMDB = async (title: string, year?: string) => {
-  try {
-    const res = await axios.get(`${TMDB_BASE}/search/multi`, {
-      params: {
-        api_key: TMDB_KEY,
-        query: title,
-        year: year?.slice(0, 4),
-        language: "ko-KR",
-      },
-    });
-
-    return res.data?.results?.find((item: any) => item.media_type === "movie") ?? null;
-  } catch {
-    return null;
-  }
-};
-
 const fetchTMDBImages = async (tmdbId: number): Promise<MovieImages | null> => {
   try {
     const res = await axios.get(`${TMDB_BASE}/movie/${tmdbId}/images`, {

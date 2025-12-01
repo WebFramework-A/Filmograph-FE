@@ -1,12 +1,12 @@
 // src/hooks/useGraphSearch.ts
 import { useEffect } from "react";
 
-export interface SearchNode {
+interface SearchNode {
   id: string | number;
   [key: string]: any;
 }
 
-export interface SearchGraphData {
+interface SearchGraphData {
   nodes: SearchNode[];
   links: any[];
 }
