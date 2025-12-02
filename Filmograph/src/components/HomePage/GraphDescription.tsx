@@ -114,7 +114,7 @@ const GraphDescription = () => {
   const [isAnimating, setIsAnimating] = useState(false);
 
   // 그래프 제어를 위한 ref
-  const fgRef = useRef<ForceGraphMethods>();
+  const fgRef = useRef<ForceGraphMethods | undefined>(undefined);
   const graphContainerRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 600, height: 500 });
 
