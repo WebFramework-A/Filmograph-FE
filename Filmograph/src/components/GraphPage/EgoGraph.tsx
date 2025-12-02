@@ -43,9 +43,9 @@ export default function EgoGraph({
   onNoResult: () => void;
 }) {
   const ROLE_COLORS = {
-    actor: "#4FC3F7",
-    director: "#FFD700",
-    staff: "#FF8A65",
+    actor: "#5B8FF9",
+    director: "#F6BD16",
+    staff: "#E040FB",
   };
 
   const [allPersons, setAllPersons] = useState<
@@ -274,32 +274,6 @@ export default function EgoGraph({
 
   return (
     <div className="w-full h-full flex flex-col">
-
-      {/* 설명바*/}
-      <div
-        className="w-full flex items-center justify-center gap-6 py-3 text-white text-sm"
-      >
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full" style={{ background: ROLE_COLORS.actor }} />
-          배우
-        </div>
-
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full" style={{ background: ROLE_COLORS.director }} />
-          감독
-        </div>
-
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full" style={{ background: ROLE_COLORS.staff }} />
-          스태프
-        </div>
-
-        <div className="ml-4 flex items-center gap-2 opacity-80">
-          <span className="w-10 h-1 bg-white inline-block" />
-          링크 두께 = 협업 횟수
-        </div>
-      </div>
-
       {/* 그래프 */}
       <div className="w-full h-full relative flex items-center justify-center">
         <ForceGraph2D<NodeT, LinkT>

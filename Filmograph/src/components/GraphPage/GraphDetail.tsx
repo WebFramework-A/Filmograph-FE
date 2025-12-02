@@ -110,6 +110,29 @@ const GraphDetail = () => {
                   </div>
                 </div>
               )}
+              {graphType === "ego" && (
+                <div
+                  className="
+                    absolute left-0 top-1/2 -translate-y-1/2 
+                    flex items-center gap-6 
+                    bg-black/40 backdrop-blur-md px-6 py-3 
+                    rounded-full text-white shadow-md
+                  "
+                >
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full" style={{ background: "#5B8FF9" }} />
+                    <span className="text-sm">배우</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full" style={{ background: "#F6BD16" }} />
+                    <span className="text-sm">감독</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full" style={{ background: "#E040FB" }} />
+                    <span className="text-sm">스태프</span>
+                  </div>
+                </div>
+              )}
 
               {/* 검색바 */}
               <div className="w-full max-w-sm">
@@ -126,7 +149,21 @@ const GraphDetail = () => {
                   }
                 />
               </div>
-
+              {graphType === "ego" && (
+                <div
+                  className="
+                    absolute right-0 top-1/2 -translate-y-1/2 
+                    flex items-center gap-6 
+                    bg-black/40 backdrop-blur-md px-6 py-3 
+                    rounded-full text-white shadow-md
+                  "
+                >
+                  <div className="ml-4 flex items-center gap-2 opacity-80">
+                    <span className="w-10 h-1 bg-white inline-block" />
+                    링크 두께 = 협업 횟수
+                  </div>
+                </div>
+              )}
               {/* 전체보기 버튼 */}
               {(graphType === "movie" || graphType === "collaboration") && (
                 <button
