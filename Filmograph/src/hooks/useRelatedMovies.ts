@@ -1,4 +1,3 @@
-// src/hooks/useExpandedRelatedMovies.ts
 import { useEffect, useState } from "react";
 import { db } from "../services/data/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
