@@ -8,7 +8,7 @@ export const useAuth = () => {
 
   useEffect(() => {
     // Firebase가 제공하는 인증 상태 리스너
-    // 사용자가 로그인하거나 로그아웃할 때마다 이 함수가 자동으로 실행됩니다.
+    // 사용자 로그인/로그아웃시, 자동실행됨
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);

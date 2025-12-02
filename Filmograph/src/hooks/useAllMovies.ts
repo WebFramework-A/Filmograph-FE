@@ -4,34 +4,33 @@ import { db } from "../services/data/firebaseConfig";
 import { type MovieDetail } from "../types/movie";
 
 export default function useAllMovies() {
-    // [수정] state 타입을 MovieDetail[]로 변경
-    const [movies, setMovies] = useState<MovieDetail[]>([]);
-    const [loading, setLoading] = useState(true);
+  const [movies, setMovies] = useState<MovieDetail[]>([]);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const fetchMovies = async () => {
-            try {
-                const querySnapshot = await getDocs(collection(db, "movies"));
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "movies"));
 
-                const movieList = querySnapshot.docs.map((doc) => {
-                    const data = doc.data();
-                    return {
-                        id: doc.id,
-                        ...data,
-                        avgRating: data.avgRating || data.rating,
-                    };
-                }) as unknown as MovieDetail[];
+        const movieList = querySnapshot.docs.map((doc) => {
+          const data = doc.data();
+          return {
+            id: doc.id,
+            ...data,
+            avgRating: data.avgRating || data.rating,
+          };
+        }) as unknown as MovieDetail[];
 
-                setMovies(movieList);
-            } catch (error) {
-                console.error("영화 전체 목록 로딩 실패:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
+        setMovies(movieList);
+      } catch (error) {
+        console.error("영화 전체 목록 로딩 실패:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-        fetchMovies();
-    }, []);
+    fetchMovies();
+  }, []);
 
-    return { movies, loading };
+  return { movies, loading };
 }
