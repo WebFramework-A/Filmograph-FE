@@ -26,29 +26,19 @@ const Hero = () => {
           <div className="absolute right-0 top-0 h-full w-full md:w-[65%] flex items-center justify-center z-10 pointer-events-none">
             {/* 노드 움직이게끔 pointer-events-auto 추가함ㅜㅜ */}
             <div className="w-full h-full flex items-center justify-center relative pointer-events-auto">
-              {/* 왼쪽 & 오른쪽 겹치는 부분에 블러처리용 오버레이 (나중에 손보기. 이거 왜 안되는거지;;) */}
+              <DecorativeGraph />
+              {/* 왼쪽 & 오른쪽 겹치는 부분에 블러처리용 오버레이 */}
               <div
                 className="absolute inset-0 pointer-events-none z-20"
                 style={{
-                  backdropFilter: "blur(0px)",
-                  WebkitBackdropFilter: "blur(0px)",
-                  background:
-                    "linear-gradient(to right, rgba(13, 90, 90, 0) 0%, rgba(13, 90, 90, 0) 40%, transparent 100%)",
+                  backdropFilter: "blur(4px)",
+                  WebkitBackdropFilter: "blur(4px)",
+                  maskImage:
+                    "linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 25%, rgba(0,0,0,0) 40%)",
+                  WebkitMaskImage:
+                    "linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 25%, rgba(0,0,0,0) 40%)",
                 }}
-              >
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    backdropFilter: "blur(4px)",
-                    WebkitBackdropFilter: "blur(4px)",
-                    maskImage:
-                      "linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 25%, rgba(0,0,0,0) 40%)",
-                    WebkitMaskImage:
-                      "linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 25%, rgba(0,0,0,0) 40%)",
-                  }}
-                />
-              </div>
-              <DecorativeGraph />
+              />
             </div>
           </div>
 

@@ -9,26 +9,7 @@ import type {
   NodeObject,
   LinkObject,
 } from "react-force-graph-2d";
-
-type NodeT = NodeObject & {
-  id: string | number;
-  label: string;
-  community?: number;
-  role?: string;
-  degree?: number;
-  movies_count?: number;
-};
-
-type LinkT = LinkObject<NodeT> & {
-  source: string | number | NodeT;
-  target: string | number | NodeT;
-  weight?: number;
-};
-
-type GraphT = {
-  nodes: NodeT[];
-  links: LinkT[];
-};
+import type { GraphEgoT, LinkEgoT, NodeEgoT } from "../../types/graph";
 
 // 기본 중심 인물 ID
 const DEFAULT_EGO_ID = "10047370";
@@ -48,12 +29,12 @@ export default function EgoGraph({
     staff: "#E040FB",
   };
 
-  const [allPersons, setAllPersons] = useState<
-    { id: string; label: string }[]
-  >([]);
+  const [allPersons, setAllPersons] = useState<{ id: string; label: string }[]>(
+    []
+  );
 
-  const [data, setData] = useState<GraphT | null>(null);
-  const [filteredData, setFilteredData] = useState<GraphT | null>(null);
+  const [data, setData] = useState<GraphEgoT | null>(null);
+  const [filteredData, setFilteredData] = useState<GraphEgoT | null>(null);
 
   const [centerPerson, setCenterPerson] = useState<{
     id: string;
@@ -67,7 +48,8 @@ export default function EgoGraph({
   });
 
   const fgRef = useRef<
-    ForceGraphMethods<NodeObject<NodeT>, LinkObject<NodeT, LinkT>> | undefined
+    | ForceGraphMethods<NodeObject<NodeEgoT>, LinkObject<NodeEgoT, LinkEgoT>>
+    | undefined
   >(undefined);
 
   // 화면 리사이즈 감지
@@ -106,7 +88,7 @@ export default function EgoGraph({
   }, []);
 
   // 특정 인물 그래프 가져오기
-  async function fetchEgoGraph(id: string): Promise<GraphT | null> {
+  async function fetchEgoGraph(id: string): Promise<GraphEgoT | null> {
     try {
       const ref = doc(db, "egoGraphs", id);
       const snap = await getDoc(ref);
@@ -144,7 +126,6 @@ export default function EgoGraph({
     }, 600);
   }, []);
 
-
   useEffect(() => {
     if (allPersons.length === 0) return;
 
@@ -157,7 +138,11 @@ export default function EgoGraph({
     if (!role) return "actor";
     if (role.includes("배우") || role.includes("출연") || role.includes("단역"))
       return "actor";
-    if (role.includes("감독") || role.includes("연출") || role.includes("조감독"))
+    if (
+      role.includes("감독") ||
+      role.includes("연출") ||
+      role.includes("조감독")
+    )
       return "director";
     return "staff";
   };
@@ -183,16 +168,14 @@ export default function EgoGraph({
       allowed.add(getNodeId(l.target));
     });
 
-    const filteredNodes = data.nodes.filter((n) =>
-      allowed.has(String(n.id))
-    );
+    const filteredNodes = data.nodes.filter((n) => allowed.has(String(n.id)));
 
     // 위치 초기화
     filteredNodes.forEach((n) => {
-        n.x = undefined;
-        n.y = 80;
-        n.vx = n.vy = undefined;
-        n.fx = n.fy = undefined;
+      n.x = undefined;
+      n.y = 80;
+      n.vx = n.vy = undefined;
+      n.fx = n.fy = undefined;
     });
 
     setFilteredData({ nodes: filteredNodes, links: filteredLinks });
@@ -259,12 +242,14 @@ export default function EgoGraph({
     fgRef.current.d3Force("link")?.distance(40);
     fgRef.current.d3Force("link")?.strength(0.4);
     fgRef.current.d3Force("charge")?.strength(-150);
-
   }, [graphData]);
 
   if (!data || !filteredData || !centerPerson) {
     return (
-      <div className="w-full flex items-center justify-center" style={{ height: "550px" }}>
+      <div
+        className="w-full flex items-center justify-center"
+        style={{ height: "550px" }}
+      >
         <div className="text-white text-xl font-semibold opacity-80">
           그래프 불러오는 중· · ·
         </div>
@@ -276,59 +261,60 @@ export default function EgoGraph({
     <div className="w-full h-full flex flex-col">
       {/* 그래프 */}
       <div className="w-full h-full relative flex items-center justify-center">
-        <ForceGraph2D<NodeT, LinkT>
-              ref={fgRef}
-              width={size.width}
-              height={graphHeight}
-              graphData={graphData}
-              backgroundColor="transparent"
-              nodeId="id"
-              enableNodeDrag={true}
-              minZoom={0.45}
-              maxZoom={2.4}
-              linkColor={() => "rgba(255,255,255,0.75)"}
-              linkWidth={(l) => {
-                const w = l.weight ?? 1;
-                const norm = (w - minW) / (maxW - minW || 1);
-                return 2 + Math.sqrt(norm) * 10;
-              }}
-              nodeCanvasObject={(raw, ctx) => {
-                const node = raw as NodeT & { x: number; y: number };
-                const isCenter = String(node.id) === egoId;
+        <ForceGraph2D<NodeEgoT, LinkEgoT>
+          ref={fgRef}
+          width={size.width}
+          height={graphHeight}
+          graphData={graphData}
+          backgroundColor="transparent"
+          nodeId="id"
+          enableNodeDrag={true}
+          minZoom={0.45}
+          maxZoom={2.4}
+          linkColor={() => "rgba(255,255,255,0.75)"}
+          linkWidth={(l) => {
+            const w = l.weight ?? 1;
+            const norm = (w - minW) / (maxW - minW || 1);
+            return 2 + Math.sqrt(norm) * 10;
+          }}
+          nodeCanvasObject={(raw, ctx) => {
+            const node = raw as NodeEgoT & { x: number; y: number };
+            const isCenter = String(node.id) === egoId;
 
-                const w = filteredData.links.find(
-                  (l) =>
-                    getNodeId(l.source) === String(node.id) ||
-                    getNodeId(l.target) === String(node.id)
-                )?.weight ?? 1;
+            const w =
+              filteredData.links.find(
+                (l) =>
+                  getNodeId(l.source) === String(node.id) ||
+                  getNodeId(l.target) === String(node.id)
+              )?.weight ?? 1;
 
-                const norm = (w - minW) / (maxW - minW || 1);
-                const eased = Math.sqrt(norm);
+            const norm = (w - minW) / (maxW - minW || 1);
+            const eased = Math.sqrt(norm);
 
-                let size = 8 + eased * 4;
-                if (isCenter) size = 12;
+            let size = 8 + eased * 4;
+            if (isCenter) size = 12;
 
-                const category = mapRole(node.role);
-                const color = ROLE_COLORS[category];
+            const category = mapRole(node.role);
+            const color = ROLE_COLORS[category];
 
-                ctx.beginPath();
-                ctx.arc(node.x, node.y, size, 0, 2 * Math.PI);
-                ctx.fillStyle = color;
-                ctx.fill();
+            ctx.beginPath();
+            ctx.arc(node.x, node.y, size, 0, 2 * Math.PI);
+            ctx.fillStyle = color;
+            ctx.fill();
 
-                ctx.font = `12px sans-serif`;
-                ctx.textAlign = "center";
-                ctx.textBaseline = "middle";
+            ctx.font = `12px sans-serif`;
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
 
-                ctx.lineWidth = 1;
-                ctx.strokeStyle = color;
-                ctx.strokeText(node.label, node.x, node.y);
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = color;
+            ctx.strokeText(node.label, node.x, node.y);
 
-                ctx.fillStyle = "black";
-                ctx.fillText(node.label, node.x, node.y);
-              }}
-              onNodeClick={(node) => loadGraph(String(node.id))}
-            />
+            ctx.fillStyle = "black";
+            ctx.fillText(node.label, node.x, node.y);
+          }}
+          onNodeClick={(node) => loadGraph(String(node.id))}
+        />
       </div>
     </div>
   );

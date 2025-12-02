@@ -1,31 +1,10 @@
 // src/components/GraphPage/CollabNetworkGraph.tsx
 import { useEffect, useMemo, useState, useRef } from "react";
 import ForceGraph2D from "react-force-graph-2d";
-import type { ForceGraphMethods, LinkObject, NodeObject } from "react-force-graph-2d";
+import type { ForceGraphMethods } from "react-force-graph-2d";
 import * as d3 from "d3-force";
 import useGraphSearch from "../../hooks/useGraphSearch";
-
-// 타입 정의 
-type NodeT = NodeObject & {
-  id: string | number;
-  label: string;
-  community?: number;
-  role?: string;
-  degree?: number;
-  movies_count?: number;
-  neighbors?: Set<string | number>;
-};
-
-type LinkT = LinkObject<NodeT> & {
-  source: string | number | NodeT;
-  target: string | number | NodeT;
-  weight?: number;
-};
-
-type GraphT = {
-  nodes: NodeT[];
-  links: LinkT[];
-};
+import type { GraphCollabT, LinkCollabT, NodeCollabT } from "../../types/graph";
 
 type CollabNetworkGraphProps = {
   resetViewFlag: boolean;
@@ -46,14 +25,14 @@ const COLORS = [
 
 // 카메라 초기값
 const INITIAL_CENTER_X = 0;
-const INITIAL_CENTER_Y = 0; 
+const INITIAL_CENTER_Y = 0;
 const INITIAL_ZOOM = 0.94;
 
 // 링크 관계 계산
 const getLinkRelation = (
-  link: LinkT,
-  selectedNode: NodeT | null,
-  getNode: (endpoint: string | number | NodeT) => NodeT | undefined
+  link: LinkCollabT,
+  selectedNode: NodeCollabT | null,
+  getNode: (endpoint: string | number | NodeCollabT) => NodeCollabT | undefined
 ) => {
   if (!selectedNode) {
     return {
@@ -108,10 +87,12 @@ export default function CollabNetworkGraph({
   searchTerm,
   onNoResult,
 }: CollabNetworkGraphProps) {
-  const [data, setData] = useState<GraphT | null>(null);
-  const [selectedNode, setSelectedNode] = useState<NodeT | null>(null);
+  const [data, setData] = useState<GraphCollabT | null>(null);
+  const [selectedNode, setSelectedNode] = useState<NodeCollabT | null>(null);
 
-  const fgRef = useRef<ForceGraphMethods<NodeT, LinkT> | null>(null);
+  const fgRef = useRef<ForceGraphMethods<NodeCollabT, LinkCollabT> | undefined>(
+    undefined
+  );
 
   // 화면 크기 기반
   const [dimensions, setDimensions] = useState({
@@ -139,9 +120,9 @@ export default function CollabNetworkGraph({
   useEffect(() => {
     fetch("/graph/network_data.json")
       .then((res) => res.json())
-      .then((json: GraphT) => {
+      .then((json: GraphCollabT) => {
         const { nodes, links } = json;
-        const idToNode = new Map<string | number, NodeT>();
+        const idToNode = new Map<string | number, NodeCollabT>();
 
         nodes.forEach((node) => {
           node.neighbors = new Set();
@@ -151,10 +132,14 @@ export default function CollabNetworkGraph({
 
         links.forEach((link) => {
           const a = idToNode.get(
-            typeof link.source === "object" ? (link.source as NodeT).id : link.source
+            typeof link.source === "object"
+              ? (link.source as NodeCollabT).id
+              : link.source
           );
           const b = idToNode.get(
-            typeof link.target === "object" ? (link.target as NodeT).id : link.target
+            typeof link.target === "object"
+              ? (link.target as NodeCollabT).id
+              : link.target
           );
           if (a && b) {
             a.neighbors?.add(b.id);
@@ -174,13 +159,13 @@ export default function CollabNetworkGraph({
 
   // 포스 설정
   useEffect(() => {
-   if (!fgRef.current || !graphData.nodes.length) return;
+    if (!fgRef.current || !graphData.nodes.length) return;
 
     const fg = fgRef.current;
 
     const linkForce = fg.d3Force("link") as any;
     if (linkForce) {
-      linkForce.distance((link: LinkT) => {
+      linkForce.distance((link: LinkCollabT) => {
         const w = link.weight ?? 1;
         return 27 + w * 25;
       });
@@ -193,7 +178,7 @@ export default function CollabNetworkGraph({
 
     fg.d3Force(
       "x",
-      d3.forceX<NodeT>(0).strength((node) => {
+      d3.forceX<NodeCollabT>(0).strength((node) => {
         const deg = node.neighbors?.size ?? 0;
         if (deg <= 1) return 0.2;
         if (deg <= 3) return 0.08;
@@ -203,7 +188,7 @@ export default function CollabNetworkGraph({
 
     fg.d3Force(
       "y",
-      d3.forceY<NodeT>(0).strength((node) => {
+      d3.forceY<NodeCollabT>(0).strength((node) => {
         const deg = node.neighbors?.size ?? 0;
         if (deg <= 1) return 0.2;
         if (deg <= 3) return 0.08;
@@ -229,11 +214,7 @@ export default function CollabNetworkGraph({
 
     if (!nodesToFit.length) return;
 
-    fgRef.current.zoomToFit(
-      600,
-      90,
-      (n: any) => nodesToFit.includes(n)
-    );
+    fgRef.current.zoomToFit(600, 90, (n: any) => nodesToFit.includes(n));
   }, [selectedNode, data]);
 
   const [mounted, setMounted] = useState(false);
@@ -242,28 +223,24 @@ export default function CollabNetworkGraph({
     setMounted(true);
   }, []);
 
-  // 검색 기능  
+  // 검색 기능
   useGraphSearch({
-    searchTerm: mounted ? (searchTerm ?? "") : "",
+    searchTerm: mounted ? searchTerm ?? "" : "",
     graphData,
     searchKey: "label",
 
     onMatch: (target) => {
-      setSelectedNode(target as NodeT);
+      setSelectedNode(target as NodeCollabT);
 
       if (!fgRef.current || !data) return;
 
       const neighbors = target.neighbors ?? new Set();
 
-      const nodesToFit = data.nodes.filter((n) =>
-        n.id === target.id || neighbors.has(n.id)
+      const nodesToFit = data.nodes.filter(
+        (n) => n.id === target.id || neighbors.has(n.id)
       );
 
-      fgRef.current.zoomToFit(
-        600,
-        80,
-        (n: any) => nodesToFit.includes(n)
-      );
+      fgRef.current.zoomToFit(600, 80, (n: any) => nodesToFit.includes(n));
     },
     onNoResult,
   });
@@ -293,13 +270,12 @@ export default function CollabNetworkGraph({
     );
   }
 
-
   const nodes = data.nodes;
 
   const getNodeFromEndpoint = (
-    endpoint: string | number | NodeT
-  ): NodeT | undefined => {
-    if (typeof endpoint === "object") return endpoint as NodeT;
+    endpoint: string | number | NodeCollabT
+  ): NodeCollabT | undefined => {
+    if (typeof endpoint === "object") return endpoint as NodeCollabT;
     return nodes.find((n) => n.id === endpoint);
   };
 
@@ -309,7 +285,7 @@ export default function CollabNetworkGraph({
         className="relative"
         style={{ width: dimensions.width, height: dimensions.height }}
       >
-        <ForceGraph2D<NodeT, LinkT>
+        <ForceGraph2D<NodeCollabT, LinkCollabT>
           ref={fgRef}
           width={dimensions.width}
           height={dimensions.height}
@@ -320,7 +296,7 @@ export default function CollabNetworkGraph({
           warmupTicks={70}
           cooldownTicks={300}
           onBackgroundClick={() => setSelectedNode(null)}
-          linkColor={(link: LinkT) => {
+          linkColor={(link: LinkCollabT) => {
             if (!selectedNode) return "rgba(255,255,255,0.25)";
 
             const { sameCommunity, isConnectedToSelected } = getLinkRelation(
@@ -334,7 +310,7 @@ export default function CollabNetworkGraph({
             }
             return "rgba(255,255,255,0.05)";
           }}
-          linkWidth={(link: LinkT) => {
+          linkWidth={(link: LinkCollabT) => {
             const w = link.weight ?? 1;
 
             if (!selectedNode) {
@@ -353,11 +329,10 @@ export default function CollabNetworkGraph({
             return 0.15;
           }}
           nodeCanvasObject={(rawNode, ctx, globalScale) => {
-            const node = rawNode as NodeT & { x: number; y: number };
+            const node = rawNode as NodeCollabT & { x: number; y: number };
             const color = COLORS[(node.community ?? 0) % COLORS.length];
 
-            const isMain =
-              selectedNode != null && selectedNode.id == node.id;
+            const isMain = selectedNode != null && selectedNode.id == node.id;
             const isNeighbor =
               selectedNode != null &&
               selectedNode.neighbors?.has(node.id) === true;
@@ -407,7 +382,7 @@ export default function CollabNetworkGraph({
               drawLabel(ctx, node.label, node.x, node.y, fontSize);
             }
           }}
-          onNodeClick={(node) => setSelectedNode(node as NodeT)}
+          onNodeClick={(node) => setSelectedNode(node as NodeCollabT)}
           enableNodeDrag
         />
       </div>

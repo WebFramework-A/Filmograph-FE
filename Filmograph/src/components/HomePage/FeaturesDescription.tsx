@@ -224,7 +224,6 @@ const FeaturesDescription = () => {
 
   return (
     <>
-      {" "}
       <FeatureSlide
         data={featuresData[currentIndex]}
         currentIndex={currentIndex}
