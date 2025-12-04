@@ -82,8 +82,14 @@ const fetchTMDBImages = async (tmdbId: number): Promise<MovieImages | null> => {
     });
 
     return {
-      backdrops: res.data?.backdrops?.map((i: any) => `${IMAGE_BASE_ORIGINAL}${i.file_path}`) ?? [],
-      posters: res.data?.posters?.map((i: any) => `${IMAGE_BASE_POSTER}${i.file_path}`) ?? [],
+      backdrops:
+        res.data?.backdrops?.map(
+          (i: any) => `${IMAGE_BASE_ORIGINAL}${i.file_path}`
+        ) ?? [],
+      posters:
+        res.data?.posters?.map(
+          (i: any) => `${IMAGE_BASE_POSTER}${i.file_path}`
+        ) ?? [],
     };
   } catch {
     return null;
@@ -121,19 +127,24 @@ const fetchTMDBVideos = async (tmdbId: number): Promise<MovieVideos | null> => {
 
     return {
       trailers: mapped.filter((v) => v.type === "Trailer"),
-      teasers:  mapped.filter((v) => v.type === "Teaser"),
-      clips:    mapped.filter((v) => v.type === "Clip"),
+      teasers: mapped.filter((v) => v.type === "Teaser"),
+      clips: mapped.filter((v) => v.type === "Clip"),
     };
   } catch {
     return null;
   }
 };
 
-const fetchTMDBWatchProviders = async (tmdbId: number): Promise<WatchProvider[] | null> => {
+const fetchTMDBWatchProviders = async (
+  tmdbId: number
+): Promise<WatchProvider[] | null> => {
   try {
-    const res = await axios.get(`${TMDB_BASE}/movie/${tmdbId}/watch/providers`, {
-      params: { api_key: TMDB_KEY },
-    });
+    const res = await axios.get(
+      `${TMDB_BASE}/movie/${tmdbId}/watch/providers`,
+      {
+        params: { api_key: TMDB_KEY },
+      }
+    );
 
     const kr = res.data?.results?.KR;
     if (!kr) return null;
@@ -175,9 +186,12 @@ const fetchSimilarMovies = async (tmdbId: number): Promise<string[]> => {
 
 const fetchRecommendedMovies = async (tmdbId: number): Promise<string[]> => {
   try {
-    const res = await axios.get(`${TMDB_BASE}/movie/${tmdbId}/recommendations`, {
-      params: { api_key: TMDB_KEY, language: "ko-KR" },
-    });
+    const res = await axios.get(
+      `${TMDB_BASE}/movie/${tmdbId}/recommendations`,
+      {
+        params: { api_key: TMDB_KEY, language: "ko-KR" },
+      }
+    );
 
     return res.data?.results?.map((m: any) => String(m.id)) ?? [];
   } catch {
@@ -189,7 +203,8 @@ const buildAwardsFromTmdb = (detail: any): Award[] => {
   if (!detail) return [];
 
   const awards: Award[] = [];
-  const year = Number(detail?.release_date?.slice(0, 4)) || new Date().getFullYear();
+  const year =
+    Number(detail?.release_date?.slice(0, 4)) || new Date().getFullYear();
 
   if (detail.vote_average >= 8 && detail.vote_count >= 5000) {
     awards.push({
@@ -212,7 +227,25 @@ const buildAwardsFromTmdb = (detail: any): Award[] => {
   return awards;
 };
 
-export const enrichMovieData = async (movie: MovieDetail): Promise<MovieDetail> => {
+const fetchMovieFromTMDB = async (title: string, releaseDate?: string) => {
+  try {
+    const res = await axios.get(`${TMDB_BASE}/search/movie`, {
+      params: {
+        api_key: TMDB_KEY,
+        query: title,
+        language: "ko-KR",
+        year: releaseDate ? releaseDate.slice(0, 4) : undefined,
+      },
+    });
+    return res.data?.results?.[0] || null;
+  } catch {
+    return null;
+  }
+};
+
+export const enrichMovieData = async (
+  movie: MovieDetail
+): Promise<MovieDetail> => {
   try {
     const tmdb = await fetchMovieFromTMDB(movie.title, movie.releaseDate);
     if (!tmdb) return movie;
@@ -240,8 +273,8 @@ export const enrichMovieData = async (movie: MovieDetail): Promise<MovieDetail> 
       fetchTMDBWatchProviders(tmdbId),
       fetchTMDBCredits(tmdbId),
 
-      fetchSimilarMovies(tmdbId),      
-      fetchRecommendedMovies(tmdbId),  
+      fetchSimilarMovies(tmdbId),
+      fetchRecommendedMovies(tmdbId),
     ]);
 
     const cast: Person[] =
@@ -250,8 +283,12 @@ export const enrichMovieData = async (movie: MovieDetail): Promise<MovieDetail> 
         name: c.name,
         character: c.character,
         role: "배우",
-        profileUrl: c.profile_path ? `${IMAGE_BASE_POSTER}${c.profile_path}` : undefined,
-      })) ?? movie.cast ?? [];
+        profileUrl: c.profile_path
+          ? `${IMAGE_BASE_POSTER}${c.profile_path}`
+          : undefined,
+      })) ??
+      movie.cast ??
+      [];
 
     const groupedCrew: Record<string, Person[]> = {
       directors: [],
@@ -274,16 +311,17 @@ export const enrichMovieData = async (movie: MovieDetail): Promise<MovieDetail> 
         id: String(c.id),
         name: c.name,
         role: translateJob(c.job),
-        profileUrl: c.profile_path ? `${IMAGE_BASE_POSTER}${c.profile_path}` : undefined,
+        profileUrl: c.profile_path
+          ? `${IMAGE_BASE_POSTER}${c.profile_path}`
+          : undefined,
       });
     });
 
     const awards = buildAwardsFromTmdb(tmdbDetail);
 
-    const relatedMovies = Array.from(new Set([
-      ...(similar ?? []),
-      ...(recommended ?? []),
-    ]));
+    const relatedMovies = Array.from(
+      new Set([...(similar ?? []), ...(recommended ?? [])])
+    );
 
     return {
       ...movie,
@@ -293,8 +331,12 @@ export const enrichMovieData = async (movie: MovieDetail): Promise<MovieDetail> 
       originalTitle: tmdbDetail?.original_title ?? movie.originalTitle,
       language: tmdbDetail?.original_language ?? movie.language,
 
-      posterUrl: tmdb.poster_path ? `${IMAGE_BASE_POSTER}${tmdb.poster_path}` : movie.posterUrl,
-      backdropUrl: tmdb.backdrop_path ? `${IMAGE_BASE_ORIGINAL}${tmdb.backdrop_path}` : movie.backdropUrl,
+      posterUrl: tmdb.poster_path
+        ? `${IMAGE_BASE_POSTER}${tmdb.poster_path}`
+        : movie.posterUrl,
+      backdropUrl: tmdb.backdrop_path
+        ? `${IMAGE_BASE_ORIGINAL}${tmdb.backdrop_path}`
+        : movie.backdropUrl,
       overview: tmdbDetail?.overview ?? movie.overview,
 
       rating: tmdbDetail?.vote_average ?? movie.rating,
@@ -307,9 +349,13 @@ export const enrichMovieData = async (movie: MovieDetail): Promise<MovieDetail> 
       watchProviders: providers ?? movie.watchProviders,
 
       cast,
-      directors: groupedCrew.directors.length ? groupedCrew.directors : movie.directors,
+      directors: groupedCrew.directors.length
+        ? groupedCrew.directors
+        : movie.directors,
       writers: groupedCrew.writers.length ? groupedCrew.writers : movie.writers,
-      producers: groupedCrew.producers.length ? groupedCrew.producers : movie.producers,
+      producers: groupedCrew.producers.length
+        ? groupedCrew.producers
+        : movie.producers,
 
       awards: awards.length ? awards : movie.awards,
 
