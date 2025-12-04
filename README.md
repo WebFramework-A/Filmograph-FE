@@ -9,7 +9,7 @@
 ## 🚀 시작하기
 ```
 # zip 폴더 압축 해제 후, 프로젝트 폴더로 이동
-cd Filmograph
+cd ./Filmograph-FE/Filmograph
 
 # 의존성 패키지 설치
 npm install
