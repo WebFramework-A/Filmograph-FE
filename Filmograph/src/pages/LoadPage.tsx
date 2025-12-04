@@ -1,25 +1,13 @@
 import { useState, useEffect } from "react";
-import {
-  fetchMovieList,
-  fetchMovieDetail,
-} from "../services/movies/movieAPI";
+import { fetchMovieList, fetchMovieDetail } from "../services/movies/movieAPI";
 
 import { saveMovie } from "../services/data/movieService";
-import {
-  countKobisCall,
-  getKobisCalls,
-} from "../services/data/kobisUsage";
+import { countKobisCall, getKobisCalls } from "../services/data/kobisUsage";
 
 import { findKobisMovieCdByTmdbId } from "../services/movies/matchTmdbToKobis";
 
 import { db } from "../services/data/firebaseConfig";
-import {
-  doc,
-  getDoc,
-  setDoc,
-  collection,
-  getDocs,
-} from "firebase/firestore";
+import { doc, getDoc, setDoc, collection, getDocs } from "firebase/firestore";
 
 const KOBIS_KEY = import.meta.env.VITE_KOBIS_API_KEY;
 
@@ -30,7 +18,6 @@ export default function LoadPage() {
   const [progress, setProgress] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [statusMsg, setStatusMsg] = useState("대기 중");
-  const [writesToday, setWritesToday] = useState(0);
   const [kobisCalls, setKobisCalls] = useState(0);
   const [startPage, setStartPage] = useState(1);
   const [singleKobisId, setSingleKobisId] = useState("");
@@ -85,9 +72,7 @@ export default function LoadPage() {
     const detail = await fetchMovieDetail(singleKobisId);
 
     if (!detail) {
-      setStatusMsg(
-        "영화 정보를 가져오지 못했습니다 (movieCd 오류 가능)"
-      );
+      setStatusMsg("영화 정보를 가져오지 못했습니다 (movieCd 오류 가능)");
       setIsRunning(false);
       return;
     }
@@ -97,16 +82,13 @@ export default function LoadPage() {
     const result = await saveMovie(detail);
 
     if (result === "SAVED") {
-      setWritesToday((prev) => prev + 1);
       setStatusMsg(`저장 완료! (${detail.movieCd})`);
     } else if (result === "SKIPPED_KOBIS") {
       setStatusMsg(`저장 불가 - KOBIS 필수 정보 미흡: ${detail.movieCd}`);
     } else if (result === "SKIPPED_19") {
       setStatusMsg(`청소년관람불가 제외됨: ${detail.movieCd}`);
     } else if (result === "SKIPPED_TMDB") {
-      setStatusMsg(
-        `저장 불가 - TMDB 필수 데이터 없음: ${detail.movieCd}`
-      );
+      setStatusMsg(`저장 불가 - TMDB 필수 데이터 없음: ${detail.movieCd}`);
     } else {
       setStatusMsg("저장 중 오류 발생 (콘솔 확인)");
     }
@@ -153,7 +135,6 @@ export default function LoadPage() {
         if (result === "SAVED") {
           todayWrites++;
           saved++;
-          setWritesToday(todayWrites);
         }
 
         await new Promise((r) => setTimeout(r, 120));
@@ -269,10 +250,11 @@ export default function LoadPage() {
   return (
     <div className="min-h-screen pt-30 pb-10 bg-[#004f51] text-white">
       <div className="max-w-5xl mx-auto">
-        
         {/* Header */}
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold text-yellow-200">🎬 영화 데이터 수집기</h1>
+          <h1 className="text-4xl font-bold text-yellow-200">
+            🎬 영화 데이터 수집기
+          </h1>
           <p className="text-white/80 mt-2">
             KOBIS + TMDB 기반 영화 데이터를 Firestore에 저장합니다
           </p>

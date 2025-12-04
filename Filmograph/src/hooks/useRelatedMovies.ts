@@ -11,13 +11,10 @@ export default function useExpandedRelatedMovies(movie: MovieDetail | null) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!movie || !movie.relatedMovies) {
-      setExpanded([]);
-      setLoading(false);
-      return;
-    }
-
     async function load() {
+      // 함수 내부에서도 명시적으로 체크
+      if (!movie || !movie.relatedMovies) return;
+
       const results: MovieDetail[] = [];
 
       for (const rid of movie.relatedMovies.slice(0, 15)) {
